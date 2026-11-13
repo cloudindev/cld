@@ -1,0 +1,64 @@
+/* Tarjeta hero de vídeo bajo el buscador · mismo ancho y radio que las tarjetas de planes */
+.section { max-width: var(--container-boxed); margin-inline: auto; padding: 20px 0 0; }
+.card {
+  position: relative; overflow: hidden;
+  aspect-ratio: 2 / 1;
+  border-radius: 12px;
+  background: #e9d8c4;
+}
+.video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+  opacity: 0; transition: opacity 0.25s linear;
+}
+.video.on { opacity: 1; }
+
+/* Capítulos y botón sobre un degradado inferior */
+.overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: flex-end; gap: 30px;
+  padding: 80px 50px 36px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+  color: #fff;
+}
+.chapters { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.chapter {
+  display: grid; grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 14px;
+  width: 100%; padding: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer;
+  opacity: 0.7; transition: opacity 0.3s;
+}
+.chapter:hover, .chapter.current { opacity: 1; }
+.chapter:focus-visible { outline: 2px solid #fff; outline-offset: 6px; border-radius: 2px; }
+.bar { grid-column: 1 / -1; position: relative; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.35); overflow: hidden; }
+.fill { position: absolute; inset: 0; background: #fff; transform-origin: left; transition: transform 0.26s linear; }
+.num { font: 500 12px/1.4 var(--ff-space-grotesk), sans-serif; letter-spacing: 1.5px; }
+.title { font: 500 16px/1.3 var(--ff-space-grotesk), sans-serif; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25); }
+.toggle {
+  flex-shrink: 0; display: grid; place-items: center;
+  width: 48px; height: 48px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92); color: #222; cursor: pointer; transition: background 0.3s;
+}
+.toggle:hover { background: #fff; }
+.toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.toggle svg { width: 20px; height: 20px; fill: currentColor; }
+
+@media (max-width: 1199px) {
+  .section { max-width: none; padding: 20px 20px 0; }
+  .overlay { padding: 60px 36px 28px; }
+}
+@media (max-width: 1023px) {
+  .overlay { gap: 16px; }
+  .chapters { gap: 6px; position: relative; padding-top: 34px; }
+  .chapter { row-gap: 10px; grid-template-columns: 1fr; }
+  /* Solo se ve el título del capítulo actual, a todo el ancho */
+  .num { display: none; }
+  .title { position: absolute; top: 0; left: 0; right: 0; opacity: 0; transition: opacity 0.3s; font-size: 18px; }
+  .current .title { opacity: 1; }
+  .chapters li { display: flex; }
+  .bar { order: 2; }
+}
+@media (max-width: 767px) {
+  .section { padding: 15px 10px 0; }
+  .card { aspect-ratio: 4 / 5; }
+  .overlay { padding: 60px 18px 20px; }
+}

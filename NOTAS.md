@@ -69,3 +69,12 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
     - Respeta `prefers-reduced-motion` y se pausa fuera de pantalla.
     - Parámetros: objeto `CONFIG` al inicio de `jelly.js`.
     - Demo independiente en `/jelly/` (68 KB en total).
+35. **Home: vídeo hero** bajo el buscador de dominios, encima del selector de planes (`components/home/VideoHero.tsx`).
+    - **Clips:** los 4 vídeos del cliente (`assets/section1-4.mp4`, 50 MB) recodificados para web en `public/video/`: H.264 720p, CRF 24, sin audio, `faststart`, 6,6 MB en total. Los clips 3 y 4 (1292×712 y 1286×716) se han recortado a 16:9. Cada uno tiene su póster `.webp` (primer fotograma).
+    - **Reproducción:** se encadenan en bucle 1→2→3→4→1 sin cortes, con dos `<video>` que se alternan: mientras uno se ve, el otro ya tiene cargado el siguiente clip.
+    - **Capítulos:** abajo hay 4 capítulos con barra de progreso; al pulsar uno, salta a ese clip. Los títulos de los capítulos son **provisionales** (`videoHero` en `content/home.ts`).
+    - **Pausa:** hay un botón de pausa (WCAG 2.2.2).
+    - **Carga y ahorro:** no descarga nada hasta que la sección está a 300 px de la pantalla y se pausa al salir de ella.
+    - **Movimiento reducido:** con `prefers-reduced-motion` no arranca solo; se ve el póster con el botón de reproducir.
+    - **Formato de la tarjeta:** 2:1 en escritorio y 4:5 en móvil (recorta los lados). Por debajo de 1024 px solo se ve el título del capítulo actual.
+    - **Servidor:** el hosting debe aceptar peticiones `Range` (206). Sin ellas Safari no reproduce el vídeo y no se puede saltar dentro del clip. Apache y Nginx lo hacen por defecto, pero `python -m http.server` no, así que en local conviene usar `npx serve out`.

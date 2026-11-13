@@ -235,3 +235,18 @@ export const planPicker = {
   error: 'Ahora mismo no podemos mostrar los planes. Puedes verlos en el área de cliente.',
   errorLink: { label: 'Ver planes en el área de cliente', href: 'https://panel.cloudin.pro/cart.php' },
 } as const;
+
+/* ---------- Vídeo hero bajo el buscador (4 clips encadenados, sin audio) ---------- */
+// Títulos de capítulo provisionales (ver NOTAS.md, punto 35).
+export const videoHero = {
+  label: 'Vídeo: de una idea a un proyecto online con Cloudin',
+  chapters: [
+    { src: '/video/section1.mp4', poster: '/video/section1.webp', title: 'Tienes una idea' },
+    { src: '/video/section2.mp4', poster: '/video/section2.webp', title: 'La llevamos a la nube' },
+    { src: '/video/section3.mp4', poster: '/video/section3.webp', title: 'Tus clientes te encuentran' },
+    { src: '/video/section4.mp4', poster: '/video/section4.webp', title: 'Tu negocio crece' },
+  ],
+  play: 'Reproducir vídeo',
+  pause: 'Pausar vídeo',
+  chapter: 'Capítulo',
+} as const;
