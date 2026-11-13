@@ -1,0 +1,14 @@
+/* jelly.css · capas de la nube de gominola (compartido por la demo y la home) */
+.jelly {
+  position: relative;
+  aspect-ratio: 760 / 488;          /* proporción del recorte cloud.webp */
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.jelly > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-user-drag: none; }
+.jelly-shadow { transform-origin: 45% 82%; will-change: transform, opacity; }
+.jelly-canvas { position: absolute; pointer-events: none; width: auto; height: auto; }
+/* Con WebGL la <img> queda invisible (sigue dando tamaño y coordenadas del puntero) */
+.jelly--webgl .jelly-img { opacity: 0; }

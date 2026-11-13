@@ -1,0 +1,139 @@
+/* ==========================================================================
+   tokens.css · Cloudin (réplica de https://cloudin.pro)
+   Valores extraídos de estilos COMPUTADOS en Chromium (Playwright) sobre
+   11 páginas × 4 anchos (1440, 1024, 768, 390). Fuente: _inventory/tokens-raw.json
+   Nada se ha estimado "a ojo". Donde el original es incoherente se conserva.
+   ========================================================================== */
+
+:root {
+  /* ---------- Tipografía: familias ---------- */
+  --font-poppins: var(--ff-poppins), sans-serif;    /* principal: cuerpo, menú, títulos de sección */
+  --font-chivo: var(--ff-chivo), sans-serif;       /* body por defecto del tema, botones, h2/h4/h5 blog */
+  --font-oswald: var(--ff-oswald), sans-serif;     /* titulares display en mayúsculas (hero, PIENSA…, planes) */
+  --font-montserrat: var(--ff-montserrat), sans-serif; /* solo capa RevSlider "Empieza tu proyecto online" (600) */
+
+  /* Pesos realmente cargados (document.fonts, status=loaded) */
+  /* Poppins 300 400 500 600 700 800 + 400 italic · Chivo 400 500 600 700 800
+     Oswald 400 600 700 · Montserrat 600 */
+
+  /* ---------- Tipografía: tamaños usados (px, por frecuencia) ---------- */
+  --fs-9: 9px;  --fs-10: 10px; --fs-11: 11px; --fs-12: 12px; --fs-13: 13px;
+  --fs-14: 14px; --fs-15: 15px; --fs-16: 16px; --fs-17: 17px; --fs-18: 18px;
+  --fs-19: 19px; --fs-20: 20px; --fs-22: 22px; --fs-24: 24px; --fs-36: 36px;
+  --fs-45: 45px; --fs-50: 50px;
+
+  /* ---------- Estilos de texto compuestos (familia peso tamaño/interlineado tracking) ---------- */
+  --type-footer-title: 700 20px/24px var(--font-poppins);           /* h5 «Cloud Computing», ls -0.2px */
+  --type-eyebrow: 700 10px/12px var(--font-poppins);                /* h6 «¿TE AYUDAMOS?», ls 1px, uppercase */
+  --type-section-h2: 700 36px/37.8px var(--font-poppins);           /* «Crea tu página web», ls -0.2px */
+  --type-hosting-h2: 700 45px/45px var(--font-poppins);             /* /hosting/, ls -1.1px */
+  --type-display-oswald-84: 700 84px/25.2px var(--font-oswald);     /* «CLOUD» (home), ls -3px */
+  --type-display-oswald-74: 700 74px/7.4px var(--font-oswald);      /* «HOSTING» (home), ls -3px */
+  --type-display-oswald-50: 700 50px/50px var(--font-oswald);       /* «DOMINIOS» (home), ls -1px */
+  --type-display-oswald-63: 700 63px/56.7px var(--font-oswald);     /* «PLANES DE HOSTING», ls -1.3px, uppercase */
+  --type-plan-title: 600 45px/67.5px var(--font-oswald);            /* «STARTER», ls -1.3px, uppercase */
+  --type-unete-h1: 800 55px/55px var(--font-chivo);                 /* «Únete al squad», ls -0.02px */
+  --type-blog-h4: 500 32px/33.6px var(--font-chivo);                /* ls 0.1px */
+  --type-blog-h5: 500 20px/24px var(--font-chivo);                  /* ls -0.2px */
+  --type-dc-region: 700 19px/19px var(--font-chivo);                /* /data-center-espana/ «Andalucía» */
+  --type-tabs-nav: 400 17px/0.4em var(--font-poppins);              /* pestañas home (valor literal del original) */
+  --ls-tight-3: -3px; --ls-tight-13: -1.3px; --ls-tight-11: -1.1px; --ls-tight-1: -1px;
+  --ls-tight-02: -0.2px; --ls-wide-1: 1px;
+
+  /* ---------- Color: texto ---------- */
+  --c-text-muted-navy: rgba(0, 36, 88, 0.6);  /* enlaces footer/menús custom (el más usado) */
+  --c-text: #4d4d4d;                           /* rgb(77,77,77) body por defecto */
+  --c-navy: #01213a;                           /* rgb(1,33,58) titulares (CLOUD, Y LOS MEJORES…) */
+  --c-white: #ffffff;
+  --c-link: #5b7bfb;                           /* --color-link del tema */
+  --c-link-hover: #181b31;                     /* --color-link-hover del tema */
+  --c-black: #000000;
+  --c-text-404046: #404046;                    /* «Impulsa tus ventas…» */
+  --c-text-2c: #2c2c2c;                        /* listas de planes /hosting/ */
+  --c-text-11: #111111;                        /* items menú principal */
+  --c-text-35: #353535;                        /* títulos planes */
+  --c-text-464039: #464039;                    /* «DOMINIOS» home */
+  --c-text-3f3e3e: #3f3e3e;                    /* «HOSTING» home */
+  --c-text-070707: #070707;
+  --c-cyan-text: #68c2d8;                      /* /hosting/ «Alojamiento web» */
+  --c-badge-hot: #0044eb;                      /* badge HOT */
+  --c-text-535353: #535353;                    /* pestañas inactivas */
+  --c-text-797979: #797979;
+
+  /* ---------- Color: fondos ---------- */
+  --bg-white: #ffffff;
+  --bg-black: #000000;
+  --bg-footer: #f7fafe;                        /* rgb(247,250,254) footer */
+  --bg-blog-cat: #54595f;
+  --bg-overlay-45: rgba(0, 0, 0, 0.45);
+  --bg-mobile-header: #f6f6f6;
+  --bg-cta-navy: #030343;                      /* «Reinventa tu negocio» */
+  --bg-card-hosting: #f1f0ec;
+  --bg-card-dominios: #f8e9e0;
+  --bg-blog-date: #f2f3f5;
+  --bg-tab: #f1f1f1;                           /* pestaña inactiva */
+  --bg-tab-active: #000000;
+  --bg-btn-unete: #edf2f6;                     /* botón «Únete» header */
+  --bg-f5: #f5f5f5;
+  /* Badge HOT: texto Poppins 600 12px #0044eb, pad 7.2px 10.8px, r 24px; el fondo es un
+     ::before con bg #0044eb, opacity .125 y box-shadow 0 8px 15px -8px #0044eb */
+  --badge-hot-color: #0044eb;
+  --badge-hot-bg-opacity: 0.125;
+
+  /* ---------- Degradados ---------- */
+  --grad-topbar: linear-gradient(90deg, #22d7df 0%, #09c1b8 100%);            /* barra promocional */
+  --grad-hosting-title: linear-gradient(135deg, #01e7ff 0%, #02ffa1 66%);     /* /hosting/ «Cuéntanos tu proyecto» (texto) */
+  --grad-unete-word: linear-gradient(to right, #85ffbd 0%, #fffb7d 100%);     /* /unete/ «squad» (texto) */
+  --grad-tab-card: linear-gradient(rgba(255,255,255,.94) 0%, #ffffff 100%);
+  --grad-contacto-hero: linear-gradient(#eeeeee 0%, #e0e0e0 100%);
+  --grad-asturias-title: linear-gradient(81deg, #13f6ff 0%, #ffe52d 100%);
+  --bg-highlight-ahora: #00fcef;               /* capa RevSlider «AHORA»: Oswald 700 82px/74px, color #020202, pad 0 0 6px 4px */
+
+  /* ---------- Radios ---------- */
+  --r-3: 3px; --r-4: 4px; --r-5: 5px; --r-6: 6px; --r-7: 7px; --r-8: 8px;
+  --r-10: 10px; --r-12: 12px; --r-24: 24px; --r-25-top: 25px 25px 0 0;
+  --r-45: 45px; --r-50: 50px; --r-75: 75px; --r-170: 170px; --r-200: 200px; --r-pill: 750px;
+
+  /* ---------- Sombras ---------- */
+  --sh-card: 0 5px 20px 0 rgba(0, 0, 0, 0.05);       /* meta blog */
+  --sh-cta: 0 15px 50px 0 rgba(0, 0, 0, 0.19);       /* «Reinventa tu negocio» */
+  --sh-hero-box: 0 20px 40px 0 rgba(0, 0, 0, 0.15);  /* caja «Empieza tu proyecto online» */
+  --sh-figure: 0 25px 30px 0 rgba(0, 0, 0, 0.07);
+  --sh-btn-hover: 0 12px 28px 0 rgba(0, 0, 0, 0.12); /* hover «Únete» (+ translateY(-2px)) */
+
+  /* ---------- Botones (medidos) ---------- */
+  /* Únete (header): Chivo 400 15px · pad 12.75px 19.5px · r 45px · bg #edf2f6 · h 49
+       hover → bg #000, color #fff, sombra --sh-btn-hover, translateY(-2px)
+     Buscar dominio: Chivo 400 16px · r 7px · bg #000 · color #fff · h 60
+     Contactar (CTA navy): Chivo 400 15px · pad 19.5px 40.5px · r 75px · bg #fff · h 62
+     ver planes / conocer más: Chivo 400 15px · pad 12px 24px · r 3px / 5px · bg #000 · h 39
+     Comprar ahora (/hosting/): Chivo 400 15px · pad 17.25px 31.5px · r 8px · bg #000 · h 58
+     Enviar (/contacto/): Poppins 600 19px · pad 0 53.2px · r 4px · bg #000 · h 50
+     Enviar (/unete/): Chivo 400 15px · pad 0 42px · r 750px · bg #020101 · h 50 */
+
+  /* ---------- Layout ---------- */
+  --site-width: 1140px;           /* --lqd-site-width del tema */
+  --container-boxed: 1270px;      /* .elementor-section-boxed > .elementor-container (≥1200px) */
+  --container-boxed-tablet: 1024px;
+  --container-boxed-mobile: 767px;
+  --e-con-gutter: 10px;           /* .e-con-inner = viewport − 20px (1420 @1440, 1004 @1024, 748 @768) */
+  --header-height: 80px;          /* --lqd-sticky-header-placeholder-height */
+  --topbar-height: 71.8px;        /* barra promocional + borde redondeado superior del header (medido) */
+  --menu-item-pad-y: 10px;
+  --menu-item-pad-x: 15px;
+
+  /* ---------- Breakpoints (media queries reales de las hojas) ---------- */
+  /* ≤479 · ≤767 / 768 · ≤991 / ≥992 · ≤1199 / ≥1200
+     Menú hamburguesa (header móvil .lqd-mobile-sec) activo por debajo de 1200px (verificado a 1025/1100/1199). */
+  --bp-xs: 479px; --bp-sm: 767px; --bp-md: 991px; --bp-lg: 1199px;
+
+  /* ---------- Movimiento ---------- */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);     /* megamenú 0.85s */
+  --ease-quint: cubic-bezier(0.23, 1, 0.32, 1);        /* hamburguesa 0.45s, zoom imagen blog 1s */
+  --ease-btn: cubic-bezier(0, 0.71, 0.4, 1);           /* texto/icono botones 0.5s */
+  --ease-imggrp: cubic-bezier(0.05, 0.7, 0.2, 1);      /* image group 0.65s */
+  --ease-arrow: cubic-bezier(0.22, 0.665, 0.34, 0.875);/* flecha icono 0.3s */
+  --ease-out-power4: cubic-bezier(0.23, 1, 0.32, 1);    /* GSAP power4.out (animaciones de entrada Hub) */
+  --t-fast: 0.3s;  --t-tab: 0.15s;  --t-megamenu: 0.85s;
+  --split-char-delay: 32.5ms;                          /* hover texto botones (split chars) */
+}

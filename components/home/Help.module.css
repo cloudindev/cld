@@ -1,0 +1,23 @@
+/* «Nos gusta ayudarte…» · 1440: 450px de alto, padding 0 40, columnas 55.83% / 44.17% centradas en vertical */
+.section {
+  display: flex; align-items: center;
+  min-height: 450px; margin-bottom: 50px; padding: 0 40px;
+  background: url('/wp-content/uploads/2025/01/ayuda-cloudin-1.jpg') top left / cover no-repeat;
+}
+.colL { flex: 0 0 55.83%; padding: 10px; }
+.colR { flex: 0 0 44.17%; padding: 10px; }
+.fh { font: 400 15px/23.25px var(--font-chivo); }
+.person { display: inline-block; margin-bottom: 7px; font: 400 14px/19.6px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text-070707); }
+.spacer { height: 228px; }
+.title { display: inline-block; margin-bottom: 17.5px; font: 700 35px/36.75px var(--font-poppins); letter-spacing: -0.2px; color: var(--c-navy); }
+.text { display: inline-block; margin-bottom: 8px; font: 400 16px/22.4px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text-070707); }
+.spacer15 { height: 15px; }
+.btn { border-radius: 5px; }
+
+@media (max-width: 767px) {
+  .section {
+    flex-direction: column; align-items: stretch;
+    background: url('/wp-content/uploads/2024/12/te-ayudamos-hosting-cloud.jpg') 0 0 / 1000px auto no-repeat;
+  }
+  .colL, .colR { flex-basis: auto; }
+}

@@ -1,0 +1,76 @@
+/* Hero · estilos comunes; posiciones por ancho generadas desde content/home.ts (Hero.tsx) */
+.wrap { position: relative; padding: 10px 0; }
+@media (max-width: 767px) { .wrap { padding: 0; margin-top: -20px; } }
+
+.hero { position: relative; width: 100%; overflow: hidden; background: #fff; }
+.hero > * { position: absolute; }
+
+.title, .ahora {
+  z-index: 8;
+  font-family: var(--font-oswald); font-weight: 700; color: #020202;
+  white-space: nowrap;
+  animation: heroFromLeft 1.5s var(--ease-out-power4) backwards;
+}
+.ahora { z-index: 7; display: inline-block; background: var(--bg-highlight-ahora); animation-delay: 0.1s; }
+.desc {
+  z-index: 6;
+  font-family: var(--font-poppins); font-weight: 400; color: rgba(2, 2, 2, 0.5);
+  animation: heroFromLeft 1.5s var(--ease-out-power4) 0.2s backwards;
+}
+
+.photo { z-index: 10; overflow: hidden; background: rgba(0, 0, 0, 0.5); animation: heroFromTop 2s var(--ease-out-power4) var(--d) backwards; }
+.hero [data-photo='dog'] { z-index: 11; }
+.hero [data-photo='plant'] { z-index: 12; animation-name: heroFromBottom; }
+.hero [data-photo='man'] { z-index: 13; }
+.hero [data-photo='woman'] { animation-name: heroFromBottom; }
+.photoBg { position: absolute; inset: 0; background-position: 50% 50%; background-repeat: no-repeat; }
+.rTop { border-radius: 75px 75px 0 0; }
+.rBottom { border-radius: 0 0 75px 75px; }
+
+.outline { z-index: 6; display: none; border: 5px solid #f7f7f7; animation: heroFade 2s var(--ease-out-power4) 0.3s backwards; }
+.hero [data-outline='b'] { z-index: 7; }
+.hero [data-outline='c'] { z-index: 9; }
+.hero [data-outline='d'] { z-index: 8; }
+
+.pill {
+  z-index: 16;
+  transform: translateX(-50%);
+  height: auto;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: var(--font-montserrat); font-weight: 600; color: #fff;
+  text-align: center; white-space: nowrap;
+  animation: heroPill 1s var(--ease-out-power4) var(--d) backwards;
+}
+.hero [data-pill='dog'] { z-index: 15; }
+.hero [data-pill='woman'] { z-index: 14; }
+
+.box { z-index: 17; inset: 0; display: none; pointer-events: none; }
+/* Sin animación en el contenedor: Chromium no pinta una capa animada con backdrop-filter en capturas a página completa */
+.dot, .boxText, .boxButton { animation: heroFade 1.5s ease 0.6s backwards; }
+.box > * { position: absolute; pointer-events: auto; }
+.boxBg {
+  border-radius: 10px;
+  background: rgba(74, 81, 101, 0.5);
+  box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.dot { border-radius: 5px; background: #f94a82; }
+.boxText { font-family: var(--font-montserrat); font-weight: 600; color: #fff; white-space: nowrap; }
+.boxButton {
+  border: 0; border-radius: 5px; background: #020000;
+  font-family: var(--font-montserrat); font-weight: 600; color: #fff; white-space: nowrap;
+  transition: background 0.3s;
+}
+.boxButton:hover { background: #333; }
+.monster { z-index: 19; max-width: none; animation: heroFade 1.5s ease 0.6s backwards; }
+
+@keyframes heroFromLeft { from { opacity: 0; transform: translateX(-100px); } to { opacity: 1; transform: none; } }
+@keyframes heroFromTop { from { opacity: 0; transform: translateY(-100%); } to { opacity: 1; transform: none; } }
+@keyframes heroFromBottom { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+@keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes heroPill { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translateX(-50%); } }

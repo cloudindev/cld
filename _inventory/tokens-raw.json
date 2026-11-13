@@ -1,0 +1,5949 @@
+{
+ "aggregate": {
+  "typeStyles": [
+   [
+    "Poppins | 400 | 14px / 23.25px | ls 0.1px | none",
+    {
+     "n": 452,
+     "ex": [
+      "/ @1440: a «¿Qué es la nube?»",
+      "/ @1024: a «¿Qué es la nube?»",
+      "/ @768: a «¿Qué es la nube?»",
+      "/ @390: a «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 13px / 29px | ls 0.1px | none",
+    {
+     "n": 264,
+     "ex": [
+      "/ @1440: a «Aviso legal»",
+      "/ @1024: a «Aviso legal»",
+      "/ @768: a «Aviso legal»",
+      "/ @390: a «Aviso legal»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 15px / 23.25px | ls 0.1px | none",
+    {
+     "n": 224,
+     "ex": [
+      "/ @1440: p «Almacena y protege tus datos empresarial»",
+      "/ @1024: p «Almacena y protege tus datos empresarial»",
+      "/ @768: p «Almacena y protege tus datos empresarial»",
+      "/ @390: p «Almacena y protege tus datos empresarial»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 15px / 23.25px | ls 0.1px | none",
+    {
+     "n": 203,
+     "ex": [
+      "/ @1440: div.screen-reader-text «Skip links»",
+      "/ @1024: div.screen-reader-text «Skip links»",
+      "/ @768: div.screen-reader-text «Skip links»",
+      "/ @390: div.screen-reader-text «Skip links»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 16px / 23.25px | ls 0.1px | none",
+    {
+     "n": 152,
+     "ex": [
+      "/ @1440: a «Soporte»",
+      "/ @1024: a «Soporte»",
+      "/ @768: a «Soporte»",
+      "/hosting/ @1440: p.p1 «El hosting web es el servicio que permit»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 15px / 15px | ls 0.1px | none",
+    {
+     "n": 152,
+     "ex": [
+      "/data-center-espana/ @1440: p «Alojamiento web Cádiz»",
+      "/data-center-espana/ @1024: p «Alojamiento web Cádiz»",
+      "/data-center-espana/ @768: p «Alojamiento web Cádiz»",
+      "/data-center-espana/ @390: p «Alojamiento web Cádiz»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 18px / 23.25px | ls 0.1px | none",
+    {
+     "n": 143,
+     "ex": [
+      "/hosting/ @1440: p.p1 «Soluciones de hosting web diseñadas para»",
+      "/hosting/ @1024: p.p1 «Soluciones de hosting web diseñadas para»",
+      "/hosting/ @768: p.p1 «Soluciones de hosting web diseñadas para»",
+      "/hosting/ @390: p.p1 «Soluciones de hosting web diseñadas para»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 20px / 24px | ls -0.2px | none",
+    {
+     "n": 132,
+     "ex": [
+      "/ @1440: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @1024: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @768: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @390: h5.ld-fh-element.d-inline-block «Cloud Computing»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 15px / 15px | ls 0.1px | none",
+    {
+     "n": 128,
+     "ex": [
+      "/ @1440: span.elementor-button-text «conocer más»",
+      "/ @1024: span.elementor-button-text «conocer más»",
+      "/ @768: span.elementor-button-text «conocer más»",
+      "/ @390: span.elementor-button-text «conocer más»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 13px / 26px | ls 0.1px | none",
+    {
+     "n": 112,
+     "ex": [
+      "/hosting/ @1440: span «1 sitio web»",
+      "/hosting/ @1024: span «1 sitio web»",
+      "/hosting/ @768: span «1 sitio web»",
+      "/hosting/ @390: span «1 sitio web»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 17px / 28.9px | ls 0.1px | none",
+    {
+     "n": 112,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: p.wp-block-paragraph «La computación en la nube ha revoluciona»",
+      "/blog/que-es-la-nube/ @1024: p.wp-block-paragraph «La computación en la nube ha revoluciona»",
+      "/blog/que-es-la-nube/ @768: p.wp-block-paragraph «La computación en la nube ha revoluciona»",
+      "/blog/que-es-la-nube/ @390: p.wp-block-paragraph «La computación en la nube ha revoluciona»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 12px / 23.25px | ls 0.1px | none",
+    {
+     "n": 77,
+     "ex": [
+      "/ @1440: span.split-inner «m»",
+      "/hosting/ @1440: span.split-inner «m»",
+      "/dominios/ @1440: span.split-inner «m»",
+      "/cloud/ @1440: span.split-inner «m»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 17px / 28.9px | ls 0.1px | none",
+    {
+     "n": 72,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: strong «Costo-efectividad»",
+      "/blog/que-es-la-nube/ @1024: strong «Costo-efectividad»",
+      "/blog/que-es-la-nube/ @768: strong «Costo-efectividad»",
+      "/blog/que-es-la-nube/ @390: strong «Costo-efectividad»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 19px / 54px | ls 0.1px | none",
+    {
+     "n": 68,
+     "ex": [
+      "/hosting/ @1440: span.accordion-title-txt «¿Qué es el hosting web y cómo funciona?»",
+      "/hosting/ @1024: span.accordion-title-txt «¿Qué es el hosting web y cómo funciona?»",
+      "/hosting/ @768: span.accordion-title-txt «¿Qué es el hosting web y cómo funciona?»",
+      "/hosting/ @390: span.accordion-title-txt «¿Qué es el hosting web y cómo funciona?»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 600 | 16px / 23.25px | ls 0.1px | none",
+    {
+     "n": 66,
+     "ex": [
+      "/ @1440: a «Dominios HOT»",
+      "/hosting/ @1440: a «Dominios HOT»",
+      "/dominios/ @1440: a «Dominios HOT»",
+      "/cloud/ @1440: a «Dominios HOT»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 700 | 19px / 19px | ls -0.2px | none",
+    {
+     "n": 64,
+     "ex": [
+      "/data-center-espana/ @1440: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @1024: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @768: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @390: h2.elementor-heading-title.elementor-size-default «Andalucía»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 15px / 30px | ls 0.1px | none",
+    {
+     "n": 56,
+     "ex": [
+      "/hosting/ @1440: span «1 sitio web»",
+      "/hosting/ @1024: span «1 sitio web»",
+      "/hosting/ @768: span «1 sitio web»",
+      "/hosting/ @390: span «1 sitio web»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 20px / 28px | ls 0.1px | none",
+    {
+     "n": 56,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: b «nuestros diseños de páginas web en Astur»",
+      "/diseno-paginas-web-asturias/ @1024: b «nuestros diseños de páginas web en Astur»",
+      "/diseno-paginas-web-asturias/ @768: b «nuestros diseños de páginas web en Astur»",
+      "/diseno-paginas-web-asturias/ @390: b «nuestros diseños de páginas web en Astur»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 10px / 12px | ls 1px | uppercase",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @1024: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @768: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @390: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 700 | 20px / 24px | ls -0.2px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: a «+34 900 433 400»",
+      "/ @1024: a «+34 900 433 400»",
+      "/ @768: a «+34 900 433 400»",
+      "/ @390: a «+34 900 433 400»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 13px / 0px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «© Cloudin | Todos los derechos Reservado»",
+      "/ @1024: p.ld-fh-element.d-inline-block «© Cloudin | Todos los derechos Reservado»",
+      "/ @768: p.ld-fh-element.d-inline-block «© Cloudin | Todos los derechos Reservado»",
+      "/ @390: p.ld-fh-element.d-inline-block «© Cloudin | Todos los derechos Reservado»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 9px / 14.4px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: p «This website is operated by Cloudin Host»",
+      "/ @1024: p «This website is operated by Cloudin Host»",
+      "/ @768: p «This website is operated by Cloudin Host»",
+      "/ @390: p «This website is operated by Cloudin Host»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 13px / 29px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Aviso legal - Privacidad - Cookies - Acc»",
+      "/ @1024: p.ld-fh-element.d-inline-block «Aviso legal - Privacidad - Cookies - Acc»",
+      "/ @768: p.ld-fh-element.d-inline-block «Aviso legal - Privacidad - Cookies - Acc»",
+      "/ @390: p.ld-fh-element.d-inline-block «Aviso legal - Privacidad - Cookies - Acc»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 10px / 23.25px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/ @390: a «Soporte»",
+      "/hosting/ @390: a «Soporte»",
+      "/dominios/ @390: a «Soporte»",
+      "/cloud/ @390: a «Soporte»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 11px / 16.5px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/blog/ @1440: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @1024: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @768: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @390: time.lqd-lp-date.pt-1 «2 semanas ago»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 15px / 23.25px | ls 0.1px | none",
+    {
+     "n": 44,
+     "ex": [
+      "/aviso-legal/ @1440: strong «DENOMINACIÓN SOCIAL:»",
+      "/aviso-legal/ @1024: strong «DENOMINACIÓN SOCIAL:»",
+      "/aviso-legal/ @768: strong «DENOMINACIÓN SOCIAL:»",
+      "/aviso-legal/ @390: strong «DENOMINACIÓN SOCIAL:»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 11px / 13.75px | ls 0.1px | none",
+    {
+     "n": 40,
+     "ex": [
+      "/blog/ @1440: a «Alojamiento web»",
+      "/blog/ @1024: a «Alojamiento web»",
+      "/blog/ @768: a «Alojamiento web»",
+      "/blog/ @390: a «Alojamiento web»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 500 | 24px / 28.8px | ls -0.2px | none",
+    {
+     "n": 37,
+     "ex": [
+      "/blog/ @1440: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/ @1024: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/ @768: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/ @390: a «¿Qué características debe tener un buen »"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 13px / 1.3px | ls 0.1px | none",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1440: p «Los precios no incluyen IVA»",
+      "/ @1024: p «Los precios no incluyen IVA»",
+      "/ @768: p «Los precios no incluyen IVA»",
+      "/hosting/ @1440: p «Los precios no incluyen IVA»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 15px / 23.25px | ls normal | none",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1024: span.sr-only «Toggle navigation»",
+      "/ @768: span.sr-only «Toggle navigation»",
+      "/ @390: span.sr-only «Toggle navigation»",
+      "/hosting/ @1024: span.sr-only «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 14px / 23.25px | ls 0.1px | none",
+    {
+     "n": 32,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: p.ld-fh-element.d-inline-block «Si necesitas otra solución contáctanos»",
+      "/diseno-paginas-web-asturias/ @1024: p.ld-fh-element.d-inline-block «Si necesitas otra solución contáctanos»",
+      "/diseno-paginas-web-asturias/ @768: p.ld-fh-element.d-inline-block «Si necesitas otra solución contáctanos»",
+      "/diseno-paginas-web-asturias/ @390: p.ld-fh-element.d-inline-block «Si necesitas otra solución contáctanos»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 700 | 50px / 50px | ls -1px | none",
+    {
+     "n": 25,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @768: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @390: h2.ld-fh-element.d-inline-block «DOMINIOS»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 600 | 50px / 50px | ls 0.1px | none",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: span.lqd-pt-price.font-weight-semibold «2,99 €/mes»",
+      "/hosting/ @1024: span.lqd-pt-price.font-weight-semibold «2,99 €/mes»",
+      "/hosting/ @768: span.lqd-pt-price.font-weight-semibold «2,99 €/mes»",
+      "/hosting/ @390: span.lqd-pt-price.font-weight-semibold «2,99 €/mes»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 600 | 15.3061px / 15.3061px | ls 0.1px | none",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: small «€/mes»",
+      "/hosting/ @1024: small «€/mes»",
+      "/hosting/ @768: small «€/mes»",
+      "/hosting/ @390: small «€/mes»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 45px / 45px | ls -1.1px | none",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 18px / 23.25px | ls 0.1px | none",
+    {
+     "n": 24,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @1024: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @768: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @390: b «diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 36px / 37.8px | ls -0.2px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @768: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @390: h2.ld-fh-element.d-inline-block «Crea tu página web»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 500 | 14px / 23.25px | ls 0.1px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/hosting/ @1440: p «Alojamiento web»",
+      "/hosting/ @1024: p «Alojamiento web»",
+      "/hosting/ @768: p «Alojamiento web»",
+      "/hosting/ @390: p «Alojamiento web»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 300 | 17px / 23.25px | ls 0.1px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/contacto/ @1440: span «Nombre y apellidos *»",
+      "/contacto/ @1024: span «Nombre y apellidos *»",
+      "/contacto/ @768: span «Nombre y apellidos *»",
+      "/contacto/ @390: span «Nombre y apellidos *»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 500 | 20px / 24px | ls -0.2px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @1024: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @768: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @390: h5 «Nube pública»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 14px / 16.1px | ls 0.1px | none",
+    {
+     "n": 18,
+     "ex": [
+      "/hosting/ @1440: a «Ver planes»",
+      "/hosting/ @1024: a «Ver planes»",
+      "/hosting/ @768: a «Ver planes»",
+      "/cloud/ @1440: a «Ver planes»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 600 | 45px / 67.5px | ls -1.3px | uppercase",
+    {
+     "n": 16,
+     "ex": [
+      "/hosting/ @1440: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @1024: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @768: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @390: h4.lqd-pt-title.font-weight-semibold «STARTER»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 600 | 22px / 23.25px | ls normal | none",
+    {
+     "n": 16,
+     "ex": [
+      "/data-center-espana/ @1440: div.ld-fh-element.d-inline-block «Tu data center confiable y seguro»",
+      "/data-center-espana/ @1024: div.ld-fh-element.d-inline-block «Tu data center confiable y seguro»",
+      "/data-center-espana/ @768: div.ld-fh-element.d-inline-block «Tu data center confiable y seguro»",
+      "/data-center-espana/ @390: div.ld-fh-element.d-inline-block «Tu data center confiable y seguro»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 16px / 23.25px | ls 0.1px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @1024: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @768: b «diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @390: b «diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 500 | 32px / 33.6px | ls 0.1px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @1024: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @768: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @390: h4 «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 13px / 14.95px | ls 0.1px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @1024: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @768: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @390: span.lqd-lp-date.pos-rel «1 mes ago»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 13px / 16.25px | ls 0.1px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: a «Cloud»",
+      "/blog/que-es-la-nube/ @1024: a «Cloud»",
+      "/blog/que-es-la-nube/ @768: a «Cloud»",
+      "/blog/que-es-la-nube/ @390: a «Cloud»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 500 | 19px / 22.8px | ls -0.2px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/que-es-la-nube/ @1024: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/que-es-la-nube/ @768: a «¿Por qué WordPress va lento y cómo soluc»",
+      "/blog/que-es-la-nube/ @390: a «¿Por qué WordPress va lento y cómo soluc»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 36px / 10.8px | ls -1.1px | none",
+    {
+     "n": 14,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Migración gratuita»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 700 | 84px / 25.2px | ls -3px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @768: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @390: h2.ld-fh-element.d-inline-block «CLOUD»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 17px / 6.8px | ls 0.1px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: span.lqd-tabs-nav-txt «Página Web»",
+      "/ @1024: span.lqd-tabs-nav-txt «Página Web»",
+      "/ @768: span.lqd-tabs-nav-txt «Página Web»",
+      "/ @390: span.lqd-tabs-nav-txt «Página Web»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 600 | 14px / 23.25px | ls 0.1px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/hosting/ @1440: p «Soluciones de Hosting»",
+      "/hosting/ @1024: p «Soluciones de Hosting»",
+      "/hosting/ @768: p «Soluciones de Hosting»",
+      "/hosting/ @390: p «Soluciones de Hosting»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 500 | 17px / 23.25px | ls 0.1px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/hosting/ @1440: span.elementor-icon-list-text «99.9% de tiempo de actividad garantizado»",
+      "/hosting/ @1024: span.elementor-icon-list-text «99.9% de tiempo de actividad garantizado»",
+      "/hosting/ @768: span.elementor-icon-list-text «99.9% de tiempo de actividad garantizado»",
+      "/hosting/ @390: span.elementor-icon-list-text «99.9% de tiempo de actividad garantizado»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 700 | 42px / 44.1px | ls -0.2px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/hosting/ @1440: a «Cuéntanos tu proyecto Te ayudamos»",
+      "/hosting/ @1024: a «Cuéntanos tu proyecto Te ayudamos»",
+      "/hosting/ @768: a «Cuéntanos tu proyecto Te ayudamos»",
+      "/dominios/ @1440: a «Cuéntanos tu proyecto Te ayudamos»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 800 | 55px / 55px | ls -0.02px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/unete/ @1440: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/unete/ @1024: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/unete/ @768: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/diseno-paginas-web-asturias/ @1440: h1.ld-fh-element.d-inline-block «Diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 20px / 28px | ls 0.1px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: p.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @1024: p.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @768: p.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @390: p.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 20px / 23.25px | ls 0.1px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: strong «mejor diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @1024: strong «mejor diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @768: strong «mejor diseño de páginas web en Asturias»",
+      "/diseno-paginas-web-asturias/ @390: strong «mejor diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 400 | 12px / 12px | ls 0.1px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»",
+      "/hosting/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»",
+      "/dominios/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»",
+      "/cloud/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 600 | 12px / 12px | ls 0.1px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: span.link-badge «HOT»",
+      "/hosting/ @1440: span.link-badge «HOT»",
+      "/dominios/ @1440: span.link-badge «HOT»",
+      "/cloud/ @1440: span.link-badge «HOT»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 500 | 13px / 23.25px | ls 0.13px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: span.lqd-scrl-indc-txt «scroll»",
+      "/hosting/ @1440: span.lqd-scrl-indc-txt «scroll»",
+      "/dominios/ @1440: span.lqd-scrl-indc-txt «scroll»",
+      "/cloud/ @1440: span.lqd-scrl-indc-txt «scroll»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 700 | 74px / 7.4px | ls -3px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @768: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @390: h2.ld-fh-element.d-inline-block «HOSTING»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 11px / 14.3px | ls 0.1px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @390: p «Los precios no incluyen IVA»",
+      "/hosting/ @390: p «Los precios no incluyen IVA»",
+      "/dominios/ @390: p «Los precios no incluyen IVA»",
+      "/cloud/ @390: p «Los precios no incluyen IVA»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 18px / 25.2px | ls 0.1px | none",
+    {
+     "n": 9,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Si vas a crear una página web para tu em»",
+      "/ @1024: p.ld-fh-element.d-inline-block «Si vas a crear una página web para tu em»",
+      "/ @768: p.ld-fh-element.d-inline-block «Si vas a crear una página web para tu em»",
+      "/ @390: p.ld-fh-element.d-inline-block «Si vas a crear una página web para tu em»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 39px / 3.9px | ls -1px | none",
+    {
+     "n": 9,
+     "ex": [
+      "/dominios/ @1440: h2.ld-fh-element.d-inline-block «.xyz»",
+      "/dominios/ @1024: h2.ld-fh-element.d-inline-block «.xyz»",
+      "/dominios/ @768: h2.ld-fh-element.d-inline-block «.xyz»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 700 | 63px / 56.7px | ls -1.3px | uppercase",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»"
+     ]
+    }
+   ],
+   [
+    "Oswald | 600 | 43px / 64.5px | ls -1.3px | uppercase",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @1024: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @768: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @390: h4.lqd-pt-title.font-weight-semibold «PREMIUM»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 36px / 43.2px | ls -1.1px | none",
+    {
+     "n": 8,
+     "ex": [
+      "/cloud/ @1440: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @1024: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @768: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @390: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 17px / 23.8px | ls 0.1px | none",
+    {
+     "n": 8,
+     "ex": [
+      "/contacto/ @1440: p «Atención al cliente de 9h a 18h. Lunes a»",
+      "/contacto/ @1024: p «Atención al cliente de 9h a 18h. Lunes a»",
+      "/contacto/ @768: p «Atención al cliente de 9h a 18h. Lunes a»",
+      "/contacto/ @390: p «Atención al cliente de 9h a 18h. Lunes a»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 48px / 50.4px | ls -0.2px | none",
+    {
+     "n": 8,
+     "ex": [
+      "/data-center-espana/ @1440: span.lqd-highlight-txt «Seguridad y compliance»",
+      "/data-center-espana/ @1024: span.lqd-highlight-txt «Seguridad y compliance»",
+      "/data-center-espana/ @768: span.lqd-highlight-txt «Seguridad y compliance»",
+      "/data-center-espana/ @390: span.lqd-highlight-txt «Seguridad y compliance»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 600 | 22px / 23.1px | ls normal | none",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 18px / 27px | ls 0.1px | none",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @1024: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @768: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @390: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 37px / 40.7px | ls normal | none",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "Chivo | 700 | 11px / 11.55px | ls 0.1px | none",
+    {
+     "n": 8,
+     "ex": [
+      "/blog/ @1440: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @1024: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @768: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @390: h3.mt-0.mb-1 «Posted by Breno»"
+     ]
+    }
+   ],
+   [
+    "Montserrat | 600 | 17px / 40px | ls normal | none",
+    {
+     "n": 6,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-8.rs-layer «Let»",
+      "/ @1024: rs-layer.rs-pxl-8.rs-layer «Let's go online!»"
+     ]
+    }
+   ],
+   [
+    "Montserrat | 600 | 13px / 30px | ls normal | none",
+    {
+     "n": 6,
+     "ex": [
+      "/ @768: rs-layer.rs-pxl-8.rs-layer «Let»",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 11.31px / 11.31px | ls 0.1px | none",
+    {
+     "n": 6,
+     "ex": [
+      "/hosting/ @390: a «Ver planes»",
+      "/cloud/ @390: a «Ver planes»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 800 | 55px / 55px | ls -0.02px | none",
+    {
+     "n": 6,
+     "ex": [
+      "/data-center-espana/ @1440: h1.ld-fh-element.d-inline-block «Data center en España y Europa»",
+      "/data-center-espana/ @1024: h1.ld-fh-element.d-inline-block «Data center en España y Europa»",
+      "/data-center-espana/ @768: h1.ld-fh-element.d-inline-block «Data center en España y Europa»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 700 | 41px / 43.05px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @768: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @390: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 400 | 29px / 30.45px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @768: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @390: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»"
+     ]
+    }
+   ],
+   [
+    "Poppins | 300 | 21px / 25.2px | ls 1px | lowercase",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @1024: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @768: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @390: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»"
+     ]
+    }
+   ]
+  ],
+  "fontFamily": [
+   [
+    "Poppins, sans-serif",
+    {
+     "n": 2505,
+     "ex": [
+      "/ @1440: a «Dominios HOT»",
+      "/ @1024: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »",
+      "/ @768: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »",
+      "/ @390: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »"
+     ]
+    }
+   ],
+   [
+    "Chivo, sans-serif",
+    {
+     "n": 1187,
+     "ex": [
+      "/ @1440: div.screen-reader-text «Skip links»",
+      "/ @1024: div.screen-reader-text «Skip links»",
+      "/ @768: div.screen-reader-text «Skip links»",
+      "/ @390: div.screen-reader-text «Skip links»"
+     ]
+    }
+   ],
+   [
+    "Oswald, sans-serif",
+    {
+     "n": 96,
+     "ex": [
+      "/ @1440: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @1024: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @768: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @390: h1.ld-fh-element.d-inline-block «PIENSA»"
+     ]
+    }
+   ],
+   [
+    "Poppins",
+    {
+     "n": 24,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @1024: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @768: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @390: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»"
+     ]
+    }
+   ],
+   [
+    "Montserrat",
+    {
+     "n": 18,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «Empieza tu proyecto online»",
+      "/ @1024: rs-layer.rs-layer «Empieza tu proyecto online»",
+      "/ @768: rs-layer.rs-layer «Empieza tu proyecto online»",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "Oswald",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @1024: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @768: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @390: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»"
+     ]
+    }
+   ]
+  ],
+  "fontWeight": [
+   [
+    "400",
+    {
+     "n": 2608,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "700",
+    {
+     "n": 813,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "600",
+    {
+     "n": 211,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "500",
+    {
+     "n": 135,
+     "ex": [
+      "/ @1440: ",
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: "
+     ]
+    }
+   ],
+   [
+    "800",
+    {
+     "n": 40,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "300",
+    {
+     "n": 31,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ]
+  ],
+  "fontSize": [
+   [
+    "15px",
+    {
+     "n": 841,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "13px",
+    {
+     "n": 554,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "14px",
+    {
+     "n": 546,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "20px",
+    {
+     "n": 286,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "17px",
+    {
+     "n": 251,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "16px",
+    {
+     "n": 246,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "18px",
+    {
+     "n": 190,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "19px",
+    {
+     "n": 148,
+     "ex": [
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: ",
+      "/hosting/ @390: "
+     ]
+    }
+   ],
+   [
+    "11px",
+    {
+     "n": 107,
+     "ex": [
+      "/ @390: ",
+      "/hosting/ @390: ",
+      "/dominios/ @390: ",
+      "/cloud/ @390: "
+     ]
+    }
+   ],
+   [
+    "12px",
+    {
+     "n": 99,
+     "ex": [
+      "/ @1440: ",
+      "/hosting/ @1440: ",
+      "/dominios/ @1440: ",
+      "/cloud/ @1440: "
+     ]
+    }
+   ],
+   [
+    "10px",
+    {
+     "n": 88,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "50px",
+    {
+     "n": 49,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "36px",
+    {
+     "n": 46,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "9px",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "45px",
+    {
+     "n": 40,
+     "ex": [
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: ",
+      "/hosting/ @390: "
+     ]
+    }
+   ],
+   [
+    "24px",
+    {
+     "n": 38,
+     "ex": [
+      "/blog/ @1440: ",
+      "/blog/ @1024: ",
+      "/blog/ @768: ",
+      "/blog/ @390: "
+     ]
+    }
+   ],
+   [
+    "22px",
+    {
+     "n": 28,
+     "ex": [
+      "/data-center-espana/ @1440: ",
+      "/data-center-espana/ @1024: ",
+      "/data-center-espana/ @768: ",
+      "/data-center-espana/ @390: "
+     ]
+    }
+   ],
+   [
+    "15.3061px",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: ",
+      "/hosting/ @390: "
+     ]
+    }
+   ],
+   [
+    "55px",
+    {
+     "n": 18,
+     "ex": [
+      "/unete/ @1440: ",
+      "/unete/ @1024: ",
+      "/unete/ @768: ",
+      "/data-center-espana/ @1440: "
+     ]
+    }
+   ],
+   [
+    "35px",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "32px",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: ",
+      "/blog/que-es-la-nube/ @1024: ",
+      "/blog/que-es-la-nube/ @768: ",
+      "/blog/que-es-la-nube/ @390: "
+     ]
+    }
+   ],
+   [
+    "84px",
+    {
+     "n": 15,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "42px",
+    {
+     "n": 15,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/hosting/ @1440: "
+     ]
+    }
+   ],
+   [
+    "25px",
+    {
+     "n": 13,
+     "ex": [
+      "/ @390: ",
+      "/contacto/ @1440: ",
+      "/contacto/ @1024: ",
+      "/contacto/ @768: "
+     ]
+    }
+   ],
+   [
+    "39px",
+    {
+     "n": 12,
+     "ex": [
+      "/ @768: ",
+      "/ @390: ",
+      "/dominios/ @1440: ",
+      "/dominios/ @1024: "
+     ]
+    }
+   ],
+   [
+    "74px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "30px",
+    {
+     "n": 11,
+     "ex": [
+      "/contacto/ @1440: ",
+      "/contacto/ @1024: ",
+      "/contacto/ @768: ",
+      "/contacto/ @390: "
+     ]
+    }
+   ],
+   [
+    "63px",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: ",
+      "/hosting/ @390: "
+     ]
+    }
+   ],
+   [
+    "43px",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: ",
+      "/hosting/ @1024: ",
+      "/hosting/ @768: ",
+      "/hosting/ @390: "
+     ]
+    }
+   ],
+   [
+    "48px",
+    {
+     "n": 8,
+     "ex": [
+      "/data-center-espana/ @1440: ",
+      "/data-center-espana/ @1024: ",
+      "/data-center-espana/ @768: ",
+      "/data-center-espana/ @390: "
+     ]
+    }
+   ],
+   [
+    "37px",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: ",
+      "/diseno-paginas-web-asturias/ @1024: ",
+      "/diseno-paginas-web-asturias/ @768: ",
+      "/diseno-paginas-web-asturias/ @390: "
+     ]
+    }
+   ],
+   [
+    "11.31px",
+    {
+     "n": 6,
+     "ex": [
+      "/hosting/ @390: ",
+      "/cloud/ @390: "
+     ]
+    }
+   ],
+   [
+    "66.3px",
+    {
+     "n": 6,
+     "ex": [
+      "/unete/ @390: ",
+      "/data-center-espana/ @390: ",
+      "/diseno-paginas-web-asturias/ @390: "
+     ]
+    }
+   ],
+   [
+    "29px",
+    {
+     "n": 5,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "41px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "21px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "70px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "31px",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: ",
+      "/diseno-paginas-web-asturias/ @1024: ",
+      "/diseno-paginas-web-asturias/ @768: ",
+      "/diseno-paginas-web-asturias/ @390: "
+     ]
+    }
+   ],
+   [
+    "78px",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: "
+     ]
+    }
+   ],
+   [
+    "83px",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: "
+     ]
+    }
+   ],
+   [
+    "27px",
+    {
+     "n": 3,
+     "ex": [
+      "/dominios/ @1440: ",
+      "/dominios/ @1024: ",
+      "/dominios/ @768: "
+     ]
+    }
+   ],
+   [
+    "82px",
+    {
+     "n": 2,
+     "ex": [
+      "/ @1440: "
+     ]
+    }
+   ],
+   [
+    "68px",
+    {
+     "n": 2,
+     "ex": [
+      "/ @1024: "
+     ]
+    }
+   ],
+   [
+    "49px",
+    {
+     "n": 2,
+     "ex": [
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "44px",
+    {
+     "n": 2,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: ",
+      "/blog/que-es-la-nube/ @1024: "
+     ]
+    }
+   ],
+   [
+    "58.5px",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "37.5px",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "40px",
+    {
+     "n": 1,
+     "ex": [
+      "/blog/que-es-la-nube/ @768: "
+     ]
+    }
+   ],
+   [
+    "40.5px",
+    {
+     "n": 1,
+     "ex": [
+      "/blog/que-es-la-nube/ @390: "
+     ]
+    }
+   ]
+  ],
+  "textColor": [
+   [
+    "rgba(0, 36, 88, 0.6)",
+    {
+     "n": 1188,
+     "ex": [
+      "/ @1440: a «Soporte»",
+      "/ @1024: a «Soporte»",
+      "/ @768: a «Soporte»",
+      "/ @390: a «Soporte»"
+     ]
+    }
+   ],
+   [
+    "rgb(77, 77, 77)",
+    {
+     "n": 892,
+     "ex": [
+      "/ @1440: div.screen-reader-text «Skip links»",
+      "/ @1024: div.screen-reader-text «Skip links»",
+      "/ @768: div.screen-reader-text «Skip links»",
+      "/ @390: div.screen-reader-text «Skip links»"
+     ]
+    }
+   ],
+   [
+    "rgb(1, 33, 58)",
+    {
+     "n": 548,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @768: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @390: h2.ld-fh-element.d-inline-block «CLOUD»"
+     ]
+    }
+   ],
+   [
+    "rgb(255, 255, 255)",
+    {
+     "n": 354,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»",
+      "/ @1024: rs-layer.rs-layer «Empieza tu proyecto online»",
+      "/ @768: rs-layer.rs-layer «Empieza tu proyecto online»",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "rgb(91, 123, 251)",
+    {
+     "n": 216,
+     "ex": [
+      "/ @1440: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @1024: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @768: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @390: a.screen-reader-shortcut «Skip to primary navigation»"
+     ]
+    }
+   ],
+   [
+    "rgb(0, 0, 0)",
+    {
+     "n": 155,
+     "ex": [
+      "/ @1440: span.btn-txt «Únete»",
+      "/ @1024: span.sr-only «Toggle navigation»",
+      "/ @768: span.sr-only «Toggle navigation»",
+      "/ @390: span.sr-only «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "rgb(64, 64, 70)",
+    {
+     "n": 124,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »",
+      "/ @1024: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »",
+      "/ @768: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »",
+      "/ @390: p.ld-fh-element.d-inline-block «Impulsa tus ventas lanzando tu proyecto »"
+     ]
+    }
+   ],
+   [
+    "rgb(44, 44, 44)",
+    {
+     "n": 112,
+     "ex": [
+      "/hosting/ @1440: span «1 sitio web»",
+      "/hosting/ @1024: span «1 sitio web»",
+      "/hosting/ @768: span «1 sitio web»",
+      "/hosting/ @390: span «1 sitio web»"
+     ]
+    }
+   ],
+   [
+    "rgb(17, 17, 17)",
+    {
+     "n": 70,
+     "ex": [
+      "/ @1440: a «Dominios HOT»",
+      "/ @1024: p.ld-fh-element.d-inline-block «Partners»",
+      "/ @768: p.ld-fh-element.d-inline-block «Partners»",
+      "/ @390: p.ld-fh-element.d-inline-block «Partners»"
+     ]
+    }
+   ],
+   [
+    "rgb(53, 53, 53)",
+    {
+     "n": 48,
+     "ex": [
+      "/hosting/ @1440: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @1024: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @768: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @390: h4.lqd-pt-title.font-weight-semibold «STARTER»"
+     ]
+    }
+   ],
+   [
+    "rgb(70, 64, 57)",
+    {
+     "n": 25,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @768: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @390: h2.ld-fh-element.d-inline-block «DOMINIOS»"
+     ]
+    }
+   ],
+   [
+    "rgb(63, 62, 62)",
+    {
+     "n": 20,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @768: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @390: h2.ld-fh-element.d-inline-block «HOSTING»"
+     ]
+    }
+   ],
+   [
+    "rgb(7, 7, 7)",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Raquel Sanz Guía Cloudin»",
+      "/ @1024: p.ld-fh-element.d-inline-block «Raquel Sanz Guía Cloudin»",
+      "/ @768: p.ld-fh-element.d-inline-block «Raquel Sanz Guía Cloudin»",
+      "/ @390: p.ld-fh-element.d-inline-block «Raquel Sanz Guía Cloudin»"
+     ]
+    }
+   ],
+   [
+    "rgb(104, 194, 216)",
+    {
+     "n": 12,
+     "ex": [
+      "/hosting/ @1440: p «Alojamiento web»",
+      "/hosting/ @1024: p «Alojamiento web»",
+      "/hosting/ @768: p «Alojamiento web»",
+      "/hosting/ @390: p «Alojamiento web»"
+     ]
+    }
+   ],
+   [
+    "rgb(0, 68, 235)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: span.link-badge «HOT»",
+      "/hosting/ @1440: span.link-badge «HOT»",
+      "/dominios/ @1440: span.link-badge «HOT»",
+      "/cloud/ @1440: span.link-badge «HOT»"
+     ]
+    }
+   ],
+   [
+    "rgb(2, 2, 2)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @1024: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @768: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»",
+      "/ @390: rs-layer.rs-layer «DIGITALIZA TU NEGOCIO»"
+     ]
+    }
+   ],
+   [
+    "rgb(83, 83, 83)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: span.lqd-tabs-nav-txt «Correo electrónico»",
+      "/ @1024: span.lqd-tabs-nav-txt «Correo electrónico»",
+      "/ @768: span.lqd-tabs-nav-txt «Correo electrónico»",
+      "/ @390: span.lqd-tabs-nav-txt «Correo electrónico»"
+     ]
+    }
+   ],
+   [
+    "rgb(121, 121, 121)",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @1024: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @768: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»",
+      "/diseno-paginas-web-asturias/ @390: p.ld-fh-element.d-inline-block «y nosotros te lo damos gratis»"
+     ]
+    }
+   ],
+   [
+    "rgb(122, 37, 255)",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: span «contáctanos»",
+      "/diseno-paginas-web-asturias/ @1024: span «contáctanos»",
+      "/diseno-paginas-web-asturias/ @768: span «contáctanos»",
+      "/diseno-paginas-web-asturias/ @390: span «contáctanos»"
+     ]
+    }
+   ],
+   [
+    "rgba(2, 2, 2, 0.5)",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @1024: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @768: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»",
+      "/ @390: rs-layer.rs-layer «Te damos las tecnologías que necesitas p»"
+     ]
+    }
+   ],
+   [
+    "rgb(10, 37, 64)",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: a «900 433 400»",
+      "/contacto/ @1024: a «900 433 400»",
+      "/contacto/ @768: a «900 433 400»",
+      "/contacto/ @390: a «900 433 400»"
+     ]
+    }
+   ],
+   [
+    "rgb(84, 89, 95)",
+    {
+     "n": 4,
+     "ex": [
+      "/blog/ @1440: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @1024: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @768: time.lqd-lp-date.pt-1 «2 semanas ago»",
+      "/blog/ @390: time.lqd-lp-date.pt-1 «2 semanas ago»"
+     ]
+    }
+   ],
+   [
+    "rgba(255, 255, 255, 0.5)",
+    {
+     "n": 4,
+     "ex": [
+      "/blog/ @1440: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @1024: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @768: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @390: h3.mt-0.mb-1 «Posted by Breno»"
+     ]
+    }
+   ],
+   [
+    "rgb(136, 129, 107)",
+    {
+     "n": 3,
+     "ex": [
+      "/dominios/ @1440: h2.ld-fh-element.d-inline-block «y muchos más»",
+      "/dominios/ @1024: h2.ld-fh-element.d-inline-block «y muchos más»",
+      "/dominios/ @768: h2.ld-fh-element.d-inline-block «y muchos más»"
+     ]
+    }
+   ]
+  ],
+  "transition": [
+   [
+    "background, border, border-radius, box-shadow, transform 0.3s, 0.3s, 0.3s, 0.3s, 0.4s ease, ease, ease, ease, ease",
+    {
+     "n": 2741,
+     "ex": [
+      "/ @1440: div.elementor-widget-container",
+      "/ @1024: div.elementor-widget-container",
+      "/ @768: div.elementor-widget-container",
+      "/ @390: div.elementor-widget-container"
+     ]
+    }
+   ],
+   [
+    "all 0.3s ease",
+    {
+     "n": 1836,
+     "ex": [
+      "/ @1440: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @1024: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @768: a.screen-reader-shortcut «Skip to primary navigation»",
+      "/ @390: a.screen-reader-shortcut «Skip to primary navigation»"
+     ]
+    }
+   ],
+   [
+    "background, box-shadow 0.3s, 0.3s ease, ease",
+    {
+     "n": 1062,
+     "ex": [
+      "/ @1440: div.elementor-widget-wrap.elementor-element-populated «Tu dominio GRATIS el primer año m á s i »",
+      "/ @1024: div.elementor-widget-wrap.elementor-element-populated",
+      "/ @768: div.elementor-widget-wrap.elementor-element-populated",
+      "/ @390: div.elementor-widget-wrap.elementor-element-populated"
+     ]
+    }
+   ],
+   [
+    "color 0.3s ease",
+    {
+     "n": 768,
+     "ex": [
+      "/ @1440: p.ld-fh-element.d-inline-block «Tu dominio GRATIS el primer año»",
+      "/ @1024: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @768: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @390: h1.ld-fh-element.d-inline-block «PIENSA»"
+     ]
+    }
+   ],
+   [
+    "background, border, box-shadow, transform 0.3s, 0.3s, 0.3s, 0.4s ease, ease, ease, ease",
+    {
+     "n": 323,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @1024: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @768: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @390: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»"
+     ]
+    }
+   ],
+   [
+    "opacity, visibility 0.3s, 0.3s ease, ease",
+    {
+     "n": 228,
+     "ex": [
+      "/ @1440: div.lqd-fancy-menu.lqd-custom-menu «Soporte Contacto Academy | Área de clien»",
+      "/ @1024: div.lqd-fancy-menu.lqd-custom-menu «Soporte Contacto Academy | Área de clien»",
+      "/ @768: div.lqd-fancy-menu.lqd-custom-menu «Soporte Contacto Academy | Área de clien»",
+      "/ @390: div.lqd-fancy-menu.lqd-custom-menu «Soporte Contacto Academy | Área de clien»"
+     ]
+    }
+   ],
+   [
+    "background, border, border-radius, box-shadow 0.3s, 0.3s, 0.3s, 0.3s ease, ease, ease, ease",
+    {
+     "n": 188,
+     "ex": [
+      "/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/ @1024: section.elementor-section.elementor-top-section «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @768: section.elementor-section.elementor-top-section «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @390: section.elementor-section.elementor-top-section «Crea tu página web desde 5,90€/mes Si va»"
+     ]
+    }
+   ],
+   [
+    "opacity 1s ease",
+    {
+     "n": 134,
+     "ex": [
+      "/ @1440: img.attachment-large.size-large",
+      "/ @1024: img.attachment-large.size-large",
+      "/ @768: img.attachment-large.size-large",
+      "/ @390: img.attachment-large.size-large"
+     ]
+    }
+   ],
+   [
+    "all 0.45s cubic-bezier(0.23, 1, 0.32, 1)",
+    {
+     "n": 132,
+     "ex": [
+      "/ @1024: span.bars.d-inline-block",
+      "/ @768: span.bars.d-inline-block",
+      "/ @390: span.bars.d-inline-block",
+      "/hosting/ @1024: span.bars.d-inline-block"
+     ]
+    }
+   ],
+   [
+    "transform, opacity 0.65s, 0.3s cubic-bezier(0.05, 0.7, 0.2, 1), ease",
+    {
+     "n": 69,
+     "ex": [
+      "/ @1440: div.lqd-imggrp-single.d-block",
+      "/ @1024: div.lqd-imggrp-single.d-block",
+      "/ @768: div.lqd-imggrp-single.d-block",
+      "/ @390: div.lqd-imggrp-single.d-block"
+     ]
+    }
+   ],
+   [
+    "transform 1s cubic-bezier(0.23, 1, 0.32, 1)",
+    {
+     "n": 56,
+     "ex": [
+      "/blog/ @1440: figure.pos-rel.bg-cover",
+      "/blog/ @1024: figure.pos-rel.bg-cover",
+      "/blog/ @768: figure.pos-rel.bg-cover",
+      "/blog/ @390: figure.pos-rel.bg-cover"
+     ]
+    }
+   ],
+   [
+    "background-color 0.3s ease",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: header.header.site-header «Tu dominio GRATIS el primer año m á s i »",
+      "/ @1024: header.header.site-header «Toggle navigation»",
+      "/ @768: header.header.site-header «Toggle navigation»",
+      "/ @390: header.header.site-header «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "opacity, visibiliy 0.3s, 0.3s ease, ease",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: img.logo-default",
+      "/ @1024: img.logo-default",
+      "/ @768: img.logo-default",
+      "/ @390: img.logo-default"
+     ]
+    }
+   ],
+   [
+    "transform 0.3s ease",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: main.content «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @1024: main.content «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @768: main.content «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @390: main.content «DIGITALIZA TU NEGOCIO AHORA Te damos las»"
+     ]
+    }
+   ],
+   [
+    "transform 0.3s cubic-bezier(0.22, 0.665, 0.34, 0.875)",
+    {
+     "n": 40,
+     "ex": [
+      "/ @1440: i.lqd-icn-ess.icon-md-arrow-forward",
+      "/ @1024: i.lqd-icn-ess.icon-md-arrow-forward",
+      "/ @768: i.lqd-icn-ess.icon-md-arrow-forward",
+      "/ @390: i.lqd-icn-ess.icon-md-arrow-forward"
+     ]
+    }
+   ],
+   [
+    "background, color, box-shadow, border, opacity, transform 0.3s, 0.125s, 0.3s, 0.3s, 0.25s, 0.5s ease, ease, ease, ease, ease, ease",
+    {
+     "n": 38,
+     "ex": [
+      "/ @1440: span.btn-icon",
+      "/ @1024: span.btn-icon",
+      "/ @768: span.btn-icon",
+      "/ @390: span.btn-icon"
+     ]
+    }
+   ],
+   [
+    "transform 0.5s cubic-bezier(0, 0.71, 0.4, 1)",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: span.btn-txt «Comprar ahora»",
+      "/hosting/ @1024: span.btn-txt «Comprar ahora»",
+      "/hosting/ @768: span.btn-txt «Comprar ahora»",
+      "/hosting/ @390: span.btn-txt «Comprar ahora»"
+     ]
+    }
+   ],
+   [
+    "opacity, transform 0.25s, 0.5s cubic-bezier(0, 0.71, 0.4, 1)",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: span.btn-icon",
+      "/hosting/ @1024: span.btn-icon",
+      "/hosting/ @768: span.btn-icon",
+      "/hosting/ @390: span.btn-icon"
+     ]
+    }
+   ],
+   [
+    "opacity, transform 0.65s, 0.85s cubic-bezier(0.15, 0.85, 0.31, 1)",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: span.btn-txt «Contactar»",
+      "/ @1024: span.btn-txt «Contactar»",
+      "/ @768: span.btn-txt «Contactar»",
+      "/ @390: span.btn-txt «Contactar»"
+     ]
+    }
+   ],
+   [
+    "box-shadow 0.5s cubic-bezier(0.7, 0, 0.3, 1)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: figure.w-100.pos-rel",
+      "/hosting/ @1440: figure.w-100.pos-rel",
+      "/dominios/ @1440: figure.w-100.pos-rel",
+      "/cloud/ @1440: figure.w-100.pos-rel"
+     ]
+    }
+   ],
+   [
+    "opacity 0.65s cubic-bezier(0.5, 1, 0.5, 1)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: img.attachment-full.size-full",
+      "/hosting/ @1440: img.attachment-full.size-full",
+      "/dominios/ @1440: img.attachment-full.size-full",
+      "/cloud/ @1440: img.attachment-full.size-full"
+     ]
+    }
+   ],
+   [
+    "transform 0.35s ease",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: i.lqd-icn-ess.icon-ion-ios-arrow-down",
+      "/hosting/ @1440: i.lqd-icn-ess.icon-ion-ios-arrow-down",
+      "/dominios/ @1440: i.lqd-icn-ess.icon-ion-ios-arrow-down",
+      "/cloud/ @1440: i.lqd-icn-ess.icon-ion-ios-arrow-down"
+     ]
+    }
+   ],
+   [
+    "transform, opacity, height, bottom, color 0.85s, 0.85s, 0.45s, 0.45s, 0.45s cubic-bezier(0.3, 0.8, 0.35, 1)",
+    {
+     "n": 8,
+     "ex": [
+      "/data-center-espana/ @1440: span.lqd-highlight-inner",
+      "/data-center-espana/ @1024: span.lqd-highlight-inner",
+      "/data-center-espana/ @768: span.lqd-highlight-inner",
+      "/data-center-espana/ @390: span.lqd-highlight-inner"
+     ]
+    }
+   ],
+   [
+    "opacity 0.15s linear",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: div.lqd-tabs-pane.fade «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @1024: div.lqd-tabs-pane.fade «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @768: div.lqd-tabs-pane.fade «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @390: div.lqd-tabs-pane.fade «Crea tu página web desde 5,90€/mes Si va»"
+     ]
+    }
+   ]
+  ],
+  "bgColor": [
+   [
+    "rgb(255, 255, 255)",
+    {
+     "n": 274,
+     "ex": [
+      "/ @1440: div «Tu dominio GRATIS el primer año m á s i »",
+      "/ @1024: div «Toggle navigation DIGITALIZA TU NEGOCIO »",
+      "/ @768: div «Toggle navigation DIGITALIZA TU NEGOCIO »",
+      "/ @390: div «Toggle navigation DIGITALIZA TU NEGOCIO »"
+     ]
+    }
+   ],
+   [
+    "rgb(0, 0, 0)",
+    {
+     "n": 178,
+     "ex": [
+      "/ @1440: span.lqd-scrl-indc-el.d-inline-block",
+      "/ @1024: span.bar.d-inline-block",
+      "/ @768: span.bar.d-inline-block",
+      "/ @390: span.bar.d-inline-block"
+     ]
+    }
+   ],
+   [
+    "rgb(247, 250, 254)",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: footer.main-footer.site-footer «Soporte Contacto Academy | Área de clien»",
+      "/ @1024: footer.main-footer.site-footer «Soporte Contacto Academy | Área de clien»",
+      "/ @768: footer.main-footer.site-footer «Soporte Contacto Academy | Área de clien»",
+      "/ @390: footer.main-footer.site-footer «Soporte Contacto Academy | Área de clien»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.45)",
+    {
+     "n": 40,
+     "ex": [
+      "/blog/ @1440: div.lqd-lp-content-bg.lqd-overlay",
+      "/blog/ @1024: div.lqd-lp-content-bg.lqd-overlay",
+      "/blog/ @768: div.lqd-lp-content-bg.lqd-overlay",
+      "/blog/ @390: div.lqd-lp-content-bg.lqd-overlay"
+     ]
+    }
+   ],
+   [
+    "rgb(84, 89, 95)",
+    {
+     "n": 40,
+     "ex": [
+      "/blog/ @1440: ul.lqd-lp-cat.lqd-lp-cat «Alojamiento web»",
+      "/blog/ @1024: ul.lqd-lp-cat.lqd-lp-cat «Alojamiento web»",
+      "/blog/ @768: ul.lqd-lp-cat.lqd-lp-cat «Alojamiento web»",
+      "/blog/ @390: ul.lqd-lp-cat.lqd-lp-cat «Alojamiento web»"
+     ]
+    }
+   ],
+   [
+    "rgb(246, 246, 246)",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1024: div.lqd-mobile-sec-inner.navbar-header «Toggle navigation»",
+      "/ @768: div.lqd-mobile-sec-inner.navbar-header «Toggle navigation»",
+      "/ @390: div.lqd-mobile-sec-inner.navbar-header «Toggle navigation»",
+      "/hosting/ @1024: div.lqd-mobile-sec-inner.navbar-header «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.05)",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1024: span.submenu-expander.pos-abs",
+      "/ @768: span.submenu-expander.pos-abs",
+      "/ @390: span.submenu-expander.pos-abs",
+      "/hosting/ @1024: span.submenu-expander.pos-abs"
+     ]
+    }
+   ],
+   [
+    "rgb(3, 3, 67)",
+    {
+     "n": 24,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @1024: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @768: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @390: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»"
+     ]
+    }
+   ],
+   [
+    "rgb(241, 240, 236)",
+    {
+     "n": 23,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-61ac5c1 «HOSTING Alojamiento web rápido y fiable »",
+      "/ @1024: div.elementor-element.elementor-element-61ac5c1 «HOSTING Alojamiento web rápido y fiable »",
+      "/ @768: div.elementor-element.elementor-element-61ac5c1 «HOSTING Alojamiento web rápido y fiable »",
+      "/ @390: div.elementor-element.elementor-element-61ac5c1 «HOSTING Alojamiento web rápido y fiable »"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.5)",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-7.rs-layer",
+      "/ @1024: rs-layer.rs-pxl-7.rs-layer",
+      "/ @768: rs-layer.rs-pxl-7.rs-layer",
+      "/ @390: rs-layer.rs-pxl-7.rs-layer"
+     ]
+    }
+   ],
+   [
+    "rgb(242, 243, 245)",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @1024: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @768: span.lqd-lp-date.pos-rel «1 mes ago»",
+      "/blog/que-es-la-nube/ @390: span.lqd-lp-date.pos-rel «1 mes ago»"
+     ]
+    }
+   ],
+   [
+    "rgb(59, 59, 59)",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: ul.lqd-lp-cat.reset-ul «Cloud»",
+      "/blog/que-es-la-nube/ @1024: ul.lqd-lp-cat.reset-ul «Cloud»",
+      "/blog/que-es-la-nube/ @768: ul.lqd-lp-cat.reset-ul «Cloud»",
+      "/blog/que-es-la-nube/ @390: ul.lqd-lp-cat.reset-ul «Cloud»"
+     ]
+    }
+   ],
+   [
+    "rgba(255, 255, 255, 0.25)",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-8.rs-layer «Let»",
+      "/ @1024: rs-layer.rs-pxl-8.rs-layer «Let's go online!»",
+      "/ @768: rs-layer.rs-pxl-8.rs-layer «Let»",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "rgb(241, 241, 241)",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: a.d-block.pt-3 «Correo electrónico»",
+      "/ @1024: a.d-block.pt-3 «Correo electrónico»",
+      "/ @768: a.d-block.pt-3 «Correo electrónico»",
+      "/ @390: a.d-block.pt-3 «Correo electrónico»"
+     ]
+    }
+   ],
+   [
+    "rgb(237, 242, 246)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «Únete»",
+      "/hosting/ @1440: a.elementor-button.btn «Únete»",
+      "/dominios/ @1440: a.elementor-button.btn «Únete»",
+      "/cloud/ @1440: a.elementor-button.btn «Únete»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.3)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: span.lqd-scrl-indc-line.flex-grow-1",
+      "/hosting/ @1440: span.lqd-scrl-indc-line.flex-grow-1",
+      "/dominios/ @1440: span.lqd-scrl-indc-line.flex-grow-1",
+      "/cloud/ @1440: span.lqd-scrl-indc-line.flex-grow-1"
+     ]
+    }
+   ],
+   [
+    "rgb(248, 233, 224)",
+    {
+     "n": 10,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-6bc388b «DOMINIOS Encuentra el nombre perfecto pa»",
+      "/ @1024: div.elementor-element.elementor-element-6bc388b «DOMINIOS Encuentra el nombre perfecto pa»",
+      "/ @768: div.elementor-element.elementor-element-6bc388b «DOMINIOS Encuentra el nombre perfecto pa»",
+      "/ @390: div.elementor-element.elementor-element-6bc388b «DOMINIOS Encuentra el nombre perfecto pa»"
+     ]
+    }
+   ],
+   [
+    "rgb(245, 245, 245)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: div.elementor-widget-container",
+      "/ @1024: div.elementor-widget-container",
+      "/ @768: div.elementor-widget-container",
+      "/ @390: div.elementor-widget-container"
+     ]
+    }
+   ],
+   [
+    "rgb(13, 13, 13)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: div.elementor-widget-container.will-change «PIENSA»",
+      "/ @1024: div.elementor-widget-container.will-change «PIENSA»",
+      "/ @768: div.elementor-widget-container.lqd-unit-animation-done «PIENSA»",
+      "/ @390: div.elementor-widget-container.lqd-unit-animation-done «PIENSA»"
+     ]
+    }
+   ],
+   [
+    "rgb(217, 238, 238)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @1024: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @768: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @390: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»"
+     ]
+    }
+   ],
+   [
+    "rgba(177, 204, 255, 0.35)",
+    {
+     "n": 8,
+     "ex": [
+      "/data-center-espana/ @1440: span.lqd-highlight-inner",
+      "/data-center-espana/ @1024: span.lqd-highlight-inner",
+      "/data-center-espana/ @768: span.lqd-highlight-inner",
+      "/data-center-espana/ @390: span.lqd-highlight-inner"
+     ]
+    }
+   ],
+   [
+    "rgb(0, 252, 239)",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer «AHORA»",
+      "/ @1024: rs-layer.rs-layer «AHORA»",
+      "/ @768: rs-layer.rs-layer «AHORA»",
+      "/ @390: rs-layer.rs-layer «AHORA»"
+     ]
+    }
+   ],
+   [
+    "rgb(151, 151, 151)",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @1024: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @768: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @390: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»"
+     ]
+    }
+   ],
+   [
+    "rgb(255, 250, 250)",
+    {
+     "n": 4,
+     "ex": [
+      "/hosting/ @1440: div.elementor-element.elementor-element-9ed1038 «Migración gratuita ¿Tienes un hosting en»",
+      "/hosting/ @1024: div.elementor-element.elementor-element-9ed1038 «Migración gratuita ¿Tienes un hosting en»",
+      "/hosting/ @768: div.elementor-element.elementor-element-9ed1038 «Migración gratuita ¿Tienes un hosting en»",
+      "/hosting/ @390: div.elementor-element.elementor-element-9ed1038 «Migración gratuita ¿Tienes un hosting en»"
+     ]
+    }
+   ],
+   [
+    "rgb(217, 238, 224)",
+    {
+     "n": 4,
+     "ex": [
+      "/dominios/ @1440: div.elementor-element.elementor-element-3692a73 «.es el nombre para empresas españolas»",
+      "/dominios/ @1024: div.elementor-element.elementor-element-3692a73 «.es el nombre para empresas españolas»",
+      "/dominios/ @768: div.elementor-element.elementor-element-3692a73 «.es el nombre para empresas españolas»",
+      "/dominios/ @390: div.elementor-element.elementor-element-3692a73 «.es el nombre para empresas españolas»"
+     ]
+    }
+   ],
+   [
+    "rgb(2, 1, 1)",
+    {
+     "n": 4,
+     "ex": [
+      "/unete/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ],
+   [
+    "rgb(247, 255, 253)",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: div.elementor-widget-container «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @1024: div.elementor-widget-container «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @768: div.elementor-widget-container «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @390: div.elementor-widget-container «¿Por qué elegir el diseño de páginas web»"
+     ]
+    }
+   ],
+   [
+    "rgb(249, 74, 130)",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer",
+      "/ @1024: rs-layer.rs-layer",
+      "/ @768: rs-layer.rs-layer"
+     ]
+    }
+   ],
+   [
+    "rgb(2, 0, 0)",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: rs-layer.rev-btn.rs-layer «¿Cómo lo hago?»",
+      "/ @1024: rs-layer.rev-btn.rs-layer «¿Cómo lo hago?»",
+      "/ @768: rs-layer.rev-btn.rs-layer «¿Cómo lo hago?»"
+     ]
+    }
+   ],
+   [
+    "rgba(74, 81, 101, 0.5)",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: rs-column-bg",
+      "/ @1024: rs-column-bg",
+      "/ @768: rs-column-bg"
+     ]
+    }
+   ],
+   [
+    "rgb(243, 243, 243)",
+    {
+     "n": 2,
+     "ex": [
+      "/blog/que-es-la-nube/ @390: div.byline «Author Cloudin»"
+     ]
+    }
+   ]
+  ],
+  "gradients": [
+   [
+    "linear-gradient(135deg, rgb(1, 231, 255) 0%, rgb(2, 255, 161) 66%)",
+    {
+     "n": 12,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «Cuéntanos tu proyecto Te ayudamos»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «Cuéntanos tu proyecto Te ayudamos»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «Cuéntanos tu proyecto Te ayudamos»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Cuéntanos tu proyecto Te ayudamos»"
+     ]
+    }
+   ],
+   [
+    "linear-gradient(to right, rgb(133, 255, 189) 0%, rgb(255, 251, 125) 100%)",
+    {
+     "n": 12,
+     "ex": [
+      "/unete/ @1440: span.gradient-word «squad»",
+      "/unete/ @1024: span.gradient-word «squad»",
+      "/unete/ @768: span.gradient-word «squad»",
+      "/unete/ @390: span.gradient-word «squad»"
+     ]
+    }
+   ],
+   [
+    "linear-gradient(90deg, rgb(34, 215, 223) 0%, rgb(9, 193, 184) 100%)",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/hosting/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/dominios/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/cloud/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »"
+     ]
+    }
+   ],
+   [
+    "linear-gradient(rgba(255, 255, 255, 0.94) 0%, rgb(255, 255, 255) 100%)",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: div.elementor-widget-wrap.elementor-element-populated «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @1024: div.elementor-widget-wrap.elementor-element-populated «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @768: div.elementor-widget-wrap.elementor-element-populated «Crea tu página web desde 5,90€/mes Si va»",
+      "/ @390: div.elementor-widget-wrap.elementor-element-populated «Crea tu página web desde 5,90€/mes Si va»"
+     ]
+    }
+   ],
+   [
+    "linear-gradient(rgb(238, 238, 238) 0%, rgb(224, 224, 224) 100%)",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: section.elementor-section.elementor-top-section «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @1024: section.elementor-section.elementor-top-section «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @768: section.elementor-section.elementor-top-section «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @390: section.elementor-section.elementor-top-section «Te ayudamos 24 horas al día los 7 días d»"
+     ]
+    }
+   ],
+   [
+    "linear-gradient(81deg, rgb(19, 246, 255) 0%, rgb(255, 229, 45) 100%)",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»"
+     ]
+    }
+   ]
+  ],
+  "sectionPadding": [
+   [
+    "0px 0px 0px 0px",
+    {
+     "n": 1142,
+     "ex": [
+      "/ @1440: div.elementor-container.elementor-column-gap-no «Tu dominio GRATIS el primer año m á s i »",
+      "/ @1024: section.lqd-hide-onstuck.elementor-section",
+      "/ @768: section.lqd-hide-onstuck.elementor-section",
+      "/ @390: section.lqd-hide-onstuck.elementor-section"
+     ]
+    }
+   ],
+   [
+    "0px 10px 0px 10px",
+    {
+     "n": 201,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @1024: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @768: div.elementor-element.elementor-element-2f2adbc «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @390: div.elementor-element.elementor-element-41da04b"
+     ]
+    }
+   ],
+   [
+    "10px 0px 10px 0px",
+    {
+     "n": 168,
+     "ex": [
+      "/ @1440: div.e-con-inner «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @1024: div.e-con-inner «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @768: div.e-con-inner «DIGITALIZA TU NEGOCIO AHORA Te damos las»",
+      "/ @390: div.e-con-inner"
+     ]
+    }
+   ],
+   [
+    "10px 10px 10px 10px",
+    {
+     "n": 88,
+     "ex": [
+      "/hosting/ @1440: div.elementor-element.elementor-element-e162460 «Preguntas frecuentes del Hosting web ¿Qu»",
+      "/hosting/ @1024: div.elementor-element.elementor-element-e162460 «Preguntas frecuentes del Hosting web ¿Qu»",
+      "/hosting/ @768: div.elementor-element.elementor-element-e162460 «Preguntas frecuentes del Hosting web ¿Qu»",
+      "/hosting/ @390: div.elementor-element.elementor-element-e162460 «Preguntas frecuentes del Hosting web ¿Qu»"
+     ]
+    }
+   ],
+   [
+    "80px 0px 25px 0px",
+    {
+     "n": 72,
+     "ex": [
+      "/ @1024: section.elementor-section.elementor-top-section",
+      "/ @768: section.elementor-section.elementor-top-section",
+      "/ @390: section.elementor-section.elementor-top-section «Crea tu página web desde 5,90€/mes Si va»",
+      "/hosting/ @1024: section.elementor-section.elementor-top-section «Alojamiento sitio web Soluciones de host»"
+     ]
+    }
+   ],
+   [
+    "0px 20px 0px 20px",
+    {
+     "n": 45,
+     "ex": [
+      "/ @1440: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @1024: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @768: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»",
+      "/ @390: div.elementor-element.elementor-element-f36873b «CLOUD Almacena y protege tus datos empre»"
+     ]
+    }
+   ],
+   [
+    "20px 0px 20px 0px",
+    {
+     "n": 45,
+     "ex": [
+      "/ @1440: div.e-con-inner «CLOUD Almacena y protege tus datos empre»",
+      "/ @1024: div.e-con-inner «CLOUD Almacena y protege tus datos empre»",
+      "/ @768: div.e-con-inner «CLOUD Almacena y protege tus datos empre»",
+      "/ @390: div.e-con-inner «CLOUD Almacena y protege tus datos empre»"
+     ]
+    }
+   ],
+   [
+    "70px 0px 0px 0px",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «Soporte Contacto Academy | Área de clien»",
+      "/ @1024: section.elementor-section.elementor-top-section «Soporte Contacto Academy | Área de clien»",
+      "/ @768: section.elementor-section.elementor-top-section «Soporte Contacto Academy | Área de clien»",
+      "/hosting/ @1440: section.elementor-section.elementor-top-section «Soporte Contacto Academy | Área de clien»"
+     ]
+    }
+   ],
+   [
+    "25px 0px 0px 0px",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section",
+      "/ @1024: section.elementor-section.elementor-top-section",
+      "/ @768: section.elementor-section.elementor-top-section",
+      "/hosting/ @1440: section.elementor-section.elementor-top-section"
+     ]
+    }
+   ],
+   [
+    "5px 0px 45px 0px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/hosting/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/dominios/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »",
+      "/cloud/ @1440: section.lqd-hide-onstuck.elementor-section «Tu dominio GRATIS el primer año m á s i »"
+     ]
+    }
+   ],
+   [
+    "0px 129.594px 0px 129.594px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: section.lqd-hide-onstuck.elementor-section",
+      "/hosting/ @1440: section.lqd-hide-onstuck.elementor-section",
+      "/dominios/ @1440: section.lqd-hide-onstuck.elementor-section",
+      "/cloud/ @1440: section.lqd-hide-onstuck.elementor-section"
+     ]
+    }
+   ],
+   [
+    "45px 0px 45px 0px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: section.lqd-stickybar-wrap.lqd-stickybar-right «scroll»",
+      "/hosting/ @1440: section.lqd-stickybar-wrap.lqd-stickybar-right «scroll»",
+      "/dominios/ @1440: section.lqd-stickybar-wrap.lqd-stickybar-right «scroll»",
+      "/cloud/ @1440: section.lqd-stickybar-wrap.lqd-stickybar-right «scroll»"
+     ]
+    }
+   ],
+   [
+    "20px 0px 0px 0px",
+    {
+     "n": 10,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «20 años cambiando las reglas Y LOS MEJOR»",
+      "/ @390: section.elementor-section.elementor-top-section «PIENSA COMO LOS GRANDES Y HAZLO REALIDAD»",
+      "/diseno-paginas-web-asturias/ @1440: section.elementor-section.elementor-inner-section «Si necesitas otra solución contáctanos»",
+      "/diseno-paginas-web-asturias/ @1024: section.elementor-section.elementor-inner-section «Si necesitas otra solución contáctanos»"
+     ]
+    }
+   ],
+   [
+    "80px 0px 30px 0px",
+    {
+     "n": 10,
+     "ex": [
+      "/ @1024: section.elementor-section.elementor-top-section «CLOUD Almacena y protege tus datos empre»",
+      "/ @768: section.elementor-section.elementor-top-section «CLOUD Almacena y protege tus datos empre»",
+      "/dominios/ @1024: section.elementor-section.elementor-top-section «.com la extensión de dominio más interna»",
+      "/dominios/ @768: section.elementor-section.elementor-top-section «.com la extensión de dominio más interna»"
+     ]
+    }
+   ],
+   [
+    "40px 0px 0px 0px",
+    {
+     "n": 9,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «Partners»",
+      "/ @1024: section.elementor-section.elementor-top-section «Partners»",
+      "/ @768: section.elementor-section.elementor-top-section «Partners»",
+      "/ @390: section.elementor-section.elementor-top-section «Partners»"
+     ]
+    }
+   ],
+   [
+    "90px 0px 10px 0px",
+    {
+     "n": 9,
+     "ex": [
+      "/unete/ @1440: section.elementor-section.elementor-top-section «Flex office Horario flexible Formación e»",
+      "/unete/ @1024: section.elementor-section.elementor-top-section «Flex office Horario flexible Formación e»",
+      "/unete/ @768: section.elementor-section.elementor-top-section «Flex office Horario flexible Formación e»",
+      "/data-center-espana/ @1440: section.elementor-section.elementor-top-section «Data center en España y Europa Data cent»"
+     ]
+    }
+   ],
+   [
+    "55px 15px 55px 15px",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1024: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @768: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/hosting/ @1024: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»",
+      "/hosting/ @768: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»"
+     ]
+    }
+   ],
+   [
+    "0px 30px 0px 30px",
+    {
+     "n": 5,
+     "ex": [
+      "/hosting/ @390: section.elementor-section.elementor-top-section «Servidores alto rendimiento Hosting opti»",
+      "/diseno-paginas-web-asturias/ @1440: div.elementor-element.elementor-element-6fbceea «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: div.elementor-element.elementor-element-6fbceea «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: div.elementor-element.elementor-element-6fbceea «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "60px 0px 0px 0px",
+    {
+     "n": 5,
+     "ex": [
+      "/unete/ @390: section.elementor-section.elementor-top-section «Flex office Horario flexible Formación e»",
+      "/data-center-espana/ @390: section.elementor-section.elementor-top-section «Data center en España y Europa Data cent»",
+      "/diseno-paginas-web-asturias/ @1440: section.elementor-section.elementor-top-section «Todo empieza por un dominio y nosotros t»",
+      "/diseno-paginas-web-asturias/ @390: section.elementor-section.elementor-top-section «Diseño de páginas web en Asturias Descub»"
+     ]
+    }
+   ],
+   [
+    "0px 0px 20px 0px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «CLOUD Almacena y protege tus datos empre»",
+      "/dominios/ @1440: section.elementor-section.elementor-top-section «.com la extensión de dominio más interna»"
+     ]
+    }
+   ],
+   [
+    "0px 40px 0px 40px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «Raquel Sanz Guía Cloudin Nos gusta ayuda»",
+      "/ @1024: section.elementor-section.elementor-top-section «Raquel Sanz Guía Cloudin Nos gusta ayuda»",
+      "/ @768: section.elementor-section.elementor-top-section «Raquel Sanz Guía Cloudin Nos gusta ayuda»",
+      "/ @390: section.elementor-section.elementor-top-section «Raquel Sanz Guía Cloudin Nos gusta ayuda»"
+     ]
+    }
+   ],
+   [
+    "55px 90px 55px 90px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/hosting/ @1440: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»",
+      "/dominios/ @1440: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»",
+      "/cloud/ @1440: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»"
+     ]
+    }
+   ],
+   [
+    "0px 0px 15px 0px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @390: section.elementor-section.elementor-top-section «CLOUD Almacena y protege tus datos empre»",
+      "/dominios/ @390: section.elementor-section.elementor-top-section «.com la extensión de dominio más interna»"
+     ]
+    }
+   ],
+   [
+    "50px 15px 50px 15px",
+    {
+     "n": 4,
+     "ex": [
+      "/ @390: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/hosting/ @390: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»",
+      "/dominios/ @390: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»",
+      "/cloud/ @390: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»"
+     ]
+    }
+   ],
+   [
+    "15px 0px 0px 0px",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: div.e-con-inner «Centro de ayuda | Contacta con nosotros»",
+      "/contacto/ @1024: div.e-con-inner «Centro de ayuda | Contacta con nosotros»",
+      "/contacto/ @768: div.e-con-inner «Centro de ayuda | Contacta con nosotros»",
+      "/contacto/ @390: div.e-con-inner «Centro de ayuda | Contacta con nosotros»"
+     ]
+    }
+   ],
+   [
+    "75px 0px 75px 0px",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: div.e-con-inner «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: div.e-con-inner «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: div.e-con-inner «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @390: div.e-con-inner «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "25px 40px 25px 40px",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @390: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "80px 0px 10px 0px",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «PIENSA COMO LOS GRANDES Y HAZLO REALIDAD»",
+      "/ @1024: section.elementor-section.elementor-top-section «PIENSA COMO LOS GRANDES Y HAZLO REALIDAD»",
+      "/ @768: section.elementor-section.elementor-top-section «PIENSA COMO LOS GRANDES Y HAZLO REALIDAD»"
+     ]
+    }
+   ],
+   [
+    "20px 20px 20px 20px",
+    {
+     "n": 3,
+     "ex": [
+      "/ @390: section.elementor-section.elementor-top-section",
+      "/dominios/ @390: section.elementor-section.elementor-top-section"
+     ]
+    }
+   ],
+   [
+    "5px 0px 25px 0px",
+    {
+     "n": 2,
+     "ex": [
+      "/hosting/ @390: section.elementor-section.elementor-top-section «Alojamiento sitio web Soluciones de host»",
+      "/cloud/ @390: section.elementor-section.elementor-top-section «Nube privada para tu organización Un ent»"
+     ]
+    }
+   ]
+  ],
+  "gap": [
+   [
+    "normal",
+    {
+     "n": 1633,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "0px",
+    {
+     "n": 319,
+     "ex": [
+      "/ @1440: ",
+      "/ @1024: ",
+      "/ @768: ",
+      "/ @390: "
+     ]
+    }
+   ],
+   [
+    "0px 25px",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: ",
+      "/diseno-paginas-web-asturias/ @1024: ",
+      "/diseno-paginas-web-asturias/ @768: ",
+      "/diseno-paginas-web-asturias/ @390: "
+     ]
+    }
+   ]
+  ],
+  "shadow": [
+   [
+    "rgba(0, 0, 0, 0.05) 0px 5px 20px 0px",
+    {
+     "n": 56,
+     "ex": [
+      "/blog/ @1440: div.lqd-lp-meta.lqd-lp-meta-solid «2 semanas ago Tags Alojamiento web»",
+      "/blog/ @1024: div.lqd-lp-meta.lqd-lp-meta-solid «2 semanas ago Tags Alojamiento web»",
+      "/blog/ @768: div.lqd-lp-meta.lqd-lp-meta-solid «2 semanas ago Tags Alojamiento web»",
+      "/blog/ @390: div.lqd-lp-meta.lqd-lp-meta-solid «2 semanas ago Tags Alojamiento web»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.19) 0px 15px 50px 0px",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @1024: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @768: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @390: section.elementor-section.elementor-inner-section «Reinventa tu negocio. Te ayudamos en tod»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.15) 0px 20px 40px 0px",
+    {
+     "n": 15,
+     "ex": [
+      "/ @1440: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/ @1024: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/ @768: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "rgba(0, 0, 0, 0.07) 0px 25px 30px 0px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: figure.w-100.pos-rel",
+      "/hosting/ @1440: figure.w-100.pos-rel",
+      "/dominios/ @1440: figure.w-100.pos-rel",
+      "/cloud/ @1440: figure.w-100.pos-rel"
+     ]
+    }
+   ]
+  ],
+  "buttons": [
+   [
+    "Chivo 400 15px | pad 0px | r 45px | bg rgba(0, 0, 0, 0) | c rgb(0, 0, 0) | h 70",
+    {
+     "n": 33,
+     "ex": [
+      "/ @1024: button.navbar-toggle.collapsed «Toggle navigation»",
+      "/ @768: button.navbar-toggle.collapsed «Toggle navigation»",
+      "/ @390: button.navbar-toggle.collapsed «Toggle navigation»",
+      "/hosting/ @1024: button.navbar-toggle.collapsed «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 16px | pad 1px 6px | r 7px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 60",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: input",
+      "/ @1024: input",
+      "/ @768: input",
+      "/ @390: input"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 17.25px 31.5px | r 8px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 58",
+    {
+     "n": 16,
+     "ex": [
+      "/hosting/ @1440: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @1024: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @768: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @390: a.elementor-button.btn «Comprar ahora»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 19.5px 40.5px | r 75px | bg rgb(255, 255, 255) | c rgb(0, 0, 0) | h 62",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «Contactar»",
+      "/ @1024: a.elementor-button.btn «Contactar»",
+      "/ @768: a.elementor-button.btn «Contactar»",
+      "/ @390: a.elementor-button.btn «Contactar»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 12px | pad 0px | r 0px | bg rgba(0, 0, 0, 0) | c rgb(255, 255, 255) | h 23",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «m á s i n f o»",
+      "/hosting/ @1440: a.elementor-button.btn «m á s i n f o»",
+      "/dominios/ @1440: a.elementor-button.btn «m á s i n f o»",
+      "/cloud/ @1440: a.elementor-button.btn «m á s i n f o»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 12.75px 19.5px | r 45px | bg rgb(237, 242, 246) | c rgb(0, 0, 0) | h 49",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «Únete»",
+      "/hosting/ @1440: a.elementor-button.btn «Únete»",
+      "/dominios/ @1440: a.elementor-button.btn «Únete»",
+      "/cloud/ @1440: a.elementor-button.btn «Únete»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 12px 24px | r 5px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 39",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: a.elementor-button.elementor-button-link «conocer más»",
+      "/ @1024: a.elementor-button.elementor-button-link «conocer más»",
+      "/ @768: a.elementor-button.elementor-button-link «conocer más»",
+      "/ @390: a.elementor-button.elementor-button-link «conocer más»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 12px 24px | r 3px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 39",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @1024: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @768: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @390: a.elementor-button.elementor-button-link «ver planes»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 0px | r 0px | bg rgba(0, 0, 0, 0) | c rgb(255, 255, 255) | h 23",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @1024: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @768: a.elementor-button.btn «Comprar ahora»",
+      "/hosting/ @390: a.elementor-button.btn «Comprar ahora»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 19.5px 40.5px | r 75px | bg rgb(255, 255, 255) | c rgb(0, 0, 0) | h 75",
+    {
+     "n": 4,
+     "ex": [
+      "/dominios/ @1440: a.elementor-button.btn «Contactar»",
+      "/dominios/ @1024: a.elementor-button.btn «Contactar»",
+      "/dominios/ @768: a.elementor-button.btn «Contactar»",
+      "/dominios/ @390: a.elementor-button.btn «Contactar»"
+     ]
+    }
+   ],
+   [
+    "Poppins 600 19px | pad 0px 53.2px | r 4px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 50",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ],
+   [
+    "Poppins 600 16px | pad 12px 24px | r 5px | bg rgb(0, 0, 0) | c rgb(255, 255, 255) | h 40",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: a.elementor-button.elementor-button-link «Solicitud de asistencia»",
+      "/contacto/ @1024: a.elementor-button.elementor-button-link «Solicitud de asistencia»",
+      "/contacto/ @768: a.elementor-button.elementor-button-link «Solicitud de asistencia»",
+      "/contacto/ @390: a.elementor-button.elementor-button-link «Solicitud de asistencia»"
+     ]
+    }
+   ],
+   [
+    "Chivo 400 15px | pad 0px 42px | r 750px | bg rgb(2, 1, 1) | c rgb(255, 255, 255) | h 50",
+    {
+     "n": 4,
+     "ex": [
+      "/unete/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ]
+  ],
+  "radius": [
+   [
+    "45px",
+    {
+     "n": 110,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «Únete»",
+      "/ @1024: button.navbar-toggle.collapsed «Toggle navigation»",
+      "/ @768: button.navbar-toggle.collapsed «Toggle navigation»",
+      "/ @390: button.navbar-toggle.collapsed «Toggle navigation»"
+     ]
+    }
+   ],
+   [
+    "50px",
+    {
+     "n": 99,
+     "ex": [
+      "/ @1024: span.bar.d-inline-block",
+      "/ @768: span.bar.d-inline-block",
+      "/ @390: span.bar.d-inline-block",
+      "/hosting/ @1024: span.bar.d-inline-block"
+     ]
+    }
+   ],
+   [
+    "8px",
+    {
+     "n": 88,
+     "ex": [
+      "/hosting/ @1440: img.attachment-large.size-large",
+      "/hosting/ @1024: img.attachment-large.size-large",
+      "/hosting/ @768: img.attachment-large.size-large",
+      "/hosting/ @390: img.attachment-large.size-large"
+     ]
+    }
+   ],
+   [
+    "12px",
+    {
+     "n": 73,
+     "ex": [
+      "/ @1440: div.elementor-widget-container",
+      "/ @1024: div.elementor-widget-container",
+      "/ @768: div.elementor-widget-container",
+      "/ @390: div.elementor-widget-container"
+     ]
+    }
+   ],
+   [
+    "4px",
+    {
+     "n": 67,
+     "ex": [
+      "/ @1440: span.lqd-scrl-indc-el.d-inline-block",
+      "/hosting/ @1440: span.lqd-scrl-indc-el.d-inline-block",
+      "/dominios/ @1440: span.lqd-scrl-indc-el.d-inline-block",
+      "/cloud/ @1440: span.lqd-scrl-indc-el.d-inline-block"
+     ]
+    }
+   ],
+   [
+    "25px 25px 0px 0px",
+    {
+     "n": 55,
+     "ex": [
+      "/ @1440: section.elementor-section.elementor-top-section «Dominios HOT Hosting Cloud Casos de éxit»",
+      "/ @1024: section.lqd-hide-onstuck.elementor-section",
+      "/ @768: section.lqd-hide-onstuck.elementor-section",
+      "/ @390: section.lqd-hide-onstuck.elementor-section"
+     ]
+    }
+   ],
+   [
+    "3px",
+    {
+     "n": 43,
+     "ex": [
+      "/ @1440: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @1024: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @768: a.elementor-button.elementor-button-link «ver planes»",
+      "/ @390: a.elementor-button.elementor-button-link «ver planes»"
+     ]
+    }
+   ],
+   [
+    "5px",
+    {
+     "n": 34,
+     "ex": [
+      "/ @1440: rs-layer.rs-layer",
+      "/ @1024: rs-layer.rs-layer",
+      "/ @768: rs-layer.rs-layer",
+      "/ @390: rs-layer.rs-pxl-8.rs-layer «gymfitness.c»"
+     ]
+    }
+   ],
+   [
+    "7px",
+    {
+     "n": 32,
+     "ex": [
+      "/ @1440: input",
+      "/ @1024: input",
+      "/ @768: input",
+      "/ @390: input"
+     ]
+    }
+   ],
+   [
+    "200px",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: a «Ver planes»",
+      "/hosting/ @1024: a «Ver planes»",
+      "/hosting/ @768: a «Ver planes»",
+      "/hosting/ @390: a «Ver planes»"
+     ]
+    }
+   ],
+   [
+    "8px 0px 0px 8px",
+    {
+     "n": 24,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: div.elementor-element.elementor-element-52f385c",
+      "/diseno-paginas-web-asturias/ @1024: div.elementor-element.elementor-element-52f385c",
+      "/diseno-paginas-web-asturias/ @768: div.elementor-element.elementor-element-52f385c",
+      "/diseno-paginas-web-asturias/ @390: div.elementor-element.elementor-element-52f385c"
+     ]
+    }
+   ],
+   [
+    "75px",
+    {
+     "n": 16,
+     "ex": [
+      "/ @1440: a.elementor-button.btn «Contactar»",
+      "/ @1024: a.elementor-button.btn «Contactar»",
+      "/ @768: a.elementor-button.btn «Contactar»",
+      "/ @390: a.elementor-button.btn «Contactar»"
+     ]
+    }
+   ],
+   [
+    "0px 0px 75px 75px",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-7.rs-layer",
+      "/ @1024: rs-layer.rs-pxl-7.rs-layer",
+      "/ @768: rs-layer.rs-pxl-7.rs-layer",
+      "/ @390: rs-layer.rs-pxl-7.rs-layer"
+     ]
+    }
+   ],
+   [
+    "75px 75px 0px 0px",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-7.rs-layer",
+      "/ @1024: rs-layer.rs-pxl-7.rs-layer",
+      "/ @768: rs-layer.rs-pxl-7.rs-layer",
+      "/ @390: rs-layer.rs-pxl-7.rs-layer"
+     ]
+    }
+   ],
+   [
+    "170px",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: a.d-block.pt-3 «Página Web»",
+      "/ @1024: a.d-block.pt-3 «Página Web»",
+      "/ @768: a.d-block.pt-3 «Página Web»",
+      "/ @390: a.d-block.pt-3 «Página Web»"
+     ]
+    }
+   ],
+   [
+    "24px",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: span.link-badge «HOT»",
+      "/hosting/ @1440: span.link-badge «HOT»",
+      "/dominios/ @1440: span.link-badge «HOT»",
+      "/cloud/ @1440: span.link-badge «HOT»"
+     ]
+    }
+   ],
+   [
+    "10px",
+    {
+     "n": 10,
+     "ex": [
+      "/ @1440: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/ @1024: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/ @768: rs-column.rs-layer «Empieza tu proyecto online ¿Cómo lo hago»",
+      "/hosting/ @1440: section.elementor-section.elementor-inner-section «Cuéntanos tu proyecto Te ayudamos Contac»"
+     ]
+    }
+   ],
+   [
+    "6px",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: figure.w-100.pos-rel",
+      "/diseno-paginas-web-asturias/ @1024: figure.w-100.pos-rel",
+      "/diseno-paginas-web-asturias/ @768: figure.w-100.pos-rel",
+      "/diseno-paginas-web-asturias/ @390: figure.w-100.pos-rel"
+     ]
+    }
+   ],
+   [
+    "9px",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @1024: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @768: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @390: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»"
+     ]
+    }
+   ],
+   [
+    "750px",
+    {
+     "n": 4,
+     "ex": [
+      "/unete/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ],
+   [
+    "0px 8px 8px 0px",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @390: div.elementor-element.elementor-element-1a47604 «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "22px",
+    {
+     "n": 4,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: a «CLOUD»",
+      "/blog/que-es-la-nube/ @1024: a «CLOUD»",
+      "/blog/que-es-la-nube/ @768: a «CLOUD»",
+      "/blog/que-es-la-nube/ @390: a «CLOUD»"
+     ]
+    }
+   ]
+  ],
+  "border": [
+   [
+    "1px solid rgba(10, 10, 10, 0.1)",
+    {
+     "n": 88,
+     "ex": [
+      "/ @1440: span.elementor-divider-separator",
+      "/ @1024: span.elementor-divider-separator",
+      "/ @768: span.elementor-divider-separator",
+      "/ @390: span.elementor-divider-separator"
+     ]
+    }
+   ],
+   [
+    "1px solid rgba(10, 10, 10, 0.2)",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: span.elementor-divider-separator",
+      "/ @1024: span.elementor-divider-separator",
+      "/ @768: span.elementor-divider-separator",
+      "/ @390: span.elementor-divider-separator"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(213, 214, 222)",
+    {
+     "n": 36,
+     "ex": [
+      "/contacto/ @1440: input.wpcf7-form-control.wpcf7-text",
+      "/contacto/ @1024: input.wpcf7-form-control.wpcf7-text",
+      "/contacto/ @768: input.wpcf7-form-control.wpcf7-text",
+      "/contacto/ @390: input.wpcf7-form-control.wpcf7-text"
+     ]
+    }
+   ],
+   [
+    "1px solid rgba(0, 0, 0, 0.2)",
+    {
+     "n": 32,
+     "ex": [
+      "/hosting/ @1440: div.lqd-pt.lqd-pt «STARTER 2,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @1024: div.lqd-pt.lqd-pt «STARTER 2,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @768: div.lqd-pt.lqd-pt «STARTER 2,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @390: div.lqd-pt.lqd-pt «STARTER 2,99 €/mes 1 sitio web Dominio g»"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(3, 3, 67)",
+    {
+     "n": 16,
+     "ex": [
+      "/hosting/ @1440: div.lqd-pt.lqd-pt «PREMIUM 5,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @1024: div.lqd-pt.lqd-pt «PREMIUM 5,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @768: div.lqd-pt.lqd-pt «PREMIUM 5,99 €/mes 1 sitio web Dominio g»",
+      "/hosting/ @390: div.lqd-pt.lqd-pt «PREMIUM 5,99 €/mes 1 sitio web Dominio g»"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(255, 255, 255)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: input",
+      "/ @1024: input",
+      "/ @768: input",
+      "/ @390: input"
+     ]
+    }
+   ],
+   [
+    "5px solid rgb(247, 247, 247)",
+    {
+     "n": 8,
+     "ex": [
+      "/ @1440: rs-layer.rs-pxl-4.rs-layer",
+      "/ @1024: rs-layer.rs-pxl-4.rs-layer"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(231, 231, 231)",
+    {
+     "n": 8,
+     "ex": [
+      "/contacto/ @1440: span.elementor-divider-separator",
+      "/contacto/ @1024: span.elementor-divider-separator",
+      "/contacto/ @768: span.elementor-divider-separator",
+      "/contacto/ @390: span.elementor-divider-separator"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(17, 17, 17)",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: input",
+      "/diseno-paginas-web-asturias/ @1024: input",
+      "/diseno-paginas-web-asturias/ @768: input",
+      "/diseno-paginas-web-asturias/ @390: input"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(235, 235, 235)",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @1024: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @768: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»",
+      "/contacto/ @390: div.elementor-widget-wrap.elementor-element-populated «Habla con nuestro equipo Nombre y apelli»"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(0, 0, 0)",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/contacto/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ],
+   [
+    "1px solid rgb(2, 1, 1)",
+    {
+     "n": 4,
+     "ex": [
+      "/unete/ @1440: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @1024: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @768: input.wpcf7-form-control.wpcf7-submit",
+      "/unete/ @390: input.wpcf7-form-control.wpcf7-submit"
+     ]
+    }
+   ]
+  ],
+  "headings": [
+   [
+    "H5 Poppins | 700 | 20px / 24px | ls -0.2px | none",
+    {
+     "n": 132,
+     "ex": [
+      "/ @1440: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @1024: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @768: h5.ld-fh-element.d-inline-block «Cloud Computing»",
+      "/ @390: h5.ld-fh-element.d-inline-block «Cloud Computing»"
+     ]
+    }
+   ],
+   [
+    "H2 Chivo | 700 | 19px / 19px | ls -0.2px | none",
+    {
+     "n": 64,
+     "ex": [
+      "/data-center-espana/ @1440: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @1024: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @768: h2.elementor-heading-title.elementor-size-default «Andalucía»",
+      "/data-center-espana/ @390: h2.elementor-heading-title.elementor-size-default «Andalucía»"
+     ]
+    }
+   ],
+   [
+    "H6 Poppins | 700 | 10px / 12px | ls 1px | uppercase",
+    {
+     "n": 44,
+     "ex": [
+      "/ @1440: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @1024: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @768: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»",
+      "/ @390: h6.ld-fh-element.d-inline-block «¿TE AYUDAMOS?»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 45px / 45px | ls -1.1px | none",
+    {
+     "n": 24,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Servidores alto rendimiento»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 36px / 37.8px | ls -0.2px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @768: h2.ld-fh-element.d-inline-block «Crea tu página web»",
+      "/ @390: h2.ld-fh-element.d-inline-block «Crea tu página web»"
+     ]
+    }
+   ],
+   [
+    "H5 Chivo | 500 | 20px / 24px | ls -0.2px | none",
+    {
+     "n": 20,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @1024: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @768: h5 «Nube pública»",
+      "/blog/que-es-la-nube/ @390: h5 «Nube pública»"
+     ]
+    }
+   ],
+   [
+    "H4 Oswald | 600 | 45px / 67.5px | ls -1.3px | uppercase",
+    {
+     "n": 16,
+     "ex": [
+      "/hosting/ @1440: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @1024: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @768: h4.lqd-pt-title.font-weight-semibold «STARTER»",
+      "/hosting/ @390: h4.lqd-pt-title.font-weight-semibold «STARTER»"
+     ]
+    }
+   ],
+   [
+    "H4 Chivo | 500 | 32px / 33.6px | ls 0.1px | none",
+    {
+     "n": 16,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @1024: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @768: h4 «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @390: h4 «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 36px / 10.8px | ls -1.1px | none",
+    {
+     "n": 14,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Migración gratuita»"
+     ]
+    }
+   ],
+   [
+    "H2 Oswald | 700 | 84px / 25.2px | ls -3px | none",
+    {
+     "n": 12,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @768: h2.ld-fh-element.d-inline-block «CLOUD»",
+      "/ @390: h2.ld-fh-element.d-inline-block «CLOUD»"
+     ]
+    }
+   ],
+   [
+    "H2 Oswald | 700 | 74px / 7.4px | ls -3px | none",
+    {
+     "n": 11,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @768: h2.ld-fh-element.d-inline-block «HOSTING»",
+      "/ @390: h2.ld-fh-element.d-inline-block «HOSTING»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 39px / 3.9px | ls -1px | none",
+    {
+     "n": 9,
+     "ex": [
+      "/dominios/ @1440: h2.ld-fh-element.d-inline-block «.xyz»",
+      "/dominios/ @1024: h2.ld-fh-element.d-inline-block «.xyz»",
+      "/dominios/ @768: h2.ld-fh-element.d-inline-block «.xyz»"
+     ]
+    }
+   ],
+   [
+    "H2 Oswald | 700 | 63px / 56.7px | ls -1.3px | uppercase",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @1024: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @768: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»",
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «PLANES DE HOSTING»"
+     ]
+    }
+   ],
+   [
+    "H4 Oswald | 600 | 43px / 64.5px | ls -1.3px | uppercase",
+    {
+     "n": 8,
+     "ex": [
+      "/hosting/ @1440: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @1024: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @768: h4.lqd-pt-title.font-weight-semibold «PREMIUM»",
+      "/hosting/ @390: h4.lqd-pt-title.font-weight-semibold «PREMIUM»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 600 | 22px / 23.1px | ls normal | none",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Somos expertos en diseño de páginas web »"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 37px / 40.7px | ls normal | none",
+    {
+     "n": 8,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «¿Cómo realizamos tu página web en Asturi»"
+     ]
+    }
+   ],
+   [
+    "H1 Chivo | 800 | 55px / 55px | ls -0.02px | none",
+    {
+     "n": 6,
+     "ex": [
+      "/unete/ @1440: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/unete/ @1024: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/unete/ @768: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/diseno-paginas-web-asturias/ @1440: h1.ld-fh-element.d-inline-block «Diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "H2 Oswald | 700 | 50px / 50px | ls -1px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @768: h2.ld-fh-element.d-inline-block «DOMINIOS»",
+      "/ @390: h2.ld-fh-element.d-inline-block «DOMINIOS»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 41px / 43.05px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @768: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»",
+      "/ @390: h2.ld-fh-element.d-inline-block «¿Qué necesitas para tu empresa?»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 400 | 29px / 30.45px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @768: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»",
+      "/ @390: h2.ld-fh-element.d-inline-block «desde 5,90€/mes»"
+     ]
+    }
+   ],
+   [
+    "H6 Poppins | 300 | 21px / 25.2px | ls 1px | lowercase",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @1024: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @768: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»",
+      "/ @390: h6.ld-fh-element.d-inline-block «20 años cambiando las reglas»"
+     ]
+    }
+   ],
+   [
+    "H2 Oswald | 700 | 70px / 63px | ls -2.2px | uppercase",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «Y LOS MEJORES CLIENTES DEL MUNDO»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «Y LOS MEJORES CLIENTES DEL MUNDO»",
+      "/ @768: h2.ld-fh-element.d-inline-block «Y LOS MEJORES CLIENTES DEL MUNDO»",
+      "/ @390: h2.ld-fh-element.d-inline-block «Y LOS MEJORES CLIENTES DEL MUNDO»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 35px / 36.75px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «Nos gusta ayudarte con tus nuevos proyec»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «Nos gusta ayudarte con tus nuevos proyec»",
+      "/ @768: h2.ld-fh-element.d-inline-block «Nos gusta ayudarte con tus nuevos proyec»",
+      "/ @390: h2.ld-fh-element.d-inline-block «Nos gusta ayudarte con tus nuevos proyec»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 36px / 43.2px | ls -1.1px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/cloud/ @1440: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @1024: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @768: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»",
+      "/cloud/ @390: h2.ld-fh-element.d-inline-block «Nube privada para tu organización»"
+     ]
+    }
+   ],
+   [
+    "H1 Poppins | 700 | 36px / 43.2px | ls -1.1px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: h1.ld-fh-element.d-inline-block «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @1024: h1.ld-fh-element.d-inline-block «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @768: h1.ld-fh-element.d-inline-block «Te ayudamos 24 horas al día los 7 días d»",
+      "/contacto/ @390: h1.ld-fh-element.d-inline-block «Te ayudamos 24 horas al día los 7 días d»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 30px / 30px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/contacto/ @1440: h2.elementor-heading-title.elementor-size-default «Habla con nuestro equipo»",
+      "/contacto/ @1024: h2.elementor-heading-title.elementor-size-default «Habla con nuestro equipo»",
+      "/contacto/ @768: h2.elementor-heading-title.elementor-size-default «Habla con nuestro equipo»",
+      "/contacto/ @390: h2.elementor-heading-title.elementor-size-default «Habla con nuestro equipo»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 400 | 18px / 18.9px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Descubre ahora el mejor diseño de página»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Descubre ahora el mejor diseño de página»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Descubre ahora el mejor diseño de página»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Descubre ahora el mejor diseño de página»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 31px / 34.1px | ls normal | none",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Aspectos por los que elegir nuestros dis»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 300 | 17px / 22.1px | ls normal | none",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «¿Por qué elegir el diseño de páginas web»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 35px / 38.5px | ls normal | none",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Descubre el mejor diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Descubre el mejor diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Descubre el mejor diseño de páginas web »",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Descubre el mejor diseño de páginas web »"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 30px / 31.5px | ls -0.2px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/diseno-paginas-web-asturias/ @1440: h2.ld-fh-element.d-inline-block «Preguntas frecuentes sobre diseño de pág»",
+      "/diseno-paginas-web-asturias/ @1024: h2.ld-fh-element.d-inline-block «Preguntas frecuentes sobre diseño de pág»",
+      "/diseno-paginas-web-asturias/ @768: h2.ld-fh-element.d-inline-block «Preguntas frecuentes sobre diseño de pág»",
+      "/diseno-paginas-web-asturias/ @390: h2.ld-fh-element.d-inline-block «Preguntas frecuentes sobre diseño de pág»"
+     ]
+    }
+   ],
+   [
+    "H3 Chivo | 700 | 11px / 11.55px | ls 0.1px | none",
+    {
+     "n": 4,
+     "ex": [
+      "/blog/ @1440: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @1024: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @768: h3.mt-0.mb-1 «Posted by Breno»",
+      "/blog/ @390: h3.mt-0.mb-1 «Posted by Breno»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 84px / 42px | ls -0.02px | uppercase",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @1024: h1.ld-fh-element.d-inline-block «PIENSA»",
+      "/ @768: h1.ld-fh-element.d-inline-block «PIENSA»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 78px / 39px | ls -0.02px | uppercase",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: h1.ld-fh-element.d-inline-block «COMO LOS GRANDES»",
+      "/ @1024: h1.ld-fh-element.d-inline-block «COMO LOS GRANDES»",
+      "/ @768: h1.ld-fh-element.d-inline-block «COMO LOS GRANDES»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 83px / 41.5px | ls -0.02px | uppercase",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: h1.ld-fh-element.d-inline-block «Y HAZLO REALIDAD»",
+      "/ @1024: h1.ld-fh-element.d-inline-block «Y HAZLO REALIDAD»",
+      "/ @768: h1.ld-fh-element.d-inline-block «Y HAZLO REALIDAD»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 42px / 44.1px | ls -0.2px | none",
+    {
+     "n": 3,
+     "ex": [
+      "/ @1440: h2.ld-fh-element.d-inline-block «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @1024: h2.ld-fh-element.d-inline-block «Reinventa tu negocio. Te ayudamos en tod»",
+      "/ @768: h2.ld-fh-element.d-inline-block «Reinventa tu negocio. Te ayudamos en tod»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 300 | 27px / 2.7px | ls -1px | none",
+    {
+     "n": 3,
+     "ex": [
+      "/dominios/ @1440: h2.ld-fh-element.d-inline-block «y muchos más»",
+      "/dominios/ @1024: h2.ld-fh-element.d-inline-block «y muchos más»",
+      "/dominios/ @768: h2.ld-fh-element.d-inline-block «y muchos más»"
+     ]
+    }
+   ],
+   [
+    "H1 Poppins | 800 | 55px / 55px | ls -0.02px | none",
+    {
+     "n": 3,
+     "ex": [
+      "/data-center-espana/ @1440: h1.ld-fh-element.d-inline-block «Data center en España y Europa»",
+      "/data-center-espana/ @1024: h1.ld-fh-element.d-inline-block «Data center en España y Europa»",
+      "/data-center-espana/ @768: h1.ld-fh-element.d-inline-block «Data center en España y Europa»"
+     ]
+    }
+   ],
+   [
+    "H3 Chivo | 700 | 30px / 31.5px | ls 0.1px | none",
+    {
+     "n": 3,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h3.related-posts-title «Otros artículos»",
+      "/blog/que-es-la-nube/ @1024: h3.related-posts-title «Otros artículos»",
+      "/blog/que-es-la-nube/ @768: h3.related-posts-title «Otros artículos»"
+     ]
+    }
+   ],
+   [
+    "H2 Chivo | 700 | 42px / 44.1px | ls -0.2px | none",
+    {
+     "n": 3,
+     "ex": [
+      "/aviso-legal/ @1440: h2.wp-block-heading «Aviso legal»",
+      "/aviso-legal/ @1024: h2.wp-block-heading «Aviso legal»",
+      "/aviso-legal/ @768: h2.wp-block-heading «Aviso legal»"
+     ]
+    }
+   ],
+   [
+    "H1 Chivo | 800 | 66.3px / 66.3px | ls -0.02px | none",
+    {
+     "n": 2,
+     "ex": [
+      "/unete/ @390: h1.ld-fh-element.d-inline-block «Únete al squad»",
+      "/diseno-paginas-web-asturias/ @390: h1.ld-fh-element.d-inline-block «Diseño de páginas web en Asturias»"
+     ]
+    }
+   ],
+   [
+    "H1 Chivo | 700 | 44px / 44px | ls -0.2px | none",
+    {
+     "n": 2,
+     "ex": [
+      "/blog/que-es-la-nube/ @1440: h1.entry-title «¿Qué es la nube?»",
+      "/blog/que-es-la-nube/ @1024: h1.entry-title «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 58.5px / 29.25px | ls -0.02px | uppercase",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: h1.ld-fh-element.d-inline-block «PIENSA»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 37.5px / 18.75px | ls -0.02px | uppercase",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: h1.ld-fh-element.d-inline-block «COMO LOS GRANDES»"
+     ]
+    }
+   ],
+   [
+    "H1 Oswald | 800 | 39px / 19.5px | ls -0.02px | uppercase",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: h1.ld-fh-element.d-inline-block «Y HAZLO REALIDAD»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 25px / 30px | ls -0.2px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/ @390: h2.ld-fh-element.d-inline-block «Reinventa tu negocio. Te ayudamos en tod»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 29px / 29px | ls -1.1px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/hosting/ @390: h2.ld-fh-element.d-inline-block «Alojamiento sitio web»"
+     ]
+    }
+   ],
+   [
+    "H2 Poppins | 700 | 36px / 39.6px | ls -1.1px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/dominios/ @390: h2.ld-fh-element.d-inline-block «Registra tu dominio y protege tu marca»"
+     ]
+    }
+   ],
+   [
+    "H1 Poppins | 800 | 66.3px / 66.3px | ls -0.02px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/data-center-espana/ @390: h1.ld-fh-element.d-inline-block «Data center en España y Europa»"
+     ]
+    }
+   ],
+   [
+    "H1 Chivo | 700 | 40px / 40px | ls -0.2px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/blog/que-es-la-nube/ @768: h1.entry-title «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "H1 Chivo | 700 | 40.5px / 40.5px | ls -0.2px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/blog/que-es-la-nube/ @390: h1.entry-title «¿Qué es la nube?»"
+     ]
+    }
+   ],
+   [
+    "H3 Chivo | 700 | 24px / 25.2px | ls 0.1px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/blog/que-es-la-nube/ @390: h3.related-posts-title «Otros artículos»"
+     ]
+    }
+   ],
+   [
+    "H2 Chivo | 700 | 35px / 36.75px | ls -0.2px | none",
+    {
+     "n": 1,
+     "ex": [
+      "/aviso-legal/ @390: h2.wp-block-heading «Aviso legal»"
+     ]
+    }
+   ]
+  ]
+ },
+ "containers": {
+  "/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1420,
+    "maxWidth": "100%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "100%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "100%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 390,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/hosting/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/hosting/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/hosting/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/hosting/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/dominios/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1470
+  },
+  "/dominios/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1126
+  },
+  "/dominios/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 845
+  },
+  "/dominios/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 429
+  },
+  "/cloud/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/cloud/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/cloud/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/cloud/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/contacto/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/contacto/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1024,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/contacto/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 768,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/contacto/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 390,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/unete/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/unete/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/unete/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/unete/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/data-center-espana/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1278,
+    "maxWidth": "90%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/data-center-espana/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 903.59375,
+    "maxWidth": "90%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/data-center-espana/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 673.1875,
+    "maxWidth": "90%",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/data-center-espana/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/diseno-paginas-web-asturias/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/diseno-paginas-web-asturias/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 964,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/diseno-paginas-web-asturias/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 708,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/diseno-paginas-web-asturias/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 330,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/blog/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/blog/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/blog/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/blog/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/blog/que-es-la-nube/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1120,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1170,
+    "maxWidth": "none",
+    "padding": "15px 15px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/blog/que-es-la-nube/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 920,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 970,
+    "maxWidth": "none",
+    "padding": "15px 15px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/blog/que-es-la-nube/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 700,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 750,
+    "maxWidth": "none",
+    "padding": "15px 15px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/blog/que-es-la-nube/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 340,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "15px 15px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  },
+  "/aviso-legal/ @1440": {
+   ".container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1270,
+    "maxWidth": "min(100%, 1270px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 600,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1440,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 1270,
+    "maxWidth": "1270px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1440
+  },
+  "/aviso-legal/ @1024": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 1004,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 1024,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 1024
+  },
+  "/aviso-legal/ @768": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 748,
+    "maxWidth": "min(100%, 1024px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 768,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "1024px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 768
+  },
+  "/aviso-legal/ @390": {
+   ".container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".e-con-inner": {
+    "width": 370,
+    "maxWidth": "min(100%, 767px)",
+    "padding": "0px 0px"
+   },
+   ".elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   ".main-header .container": {
+    "width": 0,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   "#lqd-site-content .container": {
+    "width": 390,
+    "maxWidth": "none",
+    "padding": "0px 0px"
+   },
+   ".elementor-section-boxed > .elementor-container": {
+    "width": 0,
+    "maxWidth": "767px",
+    "padding": "0px 0px"
+   },
+   "scrollWidth": 390
+  }
+ },
+ "fontsLoaded": [
+  "Poppins 300 normal",
+  "Poppins 400 normal",
+  "Poppins 500 normal",
+  "Poppins 600 normal",
+  "Poppins 700 normal",
+  "Poppins 800 normal",
+  "Chivo 400 normal",
+  "Chivo 500 normal",
+  "Chivo 700 normal",
+  "Oswald 400 normal",
+  "Oswald 700 normal",
+  "lqd-essentials 400 normal",
+  "Support Board Icons normal normal",
+  "Support Board Font 400 normal",
+  "Support Board Font 500 normal",
+  "Montserrat 600 normal",
+  "revicons normal normal",
+  "Chivo 600 normal",
+  "Oswald 600 normal",
+  "Poppins 400 italic",
+  "Chivo 800 normal"
+ ],
+ "mediaQueries": {
+  "(prefers-reduced-motion: reduce)": 4,
+  "(min-width: 600px) and (max-width: 781px)": 1,
+  "(max-width: 781px)": 2,
+  "(max-width: 1079px)": 1,
+  "(min-width: 782px)": 7,
+  "(min-width: 1080px)": 1,
+  "print": 5,
+  "(min-width: 768px)": 26,
+  "(min-width: 992px)": 38,
+  "(min-width: 1200px)": 11,
+  "screen and (max-width: 767px)": 14,
+  "screen and (-webkit-min-device-pixel-ratio: 0)": 1,
+  "(max-device-width: 480px) and (orientation: landscape)": 1,
+  "(max-width: 991px)": 13,
+  "(max-width: 767px)": 26,
+  "(min-width: 768px) and (max-width: 991px)": 2,
+  "(min-width: 992px) and (max-width: 1199px)": 2,
+  "(max-width: 1199px)": 17,
+  "(min-width:-1)": 6,
+  "(max-width:-1)": 12,
+  "(max-width: 479px)": 6,
+  "(min-width: 768px) and (max-width: 1199px)": 3,
+  "(min-width: 1200px) and (max-width:-1)": 2,
+  "(min-width:-1) and (max-width:-1)": 4,
+  "(min-width:-1) and (max-width: 1199px)": 1,
+  "(min-width: 768px) and (max-width:-1)": 1,
+  "(prefers-reduced-motion: no-preference)": 2,
+  "screen and (max-width: 1199px)": 4,
+  "(min-width: 1200px) and (max-width: 99999px)": 1,
+  "(max-width: 1199px) and (min-width: 768px)": 2,
+  "screen and (max-width: 879px)": 2,
+  "screen and (max-width: 600px)": 2,
+  "screen and (max-width: 991px)": 29,
+  "screen and (max-width: 768px)": 40,
+  "screen and (max-width: 479px)": 63,
+  "screen and (max-width: 1200px)": 1,
+  "screen and (max-width: 480px)": 1,
+  "screen and (min-width: 1200px)": 13,
+  "screen and (max-width: 992px)": 2,
+  "screen and (min-width: 992px)": 43,
+  "screen and (min-width: 480px)": 5,
+  "(max-width: 768px)": 6,
+  "screen and (min-width: 768px)": 26,
+  "screen and (min-width: 480px) and (max-width: 768px)": 2,
+  "screen and (min-width: 769px)": 2,
+  "screen and (max-width: 540px)": 3,
+  "screen and (min-width: 992px) and (max-width: 1199px)": 1,
+  "screen and (min-width: 767px)": 1,
+  "(max-width: 700px) and (orientation: portrait), (orientation: landscape) and (max-height: 700px)": 2,
+  "(max-width: 500px) and (orientation: portrait), (orientation: landscape) and (max-height: 500px)": 4,
+  "(max-width: 500px) and (orientation: portrait), (orientation: landscape) and (max-height: 414px)": 5,
+  "(min-height: 700px)": 2,
+  "(min-height: 980px)": 2,
+  "(min-width: 1800px)": 2,
+  "(max-width: 700px) and (orientation: portrait), (orientation: landscape) and (max-height: 414px)": 2,
+  "(max-width: 480px)": 2,
+  "screen and (min-width: 768px) and (max-width: 991px)": 8,
+  "screen and (max-width: 1024px)": 1,
+  "(max-width: 992px)": 3,
+  "screen and (min-width: 768px) and (max-width: 991.8px)": 1,
+  "screen and (max-width: 920px)": 1,
+  "screen and (min-width: 541px)": 1,
+  "screen and (max-width: 541px)": 1,
+  "screen and (max-width: 991px) and (max-height: 650px)": 1,
+  "screen and (min-width: 991px)": 2,
+  "screen and (max-width: 1366px)": 2,
+  "screen and (max-width: 360px)": 1,
+  "screen and (max-height: 1024px)": 1,
+  "screen and (max-height: 640px)": 1,
+  "(max-height: 678px)": 1,
+  "(max-width: 464px)": 1,
+  "not all": 1,
+  "not all and (min-resolution: 0.001dpcm)": 1,
+  "(min-width: 600px)": 7,
+  "(hover: none)": 1,
+  "not (prefers-reduced-motion)": 6,
+  "(min-width: 960px)": 1,
+  "(max-width: 600px)": 3,
+  "(hover: hover)": 1,
+  "(min-resolution: 192dpi)": 1
+ },
+ "cssVars": {
+  "--wp--preset--aspect-ratio--square": "1",
+  "--wp--preset--aspect-ratio--4-3": "4/3",
+  "--wp--preset--aspect-ratio--3-4": "3/4",
+  "--wp--preset--aspect-ratio--3-2": "3/2",
+  "--wp--preset--aspect-ratio--2-3": "2/3",
+  "--wp--preset--aspect-ratio--16-9": "16/9",
+  "--wp--preset--aspect-ratio--9-16": "9/16",
+  "--wp--preset--color--black": "#000000",
+  "--wp--preset--color--cyan-bluish-gray": "#abb8c3",
+  "--wp--preset--color--white": "#ffffff",
+  "--wp--preset--color--pale-pink": "#f78da7",
+  "--wp--preset--color--vivid-red": "#cf2e2e",
+  "--wp--preset--color--luminous-vivid-orange": "#ff6900",
+  "--wp--preset--color--luminous-vivid-amber": "#fcb900",
+  "--wp--preset--color--light-green-cyan": "#7bdcb5",
+  "--wp--preset--color--vivid-green-cyan": "#00d084",
+  "--wp--preset--color--pale-cyan-blue": "#8ed1fc",
+  "--wp--preset--color--vivid-cyan-blue": "#0693e3",
+  "--wp--preset--color--vivid-purple": "#9b51e0",
+  "--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple": "linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%)",
+  "--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan": "linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)",
+  "--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange": "linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%)",
+  "--wp--preset--gradient--luminous-vivid-orange-to-vivid-red": "linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%)",
+  "--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray": "linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%)",
+  "--wp--preset--gradient--cool-to-warm-spectrum": "linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)",
+  "--wp--preset--gradient--blush-light-purple": "linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%)",
+  "--wp--preset--gradient--blush-bordeaux": "linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%)",
+  "--wp--preset--gradient--luminous-dusk": "linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%)",
+  "--wp--preset--gradient--pale-ocean": "linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%)",
+  "--wp--preset--gradient--electric-grass": "linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%)",
+  "--wp--preset--gradient--midnight": "linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%)",
+  "--wp--preset--font-size--small": "13px",
+  "--wp--preset--font-size--medium": "20px",
+  "--wp--preset--font-size--large": "36px",
+  "--wp--preset--font-size--x-large": "42px",
+  "--wp--preset--spacing--20": "0.44rem",
+  "--wp--preset--spacing--30": "0.67rem",
+  "--wp--preset--spacing--40": "1rem",
+  "--wp--preset--spacing--50": "1.5rem",
+  "--wp--preset--spacing--60": "2.25rem",
+  "--wp--preset--spacing--70": "3.38rem",
+  "--wp--preset--spacing--80": "5.06rem",
+  "--wp--preset--shadow--natural": "6px 6px 9px rgba(0, 0, 0, 0.2)",
+  "--wp--preset--shadow--deep": "12px 12px 50px rgba(0, 0, 0, 0.4)",
+  "--wp--preset--shadow--sharp": "6px 6px 0px rgba(0, 0, 0, 0.2)",
+  "--wp--preset--shadow--outlined": "6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0)",
+  "--wp--preset--shadow--crisp": "6px 6px 0px rgb(0, 0, 0)",
+  "--extendify--spacing--large": "var(--wp--custom--spacing--large,clamp(2em, 8vw, 8em))",
+  "--wp--preset--font-size--ext-small": "1rem",
+  "--wp--preset--font-size--ext-medium": "1.125rem",
+  "--wp--preset--font-size--ext-large": "clamp(1.65rem, 3.5vw, 2.15rem)",
+  "--wp--preset--font-size--ext-x-large": "clamp(3rem, 6vw, 4.75rem)",
+  "--wp--preset--font-size--ext-xx-large": "clamp(3.25rem, 7.5vw, 5.75rem)",
+  "--direction-multiplier": "1",
+  "--page-title-display": "block",
+  "--color-font": "var(--e-global-color-text, #626974)",
+  "--color-primary": "var(--e-global-color-primary, #184341)",
+  "--color-secondary": "var(--e-global-color-secondary)",
+  "--color-link": "#5b7bfb",
+  "--color-link-hover": "#181b31",
+  "--color-gradient-start": "#007fff",
+  "--color-gradient-stop": "#ff4d54",
+  "--lqd-site-width": "1140px",
+  "--lqd-z-index": "20",
+  "--lqd-sticky-header-height": "0px",
+  "--lqd-sticky-header-sentinel-top": "100%",
+  "--lqd-sticky-header-placeholder-height": "80px",
+  "--lqd-snickersbar-animation-time": "1.2s",
+  "--lqd-snickersbar-stay-time": "4s",
+  "--lqd-menu-items-top-padding": "10px",
+  "--lqd-menu-items-bottom-padding": "10px",
+  "--lqd-menu-items-left-padding": "15px",
+  "--lqd-menu-items-right-padding": "15px",
+  "--lqd-cc-bc": "var(--color-primary)",
+  "--lqd-cc-bg": "var(--color-primary)",
+  "--lqd-cc-size-outer": "35px",
+  "--lqd-cc-size-inner": "7px",
+  "--lqd-cc-bw": "1px",
+  "--lqd-cc-br": "calc(var(--lqd-cc-size-outer) / 2)",
+  "--lqd-cc-active-bc": "rgb(0, 0, 0)",
+  "--lqd-cc-active-bg": "rgb(0, 0, 0)",
+  "--lqd-cc-active-bw": "1px",
+  "--lqd-cc-active-circle-color": "#fff",
+  "--lqd-cc-active-circle-txt": "rgb(0, 0, 0)",
+  "--lqd-cc-active-arrow-color": "#fff",
+  "--frame-width": "20px",
+  "--wp-block-synced-color": "#7a00df",
+  "--wp-block-synced-color--rgb": "122,0,223",
+  "--wp-bound-block-color": "#7a00df",
+  "--wp-editor-canvas-background": "#ddd",
+  "--wp-admin-theme-color": "#007cba",
+  "--wp-admin-theme-color--rgb": "0,124,186",
+  "--wp-admin-theme-color-darker-10": "#006ba1",
+  "--wp-admin-theme-color-darker-10--rgb": "0,107,160.5",
+  "--wp-admin-theme-color-darker-20": "#005a87",
+  "--wp-admin-theme-color-darker-20--rgb": "0,90,135",
+  "--wp-admin-border-width-focus": "2px",
+  "--wp--preset--font-size--normal": "16px",
+  "--wp--preset--font-size--huge": "42px"
+ }
+}

@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+tools/node_modules
+_inventory/screens
+_inventory/replica
+*.tsbuildinfo
+next-env.d.ts
+.env*
+!.env.example
+.DS_Store
+_inventory/extract
+_inventory/pages
+_inventory/measure
+_inventory/interactions

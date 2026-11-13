@@ -1,0 +1,21 @@
+/* Medidas del original a 1440×900: enlace en x=1378.38, y=569.58 (fijo) */
+.wrap { display: none; }
+@media (min-width: 1200px) {
+  .wrap { position: fixed; top: 0; right: 0; bottom: 0; z-index: 10; display: block; width: 100px; pointer-events: none; }
+}
+.link {
+  position: absolute; top: calc(50% + 119.58px); left: 38.38px;
+  display: block; width: 23.25px; height: 122.22px;
+  font: 500 13px/23.25px var(--font-chivo); letter-spacing: 0.13px; color: #000;
+  pointer-events: auto;
+}
+.link:hover { color: #000; }
+.txt {
+  position: absolute; top: 13px; left: 0;
+  width: 36.22px; height: 23.25px;
+  transform-origin: 0 0;
+  transform: translate(0, 36.22px) rotate(-90deg);
+  white-space: nowrap;
+}
+.line { position: absolute; top: 62.22px; left: 11.12px; width: 1px; height: 60px; background: rgba(0, 0, 0, 0.3); }
+.dot { position: absolute; top: -4px; left: -4px; width: 8px; height: 8px; border-radius: 4px; background: #000; }

@@ -1,0 +1,29 @@
+/* Buscador de dominios de la home · 1440: caja #f5f5f5 r12 bajo el header; input 85% + botón 150px en línea */
+.section { max-width: var(--container-boxed); margin-inline: auto; padding-top: 20px; }
+.box { padding: 10px; border-radius: 12px; background: #f5f5f5; }
+.form { font: 400 15px/23.25px var(--font-chivo); }
+.input {
+  width: 85%; height: 60px;
+  padding: 1px 2px 1px 15px;
+  border: 1px solid #fff; border-radius: 7px;
+  background: #fff;
+  font: 700 19px/23.25px var(--font-poppins); letter-spacing: normal; color: #111;
+  vertical-align: baseline;
+}
+.input::placeholder { color: #757575; opacity: 1; }
+.submit {
+  width: 150px; height: 60px; margin-left: 5px;
+  padding: 1px 6px;
+  border: 0; border-radius: 7px;
+  background: #000;
+  font: 400 16px/23.25px var(--font-chivo); letter-spacing: normal; color: #fff;
+  cursor: pointer;
+}
+@media (max-width: 1199px) {
+  .section { padding: 100px 0 25px; }
+}
+@media (max-width: 767px) {
+  .section { padding: 20px; }
+  .input { width: 100%; }
+  .submit { width: 100%; margin: 20px 0 0; }
+}

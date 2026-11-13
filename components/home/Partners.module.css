@@ -1,0 +1,18 @@
+/* Partners · celda = (ancho + hueco) / nº visibles: 1440 → (1250+32)/7, <1200 → (W+30)/3.
+   El último logo queda a la izquierda del primero (wrapAround de Flickity). */
+.section { max-width: var(--container-boxed); margin: 0 auto 50px; padding: 50px 10px 10px; }
+.head { padding: 10px; text-align: center; font: 400 15px/23.25px var(--font-chivo); }
+.title { display: inline-block; margin-bottom: 17.5px; font: 400 35px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: #111; text-align: center; }
+.viewport { --gap: 32px; --cell: calc((100% + var(--gap)) / 7); overflow: hidden; padding-top: 30px; touch-action: pan-y; }
+.track { display: flex; transition: transform 0.6s var(--ease-quint); }
+.cell { flex: 0 0 calc(var(--cell) - var(--gap)); margin: 0 var(--gap) 0 0; }
+.cell img { display: block; width: 100%; max-width: 300px; height: auto; }
+.dots { display: flex; justify-content: center; margin-top: 28.5px; padding-bottom: 3px; }
+.dots li { margin: 0 6px; }
+.dots li:first-child { margin-left: 0; }
+.dots button { display: block; width: 6px; height: 6px; padding: 0; border: 0; border-radius: 75px; background: rgba(23, 24, 26, 0.2); transition: width 0.3s; }
+.dots .dotActive button { width: 15px; background: #17181a; }
+
+@media (max-width: 1199px) {
+  .viewport { --gap: 30px; --cell: calc((100% + var(--gap)) / 3); }
+}

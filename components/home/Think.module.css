@@ -1,0 +1,36 @@
+/* «Piensa…» · 1440: sección 594.8px, padding-top 80; bloque central al 54% del contenedor */
+.section { position: relative; padding: 80px 0 10px; }
+.canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.inner, .textWrap { position: relative; width: calc(var(--container-boxed) * 0.54); margin-inline: auto; text-align: center; }
+.inner { padding-top: 20px; }
+.line { display: flex; justify-content: center; }
+.dark { padding: 20px 10px 0; background: #0d0d0d; }
+.plain { padding-top: 20px; }
+.h84, .h78, .h83 {
+  display: inline-block;
+  font-family: var(--font-oswald); font-weight: 800; letter-spacing: -0.02px;
+  text-transform: uppercase; text-align: center;
+}
+.h84 { font-size: 84px; line-height: 42px; margin-bottom: 29.4px; color: #fff; }
+.h78 { font-size: 78px; line-height: 39px; margin-bottom: 27.3px; color: #000; }
+.h83 { font-size: 83px; line-height: 41.5px; margin-bottom: 29.05px; color: #fff; }
+.textWrap { margin-top: 38px; }
+.textPad { padding: 3% 3% 0; }
+.text { display: inline-block; margin-bottom: 33px; font: 400 20px/30px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text-404046); }
+.bottomSpacer { height: 65px; }
+
+@media (max-width: 1199px) { .inner, .textWrap { width: 82.28%; } }
+@media (max-width: 1023px) { .inner, .textWrap { width: 84%; } }
+@media (max-width: 767px) {
+  .section { padding: 20px 10px 0; }
+  .inner, .textWrap { width: 100%; }
+  .inner { padding-top: 30px; }
+  .h84 { font-size: 58.5px; line-height: 29.25px; margin-bottom: 20.48px; }
+  .h78 { font-size: 37.5px; line-height: 18.75px; margin-bottom: 13.13px; }
+  .h83 { font-size: 39px; line-height: 19.5px; margin-bottom: 13.65px; }
+  .plain { padding: 11.1px 0 2.6px; }
+  .textWrap { margin-top: 56.9px; }
+  .textPad { padding: 0; }
+  .text { font-size: 16px; margin-bottom: 26.4px; }
+  .bottomSpacer { display: none; }
+}

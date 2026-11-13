@@ -1,0 +1,51 @@
+/* 404 · medidas del original. Fondo: linear-gradient(#67d8d9 0%, #fff 74%) */
+.wrap { padding-bottom: 60px; }
+.module {
+  --vw: 1440px;
+  position: relative; height: 900px; overflow: hidden;
+  background: linear-gradient(rgb(103, 216, 217) 0%, rgb(255, 255, 255) 74%, rgb(255, 255, 255) 100%);
+  font-family: var(--ff-space-grotesk), sans-serif; color: #000;
+}
+.module > * { position: absolute; }
+.eyebrow, .title, .text { white-space: nowrap; }
+.eyebrow { left: calc(50% - 570px); top: 282px; width: 760px; font-size: 25px; line-height: 30px; letter-spacing: -1px; }
+.emoji { display: inline-block; width: 1em; height: 1em; margin: 0 0.07em; vertical-align: -0.1em; }
+.title { left: calc(50% - 570px); top: 322px; width: 760px; font-size: 130px; line-height: 150px; font-weight: 700; letter-spacing: -10px; }
+.text { left: calc(50% - 570px); top: 492px; width: 527px; font-size: 25px; line-height: 30px; letter-spacing: -1px; }
+.button {
+  left: calc(50% - 570px); top: 562px; width: 234.16px; height: 57px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid transparent; border-radius: 50px; background: #000;
+  font-size: 16px; line-height: 55px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #fff;
+}
+.button:hover { color: #fff; }
+.ghost { left: calc(50% + 174px); top: 155.43px; width: 371px; height: 518px; z-index: 2; max-width: none; }
+.shadow { left: calc(50% + 193px); top: 648px; width: 334px; height: 102px; z-index: 1; max-width: none; }
+
+@media (max-width: 1239px) {
+  .eyebrow { left: calc(50% - 462px); top: 311px; width: 616px; font-size: 21px; line-height: 25px; letter-spacing: -0.83px; }
+  .title { left: calc(50% - 462px); top: 344px; width: 616px; font-size: 107px; line-height: 124px; letter-spacing: -8.26px; }
+  .text { left: calc(50% - 462px); top: 485px; width: 435.19px; font-size: 21px; line-height: 25px; letter-spacing: -0.83px; }
+  .button { left: calc(50% - 462px); top: 543px; width: 191.72px; height: 47px; font-size: 13px; line-height: 45px; letter-spacing: 0.83px; }
+  .ghost { left: calc(50% + 143px); top: 205.06px; width: 306.36px; height: 427.77px; }
+  .shadow { left: calc(50% + 159px); top: 612.38px; width: 275.81px; height: 84.22px; }
+}
+@media (max-width: 1023px) {
+  .eyebrow { left: calc(50% - 314.7px); top: 317px; width: 629.38px; font-size: 19px; line-height: 28px; letter-spacing: normal; }
+  .title { left: calc(50% - 314.7px); top: 351px; width: 629.38px; font-size: 76px; line-height: 87px; letter-spacing: -5.63px; }
+  .text { left: calc(50% - 314.7px); top: 450px; width: 309.38px; font-size: 19px; line-height: 28px; letter-spacing: normal; white-space: normal; }
+  .button { left: calc(50% - 314.7px); top: 529px; width: 219.27px; height: 54px; font-size: 15px; line-height: 52px; letter-spacing: 0.94px; }
+  .ghost { left: calc(50% + 59.3px); top: 271.29px; width: 247.5px; height: 345.94px; }
+  .shadow { left: calc(50% + 72.3px); top: 601px; width: 222.19px; height: 67.5px; }
+}
+@media (max-width: 767px) {
+  .wrap { padding-top: 70px; }
+  .module { height: 844px; }
+  .eyebrow, .title, .text { left: calc(50% - 145px); width: 290px; text-align: center; white-space: normal; }
+  .eyebrow { top: 208px; font-size: 13px; line-height: 20px; }
+  .title { top: 231px; font-size: 41px; line-height: 49px; letter-spacing: -2.44px; }
+  .text { top: 287px; padding: 0 41px; font-size: 13px; line-height: 20px; }
+  .button { left: calc(50% - 95.75px); top: 339px; width: 191.5px; height: 47px; font-size: 13px; line-height: 45px; letter-spacing: 0.81px; }
+  .ghost { left: calc(50% - 74px); top: 435.98px; width: 147.06px; height: 207.19px; }
+  .shadow { left: calc(50% - 67px); top: 631.5px; width: 132.44px; height: 40.63px; }
+}

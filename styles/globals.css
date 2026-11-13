@@ -1,0 +1,115 @@
+/* ==========================================================================
+   globals.css · base común de la réplica (reset + tipografía por defecto del tema).
+   Los valores salen de estilos computados del original (ver styles/tokens.css).
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-white);
+  color: var(--c-text);
+  font-family: var(--font-chivo);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23.25px;
+  letter-spacing: 0.1px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+a { color: var(--c-link); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--c-link-hover); }
+
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+
+button, input, textarea, select { font: inherit; letter-spacing: inherit; color: inherit; }
+button { cursor: pointer; }
+
+:focus-visible { outline: 2px solid #0044eb; outline-offset: 2px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 1000;
+  background: #fff; color: var(--c-link); padding: 8px 12px;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+/* Iconos de la fuente del tema (lqd-essentials) */
+.icn {
+  display: inline-block;
+  font-family: var(--ff-lqd-icons);
+  font-size: 1em; font-style: normal; font-weight: 400; line-height: 1;
+  speak: none; text-transform: none;
+}
+.icn-arrow-down::before { content: '\ea2f'; }
+.icn-arrow-forward::before { content: '\ea2c'; }
+.icn-arrow-back::before { content: '\ea29'; }
+.icn-md-arrow-forward::before { content: '\ea31'; }
+
+/* Contenedor «boxed» de Elementor: 1270 / 1024 / 767 y gutter de columna 10px */
+.boxed { width: 100%; max-width: var(--container-boxed); margin-inline: auto; }
+@media (max-width: 1199px) { .boxed { max-width: var(--container-boxed-tablet); } }
+@media (max-width: 767px) { .boxed { max-width: var(--container-boxed-mobile); } }
+
+/* Botón negro pequeño de Elementor («ver planes», «conocer más», «obtener ayuda»…) */
+.btn-sm {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 3px;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-chivo);
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.btn-sm:hover, .btn-sm:focus { color: #fff; }
+
+/* Animación de entrada (IntersectionObserver añade .is-in) */
+/* Entrada «PIENSA…»: y 35px + opacidad, 1,8 s power4.out, 180 ms entre elementos (--i) */
+[data-reveal='up'] > * { opacity: 0; transform: translateY(35px); transition: opacity 1.8s var(--ease-out-power4), transform 1.8s var(--ease-out-power4); transition-delay: calc(var(--i, 0) * 180ms); }
+/* Entrada CTA: y 65px, scale .85, rotateX -35°, opacidad */
+[data-reveal='flip'] > * { opacity: 0; transform: perspective(1200px) translateY(65px) scale(0.85) rotateX(-35deg); transition: opacity 1.8s var(--ease-out-power4), transform 1.8s var(--ease-out-power4); transition-delay: calc(var(--i, 0) * 180ms); }
+[data-reveal].is-in > * { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  [data-reveal] > * { opacity: 1 !important; transform: none !important; }
+}
+
+/* Hover letra a letra de los botones del tema (btn-hover-txt-liquid-x): cada letra sube y
+   la sustituye su copia desde abajo, con 32,5 ms de retardo entre letras. */
+.split-word { display: inline-block; white-space: nowrap; }
+.split-char { position: relative; display: inline-block; overflow: hidden; vertical-align: top; }
+.split-in { position: relative; display: inline-block; transition: transform 0.5s var(--ease-btn); transition-delay: calc(var(--i) * var(--split-char-delay)); }
+.split-in::after { content: attr(data-char); position: absolute; left: 0; top: 100%; }
+.split-host:hover .split-in,
+.split-host:focus-visible .split-in { transform: translateY(-100%); }
+[hidden] { display: none !important; }
+
+/* Ámbito de las páginas generadas (.pg-*): valores por defecto del navegador que el CSS generado
+   da por supuestos (solo emite lo que difiere de ellos o de lo heredado). */
+[class^='pg-'] img, [class^='pg-'] svg, [class^='pg-'] video, [class^='pg-'] iframe { display: inline-block; max-width: none; }
+[class^='pg-'] a, [class^='pg-'] a:hover { color: inherit; transition: none; }
+[class^='pg-'] ul, [class^='pg-'] ol { list-style: inherit; }
+[class^='pg-'] button, [class^='pg-'] input, [class^='pg-'] select, [class^='pg-'] textarea { margin: 0; }

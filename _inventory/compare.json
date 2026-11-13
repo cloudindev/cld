@@ -1,0 +1,1982 @@
+{
+ "accesibilidad": {
+  "390": {
+   "pct": 1.09,
+   "hOrig": 3299,
+   "hRep": 3322
+  },
+  "768": {
+   "pct": 0.46,
+   "hOrig": 2178,
+   "hRep": 2177
+  },
+  "1024": {
+   "pct": 0.39,
+   "hOrig": 1950,
+   "hRep": 1926
+  },
+  "1440": {
+   "pct": 0.34,
+   "hOrig": 1871,
+   "hRep": 1870
+  }
+ },
+ "alojamiento-web-a-coruna": {
+  "390": {
+   "pct": 0.31,
+   "hOrig": 14625,
+   "hRep": 14648
+  },
+  "768": {
+   "pct": 8.15,
+   "hOrig": 9194,
+   "hRep": 9212
+  },
+  "1024": {
+   "pct": 8.77,
+   "hOrig": 7663,
+   "hRep": 7658
+  },
+  "1440": {
+   "pct": 7.82,
+   "hOrig": 7194,
+   "hRep": 7211
+  }
+ },
+ "alojamiento-web-albacete": {
+  "390": {
+   "pct": 1.89,
+   "hOrig": 14665,
+   "hRep": 14687
+  },
+  "768": {
+   "pct": 0.19,
+   "hOrig": 9157,
+   "hRep": 9156
+  },
+  "1024": {
+   "pct": 8.64,
+   "hOrig": 7751,
+   "hRep": 7746
+  },
+  "1440": {
+   "pct": 0.75,
+   "hOrig": 7161,
+   "hRep": 7160
+  }
+ },
+ "alojamiento-web-almeria": {
+  "390": {
+   "pct": 2.13,
+   "hOrig": 15013,
+   "hRep": 15035
+  },
+  "768": {
+   "pct": 1.13,
+   "hOrig": 9252,
+   "hRep": 9251
+  },
+  "1024": {
+   "pct": 9.39,
+   "hOrig": 7954,
+   "hRep": 7948
+  },
+  "1440": {
+   "pct": 7.97,
+   "hOrig": 7132,
+   "hRep": 7150
+  }
+ },
+ "alojamiento-web-andalucia": {
+  "390": {
+   "pct": 2.45,
+   "hOrig": 14784,
+   "hRep": 14807
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 9089,
+   "hRep": 9088
+  },
+  "1024": {
+   "pct": 8.57,
+   "hOrig": 7886,
+   "hRep": 7880
+  },
+  "1440": {
+   "pct": 0.69,
+   "hOrig": 7088,
+   "hRep": 7087
+  }
+ },
+ "alojamiento-web-asturias": {
+  "390": {
+   "pct": 0.83,
+   "hOrig": 12047,
+   "hRep": 12070
+  },
+  "768": {
+   "pct": 0.21,
+   "hOrig": 6858,
+   "hRep": 6857
+  },
+  "1024": {
+   "pct": 0.23,
+   "hOrig": 5849,
+   "hRep": 5824
+  },
+  "1440": {
+   "pct": 0.51,
+   "hOrig": 5323,
+   "hRep": 5322
+  }
+ },
+ "alojamiento-web-aviles": {
+  "390": {
+   "pct": 0.85,
+   "hOrig": 11894,
+   "hRep": 11917
+  },
+  "768": {
+   "pct": 0.15,
+   "hOrig": 6764,
+   "hRep": 6763
+  },
+  "1024": {
+   "pct": 0.15,
+   "hOrig": 5670,
+   "hRep": 5646
+  },
+  "1440": {
+   "pct": 0.55,
+   "hOrig": 5275,
+   "hRep": 5274
+  }
+ },
+ "alojamiento-web-barcelona": {
+  "390": {
+   "pct": 1.89,
+   "hOrig": 15095,
+   "hRep": 15118
+  },
+  "768": {
+   "pct": 8.77,
+   "hOrig": 9338,
+   "hRep": 9356
+  },
+  "1024": {
+   "pct": 9.61,
+   "hOrig": 8120,
+   "hRep": 8114
+  },
+  "1440": {
+   "pct": 10.46,
+   "hOrig": 7215,
+   "hRep": 7233
+  }
+ },
+ "alojamiento-web-bilbao": {
+  "390": {
+   "pct": 2.03,
+   "hOrig": 14960,
+   "hRep": 14983
+  },
+  "768": {
+   "pct": 1.13,
+   "hOrig": 9372,
+   "hRep": 9371
+  },
+  "1024": {
+   "pct": 8.52,
+   "hOrig": 8077,
+   "hRep": 8072
+  },
+  "1440": {
+   "pct": 7.99,
+   "hOrig": 7187,
+   "hRep": 7205
+  }
+ },
+ "alojamiento-web-cordoba": {
+  "390": {
+   "pct": 2.51,
+   "hOrig": 14063,
+   "hRep": 14085
+  },
+  "768": {
+   "pct": 0.19,
+   "hOrig": 8704,
+   "hRep": 8703
+  },
+  "1024": {
+   "pct": 8.56,
+   "hOrig": 7518,
+   "hRep": 7513
+  },
+  "1440": {
+   "pct": 0.68,
+   "hOrig": 7053,
+   "hRep": 7052
+  }
+ },
+ "alojamiento-web-galicia": {
+  "390": {
+   "pct": 11.07,
+   "hOrig": 14429,
+   "hRep": 14471
+  },
+  "768": {
+   "pct": 8.47,
+   "hOrig": 9178,
+   "hRep": 9196
+  },
+  "1024": {
+   "pct": 9.55,
+   "hOrig": 7610,
+   "hRep": 7605
+  },
+  "1440": {
+   "pct": 7.7,
+   "hOrig": 7170,
+   "hRep": 7188
+  }
+ },
+ "alojamiento-web-gijon": {
+  "390": {
+   "pct": 2.01,
+   "hOrig": 12319,
+   "hRep": 12342
+  },
+  "768": {
+   "pct": 0.14,
+   "hOrig": 7088,
+   "hRep": 7087
+  },
+  "1024": {
+   "pct": 0.13,
+   "hOrig": 5978,
+   "hRep": 5954
+  },
+  "1440": {
+   "pct": 0.54,
+   "hOrig": 5394,
+   "hRep": 5393
+  }
+ },
+ "alojamiento-web-girona": {
+  "390": {
+   "pct": 1.07,
+   "hOrig": 14646,
+   "hRep": 14668
+  },
+  "768": {
+   "pct": 8.27,
+   "hOrig": 8994,
+   "hRep": 9012
+  },
+  "1024": {
+   "pct": 8.66,
+   "hOrig": 7704,
+   "hRep": 7699
+  },
+  "1440": {
+   "pct": 7.79,
+   "hOrig": 7130,
+   "hRep": 7148
+  }
+ },
+ "alojamiento-web-granada": {
+  "390": {
+   "pct": 1.82,
+   "hOrig": 14182,
+   "hRep": 14205
+  },
+  "768": {
+   "pct": 8.21,
+   "hOrig": 8828,
+   "hRep": 8845
+  },
+  "1024": {
+   "pct": 8.69,
+   "hOrig": 7530,
+   "hRep": 7525
+  },
+  "1440": {
+   "pct": 7.8,
+   "hOrig": 7055,
+   "hRep": 7073
+  }
+ },
+ "alojamiento-web-huelva": {
+  "390": {
+   "pct": 3.02,
+   "hOrig": 14414,
+   "hRep": 14437
+  },
+  "768": {
+   "pct": 8.64,
+   "hOrig": 9086,
+   "hRep": 9104
+  },
+  "1024": {
+   "pct": 8.76,
+   "hOrig": 7632,
+   "hRep": 7626
+  },
+  "1440": {
+   "pct": 7.84,
+   "hOrig": 7128,
+   "hRep": 7146
+  }
+ },
+ "alojamiento-web-huesca": {
+  "390": {
+   "pct": 11.09,
+   "hOrig": 14355,
+   "hRep": 14397
+  },
+  "768": {
+   "pct": 8.68,
+   "hOrig": 8891,
+   "hRep": 8909
+  },
+  "1024": {
+   "pct": 8.71,
+   "hOrig": 7567,
+   "hRep": 7562
+  },
+  "1440": {
+   "pct": 7.82,
+   "hOrig": 7076,
+   "hRep": 7094
+  }
+ },
+ "alojamiento-web-la-rioja": {
+  "390": {
+   "pct": 2.22,
+   "hOrig": 14003,
+   "hRep": 14026
+  },
+  "768": {
+   "pct": 8.39,
+   "hOrig": 8854,
+   "hRep": 8872
+  },
+  "1024": {
+   "pct": 9.4,
+   "hOrig": 7457,
+   "hRep": 7452
+  },
+  "1440": {
+   "pct": 7.78,
+   "hOrig": 6963,
+   "hRep": 6981
+  }
+ },
+ "alojamiento-web-lleida": {
+  "390": {
+   "pct": 1.82,
+   "hOrig": 14653,
+   "hRep": 14675
+  },
+  "768": {
+   "pct": 8.17,
+   "hOrig": 9186,
+   "hRep": 9204
+  },
+  "1024": {
+   "pct": 8.74,
+   "hOrig": 7652,
+   "hRep": 7647
+  },
+  "1440": {
+   "pct": 8.03,
+   "hOrig": 7062,
+   "hRep": 7080
+  }
+ },
+ "alojamiento-web-logrono": {
+  "390": {
+   "pct": 11.15,
+   "hOrig": 14108,
+   "hRep": 14150
+  },
+  "768": {
+   "pct": 8.69,
+   "hOrig": 8814,
+   "hRep": 8832
+  },
+  "1024": {
+   "pct": 9.58,
+   "hOrig": 7519,
+   "hRep": 7514
+  },
+  "1440": {
+   "pct": 7.8,
+   "hOrig": 7036,
+   "hRep": 7054
+  }
+ },
+ "alojamiento-web-lugo": {
+  "390": {
+   "pct": 11.14,
+   "hOrig": 14186,
+   "hRep": 14228
+  },
+  "768": {
+   "pct": 8.61,
+   "hOrig": 8884,
+   "hRep": 8902
+  },
+  "1024": {
+   "pct": 9.55,
+   "hOrig": 7563,
+   "hRep": 7558
+  },
+  "1440": {
+   "pct": 7.7,
+   "hOrig": 7050,
+   "hRep": 7068
+  }
+ },
+ "alojamiento-web-madrid": {
+  "390": {
+   "pct": 11.02,
+   "hOrig": 14522,
+   "hRep": 14564
+  },
+  "768": {
+   "pct": 8.52,
+   "hOrig": 9112,
+   "hRep": 9130
+  },
+  "1024": {
+   "pct": 9.66,
+   "hOrig": 7681,
+   "hRep": 7676
+  },
+  "1440": {
+   "pct": 9.66,
+   "hOrig": 6966,
+   "hRep": 6984
+  }
+ },
+ "alojamiento-web-malaga": {
+  "390": {
+   "pct": 0.9,
+   "hOrig": 11910,
+   "hRep": 11933
+  },
+  "768": {
+   "pct": 0.14,
+   "hOrig": 6792,
+   "hRep": 6791
+  },
+  "1024": {
+   "pct": 0.13,
+   "hOrig": 5779,
+   "hRep": 5755
+  },
+  "1440": {
+   "pct": 0.51,
+   "hOrig": 5329,
+   "hRep": 5328
+  }
+ },
+ "alojamiento-web-murcia": {
+  "390": {
+   "pct": 2.19,
+   "hOrig": 15190,
+   "hRep": 15213
+  },
+  "768": {
+   "pct": 8.66,
+   "hOrig": 9512,
+   "hRep": 9530
+  },
+  "1024": {
+   "pct": 9.53,
+   "hOrig": 8045,
+   "hRep": 8040
+  },
+  "1440": {
+   "pct": 9.21,
+   "hOrig": 7254,
+   "hRep": 7272
+  }
+ },
+ "alojamiento-web-oviedo": {
+  "390": {
+   "pct": 0.6,
+   "hOrig": 11925,
+   "hRep": 11947
+  },
+  "768": {
+   "pct": 0.16,
+   "hOrig": 6693,
+   "hRep": 6692
+  },
+  "1024": {
+   "pct": 0.14,
+   "hOrig": 5683,
+   "hRep": 5659
+  },
+  "1440": {
+   "pct": 0.55,
+   "hOrig": 5276,
+   "hRep": 5275
+  }
+ },
+ "alojamiento-web-sevilla": {
+  "390": {
+   "pct": 0.3,
+   "hOrig": 14765,
+   "hRep": 14788
+  },
+  "768": {
+   "pct": 7.99,
+   "hOrig": 9338,
+   "hRep": 9356
+  },
+  "1024": {
+   "pct": 8.51,
+   "hOrig": 7861,
+   "hRep": 7855
+  },
+  "1440": {
+   "pct": 8.98,
+   "hOrig": 7224,
+   "hRep": 7242
+  }
+ },
+ "alojamiento-web-tarragona": {
+  "390": {
+   "pct": 0.31,
+   "hOrig": 14537,
+   "hRep": 14560
+  },
+  "768": {
+   "pct": 8.25,
+   "hOrig": 9089,
+   "hRep": 9107
+  },
+  "1024": {
+   "pct": 8.55,
+   "hOrig": 7840,
+   "hRep": 7835
+  },
+  "1440": {
+   "pct": 8.03,
+   "hOrig": 6959,
+   "hRep": 6977
+  }
+ },
+ "alojamiento-web-toledo": {
+  "390": {
+   "pct": 2.05,
+   "hOrig": 14569,
+   "hRep": 14592
+  },
+  "768": {
+   "pct": 8.56,
+   "hOrig": 9237,
+   "hRep": 9255
+  },
+  "1024": {
+   "pct": 9.59,
+   "hOrig": 7707,
+   "hRep": 7701
+  },
+  "1440": {
+   "pct": 7.9,
+   "hOrig": 7140,
+   "hRep": 7158
+  }
+ },
+ "alojamiento-web-valencia": {
+  "390": {
+   "pct": 2.63,
+   "hOrig": 15086,
+   "hRep": 15109
+  },
+  "768": {
+   "pct": 8.63,
+   "hOrig": 9461,
+   "hRep": 9479
+  },
+  "1024": {
+   "pct": 9.69,
+   "hOrig": 8002,
+   "hRep": 7997
+  },
+  "1440": {
+   "pct": 8.28,
+   "hOrig": 7287,
+   "hRep": 7305
+  }
+ },
+ "alojamiento-web-zaragoza": {
+  "390": {
+   "pct": 2.06,
+   "hOrig": 14273,
+   "hRep": 14295
+  },
+  "768": {
+   "pct": 8.17,
+   "hOrig": 8911,
+   "hRep": 8929
+  },
+  "1024": {
+   "pct": 8.58,
+   "hOrig": 7633,
+   "hRep": 7628
+  },
+  "1440": {
+   "pct": 9.07,
+   "hOrig": 7042,
+   "hRep": 7060
+  }
+ },
+ "aviso-legal": {
+  "390": {
+   "pct": 0.57,
+   "hOrig": 6463,
+   "hRep": 6486
+  },
+  "768": {
+   "pct": 0.27,
+   "hOrig": 4086,
+   "hRep": 4085
+  },
+  "1024": {
+   "pct": 0.23,
+   "hOrig": 3580,
+   "hRep": 3555
+  },
+  "1440": {
+   "pct": 0.21,
+   "hOrig": 3361,
+   "hRep": 3360
+  }
+ },
+ "blog": {
+  "390": {
+   "pct": 36.46,
+   "hOrig": 3344,
+   "hRep": 3473
+  },
+  "768": {
+   "pct": 0.17,
+   "hOrig": 5754,
+   "hRep": 5753
+  },
+  "1024": {
+   "pct": 0.39,
+   "hOrig": 1983,
+   "hRep": 1959
+  },
+  "1440": {
+   "pct": 26.44,
+   "hOrig": 2262,
+   "hRep": 2261
+  }
+ },
+ "blog__alojamiento-web-para-tu-organizacion-o-proyecto": {
+  "390": {
+   "pct": 0.81,
+   "hOrig": 4463,
+   "hRep": 4486
+  },
+  "768": {
+   "pct": 0.28,
+   "hOrig": 3238,
+   "hRep": 3237
+  },
+  "1024": {
+   "pct": 0.84,
+   "hOrig": 3135,
+   "hRep": 3081
+  },
+  "1440": {
+   "pct": 0.19,
+   "hOrig": 3078,
+   "hRep": 3077
+  }
+ },
+ "blog__author__admin_cdin": {
+  "390": {
+   "pct": 0.98,
+   "hOrig": 9749,
+   "hRep": 9772
+  },
+  "768": {
+   "pct": 1.15,
+   "hOrig": 7654,
+   "hRep": 7653
+  },
+  "1024": {
+   "pct": 1.08,
+   "hOrig": 7336,
+   "hRep": 7311
+  },
+  "1440": {
+   "pct": 1.01,
+   "hOrig": 6870,
+   "hRep": 6869
+  }
+ },
+ "blog__author__breno": {
+  "390": {
+   "pct": 0.98,
+   "hOrig": 9749,
+   "hRep": 9772
+  },
+  "768": {
+   "pct": 1.14,
+   "hOrig": 7654,
+   "hRep": 7653
+  },
+  "1024": {
+   "pct": 1.07,
+   "hOrig": 7336,
+   "hRep": 7311
+  },
+  "1440": {
+   "pct": 1.01,
+   "hOrig": 6870,
+   "hRep": 6869
+  }
+ },
+ "blog__category__alojamiento-web": {
+  "390": {
+   "pct": 4.67,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.7,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.99,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 2.19,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__category__ciberseguridad": {
+  "390": {
+   "pct": 4.66,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.67,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.97,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 2.18,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__category__cloud": {
+  "390": {
+   "pct": 4.44,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.2,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.6,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 1.92,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__category__cloud__page__2": {
+  "390": {
+   "pct": 4.44,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.2,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.6,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 1.92,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__category__cloud__page__3": {
+  "390": {
+   "pct": 4.44,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.2,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.6,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 1.92,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__category__seo": {
+  "390": {
+   "pct": 4.41,
+   "hOrig": 1527,
+   "hRep": 1351
+  },
+  "768": {
+   "pct": 3.14,
+   "hOrig": 1169,
+   "hRep": 945
+  },
+  "1024": {
+   "pct": 2.55,
+   "hOrig": 1104,
+   "hRep": 900
+  },
+  "1440": {
+   "pct": 1.89,
+   "hOrig": 1118,
+   "hRep": 900
+  }
+ },
+ "blog__como-afecta-el-hosting-a-la-experiencia-del-usuario": {
+  "390": {
+   "pct": 4.64,
+   "hOrig": 9006,
+   "hRep": 9029
+  },
+  "768": {
+   "pct": 0.25,
+   "hOrig": 7101,
+   "hRep": 7100
+  },
+  "1024": {
+   "pct": 4.62,
+   "hOrig": 6723,
+   "hRep": 6699
+  },
+  "1440": {
+   "pct": 0.16,
+   "hOrig": 6108,
+   "hRep": 6107
+  }
+ },
+ "blog__como-digitalizar-tu-negocio-local": {
+  "390": {
+   "pct": 0.81,
+   "hOrig": 4643,
+   "hRep": 4666
+  },
+  "768": {
+   "pct": 0.31,
+   "hOrig": 3328,
+   "hRep": 3327
+  },
+  "1024": {
+   "pct": 0.45,
+   "hOrig": 3329,
+   "hRep": 3305
+  },
+  "1440": {
+   "pct": 0.26,
+   "hOrig": 2965,
+   "hRep": 2964
+  }
+ },
+ "blog__como-elegir-hosting-wordpress-2026": {
+  "390": {
+   "pct": 0.46,
+   "hOrig": 8148,
+   "hRep": 8171
+  },
+  "768": {
+   "pct": 0.16,
+   "hOrig": 6449,
+   "hRep": 6448
+  },
+  "1024": {
+   "pct": 0.26,
+   "hOrig": 6421,
+   "hRep": 6396
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 5779,
+   "hRep": 5778
+  }
+ },
+ "blog__como-elegir-nombre-dominio-perfecto-marca": {
+  "390": {
+   "pct": 0.5,
+   "hOrig": 7598,
+   "hRep": 7621
+  },
+  "768": {
+   "pct": 0.7,
+   "hOrig": 5730,
+   "hRep": 5699
+  },
+  "1024": {
+   "pct": 5.35,
+   "hOrig": 5510,
+   "hRep": 5486
+  },
+  "1440": {
+   "pct": 0.39,
+   "hOrig": 5006,
+   "hRep": 4975
+  }
+ },
+ "blog__como-estimar-cuantos-recursos-va-necesitar-web": {
+  "390": {
+   "pct": 0.48,
+   "hOrig": 7855,
+   "hRep": 7878
+  },
+  "768": {
+   "pct": 0.45,
+   "hOrig": 5997,
+   "hRep": 5996
+  },
+  "1024": {
+   "pct": 5.3,
+   "hOrig": 5663,
+   "hRep": 5639
+  },
+  "1440": {
+   "pct": 0.16,
+   "hOrig": 5161,
+   "hRep": 5160
+  }
+ },
+ "blog__como-migrar-tu-web-a-otro-hosting-sin-perder-nada": {
+  "390": {
+   "pct": 0.5,
+   "hOrig": 7598,
+   "hRep": 7621
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 5900,
+   "hRep": 5899
+  },
+  "1024": {
+   "pct": 0.32,
+   "hOrig": 5817,
+   "hRep": 5792
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 5338,
+   "hRep": 5337
+  }
+ },
+ "blog__como-migrar-web-a-otro-hosting-sin-perder-trafico": {
+  "390": {
+   "pct": 0.64,
+   "hOrig": 8883,
+   "hRep": 8906
+  },
+  "768": {
+   "pct": 0.49,
+   "hOrig": 7345,
+   "hRep": 7314
+  },
+  "1024": {
+   "pct": 0.21,
+   "hOrig": 6969,
+   "hRep": 6945
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 6473,
+   "hRep": 6472
+  }
+ },
+ "blog__como-proteger-los-datos-de-tu-empresa-en-la-nube": {
+  "390": {
+   "pct": 0.91,
+   "hOrig": 3974,
+   "hRep": 3997
+  },
+  "768": {
+   "pct": 0.3,
+   "hOrig": 3112,
+   "hRep": 3111
+  },
+  "1024": {
+   "pct": 0.88,
+   "hOrig": 3009,
+   "hRep": 2955
+  },
+  "1440": {
+   "pct": 0.21,
+   "hOrig": 2999,
+   "hRep": 2998
+  }
+ },
+ "blog__como-saber-hosting-limitando-el-rendimiento-web": {
+  "390": {
+   "pct": 0.5,
+   "hOrig": 9256,
+   "hRep": 9279
+  },
+  "768": {
+   "pct": 0.14,
+   "hOrig": 7177,
+   "hRep": 7176
+  },
+  "1024": {
+   "pct": 4.94,
+   "hOrig": 6883,
+   "hRep": 6829
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 6160,
+   "hRep": 6159
+  }
+ },
+ "blog__cuando-cambiar-a-un-servidor-vps": {
+  "390": {
+   "pct": 0.58,
+   "hOrig": 8461,
+   "hRep": 8484
+  },
+  "768": {
+   "pct": 0.44,
+   "hOrig": 6349,
+   "hRep": 6348
+  },
+  "1024": {
+   "pct": 5.17,
+   "hOrig": 6104,
+   "hRep": 6079
+  },
+  "1440": {
+   "pct": 0.17,
+   "hOrig": 5576,
+   "hRep": 5575
+  }
+ },
+ "blog__cuanta-ram-necesita-servidor-alojar-web": {
+  "390": {
+   "pct": 0.44,
+   "hOrig": 8613,
+   "hRep": 8636
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 6513,
+   "hRep": 6512
+  },
+  "1024": {
+   "pct": 5.23,
+   "hOrig": 6110,
+   "hRep": 6086
+  },
+  "1440": {
+   "pct": 0.13,
+   "hOrig": 5587,
+   "hRep": 5586
+  }
+ },
+ "blog__diferencias-hosting-barato-hosting-profesional": {
+  "390": {
+   "pct": 0.48,
+   "hOrig": 8033,
+   "hRep": 8056
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 6607,
+   "hRep": 6606
+  },
+  "1024": {
+   "pct": 0.23,
+   "hOrig": 6387,
+   "hRep": 6362
+  },
+  "1440": {
+   "pct": 1.89,
+   "hOrig": 5797,
+   "hRep": 5796
+  }
+ },
+ "blog__errores-mas-comunes-hosting-como-solucionarlos": {
+  "390": {
+   "pct": 0.44,
+   "hOrig": 8940,
+   "hRep": 8963
+  },
+  "768": {
+   "pct": 0.17,
+   "hOrig": 6789,
+   "hRep": 6788
+  },
+  "1024": {
+   "pct": 3.81,
+   "hOrig": 6429,
+   "hRep": 6405
+  },
+  "1440": {
+   "pct": 0.14,
+   "hOrig": 5842,
+   "hRep": 5841
+  }
+ },
+ "blog__factores-clave-posicionar-web-primeros-resultados": {
+  "390": {
+   "pct": 0.48,
+   "hOrig": 7914,
+   "hRep": 7936
+  },
+  "768": {
+   "pct": 0.21,
+   "hOrig": 6218,
+   "hRep": 6217
+  },
+  "1024": {
+   "pct": 4.54,
+   "hOrig": 6019,
+   "hRep": 5965
+  },
+  "1440": {
+   "pct": 0.13,
+   "hOrig": 5411,
+   "hRep": 5410
+  }
+ },
+ "blog__hosting-wordpress-por-que-elegir-plan-especializado": {
+  "390": {
+   "pct": 0.61,
+   "hOrig": 7481,
+   "hRep": 7504
+  },
+  "768": {
+   "pct": 0.24,
+   "hOrig": 5605,
+   "hRep": 5604
+  },
+  "1024": {
+   "pct": 5.8,
+   "hOrig": 5336,
+   "hRep": 5312
+  },
+  "1440": {
+   "pct": 0.16,
+   "hOrig": 4902,
+   "hRep": 4901
+  }
+ },
+ "blog__nube-privada-vs-nube-publica-cual-debes-utilizar": {
+  "390": {
+   "pct": 0.96,
+   "hOrig": 5625,
+   "hRep": 5648
+  },
+  "768": {
+   "pct": 0.57,
+   "hOrig": 4144,
+   "hRep": 4143
+  },
+  "1024": {
+   "pct": 7.07,
+   "hOrig": 4022,
+   "hRep": 3998
+  },
+  "1440": {
+   "pct": 3.19,
+   "hOrig": 3591,
+   "hRep": 3589
+  }
+ },
+ "blog__planes-de-alojamiemto-web-para-agencias": {
+  "390": {
+   "pct": 0.81,
+   "hOrig": 4651,
+   "hRep": 4674
+  },
+  "768": {
+   "pct": 0.31,
+   "hOrig": 3253,
+   "hRep": 3252
+  },
+  "1024": {
+   "pct": 0.47,
+   "hOrig": 3305,
+   "hRep": 3281
+  },
+  "1440": {
+   "pct": 0.22,
+   "hOrig": 2850,
+   "hRep": 2849
+  }
+ },
+ "blog__por-que-cada-vez-mas-empresas-migran-nube": {
+  "390": {
+   "pct": 0.49,
+   "hOrig": 7785,
+   "hRep": 7808
+  },
+  "768": {
+   "pct": 0.2,
+   "hOrig": 5973,
+   "hRep": 5972
+  },
+  "1024": {
+   "pct": 0.28,
+   "hOrig": 5598,
+   "hRep": 5573
+  },
+  "1440": {
+   "pct": 0.16,
+   "hOrig": 5029,
+   "hRep": 5028
+  }
+ },
+ "blog__por-que-mi-sitio-web-va-lento": {
+  "390": {
+   "pct": 0.67,
+   "hOrig": 7073,
+   "hRep": 7096
+  },
+  "768": {
+   "pct": 0.67,
+   "hOrig": 5316,
+   "hRep": 5285
+  },
+  "1024": {
+   "pct": 0.15,
+   "hOrig": 5180,
+   "hRep": 5155
+  },
+  "1440": {
+   "pct": 0.13,
+   "hOrig": 4792,
+   "hRep": 4791
+  }
+ },
+ "blog__por-que-velocidad-hosting-afecta-seo": {
+  "390": {
+   "pct": 0.63,
+   "hOrig": 5742,
+   "hRep": 5765
+  },
+  "768": {
+   "pct": 0.29,
+   "hOrig": 4643,
+   "hRep": 4642
+  },
+  "1024": {
+   "pct": 0.24,
+   "hOrig": 4296,
+   "hRep": 4271
+  },
+  "1440": {
+   "pct": 0.2,
+   "hOrig": 4251,
+   "hRep": 4250
+  }
+ },
+ "blog__por-que-wordpress-va-lento-como-solucionarlo": {
+  "390": {
+   "pct": 0.43,
+   "hOrig": 9014,
+   "hRep": 9037
+  },
+  "768": {
+   "pct": 0.27,
+   "hOrig": 6877,
+   "hRep": 6876
+  },
+  "1024": {
+   "pct": 3.94,
+   "hOrig": 6492,
+   "hRep": 6467
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 5967,
+   "hRep": 5966
+  }
+ },
+ "blog__que-caracteristicas-tener-buen-servicio-alojamiento-web": {
+  "390": {
+   "pct": 0.5,
+   "hOrig": 7152,
+   "hRep": 7175
+  },
+  "768": {
+   "pct": 0.34,
+   "hOrig": 5803,
+   "hRep": 5802
+  },
+  "1024": {
+   "pct": 5.63,
+   "hOrig": 5376,
+   "hRep": 5352
+  },
+  "1440": {
+   "pct": 0.14,
+   "hOrig": 5376,
+   "hRep": 5375
+  }
+ },
+ "blog__que-es-el-iaas-infrastructure-as-a-service": {
+  "390": {
+   "pct": 0.93,
+   "hOrig": 4703,
+   "hRep": 4726
+  },
+  "768": {
+   "pct": 0.3,
+   "hOrig": 3731,
+   "hRep": 3730
+  },
+  "1024": {
+   "pct": 0.42,
+   "hOrig": 3804,
+   "hRep": 3779
+  },
+  "1440": {
+   "pct": 0.18,
+   "hOrig": 3414,
+   "hRep": 3413
+  }
+ },
+ "blog__que-es-hosting-dedicado-cuando-es-necesario": {
+  "390": {
+   "pct": 0.77,
+   "hOrig": 7358,
+   "hRep": 7381
+  },
+  "768": {
+   "pct": 0.19,
+   "hOrig": 5702,
+   "hRep": 5701
+  },
+  "1024": {
+   "pct": 0.19,
+   "hOrig": 5639,
+   "hRep": 5615
+  },
+  "1440": {
+   "pct": 0.13,
+   "hOrig": 4892,
+   "hRep": 4891
+  }
+ },
+ "blog__que-es-la-nube": {
+  "390": {
+   "pct": 0.51,
+   "hOrig": 9424,
+   "hRep": 9447
+  },
+  "768": {
+   "pct": 0.28,
+   "hOrig": 5972,
+   "hRep": 5970
+  },
+  "1024": {
+   "pct": 2.72,
+   "hOrig": 5476,
+   "hRep": 5452
+  },
+  "1440": {
+   "pct": 0.14,
+   "hOrig": 4811,
+   "hRep": 4810
+  }
+ },
+ "blog__que-es-un-dominio-como-relaciona-con-hosting": {
+  "390": {
+   "pct": 0.52,
+   "hOrig": 7278,
+   "hRep": 7301
+  },
+  "768": {
+   "pct": 0.21,
+   "hOrig": 5673,
+   "hRep": 5672
+  },
+  "1024": {
+   "pct": 0.27,
+   "hOrig": 5649,
+   "hRep": 5625
+  },
+  "1440": {
+   "pct": 0.14,
+   "hOrig": 5171,
+   "hRep": 5170
+  }
+ },
+ "blog__que-es-un-servidor-dns-y-como-influye-en-tu-hosting": {
+  "390": {
+   "pct": 0.43,
+   "hOrig": 9416,
+   "hRep": 9439
+  },
+  "768": {
+   "pct": 0.22,
+   "hOrig": 7038,
+   "hRep": 7037
+  },
+  "1024": {
+   "pct": 2.87,
+   "hOrig": 6722,
+   "hRep": 6698
+  },
+  "1440": {
+   "pct": 0.12,
+   "hOrig": 6130,
+   "hRep": 6129
+  }
+ },
+ "blog__que-necesitas-para-crear-una-pagina-web-desde-cero": {
+  "390": {
+   "pct": 0.46,
+   "hOrig": 8199,
+   "hRep": 8222
+  },
+  "768": {
+   "pct": 0.16,
+   "hOrig": 6316,
+   "hRep": 6315
+  },
+  "1024": {
+   "pct": 3.97,
+   "hOrig": 6091,
+   "hRep": 6067
+  },
+  "1440": {
+   "pct": 0.12,
+   "hOrig": 5564,
+   "hRep": 5563
+  }
+ },
+ "blog__que-son-como-utilizar-redirecciones-dominio": {
+  "390": {
+   "pct": 0.79,
+   "hOrig": 8773,
+   "hRep": 8796
+  },
+  "768": {
+   "pct": 0.25,
+   "hOrig": 6285,
+   "hRep": 6284
+  },
+  "1024": {
+   "pct": 0.12,
+   "hOrig": 5919,
+   "hRep": 5895
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 5234,
+   "hRep": 5233
+  }
+ },
+ "blog__tipos-hosting-web-diferencias-compartido-vps-dedicado-cloud": {
+  "390": {
+   "pct": 0.37,
+   "hOrig": 10184,
+   "hRep": 10207
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 7230,
+   "hRep": 7229
+  },
+  "1024": {
+   "pct": 0.24,
+   "hOrig": 7132,
+   "hRep": 7108
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 6534,
+   "hRep": 6533
+  }
+ },
+ "blog__tipos-paginas-web-mejor-para-tu-proyecto": {
+  "390": {
+   "pct": 0.58,
+   "hOrig": 8275,
+   "hRep": 8298
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 6060,
+   "hRep": 6059
+  },
+  "1024": {
+   "pct": 0.24,
+   "hOrig": 6162,
+   "hRep": 6138
+  },
+  "1440": {
+   "pct": 0.2,
+   "hOrig": 5770,
+   "hRep": 5769
+  }
+ },
+ "blog__uptime-que-es-importante-hosting": {
+  "390": {
+   "pct": 0.53,
+   "hOrig": 7131,
+   "hRep": 7154
+  },
+  "768": {
+   "pct": 0.27,
+   "hOrig": 5588,
+   "hRep": 5587
+  },
+  "1024": {
+   "pct": 0.29,
+   "hOrig": 5345,
+   "hRep": 5320
+  },
+  "1440": {
+   "pct": 0.15,
+   "hOrig": 4869,
+   "hRep": 4868
+  }
+ },
+ "brief-alta-nuevo-cliente-fm": {
+  "390": {
+   "pct": 0.91,
+   "hOrig": 4220,
+   "hRep": 4243
+  },
+  "768": {
+   "pct": 0.29,
+   "hOrig": 3614,
+   "hRep": 3613
+  },
+  "1024": {
+   "pct": 0.23,
+   "hOrig": 3550,
+   "hRep": 3525
+  },
+  "1440": {
+   "pct": 0.19,
+   "hOrig": 3563,
+   "hRep": 3562
+  }
+ },
+ "cloud": {
+  "390": {
+   "pct": 0.41,
+   "hOrig": 10481,
+   "hRep": 10504
+  },
+  "768": {
+   "pct": 0.2,
+   "hOrig": 6562,
+   "hRep": 6561
+  },
+  "1024": {
+   "pct": 0.14,
+   "hOrig": 6159,
+   "hRep": 6135
+  },
+  "1440": {
+   "pct": 0.13,
+   "hOrig": 5199,
+   "hRep": 5198
+  }
+ },
+ "contacto": {
+  "390": {
+   "pct": 0.94,
+   "hOrig": 4070,
+   "hRep": 4093
+  },
+  "768": {
+   "pct": 0.34,
+   "hOrig": 3420,
+   "hRep": 3419
+  },
+  "1024": {
+   "pct": 0.26,
+   "hOrig": 3286,
+   "hRep": 3262
+  },
+  "1440": {
+   "pct": 0.22,
+   "hOrig": 3105,
+   "hRep": 3104
+  }
+ },
+ "contacto-old": {
+  "390": {
+   "pct": 1.34,
+   "hOrig": 2845,
+   "hRep": 2868
+  },
+  "768": {
+   "pct": 0.45,
+   "hOrig": 2476,
+   "hRep": 2475
+  },
+  "1024": {
+   "pct": 0.33,
+   "hOrig": 2387,
+   "hRep": 2363
+  },
+  "1440": {
+   "pct": 0.27,
+   "hOrig": 2401,
+   "hRep": 2400
+  }
+ },
+ "cookies": {
+  "390": {
+   "pct": 0.7,
+   "hOrig": 5184,
+   "hRep": 5207
+  },
+  "768": {
+   "pct": 0.32,
+   "hOrig": 3174,
+   "hRep": 3173
+  },
+  "1024": {
+   "pct": 0.28,
+   "hOrig": 2773,
+   "hRep": 2749
+  },
+  "1440": {
+   "pct": 0.23,
+   "hOrig": 2567,
+   "hRep": 2566
+  }
+ },
+ "data-center-espana": {
+  "390": {
+   "pct": 5.93,
+   "hOrig": 8093,
+   "hRep": 8116
+  },
+  "768": {
+   "pct": 4.55,
+   "hOrig": 5337,
+   "hRep": 5336
+  },
+  "1024": {
+   "pct": 4.95,
+   "hOrig": 4355,
+   "hRep": 4331
+  },
+  "1440": {
+   "pct": 4.56,
+   "hOrig": 4071,
+   "hRep": 4070
+  }
+ },
+ "diseno-paginas-web-asturias": {
+  "390": {
+   "pct": 0.82,
+   "hOrig": 11095,
+   "hRep": 11119
+  },
+  "768": {
+   "pct": 0.18,
+   "hOrig": 7849,
+   "hRep": 7848
+  },
+  "1024": {
+   "pct": 9.33,
+   "hOrig": 6683,
+   "hRep": 6678
+  },
+  "1440": {
+   "pct": 0.51,
+   "hOrig": 5904,
+   "hRep": 5903
+  }
+ },
+ "dominios": {
+  "390": {
+   "pct": 1.21,
+   "hOrig": 3104,
+   "hRep": 3127
+  },
+  "768": {
+   "pct": 0.28,
+   "hOrig": 3414,
+   "hRep": 3413
+  },
+  "1024": {
+   "pct": 0.23,
+   "hOrig": 3326,
+   "hRep": 3302
+  },
+  "1440": {
+   "pct": 0.25,
+   "hOrig": 2408,
+   "hRep": 2407
+  }
+ },
+ "home": {
+  "390": {
+   "pct": 0.95,
+   "hOrig": 9749,
+   "hRep": 9772
+  },
+  "768": {
+   "pct": 1.12,
+   "hOrig": 7654,
+   "hRep": 7653
+  },
+  "1024": {
+   "pct": 1.07,
+   "hOrig": 7336,
+   "hRep": 7311
+  },
+  "1440": {
+   "pct": 1,
+   "hOrig": 6870,
+   "hRep": 6869
+  }
+ },
+ "hosting": {
+  "390": {
+   "pct": 0.37,
+   "hOrig": 9792,
+   "hRep": 9815
+  },
+  "768": {
+   "pct": 0.14,
+   "hOrig": 6679,
+   "hRep": 6678
+  },
+  "1024": {
+   "pct": 0.14,
+   "hOrig": 6309,
+   "hRep": 6284
+  },
+  "1440": {
+   "pct": 0.11,
+   "hOrig": 5395,
+   "hRep": 5394
+  }
+ },
+ "hosting-web": {
+  "390": {
+   "pct": 6.12,
+   "hOrig": 4357,
+   "hRep": 4380
+  },
+  "768": {
+   "pct": 4.02,
+   "hOrig": 3178,
+   "hRep": 3177
+  },
+  "1024": {
+   "pct": 5.75,
+   "hOrig": 2555,
+   "hRep": 2530
+  },
+  "1440": {
+   "pct": 5.37,
+   "hOrig": 2421,
+   "hRep": 2420
+  }
+ },
+ "hosting-y-dominios-cloud-empresas": {
+  "390": {
+   "pct": 0.94,
+   "hOrig": 9806,
+   "hRep": 9829
+  },
+  "768": {
+   "pct": 1.18,
+   "hOrig": 7643,
+   "hRep": 7642
+  },
+  "1024": {
+   "pct": 1.15,
+   "hOrig": 7322,
+   "hRep": 7297
+  },
+  "1440": {
+   "pct": 1.11,
+   "hOrig": 6852,
+   "hRep": 6851
+  }
+ },
+ "no-existe-xyz": {
+  "390": {
+   "pct": 1.61,
+   "hOrig": 2302,
+   "hRep": 2325
+  },
+  "768": {
+   "pct": 0.81,
+   "hOrig": 1906,
+   "hRep": 1905
+  },
+  "1024": {
+   "pct": 0.83,
+   "hOrig": 1841,
+   "hRep": 1817
+  },
+  "1440": {
+   "pct": 0.99,
+   "hOrig": 1855,
+   "hRep": 1853
+  }
+ },
+ "politica-abuso": {
+  "390": {
+   "pct": 0.59,
+   "hOrig": 6110,
+   "hRep": 6133
+  },
+  "768": {
+   "pct": 0.27,
+   "hOrig": 3710,
+   "hRep": 3709
+  },
+  "1024": {
+   "pct": 0.24,
+   "hOrig": 3180,
+   "hRep": 3156
+  },
+  "1440": {
+   "pct": 0.21,
+   "hOrig": 2868,
+   "hRep": 2867
+  }
+ },
+ "politica-seguridad": {
+  "390": {
+   "pct": 0.64,
+   "hOrig": 5625,
+   "hRep": 5648
+  },
+  "768": {
+   "pct": 0.26,
+   "hOrig": 3815,
+   "hRep": 3814
+  },
+  "1024": {
+   "pct": 0.21,
+   "hOrig": 3332,
+   "hRep": 3307
+  },
+  "1440": {
+   "pct": 0.21,
+   "hOrig": 3043,
+   "hRep": 3042
+  }
+ },
+ "posicionamiento-seo-asturias": {
+  "390": {
+   "pct": 0.8,
+   "hOrig": 11401,
+   "hRep": 11424
+  },
+  "768": {
+   "pct": 0.31,
+   "hOrig": 8165,
+   "hRep": 8164
+  },
+  "1024": {
+   "pct": 8.87,
+   "hOrig": 6847,
+   "hRep": 6841
+  },
+  "1440": {
+   "pct": 0.98,
+   "hOrig": 6239,
+   "hRep": 6238
+  }
+ },
+ "privacidad": {
+  "390": {
+   "pct": 0.68,
+   "hOrig": 5703,
+   "hRep": 5726
+  },
+  "768": {
+   "pct": 0.35,
+   "hOrig": 3756,
+   "hRep": 3755
+  },
+  "1024": {
+   "pct": 0.36,
+   "hOrig": 3319,
+   "hRep": 3295
+  },
+  "1440": {
+   "pct": 0.34,
+   "hOrig": 3170,
+   "hRep": 3169
+  }
+ },
+ "unete": {
+  "390": {
+   "pct": 4.09,
+   "hOrig": 2978,
+   "hRep": 3001
+  },
+  "768": {
+   "pct": 1.68,
+   "hOrig": 2100,
+   "hRep": 2099
+  },
+  "1024": {
+   "pct": 2.2,
+   "hOrig": 1957,
+   "hRep": 1933
+  },
+  "1440": {
+   "pct": 5.05,
+   "hOrig": 1970,
+   "hRep": 1969
+  }
+ }
+}
