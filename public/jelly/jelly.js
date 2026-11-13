@@ -283,7 +283,9 @@ function createWebGL(root, img, cfg) {
   gl.uniform2f(u.scale, 1 / (1 + 2 * cfg.pad), 1 / (1 + 2 * cfg.pad));
 
   // El canvas sobresale de la imagen por `pad` en cada lado; se redimensiona con el contenedor
-  canvas.style.inset = `${-cfg.pad * 100}%`;
+  // Tamaño CSS explícito: un <canvas> con width:auto tomaría su tamaño interno (× devicePixelRatio)
+  canvas.style.left = canvas.style.top = `${-cfg.pad * 100}%`;
+  canvas.style.width = canvas.style.height = `${(1 + 2 * cfg.pad) * 100}%`;
   const fit = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, cfg.maxDpr);
     const r = img.getBoundingClientRect();
