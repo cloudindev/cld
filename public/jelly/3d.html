@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelly 3D · demo</title>
+  <meta name="robots" content="noindex">
+  <style>
+    html, body { margin: 0; height: 100%; }
+    body { display: grid; place-items: center; gap: 24px; background: #fff; font: 14px/1.4 system-ui, sans-serif; color: #6b6a64; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: min(92vw, 1240px); }
+    .card { position: relative; height: 300px; border-radius: 12px; overflow: hidden; }
+    .web { background: #e4f1f2; } .vps { background: #f1edea; }
+    .slot { position: absolute; top: 50%; right: 20px; width: 330px; aspect-ratio: 900 / 513; margin-top: -94px; }
+    .vps .slot { width: 290px; aspect-ratio: 900 / 654; margin-top: -105px; }
+    .hint { text-align: center; }
+    .hint a { color: inherit; }
+  </style>
+</head>
+<body>
+  <div class="cards">
+    <div class="card web"><div class="slot" id="web"></div></div>
+    <div class="card vps"><div class="slot" id="vps"></div></div>
+  </div>
+  <p class="hint">Arrastra las piezas · <a href="#" id="reset">devolverlas a su sitio</a></p>
+  <script type="module">
+    import { createJelly3D } from './jelly3d.js';
+    window.web = createJelly3D(document.getElementById('web'), { shape: 'web' });
+    window.vps = createJelly3D(document.getElementById('vps'), { shape: 'cloud' });
+    document.getElementById('reset').onclick = e => { e.preventDefault(); window.web?.reset(); window.vps?.reset(); };
+  </script>
+</body>
+</html>

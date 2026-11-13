@@ -122,7 +122,12 @@ Los precios se actualizan al volver a compilar. Para refrescarlos solos, program
 
 ## Nube «jelly»
 
-`public/jelly/` contiene la nube animada (WebGL + fallback CSS) y una demo independiente en `/jelly/`. Los parámetros de la animación están en el objeto `CONFIG` al inicio de `jelly.js`.
+`public/jelly/` contiene dos motores sin dependencias:
+
+- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Se pueden arrastrar dentro de su tarjeta. Parámetros en `CONFIG3D`; formas y materiales en `SHAPES`. Demo en `/jelly/3d.html`.
+- **`jelly.js`** (WebGL1 + fallback CSS): animación 2D sobre las fotos recortadas. Se usa solo si no hay WebGL2. Parámetros en `CONFIG`. Demo en `/jelly/`.
+
+El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Detalles en NOTAS.md, punto 34.
 
 ## Formularios
 
