@@ -58,6 +58,7 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
     - **Permiso en WHMCS:** la credencial API tiene el permiso `GetProducts`. Si falla, se muestra un aviso con el enlace al carrito del panel.
     - **Características de los planes:** salen de la descripción de cada producto en WHMCS. Las líneas «Etiqueta: valor» se muestran como tabla y el resto como lista. CVPS 1 y CVPS 2 no tienen descripción.
     - **Diseño:** dos tarjetas con bordes redondeados (12 px, como las tarjetas de producto). La ventana naranja va en Hosting Web y la nube en VPS. La pestaña activa se marca con una barra inferior.
+    - **Bloque de planes:** caja del color de la pestaña activa con el título, «Precios sin IVA» y el selector Mensual/Anual (por defecto Anual). Se ven 4 planes; si hay más, se pasan con flechas (carrusel con scroll-snap, 3 en tablet, 2 en 768 px y 1 en móvil). Cada plan muestra las 5 primeras líneas de su descripción (`maxFeatures` en `content/home.ts`) y el botón «Contratar».
     - **Texto provisional:** el subtítulo de VPS.
 34. **Piezas de gominola** (`public/jelly/`; las imágenes fuente están en `assets/jelly/`).
     - **Nube (panel VPS):** `cloud.webp` viene del PNG ya recortado del cliente. No lleva sombra, a petición del cliente.

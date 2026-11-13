@@ -218,8 +218,8 @@ export const family = [
 // TODO: subtítulo de VPS provisional, pendiente de confirmar.
 export const planPicker = {
   options: [
-    { key: 'web', eyebrow: 'HOSTING', title: 'WEB', text: 'Alojamiento web rápido y fiable', button: 'ver planes' },
-    { key: 'vps', eyebrow: 'HOSTING', title: 'VPS', text: 'Servidores virtuales con recursos dedicados', button: 'ver planes' },
+    { key: 'web', eyebrow: 'HOSTING', title: 'WEB', text: 'Alojamiento web rápido y fiable', button: 'ver planes', plansTitle: 'Planes de Hosting Web' },
+    { key: 'vps', eyebrow: 'HOSTING', title: 'VPS', text: 'Servidores virtuales con recursos dedicados', button: 'ver planes', plansTitle: 'Planes de Hosting VPS' },
   ],
   cloud: { alt: 'Nube de gominola azul translúcida' },
   web: { alt: 'Ventana de navegador de gominola naranja translúcida' },
@@ -227,7 +227,10 @@ export const planPicker = {
   perMonth: '/ mes',
   perYear: '/ año',
   vat: 'Precios sin IVA',
-  order: 'Configurar',
+  order: 'Contratar',
+  maxFeatures: 5,
+  prev: 'Planes anteriores',
+  next: 'Más planes',
   unavailable: 'Este ciclo de pago no está disponible para este plan.',
   error: 'Ahora mismo no podemos mostrar los planes. Puedes verlos en el área de cliente.',
   errorLink: { label: 'Ver planes en el área de cliente', href: 'https://panel.cloudin.pro/cart.php' },
