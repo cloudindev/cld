@@ -15,6 +15,8 @@ const fmt = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2,
 export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
   const [sel, setSel] = useState<Key>('web');
   const [cycle, setCycle] = useState<Cycle>('annually');
+  // Al elegir una tarjeta, las piezas jelly de las demás vuelven a su sitio
+  const [resets, setResets] = useState<Record<Key, number>>({ web: 0, vps: 0 });
   const tabs = useRef<(HTMLDivElement | null)[]>([]);
   const panel = useRef<HTMLDivElement>(null);
   const res = plans[sel];
@@ -26,6 +28,7 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
 
   const choose = (k: Key, scroll = false) => {
     setSel(k);
+    setResets(r => Object.fromEntries(Object.entries(r).map(([key, n]) => [key, key === k ? n : n + 1])) as Record<Key, number>);
     if (scroll) requestAnimationFrame(() => panel.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   };
   const onKey = (e: KeyboardEvent, i: number) => {
@@ -56,8 +59,8 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
               <p className={s.text}>{o.text}</p>
               <span className={`btn-sm ${s.btn}`} onClick={e => { e.stopPropagation(); choose(o.key, true); }}>{o.button}</span>
             </div>
-            {o.key === 'web' && <JellyCloud image="web" alt={c.web.alt} className={s.jelly} />}
-            {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} />}
+            {o.key === 'web' && <JellyCloud image="web" alt={c.web.alt} className={s.jelly} reset={resets.web} />}
+            {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} reset={resets.vps} />}
           </div>
         ))}
       </div>

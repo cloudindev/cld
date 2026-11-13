@@ -20,7 +20,7 @@
 .web { --bg: #e4f1f2; background-color: var(--bg); }
 .vps { --bg: #f1edea; background-color: var(--bg); }
 .card:focus-visible { outline: 3px solid var(--c-link); outline-offset: -3px; }
-.cardBody { position: relative; z-index: 1; max-width: 58%; }
+.cardBody { position: relative; max-width: 58%; } /* sin z-index: la pieza arrastrada pasa por encima del texto */
 .title {
   display: flex; align-items: baseline; gap: 6px;
   margin-bottom: 22px;

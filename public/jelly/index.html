@@ -23,7 +23,7 @@
       <img class="jelly-img" src="cloud.webp" alt="Nube de gominola azul translúcida">
     </div>
   </div>
-  <p class="hint">Pasa el ratón o toca la nube para animarla · haz clic para un rebote más fuerte</p>
+  <p class="hint">Pasa el ratón o toca la nube para animarla · arrástrala con el ratón · <a href="#" onclick="jelly.reset();return false">devolverla a su sitio</a></p>
   <script type="module">
     import { createJelly } from './jelly.js';
     window.jelly = createJelly(document.getElementById('cloud'));

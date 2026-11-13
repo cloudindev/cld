@@ -65,6 +65,10 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
     - **Ventana naranja (panel Hosting Web):** `web.webp` está recortada de la foto. Su sombra (`web-shadow.webp`) es la de la propia foto.
     - **Sombras:** se aplican en modo `multiply`.
     - **Animación:** por defecto las piezas están quietas. El bucle entra y sale suavemente al pasar el ratón; en táctil, al tocar, y sigue 2,5 s más. Con la pieza parada no se pide ningún frame. Se controla con `CONFIG.idle.trigger` (`'hover'` / `'always'`). Ningún elemento por encima de la sombra puede llevar `transform`, porque aislaría la mezcla y se vería un rectángulo blanco.
+    - **Arrastre (ratón y lápiz):** las piezas se pueden arrastrar dentro de su tarjeta, y el centro de la pieza no sale de ella. El cuerpo sigue al puntero con un muelle algo subamortiguado. La zona agarrada se estira hacia el puntero y adelgaza para conservar el volumen. El resto llega tarde por inercia, con un muelle secundario. Al soltar, rebota y conserva un poco de la velocidad. Se mueve con `left/top` en `.jelly-body`, nunca con `transform` (aislaría la sombra). En táctil no hay arrastre, para no bloquear el scroll.
+    - **Vuelta a su sitio:** al elegir una tarjeta, la pieza de la otra vuelve rebotando (`reset()` del motor, prop `reset` de `JellyCloud`). Arrastrar una pieza no selecciona su tarjeta.
+    - **Texto de la tarjeta:** ya no lleva `z-index`, para que la pieza arrastrada pase por encima del texto.
+    - **Parámetros del arrastre:** `CONFIG.drag`.
     - Se anima con WebGL sobre una malla de 48×32, con fallback de CSS transforms.
     - Respeta `prefers-reduced-motion` y se pausa fuera de pantalla.
     - Parámetros: objeto `CONFIG` al inicio de `jelly.js`.

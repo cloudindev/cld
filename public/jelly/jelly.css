@@ -2,15 +2,23 @@
 .jelly {
   position: relative;
   aspect-ratio: 900 / 654;          /* proporción del recorte cloud.webp */
-  touch-action: manipulation;
-  cursor: pointer;
+  pointer-events: none;             /* solo el cuerpo (que se puede arrastrar) recibe el puntero */
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
-.jelly > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-user-drag: none; }
+/* El cuerpo se mueve con left/top (nunca transform: aislaría la mezcla «multiply» de la sombra) */
+.jelly-body {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; /* tamaño fijo: left/top solo lo desplazan */
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: grab;
+}
+.jelly--grabbing .jelly-body { cursor: grabbing; }
+.jelly-body > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; -webkit-user-drag: none; }
 /* La sombra es una capa «multiply» (blanco = sin efecto): conserva el tono y el reflejo arcoíris
    de la foto sobre cualquier fondo claro. */
 .jelly-shadow { transform-origin: 50% 84%; mix-blend-mode: multiply; will-change: transform, opacity; }
 .jelly-canvas { position: absolute; pointer-events: none; width: auto; height: auto; }
 /* Con WebGL la <img> queda invisible (sigue dando tamaño y coordenadas del puntero) */
 .jelly--webgl .jelly-img { opacity: 0; }
+@media (hover: none) { .jelly-body { cursor: pointer; } }
