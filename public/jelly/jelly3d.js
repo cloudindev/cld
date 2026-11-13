@@ -33,8 +33,8 @@ export const CONFIG3D = {
     hz: 60,
     substeps: 10,
     gravity: 140,
-    edgeCompliance: 0.004,  // blandura de la gelatina (más alto = más blanda)
-    shapeMatch: 0.035,      // tirón por subpaso hacia su forma rígida mejor encajada: evita que se pliegue (0 = sin límite)
+    edgeCompliance: 0.006,  // blandura de la gelatina (más alto = más blanda)
+    shapeMatch: 0.016,      // tirón por subpaso hacia su forma rígida mejor encajada: evita que se pliegue (0 = sin límite)
     volumeCompliance: 0,    // 0 = incompresible
     damping: 2.2,           // amortiguación interna (1/s): más alto = menos temblor
     air: 0.15,              // rozamiento con el aire (1/s)
@@ -44,10 +44,10 @@ export const CONFIG3D = {
   },
   hover: { kick: 0.9, radius: 0.5 }, // golpecito al pasar el ratón por encima (un temblor)
   grab: {
-    radius: 0.7,            // tamaño del parche agarrado (grande: el tirón se reparte y no pellizca)
+    radius: 0.55,           // tamaño del parche agarrado (grande: el tirón se reparte y no pellizca)
     compliance: 2e-3,       // unión del parche al puntero (más alto = agarre más elástico; nunca rígido, para que no pellizque)
     maxHeight: 0.7,         // hasta dónde se puede levantar
-    maxStretch: 0.1,        // cuánto puede alejarse el punto agarrado del cuerpo (tope de la flexión)
+    maxStretch: 0.2,        // cuánto puede alejarse el punto agarrado del cuerpo (tope de la flexión)
     clickKick: 2.4,         // golpecito al hacer clic sin arrastrar
   },
   reset: { duration: 0.8 }, // vuelta a su sitio (s)
@@ -71,23 +71,23 @@ const SHAPES = {
       d = smin(d, sdCircle(x, z, 0.7, -0.02, 0.42), 0.2);
       return d;
     },
-    thickness: 0.5, bevel: 0.15, yaw: -14,
-    layers: [0.42, 0.55],
+    thickness: 0.54, bevel: 0.15, yaw: -14,
+    layers: [0.4, 0.52],
     materials: [
-      { sigma: [5.0, 1.1, 0.8], milk: 0.6, milkColor: [0.03, 0.42, 0.5] },   // base turquesa
-      { sigma: [0.3, 0.35, 0.5], milk: 14, milkColor: [0.97, 0.95, 0.9] },   // franja crema
-      { sigma: [1.8, 0.45, 0.06], milk: 0.6, milkColor: [0.6, 0.85, 0.98] },  // nube azul hielo (cristal)
+      { sigma: [14.0, 3.0, 2.0], milk: 0.9, milkColor: [0.04, 0.42, 0.5] },  // base turquesa
+      { sigma: [0.3, 0.35, 0.5], milk: 14, milkColor: [0.98, 0.96, 0.9] },   // franja crema (geometría interior)
+      { sigma: [3.2, 0.9, 0.08], milk: 0.5, milkColor: [0.5, 0.82, 1.0] },  // nube azul hielo (cristal)
     ],
     tint: [0.15, 0.5, 0.56],
   },
   web: {
     sdf(x, z) { return sdRoundBox(x, z, 0, 0, 1.0, 0.68, 0.22); },
-    thickness: 0.38, bevel: 0.12, yaw: -18,
-    layers: [0.26, 0.46],
+    thickness: 0.42, bevel: 0.12, yaw: -18,
+    layers: [0.36, 0.5],
     materials: [
-      { sigma: [0.5, 3.4, 4.2], milk: 0.4, milkColor: [0.8, 0.26, 0.14] },   // base naranja rojizo
-      { sigma: [0.3, 0.4, 0.6], milk: 14, milkColor: [0.98, 0.93, 0.84] },   // franja crema
-      { sigma: [0.04, 0.9, 1.3], milk: 0.5, milkColor: [1.0, 0.74, 0.58] },  // tapa melocotón (cristal)
+      { sigma: [1.2, 10.0, 14.0], milk: 0.7, milkColor: [0.8, 0.25, 0.12] }, // base naranja rojizo
+      { sigma: [0.3, 0.4, 0.6], milk: 14, milkColor: [0.99, 0.94, 0.85] },   // franja crema (geometría interior)
+      { sigma: [0.06, 1.5, 2.2], milk: 0.45, milkColor: [1.0, 0.68, 0.5] },  // tapa melocotón (cristal)
     ],
     tint: [0.9, 0.42, 0.3],
     // Adornos en relieve sobre la cara superior (z negativo = fondo de la pieza)
@@ -244,6 +244,32 @@ function buildModel(shape, cfg) {
     }
   }
 
+  // Franja crema: malla opaca interior entre las dos alturas de capa, metida dentro del bisel
+  const bv = [], bt = [];
+  {
+    const y0 = shape.layers[0] * T, y1 = shape.layers[1] * T, inset = r * 0.5;
+    const ring = ol.map(p => ({ x: p.x - p.nx * inset, z: p.z - p.nz * inset }));
+    // lados (vértices 0..2N-1)
+    for (const y of [y0, y1]) for (const q of ring) bv.push({ x: q.x, y, z: q.z, e: [0, 0, 0] });
+    for (let i = 0; i < N; i++) { const j = (i + 1) % N; bt.push(i, j, N + j, i, N + j, N + i); }
+    for (let t = 0; t < N * 6; t += 3) { // hacia fuera
+      const A = bv[bt[t]], B = bv[bt[t + 1]], C = bv[bt[t + 2]];
+      const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z, vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;
+      const nx = uy * vz - uz * vy, nz = ux * vy - uy * vx, i = bt[t] % N;
+      if (nx * ol[i].nx + nz * ol[i].nz < 0) { const tmp = bt[t + 1]; bt[t + 1] = bt[t + 2]; bt[t + 2] = tmp; }
+    }
+    // tapas con vértices propios (2N..4N-1), trianguladas sobre el anillo completo
+    for (const y of [y0, y1]) for (const q of ring) bv.push({ x: q.x, y, z: q.z, e: [0, 0, 0] });
+    const ct = earClip(ring.map(q => ({ x: q.x, z: q.z })));
+    for (let t = 0; t < ct.length; t += 3) bt.push(3 * N + ct[t], 3 * N + ct[t + 1], 3 * N + ct[t + 2], 2 * N + ct[t], 2 * N + ct[t + 2], 2 * N + ct[t + 1]);
+    for (let t = N * 6; t < bt.length; t += 3) { // tapa superior hacia arriba, inferior hacia abajo
+      const A = bv[bt[t]], B = bv[bt[t + 1]], C = bv[bt[t + 2]];
+      const ny = (B.z - A.z) * (C.x - A.x) - (B.x - A.x) * (C.z - A.z);
+      const up = bt[t] >= 3 * N;
+      if ((ny > 0) !== up) { const tmp = bt[t + 1]; bt[t + 1] = bt[t + 2]; bt[t + 2] = tmp; }
+    }
+  }
+
   // Retícula de tetraedros que cubre la silueta (dilatada para envolver toda la superficie)
   const h = cfg.physics.cell, ny = Math.max(2, Math.round(T / h)), hy = T / ny;
   const gx0 = -1 - h, gz0 = zMin - h;
@@ -302,6 +328,7 @@ function buildModel(shape, cfg) {
     particles: pos, tets: tetArr,
     surface: { n: verts.length, extra: new Float32Array(verts.flatMap(v => v.e)), index: new Uint32Array(tris), ...embed(verts) },
     deco: dv.length ? { n: dv.length, extra: new Float32Array(dv.flatMap(v => v.e)), index: new Uint32Array(dt), ...embed(dv) } : null,
+    band: { n: bv.length, extra: new Float32Array(bv.flatMap(v => v.e)), index: new Uint32Array(bt), ...embed(bv) },
   };
 }
 
@@ -458,7 +485,7 @@ const FS_JELLY = `#version 300 es
 precision highp float;
 in vec3 v_pos; in vec3 v_nrm; in vec3 v_x; in float v_vz;
 uniform sampler2D u_scene, u_back; uniform vec2 u_res; uniform vec3 u_cam; uniform mat4 u_view; uniform float u_far;
-uniform vec3 u_sig[3]; uniform vec3 u_milkC[3]; uniform float u_milk[3]; uniform vec2 u_layers; uniform vec3 u_L; uniform float u_T;
+uniform vec3 u_sig[3]; uniform vec3 u_milkC[3]; uniform float u_milk[3]; uniform vec2 u_layers; uniform vec3 u_L;
 out vec4 o;
 // Estudio: cielo claro, una caja de luz grande arriba a la izquierda (el reflejo ancho) y relleno a la derecha
 float box(vec3 r, vec3 c, float w, float h) {
@@ -470,10 +497,10 @@ float box(vec3 r, vec3 c, float w, float h) {
   return smoothstep(w, w * 0.6, abs(q.x)) * smoothstep(h, h * 0.6, abs(q.y));
 }
 vec3 env(vec3 r) {
-  vec3 c = vec3(0.16, 0.16, 0.17) + vec3(0.3, 0.3, 0.32) * smoothstep(-0.4, 0.9, r.y);
-  c += vec3(2.4) * box(r, normalize(vec3(-0.4, 0.85, 0.35)), 0.9, 0.35);   // caja de luz principal (reflejo ancho)
-  c += vec3(1.2) * box(r, normalize(vec3(0.75, 0.55, 0.4)), 0.35, 0.3);    // relleno a la derecha
-  c += vec3(1.7) * box(r, normalize(vec3(-0.1, 0.55, -0.85)), 0.9, 0.22);  // ventana tras la pieza: es la que refleja la tapa plana
+  vec3 c = vec3(0.32, 0.32, 0.34) + vec3(0.5, 0.5, 0.52) * smoothstep(-0.4, 0.9, r.y);
+  c += vec3(3.2) * box(r, normalize(vec3(-0.4, 0.85, 0.35)), 0.9, 0.35);   // caja de luz principal (reflejo ancho)
+  c += vec3(1.6) * box(r, normalize(vec3(0.75, 0.55, 0.4)), 0.35, 0.3);    // relleno a la derecha
+  c += vec3(2.4) * box(r, normalize(vec3(-0.1, 0.55, -0.85)), 0.9, 0.22);  // ventana tras la pieza: es la que refleja la tapa plana
   return c;
 }
 void main() {
@@ -489,21 +516,20 @@ void main() {
   vec3 mc = mix(mix(u_milkC[0], u_milkC[1], la), u_milkC[2], lb);
   float mk = mix(mix(u_milk[0], u_milk[1], la), u_milk[2], lb);
   vec3 nV = mat3(u_view) * N;
-  vec3 bg = texture(u_scene, clamp(uv - nV.xy * (0.03 + t * 0.06), 0.001, 0.999)).rgb;
-  // Tapa superior: capa de cristal fina sobre la franja crema (lo que se ve debajo es la franja, no el suelo)
-  float topFace = lb * smoothstep(0.25, 0.75, N.y);
-  float tTop = (1.0 - u_layers.y) * u_T / max(NdV, 0.3);
-  t = mix(t, min(t, tTop), topFace);
-  bg = mix(bg, u_milkC[1], topFace * 0.7);
+  // lo que hay detrás (suelo con sombra y la franja crema interior), refractado según el grosor; a lineal
+  vec3 bg = pow(texture(u_scene, clamp(uv - nV.xy * (0.035 + t * 0.05), 0.001, 0.999)).rgb, vec3(2.2));
+  mc = pow(mc, vec3(2.2));
   float m = 1.0 - exp(-mk * t);
   vec3 col = bg * exp(-sig * t) * (1.0 - m) + mc * m;
   float dif = clamp(dot(N, u_L) * 0.5 + 0.5, 0.0, 1.0);
-  col *= 0.92 + 0.22 * dif;
-  col += mc * exp(-t * 7.0) * 0.2 * (1.0 - NdV);    // brillo a contraluz en bordes finos
+  col *= 0.9 + 0.3 * dif;
+  // luz que entra por los bordes finos y biselados (brillo de borde, como en la foto)
+  float rim = pow(1.0 - NdV, 2.5) * smoothstep(u_layers.x * 0.5, u_layers.y, v_x.x);
+  col += (mc * 0.6 + 0.4) * rim * (0.18 + 0.35 * exp(-t * 4.0));
   vec3 R = reflect(-V, N);
-  float F = 0.06 + 0.94 * pow(1.0 - NdV, 5.0);
+  float F = 0.05 + 0.95 * pow(1.0 - NdV, 5.0);
   col = col * (1.0 - F) + env(R) * F;
-  col *= 1.0 - 0.22 * (1.0 - smoothstep(0.0, 0.3, v_x.x));   // la base queda en sombra junto al suelo
+  col *= 1.0 - 0.25 * (1.0 - smoothstep(0.0, 0.3, v_x.x));   // la base queda en sombra junto al suelo
   vec3 H = normalize(u_L + V);
   float NdH = max(dot(N, H), 0.0), NdL = max(dot(N, u_L), 0.0);
   float a2 = 0.0016, dd = NdH * NdH * (a2 - 1.0) + 1.0;
@@ -514,7 +540,22 @@ void main() {
   vec3 H2 = normalize(normalize(vec3(0.8, 0.45, 0.4)) + V);
   float nh2 = max(dot(N, H2), 0.0), dd2 = nh2 * nh2 * (0.004 - 1.0) + 1.0;
   col += vec3(0.5) * min(0.004 / (3.14159 * dd2 * dd2) * 0.04, 2.0);
-  o = vec4(col, 1.0);
+  o = vec4(pow(max(col, 0.0), vec3(1.0 / 2.2)), 1.0);
+}`;
+
+// Franja crema interior: opaca, mate con un poco de brillo (va dentro de la escena que refracta el cristal)
+const FS_BAND = `#version 300 es
+precision highp float;
+in vec3 v_pos; in vec3 v_nrm;
+uniform vec3 u_cam, u_L, u_color; out vec4 o;
+void main() {
+  vec3 N = normalize(v_nrm), V = normalize(u_cam - v_pos);
+  vec3 base = pow(u_color, vec3(2.2));
+  float dif = clamp(dot(N, u_L), 0.0, 1.0);
+  vec3 col = base * (0.55 + 0.5 * dif);
+  vec3 H = normalize(u_L + V); float nh = max(dot(N, H), 0.0), dd = nh * nh * (0.05 - 1.0) + 1.0;
+  col += vec3(0.25) * min(0.05 / (3.14159 * dd * dd) * 0.1, 1.0);
+  o = vec4(pow(col, vec3(1.0 / 2.2)), 1.0);
 }`;
 
 // Adornos opacos (crema / puntos de color) con brillo
@@ -525,12 +566,12 @@ uniform vec3 u_cam, u_L; out vec4 o;
 void main() {
   vec3 N = normalize(v_nrm), V = normalize(u_cam - v_pos);
   float NdV = clamp(dot(N, V), 0.0, 1.0);
-  vec3 col = v_x * (0.7 + 0.4 * clamp(dot(N, u_L), 0.0, 1.0));
+  vec3 col = pow(v_x, vec3(2.2)) * (0.55 + 0.5 * clamp(dot(N, u_L), 0.0, 1.0));
   float F = 0.05 + 0.95 * pow(1.0 - NdV, 5.0);
   col = mix(col, vec3(1.0), F * 0.7);
   vec3 H = normalize(u_L + V); float nh = max(dot(N, H), 0.0), dd = nh * nh * (0.006 - 1.0) + 1.0;
   col += vec3(0.8) * min(0.006 / (3.14159 * dd * dd) * 0.08, 1.5);
-  o = vec4(col, 1.0);
+  o = vec4(pow(col, vec3(1.0 / 2.2)), 1.0);
 }`;
 
 /* =========================================================================
@@ -549,7 +590,7 @@ export function createJelly3D(root, opts = {}) {
 
   const progs = {
     back: program(gl, VS, FS_BACK), height: program(gl, VS_HEIGHT, FS_HEIGHT),
-    floor: program(gl, VS, FS_FLOOR), jelly: program(gl, VS, FS_JELLY), deco: program(gl, VS, FS_DECO),
+    floor: program(gl, VS, FS_FLOOR), jelly: program(gl, VS, FS_JELLY), deco: program(gl, VS, FS_DECO), band: program(gl, VS, FS_BAND),
   };
   if (Object.values(progs).some(p => !p)) return null;
 
@@ -579,7 +620,8 @@ export function createJelly3D(root, opts = {}) {
   const restLen = new Float32Array(ne);
   for (let e = 0; e < ne; e++) restLen[e] = dist(x, edges[e * 2], edges[e * 2 + 1]);
 
-  const surf = model.surface, deco = model.deco;
+  const surf = model.surface, deco = model.deco, band = model.band;
+  const bPos = new Float32Array(band.n * 3), bNrm = new Float32Array(band.n * 3);
   const sPos = new Float32Array(surf.n * 3), sNrm = new Float32Array(surf.n * 3);
   const dPos = deco ? new Float32Array(deco.n * 3) : null, dNrm = deco ? new Float32Array(deco.n * 3) : null;
 
@@ -747,7 +789,7 @@ export function createJelly3D(root, opts = {}) {
       gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrmArr);
     } };
   };
-  const gSurf = mkMesh(surf, sPos, sNrm), gDeco = deco ? mkMesh(deco, dPos, dNrm) : null;
+  const gSurf = mkMesh(surf, sPos, sNrm), gDeco = deco ? mkMesh(deco, dPos, dNrm) : null, gBand = mkMesh(band, bPos, bNrm);
   const floorVao = gl.createVertexArray(); gl.bindVertexArray(floorVao);
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-30, 0, -30, 30, 0, -30, -30, 0, 30, 30, 0, 30]), gl.STATIC_DRAW);
@@ -757,7 +799,7 @@ export function createJelly3D(root, opts = {}) {
 
   const HS = 512;
   const heightT = tex(gl, HS, HS, true), heightFB = fbo(gl, heightT, null);
-  let sceneT, sceneFB, backT, backDepth, backFB, W = 1, H = 1;
+  let sceneT, sceneFB, sceneDepth, backT, backDepth, backFB, W = 1, H = 1;
 
   /* ----- Cámara: la pieza en reposo ocupa el sitio y el tamaño del elemento `root` ----- */
   let view, proj, viewProj, invVP, cam, far;
@@ -769,10 +811,9 @@ export function createJelly3D(root, opts = {}) {
     if (w !== W || hh !== H) {
       W = w; H = hh; canvas.width = W; canvas.height = H;
       [sceneT, backT].forEach(t => t && gl.deleteTexture(t));
-      sceneT = tex(gl, W, H); sceneFB = fbo(gl, sceneT, null);
-      backT = tex(gl, W, H); backDepth = gl.createRenderbuffer();
-      gl.bindRenderbuffer(gl.RENDERBUFFER, backDepth); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT24, W, H);
-      backFB = fbo(gl, backT, backDepth);
+      const rb = () => { const d = gl.createRenderbuffer(); gl.bindRenderbuffer(gl.RENDERBUFFER, d); gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT24, W, H); return d; };
+      sceneT = tex(gl, W, H); sceneDepth = rb(); sceneFB = fbo(gl, sceneT, sceneDepth);
+      backT = tex(gl, W, H); backDepth = rb(); backFB = fbo(gl, backT, backDepth);
     }
     const fov = cfg.camera.fov * DEG, el = cfg.camera.elevation * DEG;
     // ancho en pantalla de la pieza en reposo
@@ -822,6 +863,7 @@ export function createJelly3D(root, opts = {}) {
   let bg = bgColor();
   function draw() {
     skin(surf, sPos, sNrm); gSurf.upload();
+    skin(band, bPos, bNrm); gBand.upload();
     if (deco) { skin(deco, dPos, dNrm); gDeco.upload(); }
     let cxs = 0, czs = 0; for (let i = 0; i < np; i++) { cxs += x[i * 3]; czs += x[i * 3 + 2]; } cxs /= np; czs /= np;
     const S = 2.6;
@@ -848,7 +890,11 @@ export function createJelly3D(root, opts = {}) {
       gl.bindVertexArray(floorVao); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
     gl.bindFramebuffer(gl.FRAMEBUFFER, sceneFB); gl.viewport(0, 0, W, H);
+    gl.clearDepth(1); gl.clear(gl.DEPTH_BUFFER_BIT);
     floorU(0);
+    gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LESS); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
+    const pb = progs.band; gl.useProgram(pb); setCam(pb); gl.uniform3fv(U(pb, 'u_L'), L); gl.uniform3fv(U(pb, 'u_color'), shape.materials[1].milkColor);
+    gl.bindVertexArray(gBand.vao); gl.drawElements(gl.TRIANGLES, gBand.count, gl.UNSIGNED_INT, 0);
 
     // 3 · caras traseras → grosor
     gl.bindFramebuffer(gl.FRAMEBUFFER, backFB); gl.viewport(0, 0, W, H);
@@ -856,6 +902,8 @@ export function createJelly3D(root, opts = {}) {
     gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LESS); gl.enable(gl.CULL_FACE); gl.cullFace(gl.FRONT);
     gl.useProgram(progs.back); setCam(progs.back); gl.uniform1f(U(progs.back, 'u_far'), far);
     gl.bindVertexArray(gSurf.vao); gl.drawElements(gl.TRIANGLES, gSurf.count, gl.UNSIGNED_INT, 0);
+    gl.cullFace(gl.BACK);
+    gl.bindVertexArray(gBand.vao); gl.drawElements(gl.TRIANGLES, gBand.count, gl.UNSIGNED_INT, 0);
 
     // 4 · pantalla: sombra, gelatina y adornos
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, W, H);
@@ -872,7 +920,7 @@ export function createJelly3D(root, opts = {}) {
     gl.uniform3fv(U(pj, 'u_sig'), shape.materials.flatMap(m => m.sigma));
     gl.uniform3fv(U(pj, 'u_milkC'), shape.materials.flatMap(m => m.milkColor));
     gl.uniform1fv(U(pj, 'u_milk'), shape.materials.map(m => m.milk));
-    gl.uniform2f(U(pj, 'u_layers'), shape.layers[0], shape.layers[1]); gl.uniform1f(U(pj, 'u_T'), model.T);
+    gl.uniform2f(U(pj, 'u_layers'), shape.layers[0], shape.layers[1]);
     gl.bindVertexArray(gSurf.vao); gl.drawElements(gl.TRIANGLES, gSurf.count, gl.UNSIGNED_INT, 0);
     if (gDeco) {
       const pd = progs.deco; gl.useProgram(pd); setCam(pd); gl.uniform3fv(U(pd, 'u_L'), L);
