@@ -50,3 +50,15 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
 ## Cambios pedidos por el cliente (desviaciones del original)
 
 31. **Menú principal:** «Hosting» pasa a ser el primer ítem y tiene un desplegable. A la izquierda: Hosting Web (→ `/hosting/`), Hosting VPS y Hosting GPU. A la derecha, sin iconos y con subtítulo: Hosting node.js for apps, Hosting Wordpress y Hosting Woocommerce. Todos menos Hosting Web apuntan a `#` porque esas páginas no existen, y los subtítulos son provisionales. Ambas cosas se cambian en `hostingMenu` (`content/global.ts`). Por este cambio el header ya no coincide al píxel con el original.
+32. **Botón «Únete» → «Iniciar sesión»** (`/iniciar-sesion/`). La pantalla de acceso es solo la vista. El envío llama a `submitLogin()` (`lib/submitLogin.ts`, TODO) porque WHMCS no admite un login desde otro dominio sin backend. Opciones: un endpoint propio con `ValidateLogin` + `CreateSsoToken`, o el OAuth de WHMCS. «¿Has olvidado tu contraseña?», «Crea tu cuenta» y «Abre un ticket» enlazan al panel. La página es `noindex`.
+33. **Home: selector Hosting Web / Hosting VPS** bajo el buscador de dominios, con los planes de WHMCS debajo.
+    - **Origen de los datos:** los planes salen de la acción `GetProducts` de la API de WHMCS (`lib/whmcs.ts`) y se consultan **solo durante `npm run build`**. Las credenciales están en `.env.local` y no llegan al navegador.
+    - **Actualización:** los precios se refrescan en cada build.
+    - **IDs de producto:** están en `PLAN_IDS`.
+    - **Pendiente en WHMCS:** dar a la credencial API el permiso `GetProducts` (y, si se usa lista blanca de IPs, añadir la del servidor de build). Hasta entonces se muestra el aviso con el enlace al carrito del panel.
+    - **Textos provisionales:** el subtítulo de VPS y su imagen de fondo.
+34. **Nube de gominola** (`public/jelly/`). Es la foto recortada (`cloud.webp`) y una capa de sombra aparte (`shadow.webp`).
+    - Se anima con WebGL sobre una malla de 48×32, con fallback de CSS transforms.
+    - Respeta `prefers-reduced-motion` y se pausa fuera de pantalla.
+    - Parámetros: objeto `CONFIG` al inicio de `jelly.js`.
+    - Demo independiente en `/jelly/` (68 KB en total).

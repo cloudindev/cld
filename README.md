@@ -114,6 +114,16 @@ Las capturas de la réplica se hacen en las mismas condiciones que las del origi
 - scroll completo para disparar lazy-load y animaciones;
 - captura a página completa recortada al ancho del viewport.
 
+## Variables de entorno
+
+Copia `.env.example` a `.env.local` y rellena las credenciales de la API de WHMCS. Solo se usan en `npm run build`, para cargar los planes de la home; nunca llegan al navegador. Sin ellas, el build funciona igual y la sección muestra un aviso con el enlace al panel.
+
+Los precios se actualizan al volver a compilar. Para refrescarlos solos, programa un build periódico, por ejemplo diario, en el CI o en el hosting.
+
+## Nube «jelly»
+
+`public/jelly/` contiene la nube animada (WebGL + fallback CSS) y una demo independiente en `/jelly/`. Los parámetros de la animación están en el objeto `CONFIG` al inicio de `jelly.js`.
+
 ## Formularios
 
 Los formularios mantienen sus campos, nombres, obligatorios y validación. El envío llama a `submitContact()` en `lib/submitContact.ts`, que está marcado con `TODO`. Ahí hay que conectar el backend que se elija; no se ha inventado ninguno. reCAPTCHA se muestra como un marcador del mismo tamaño.
