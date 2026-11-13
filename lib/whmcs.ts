@@ -60,6 +60,7 @@ function toPlan(p: WhmcsProduct): Plan {
   const lines = htmlToLines(p.description ?? '');
   const specs: Plan['specs'] = [], features: string[] = [];
   for (const l of lines) {
+    if (/^características:?$/i.test(l)) continue; // encabezado, no es una característica
     const m = /^([^:]{1,30}):\s*(.+)$/.exec(l);
     if (m) specs.push({ label: m[1]!.trim(), value: m[2]!.trim() }); else features.push(l);
   }

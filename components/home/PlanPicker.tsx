@@ -47,16 +47,15 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
             aria-controls="pp-panel"
             tabIndex={sel === o.key ? 0 : -1}
             className={`${s.card} ${s[o.key]} ${sel === o.key ? s.active : ''}`}
-            style={'bg' in o ? { backgroundImage: `url(${o.bg})` } : undefined}
             onClick={() => choose(o.key)}
             onKeyDown={e => onKey(e, i)}
           >
             <div className={s.cardBody}>
-              <h2 className={s.title}>{o.title}</h2>
+              <h2 className={s.title}><span className={s.eyebrow}>{o.eyebrow}</span> {o.title}</h2>
               <p className={s.text}>{o.text}</p>
               <span className={`btn-sm ${s.btn}`} onClick={e => { e.stopPropagation(); choose(o.key, true); }}>{o.button}</span>
             </div>
-            {o.key === 'web' && <JellyCloud alt={c.cloud.alt} className={s.jelly} />}
+            {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} />}
           </div>
         ))}
       </div>

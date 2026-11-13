@@ -55,9 +55,11 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
     - **Origen de los datos:** los planes salen de la acción `GetProducts` de la API de WHMCS (`lib/whmcs.ts`) y se consultan **solo durante `npm run build`**. Las credenciales están en `.env.local` y no llegan al navegador.
     - **Actualización:** los precios se refrescan en cada build.
     - **IDs de producto:** están en `PLAN_IDS`.
-    - **Pendiente en WHMCS:** dar a la credencial API el permiso `GetProducts` (y, si se usa lista blanca de IPs, añadir la del servidor de build). Hasta entonces se muestra el aviso con el enlace al carrito del panel.
-    - **Textos provisionales:** el subtítulo de VPS y su imagen de fondo.
-34. **Nube de gominola** (`public/jelly/`). Es la foto recortada (`cloud.webp`) y una capa de sombra aparte (`shadow.webp`).
+    - **Permiso en WHMCS:** la credencial API tiene el permiso `GetProducts`. Si falla, se muestra un aviso con el enlace al carrito del panel.
+    - **Características de los planes:** salen de la descripción de cada producto en WHMCS. Las líneas «Etiqueta: valor» se muestran como tabla y el resto como lista. CVPS 1 y CVPS 2 no tienen descripción.
+    - **Diseño:** paneles a todo el ancho según la maqueta del cliente. La nube va en el panel de VPS y la pestaña activa se marca con una barra inferior.
+    - **Texto provisional:** el subtítulo de VPS.
+34. **Nube de gominola** (`public/jelly/`). Es la foto recortada (`cloud.webp`, segunda imagen del cliente) y una capa de sombra aparte (`shadow.webp`). La sombra se aplica en modo `multiply` para conservar el reflejo arcoíris. Ningún elemento por encima de la sombra puede llevar `transform`, porque aislaría la mezcla y se vería un rectángulo blanco.
     - Se anima con WebGL sobre una malla de 48×32, con fallback de CSS transforms.
     - Respeta `prefers-reduced-motion` y se pausa fuera de pantalla.
     - Parámetros: objeto `CONFIG` al inicio de `jelly.js`.

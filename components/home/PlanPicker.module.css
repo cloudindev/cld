@@ -1,36 +1,40 @@
 /* Selector Hosting Web / VPS + planes · tarjetas pastel con el lenguaje visual de las tarjetas de la home */
-.section { max-width: var(--container-boxed); margin-inline: auto; padding: 20px 0 40px; }
+.section { padding: 20px 0 40px; }
 
-/* ---------- Tarjetas selector ---------- */
-.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* ---------- Paneles selector: a todo el ancho, pegados y sin redondeo (maqueta) ---------- */
+.cards { display: grid; grid-template-columns: 1fr 1fr; }
 .card {
   position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: space-between;
-  min-height: 300px;
-  padding: 20px 30px 20px 40px;
-  border-radius: 12px;
-  outline: 2px solid transparent; outline-offset: -2px;
-  background-repeat: no-repeat; background-size: cover; background-position: right center;
+  display: flex; align-items: center;
+  min-height: 326px;
+  padding: 40px 64px;
   cursor: pointer;
-  transition: outline-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
-.web { background-color: #dcefef; }
-.vps { background-color: var(--bg-card-hosting); }
-.card:hover { transform: translateY(-2px); }
-.active { outline-color: #111; box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.35); }
-.card:focus-visible { outline: 3px solid var(--c-link); }
-.cardBody { position: relative; z-index: 1; flex: 0 0 auto; max-width: 52%; }
+.web { background-color: #e4f1f2; }
+.vps { background-color: #f1edea; }
+/* pestaña activa: barra inferior */
+.card::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+  background: #111; transform: scaleX(0); transform-origin: left; transition: transform 0.45s var(--ease-out-expo);
+}
+.active::after { transform: none; }
+.card:focus-visible { outline: 3px solid var(--c-link); outline-offset: -3px; }
+.cardBody { position: relative; z-index: 1; max-width: 55%; }
 .title {
-  font: 700 64px/0.95 var(--font-oswald); letter-spacing: -2px; color: var(--c-text-3f3e3e);
-  margin-bottom: 14px;
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 26px;
+  font: 700 62px/1 var(--font-oswald); letter-spacing: -1.5px; color: var(--c-text-3f3e3e);
 }
+.eyebrow { font-size: 38px; letter-spacing: -1px; }
 .web .title { color: var(--c-navy); }
-.text { margin-bottom: 24px; font: 400 15px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text); }
+.text { margin-bottom: 26px; font: 400 15px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text); }
 .btn { cursor: pointer; }
-.jelly { flex: 0 0 auto; width: 46%; margin-right: -10px; }
+/* La nube de VPS se sale por la derecha (recortada por el panel) */
+/* Sin transform: un transform aislaría la capa «multiply» de la sombra y se vería un rectángulo blanco */
+.jelly { --jw: 470px; position: absolute; top: 50%; right: -150px; width: var(--jw); margin-top: calc(var(--jw) * -548 / 900 / 2); }
 
 /* ---------- Planes ---------- */
-.panel { padding-top: 50px; scroll-margin-top: 90px; }
+.panel { max-width: var(--container-boxed); margin-inline: auto; padding-top: 50px; scroll-margin-top: 90px; }
 .toggle {
   display: flex; width: max-content; margin: 0 auto;
   padding: 5px; border: 1px solid #e3e3e3; border-radius: 40px; background: #fff;
@@ -63,8 +67,8 @@
 .na { margin-bottom: 24px; font: 400 14px/1.5 var(--font-poppins); color: #777; }
 .specs { margin-bottom: 22px; }
 .specs > div { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #ececec; }
-.specs dt { font: 400 12px/1.4 var(--ff-space-grotesk), sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: #777; }
-.specs dd { font: 500 15px/1.4 var(--ff-space-grotesk), sans-serif; color: #1a1a1a; text-align: right; }
+.specs dt { flex: 0 1 45%; font: 400 12px/1.4 var(--ff-space-grotesk), sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: #777; }
+.specs dd { flex: 1 0 auto; max-width: 60%; font: 500 15px/1.4 var(--ff-space-grotesk), sans-serif; color: #1a1a1a; text-align: right; }
 .features { margin-bottom: 26px; }
 .features li { position: relative; padding: 5px 0 5px 26px; font: 400 15px/1.45 var(--font-poppins); color: #333; }
 .features li::before {
@@ -83,21 +87,22 @@
 .error a { color: var(--c-link); text-decoration: underline; }
 
 @media (max-width: 1199px) {
-  .section { padding: 20px 20px 40px; max-width: var(--container-boxed-tablet); }
-  .title { font-size: 52px; }
+  .panel { max-width: none; padding-inline: 20px; }
+  .card { padding: 36px 40px; min-height: 300px; }
+  .title { font-size: 52px; } .eyebrow { font-size: 32px; }
+  .jelly { --jw: 380px; right: -140px; }
 }
 @media (max-width: 900px) {
   .cards { grid-template-columns: 1fr; }
+  .card { min-height: 260px; }
+  .jelly { --jw: 360px; right: -90px; }
 }
 @media (max-width: 767px) {
-  .section { padding: 15px 10px 30px; }
-  .card { min-height: 0; padding: 26px 16px 22px 22px; }
-  .title { font-size: 42px; letter-spacing: -1px; }
-  .cardBody { max-width: 56%; }
-  .jelly { width: 48%; }
+  .section { padding: 15px 0 30px; }
+  .panel { padding-inline: 10px; }
+  .card { min-height: 230px; padding: 28px 22px; }
+  .cardBody { max-width: 62%; }
+  .title { font-size: 44px; letter-spacing: -1px; } .eyebrow { font-size: 27px; }
+  .jelly { --jw: 250px; right: -95px; }
   .toggle button { padding: 10px 18px; }
-}
-@media (max-width: 600px) {
-  .vps { background-image: none !important; } /* la imagen tapaba el texto en móvil */
-  .cardBody { max-width: 60%; }
 }

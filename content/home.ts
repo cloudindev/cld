@@ -215,11 +215,11 @@ export const family = [
 ];
 
 /* ---------- Selector Hosting Web / VPS + planes (añadido; no existe en el original) ---------- */
-// TODO: subtítulo de VPS e imagen de su tarjeta provisionales, pendientes de confirmar.
+// TODO: subtítulo de VPS provisional, pendiente de confirmar.
 export const planPicker = {
   options: [
-    { key: 'web', title: 'HOSTING WEB', text: 'Alojamiento web rápido y fiable', button: 'ver planes' },
-    { key: 'vps', title: 'HOSTING VPS', text: 'Servidores virtuales con recursos dedicados', button: 'ver planes', bg: '/wp-content/uploads/2024/12/hosting-y-dominios.jpg' },
+    { key: 'web', eyebrow: 'HOSTING', title: 'WEB', text: 'Alojamiento web rápido y fiable', button: 'ver planes' },
+    { key: 'vps', eyebrow: 'HOSTING', title: 'VPS', text: 'Servidores virtuales con recursos dedicados', button: 'ver planes' },
   ],
   cloud: { alt: 'Nube de gominola azul translúcida' },
   cycles: { monthly: 'Mensual', annually: 'Anual' },
