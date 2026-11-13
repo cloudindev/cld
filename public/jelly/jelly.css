@@ -1,7 +1,7 @@
 /* jelly.css · capas de la nube de gominola (compartido por la demo y la home) */
 .jelly {
   position: relative;
-  aspect-ratio: 900 / 548;          /* proporción del recorte cloud.webp */
+  aspect-ratio: 900 / 654;          /* proporción del recorte cloud.webp */
   touch-action: manipulation;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;

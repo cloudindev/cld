@@ -222,6 +222,7 @@ export const planPicker = {
     { key: 'vps', eyebrow: 'HOSTING', title: 'VPS', text: 'Servidores virtuales con recursos dedicados', button: 'ver planes' },
   ],
   cloud: { alt: 'Nube de gominola azul translúcida' },
+  web: { alt: 'Ventana de navegador de gominola naranja translúcida' },
   cycles: { monthly: 'Mensual', annually: 'Anual' },
   perMonth: '/ mes',
   perYear: '/ año',

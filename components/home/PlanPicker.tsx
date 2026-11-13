@@ -55,6 +55,7 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
               <p className={s.text}>{o.text}</p>
               <span className={`btn-sm ${s.btn}`} onClick={e => { e.stopPropagation(); choose(o.key, true); }}>{o.button}</span>
             </div>
+            {o.key === 'web' && <JellyCloud image="web" alt={c.web.alt} className={s.jelly} />}
             {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} />}
           </div>
         ))}

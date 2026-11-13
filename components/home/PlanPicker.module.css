@@ -29,9 +29,10 @@
 .web .title { color: var(--c-navy); }
 .text { margin-bottom: 26px; font: 400 15px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-text); }
 .btn { cursor: pointer; }
-/* La nube de VPS se sale por la derecha (recortada por el panel) */
+/* Las piezas se salen por la derecha (recortadas por el panel). La nube es más alta: algo más pequeña */
 /* Sin transform: un transform aislaría la capa «multiply» de la sombra y se vería un rectángulo blanco */
-.jelly { --jw: 470px; position: absolute; top: 50%; right: -150px; width: var(--jw); margin-top: calc(var(--jw) * -548 / 900 / 2); }
+.jelly { --jw: 470px; position: absolute; top: 50%; right: -150px; width: var(--jw); margin-top: calc(var(--jw) * var(--jr, 0.61) / -2); }
+.vps .jelly { --jw: 420px; right: -110px; }
 
 /* ---------- Planes ---------- */
 .panel { max-width: var(--container-boxed); margin-inline: auto; padding-top: 50px; scroll-margin-top: 90px; }
@@ -91,11 +92,12 @@
   .card { padding: 36px 40px; min-height: 300px; }
   .title { font-size: 52px; } .eyebrow { font-size: 32px; }
   .jelly { --jw: 380px; right: -140px; }
+  .vps .jelly { --jw: 350px; right: -110px; }
 }
 @media (max-width: 900px) {
   .cards { grid-template-columns: 1fr; }
   .card { min-height: 260px; }
-  .jelly { --jw: 360px; right: -90px; }
+  .jelly, .vps .jelly { --jw: 360px; right: -90px; }
 }
 @media (max-width: 767px) {
   .section { padding: 15px 0 30px; }
@@ -103,6 +105,6 @@
   .card { min-height: 230px; padding: 28px 22px; }
   .cardBody { max-width: 62%; }
   .title { font-size: 44px; letter-spacing: -1px; } .eyebrow { font-size: 27px; }
-  .jelly { --jw: 250px; right: -95px; }
+  .jelly, .vps .jelly { --jw: 250px; right: -95px; }
   .toggle button { padding: 10px 18px; }
 }
