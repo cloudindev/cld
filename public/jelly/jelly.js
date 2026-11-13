@@ -6,7 +6,7 @@
  *
  * Marcado esperado dentro del contenedor:
  *   <div class="jelly">
- *     <img class="jelly-shadow" src="shadow.webp" alt="">
+ *     <img class="jelly-shadow" src="shadow.webp" alt="">   (opcional)
  *     <img class="jelly-img" src="cloud.webp" alt="…">
  *   </div>
  * Uso: import { createJelly } from './jelly.js'; const j = createJelly(el); … j.destroy();
@@ -19,6 +19,9 @@
 export const CONFIG = {
   loop: 4,                 // duración del bucle en reposo (s). Todo lo idle es periódico en este valor.
   idle: {
+    trigger: 'hover',      // 'hover' = quieto hasta que pasa el ratón / se toca; 'always' = bucle continuo
+    fade: 0.35,            // segundos que tarda el bucle en entrar / apagarse (sin saltos)
+    touchHold: 2.5,        // en táctil, segundos que sigue animado tras tocar
     float: 0.045,          // amplitud de la flotación vertical
     squash: 0.035,         // squash & stretch: aplasta abajo, estira arriba (desfasado = inercia)
     squashLag: 0.7,        // retraso (rad) del squash respecto a la flotación
@@ -121,22 +124,24 @@ export function createJelly(root, overrides = {}) {
   const squash = spring();   // squash global (idle se suma aparte)
   const poke = spring();     // intensidad de la abolladura
   const pokePos = { x: 0, y: 0.5, tx: 0, ty: 0.5 };
-  let raf = 0, last = 0, visible = true, destroyed = false, paused = false;
+  const act = { x: cfg.idle.trigger === 'always' ? 1 : 0, target: cfg.idle.trigger === 'always' ? 1 : 0 }; // intensidad del bucle (0-1)
+  let raf = 0, last = 0, visible = true, destroyed = false, paused = false, touchTimer = 0;
   let renderer = null;
 
   /* ----- Estado en cada instante: idle (periódico) + muelles ----- */
-  function sample(t) {
+  // a = intensidad del bucle en reposo (0 = quieto); los muelles de la interacción no dependen de ella
+  function sample(t, a = act.x) {
     const ph = ((t * cfg.speed) % cfg.loop) / cfg.loop * TAU; // fase del bucle
     const i = cfg.idle;
     const up = Math.sin(ph);                                     // -1 abajo … 1 arriba
     return {
       ph,
-      up,
-      float: i.float * up,
+      lift: a * (up + 1) / 2,                                    // 0 en reposo/abajo … 1 arriba (para la sombra)
+      float: a * i.float * up,
       // aplasta al llegar abajo, estira al subir (con retraso) + armónico 2 para el temblor
-      squash: -i.squash * Math.sin(ph - i.squashLag) + i.squash * 0.35 * Math.sin(2 * ph + 1.1) + squash.x * 0.06,
-      sway: i.sway * Math.sin(2 * ph + 0.6) + squash.v * 0.0015,
-      ripple: i.ripple,
+      squash: a * (-i.squash * Math.sin(ph - i.squashLag) + i.squash * 0.35 * Math.sin(2 * ph + 1.1)) + squash.x * 0.06,
+      sway: a * i.sway * Math.sin(2 * ph + 0.6) + squash.v * 0.0015,
+      ripple: a * i.ripple,
       pokeAmt: Math.max(0, poke.x) * cfg.hover.depth,
     };
   }
@@ -144,7 +149,7 @@ export function createJelly(root, overrides = {}) {
   /* ----- Sombra: se encoge y aclara al subir; se ensancha al aplastarse ----- */
   function drawShadow(st) {
     if (!shadow) return;
-    const k = (st.up + 1) / 2; // 0 abajo, 1 arriba
+    const k = st.lift; // 0 abajo / en reposo, 1 arriba
     const sc = 1 - (1 - cfg.shadow.minScale) * k;
     const op = 1 - (1 - cfg.shadow.minOpacity) * k;
     shadow.style.transform = `scale(${(sc * (1 + st.squash * 0.6)).toFixed(4)}, ${sc.toFixed(4)})`;
@@ -164,6 +169,8 @@ export function createJelly(root, overrides = {}) {
       stepSpring(squash, h, cfg.spring.stiffness, cfg.spring.damping);
       stepSpring(poke, h, cfg.spring.stiffness, cfg.spring.damping);
     }
+    act.x += (act.target - act.x) * (1 - Math.exp(-dt / cfg.idle.fade));
+    if (Math.abs(act.x - act.target) < 0.002) act.x = act.target;
     const f = 1 - Math.exp(-cfg.hover.follow * dt);
     pokePos.x += (pokePos.tx - pokePos.x) * f;
     pokePos.y += (pokePos.ty - pokePos.y) * f;
@@ -172,7 +179,9 @@ export function createJelly(root, overrides = {}) {
     if (reduce.matches) { st.float = 0; st.squash = 0; st.sway = 0; st.ripple = 0; st.pokeAmt = 0; }
     renderer.draw(st, pokePos);
     drawShadow(st);
-    if (!reduce.matches && visible) raf = requestAnimationFrame(frame);
+    // sin bucle activo y con los muelles en reposo no se pide otro frame (0 % CPU parado)
+    const moving = act.x > 0 || act.target > 0 || Math.abs(squash.x) + Math.abs(squash.v) + Math.abs(poke.x) + Math.abs(poke.v) > 1e-4 || poke.target > 0;
+    if (!reduce.matches && visible && moving) raf = requestAnimationFrame(frame);
   }
   const start = () => { if (!raf && !destroyed && !paused) { last = 0; raf = requestAnimationFrame(frame); } };
 
@@ -186,14 +195,21 @@ export function createJelly(root, overrides = {}) {
   function onEnter(e) {
     if (reduce.matches) return;
     const p = toImage(e); pokePos.x = pokePos.tx = p.x; pokePos.y = pokePos.ty = p.y;
-    poke.target = 1; squash.v += cfg.hover.enterKick * 10; start();
+    poke.target = 1; act.target = 1; squash.v += cfg.hover.enterKick * 10; start();
   }
-  function onLeave() { poke.target = 0; }
+  function onLeave(e) {
+    if (e && e.pointerType === 'touch') return; // en táctil se apaga con el temporizador
+    poke.target = 0; if (cfg.idle.trigger !== 'always') act.target = 0;
+  }
   function onDown(e) {
     if (reduce.matches) return;
     onMove(e);
     squash.v += cfg.click.kick * 10; poke.v += cfg.click.poke; start();
-    if (e.pointerType !== 'mouse') { poke.target = 1; setTimeout(() => { poke.target = 0; }, 350); } // toque
+    if (e.pointerType === 'touch') { // toque: abolladura breve y bucle activo unos segundos
+      poke.target = 1; act.target = 1; setTimeout(() => { poke.target = 0; }, 350);
+      clearTimeout(touchTimer);
+      touchTimer = setTimeout(() => { if (cfg.idle.trigger !== 'always') act.target = 0; start(); }, cfg.idle.touchHold * 1000);
+    }
   }
   root.addEventListener('pointerenter', onEnter);
   root.addEventListener('pointermove', onMove);
@@ -207,7 +223,7 @@ export function createJelly(root, overrides = {}) {
   reduce.addEventListener('change', onReduce);
 
   function ready() {
-    renderer = createWebGL(root, img, cfg) || createCss(img, cfg);
+    renderer = createWebGL(root, img, cfg, start) || createCss(img, cfg);
     root.classList.add(renderer.kind === 'webgl' ? 'jelly--webgl' : 'jelly--css');
     start();
   }
@@ -219,9 +235,9 @@ export function createJelly(root, overrides = {}) {
     pause() { paused = true; cancelAnimationFrame(raf); raf = 0; },
     play() { paused = false; start(); },
     /** Dibuja un instante concreto del bucle (para pruebas): t en segundos. */
-    render(t) { const st = sample(t); renderer.draw(st, pokePos); drawShadow(st); },
+    render(t) { const st = sample(t, 1); renderer.draw(st, pokePos); drawShadow(st); },
     destroy() {
-      destroyed = true; cancelAnimationFrame(raf); io.disconnect();
+      destroyed = true; cancelAnimationFrame(raf); clearTimeout(touchTimer); io.disconnect();
       reduce.removeEventListener('change', onReduce);
       root.removeEventListener('pointerenter', onEnter); root.removeEventListener('pointermove', onMove);
       root.removeEventListener('pointerleave', onLeave); root.removeEventListener('pointerdown', onDown);
@@ -233,7 +249,7 @@ export function createJelly(root, overrides = {}) {
 /* =========================================================================
  * Render WebGL: imagen como textura sobre una malla de cols × rows
  * ========================================================================= */
-function createWebGL(root, img, cfg) {
+function createWebGL(root, img, cfg, redraw) {
   const canvas = document.createElement('canvas');
   canvas.className = 'jelly-canvas';
   canvas.setAttribute('aria-hidden', 'true');
@@ -290,7 +306,8 @@ function createWebGL(root, img, cfg) {
     const dpr = Math.min(window.devicePixelRatio || 1, cfg.maxDpr);
     const r = img.getBoundingClientRect();
     const w = Math.round(r.width * (1 + 2 * cfg.pad) * dpr), h = Math.round(r.height * (1 + 2 * cfg.pad) * dpr);
-    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); }
+    // cambiar el tamaño vacía el canvas: se pide un frame para repintarlo aunque la animación esté parada
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); redraw?.(); }
   };
   const ro = new ResizeObserver(fit);
   ro.observe(root);

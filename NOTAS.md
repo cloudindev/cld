@@ -57,12 +57,13 @@ Rarezas o mejoras posibles detectadas en el original. **Se replican tal cual** s
     - **IDs de producto:** están en `PLAN_IDS`.
     - **Permiso en WHMCS:** la credencial API tiene el permiso `GetProducts`. Si falla, se muestra un aviso con el enlace al carrito del panel.
     - **Características de los planes:** salen de la descripción de cada producto en WHMCS. Las líneas «Etiqueta: valor» se muestran como tabla y el resto como lista. CVPS 1 y CVPS 2 no tienen descripción.
-    - **Diseño:** paneles a todo el ancho según la maqueta del cliente. La nube va en el panel de VPS y la pestaña activa se marca con una barra inferior.
+    - **Diseño:** dos tarjetas con bordes redondeados (12 px, como las tarjetas de producto). La ventana naranja va en Hosting Web y la nube en VPS. La pestaña activa se marca con una barra inferior.
     - **Texto provisional:** el subtítulo de VPS.
 34. **Piezas de gominola** (`public/jelly/`; las imágenes fuente están en `assets/jelly/`).
-    - **Nube (panel VPS):** `cloud.webp` viene del PNG ya recortado del cliente. Su sombra de contacto (`shadow.webp`) se genera a partir de la silueta.
+    - **Nube (panel VPS):** `cloud.webp` viene del PNG ya recortado del cliente. No lleva sombra, a petición del cliente.
     - **Ventana naranja (panel Hosting Web):** `web.webp` está recortada de la foto. Su sombra (`web-shadow.webp`) es la de la propia foto.
-    - **Sombras:** se aplican en modo `multiply`. Ningún elemento por encima de la sombra puede llevar `transform`, porque aislaría la mezcla y se vería un rectángulo blanco.
+    - **Sombras:** se aplican en modo `multiply`.
+    - **Animación:** por defecto las piezas están quietas. El bucle entra y sale suavemente al pasar el ratón; en táctil, al tocar, y sigue 2,5 s más. Con la pieza parada no se pide ningún frame. Se controla con `CONFIG.idle.trigger` (`'hover'` / `'always'`). Ningún elemento por encima de la sombra puede llevar `transform`, porque aislaría la mezcla y se vería un rectángulo blanco.
     - Se anima con WebGL sobre una malla de 48×32, con fallback de CSS transforms.
     - Respeta `prefers-reduced-motion` y se pausa fuera de pantalla.
     - Parámetros: objeto `CONFIG` al inicio de `jelly.js`.

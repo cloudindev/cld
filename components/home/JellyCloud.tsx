@@ -7,11 +7,11 @@ import '@/public/jelly/jelly.css';
 type Jelly = { destroy(): void };
 const ENGINE = '/jelly/jelly.js';
 
-/** Imágenes disponibles en public/jelly (recorte con alfa + sombra «multiply» del mismo tamaño). */
-export const JELLY = {
-  cloud: { src: '/jelly/cloud.webp', shadow: '/jelly/shadow.webp', width: 900, height: 654 },
+/** Imágenes disponibles en public/jelly (recorte con alfa + sombra «multiply» opcional del mismo tamaño). */
+export const JELLY: Record<'cloud' | 'web', { src: string; shadow: string | null; width: number; height: number }> = {
+  cloud: { src: '/jelly/cloud.webp', shadow: null, width: 900, height: 654 }, // sin sombra (a petición del cliente)
   web: { src: '/jelly/web.webp', shadow: '/jelly/web-shadow.webp', width: 900, height: 513 },
-} as const;
+};
 
 export function JellyCloud({ alt, className, image = 'cloud' }: { alt: string; className?: string; image?: keyof typeof JELLY }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +28,7 @@ export function JellyCloud({ alt, className, image = 'cloud' }: { alt: string; c
   return (
     <div ref={ref} className={`jelly ${className ?? ''}`} style={style}>
       {/* eslint-disable-next-line @next/next/no-img-element -- la <img> es la textura WebGL: debe ser el archivo original, sin optimizar */}
-      <img className="jelly-shadow" src={im.shadow} alt="" width={im.width} height={im.height} />
+      {im.shadow && <img className="jelly-shadow" src={im.shadow} alt="" width={im.width} height={im.height} />}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="jelly-img" src={im.src} alt={alt} width={im.width} height={im.height} />
     </div>
