@@ -1,6 +1,7 @@
 import { buildMetadata, JsonLd } from '@/lib/seo';
 import { DomainSearch } from '@/components/home/DomainSearch';
 import { HostingPlans } from '@/components/home/HostingPlans';
+import { Mascot } from '@/components/home/Mascot';
 import { VideoHero } from '@/components/home/VideoHero';
 import { Hero } from '@/components/home/Hero';
 import { Think } from '@/components/home/Think';
@@ -21,6 +22,7 @@ export default function HomePage() {
       <DomainSearch />
       <VideoHero />
       <HostingPlans />
+      <Mascot />
       <Hero />
       <Think />
       <ProductCards />
