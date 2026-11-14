@@ -56,14 +56,17 @@ npm start            # sirve out/ en http://localhost:3000 (npx serve)
 ```
 app/                    Rutas (una carpeta por URL). layout.tsx = header, footer, fuentes y GA4
   page.tsx              Home (componentes escritos a mano)
+  academy/              Academy (Centro de Ayuda): portada, temas, guías y buscador
   <ruta>/page.tsx       Resto de páginas (generadas por tools/gen-routes.mjs)
 components/
   layout/               Header, Footer, indicador «scroll», revelado al hacer scroll
   home/                 Una sección por componente (hero, pestañas, carrusel, partners…)
+  academy/              Vistas de Academy (portada, tema, guía, búsqueda)
   generic/              Renderizador de páginas extraídas + interacciones (acordeón, pestañas, parallax…)
 content/
   global.ts             Textos y enlaces de header y footer
   home.ts               Textos de la home
+  academy/              Temas, guías (una por objeto) y datos de Academy
   pages/<slug>.json     Contenido literal de cada página (textos, enlaces, imágenes)
   seo.json              title, description, canonical, robots, OG y JSON-LD de cada URL
 styles/
@@ -132,6 +135,16 @@ El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si 
 ## Páginas de servicio
 
 `/paginas-web/` y `/seguridad/` comparten la plantilla `components/servicios/ServicePage.tsx` y su contenido está en `content/servicios.ts` (encabezado con la pieza 3D, ventajas, pasos, banda, preguntas frecuentes y llamada final). Para añadir otra página de servicio basta con otro objeto `ServicePage` y una ruta en `app/`. Detalles en NOTAS.md, punto 37.
+
+## Academy (Centro de Ayuda)
+
+`/academy/` es el Centro de Ayuda: portada con buscador, una página por tema, una por guía y la de resultados de búsqueda, que se calcula en el navegador. Todo el contenido está en `content/academy/`:
+
+- `categorias.ts`: los temas y el orden de «Lo más buscado» y «Las que más resuelven»;
+- `guias/<tema>.ts`: las guías, una por objeto, con bloques de párrafo, lista, tabla, pasos, pestañas, «Si algo falla», código y notas;
+- `datos.ts`: los datos que se repiten en las guías (servidores de correo, DNS, horario…).
+
+Para añadir una guía, escribe otro objeto en el fichero de su tema: la página, el buscador y el sitemap (`/academy-sitemap.xml`) se actualizan al compilar. El build falla si una guía enlaza a otra que no existe. Pruebas: `node tools/academy/interactions.mjs`. Detalles y datos pendientes en NOTAS.md, punto 38.
 
 ## Personaje asomado
 

@@ -1,0 +1,136 @@
+/* Academy (Centro de Ayuda): estilos comunes a todas sus páginas.
+   Colores y medidas tomados del diseño entregado por el cliente: Space Grotesk para el texto,
+   Oswald para los titulares grandes, azul marino #102036 y la raya de seis colores. */
+.academy {
+  --ac-navy: #102036;
+  --ac-muted: #4e5a65;
+  --ac-soft: #c8d5d9;        /* texto secundario sobre marino */
+  --ac-link: #324ace;
+  --ac-chip: #eff1f5;
+  --ac-mist: #e8f1f2;        /* panel de temas, pasos, «Sigue por aquí» */
+  --ac-sand: #efedea;        /* «¿No lo encuentras?», valoración */
+  --ac-mint: #b1d5cc;
+  --ac-rule: #e8ebef;
+  --ac-sans: var(--ff-space-grotesk), sans-serif;
+  --ac-display: var(--ff-oswald), sans-serif;
+  --ac-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* raya de colores (la del personaje también los usa) */
+  --l1: #6779eb; --l2: #68a4a1; --l3: #102036; --l4: #dda993; --l5: #c46e50; --l6: #b1d5cc;
+  --line-h: 6px; --line-grow: 1; --line-grow1: 1;
+  font-family: var(--ac-sans);
+  color: var(--ac-navy);
+  background: #fff;
+  padding-bottom: 0;
+}
+.academy :where(a) { color: inherit; }
+.wrap { width: min(var(--container-boxed), 100% - 40px); margin-inline: auto; }
+.eyebrow { display: block; font: 500 11px/1.3 var(--ac-sans); letter-spacing: 2.2px; text-transform: uppercase; color: var(--ac-muted); }
+
+/* ---------- Raya de colores ---------- */
+.line { display: flex; height: var(--line-h); }
+.line span { flex: 1 1 0; }
+.line span:nth-child(1) { background: var(--l1); }
+.line span:nth-child(2) { background: var(--l2); }
+.line span:nth-child(3) { background: var(--l3); }
+.line span:nth-child(4) { background: var(--l4); }
+.line span:nth-child(5) { background: var(--l5); }
+.line span:nth-child(6) { background: var(--l6); }
+.endLine { margin-top: 100px; }
+
+/* ---------- Buscador grande (portada y página de resultados) ---------- */
+.search {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; max-width: 705px; height: 62px; padding: 0 7px 0 20px;
+  border: 2px solid var(--ac-navy); border-radius: 12px; background: #fff;
+  transition: box-shadow 0.25s;
+}
+.search:focus-within { box-shadow: 0 0 0 4px rgba(103, 121, 235, 0.22); }
+.searchIcon { display: flex; flex: none; color: var(--ac-navy); }
+.search input, .pill input {
+  flex: 1; min-width: 0; height: 100%; padding: 0; border: 0; background: transparent; outline: 0; text-overflow: ellipsis;
+  font: 400 16px/1.2 var(--ac-sans); color: var(--ac-navy);
+}
+.search input::placeholder, .pill input::placeholder { color: #757b82; opacity: 1; }
+.search input::-webkit-search-cancel-button, .pill input::-webkit-search-cancel-button { cursor: pointer; }
+.searchBtn {
+  flex: none; height: 46px; padding: 0 25px; border: 0; border-radius: 8px;
+  background: #000; color: #fff; cursor: pointer;
+  font: 600 15px/1 var(--ac-sans);
+  transition: background 0.2s, transform 0.2s;
+}
+.searchBtn:hover { background: var(--ac-navy); }
+.searchBtn:active { transform: scale(0.97); }
+.searchBtn:focus-visible { outline: 2px solid var(--l1); outline-offset: 2px; }
+
+/* Buscador pequeño (barra superior de las páginas interiores) */
+.pill {
+  display: flex; align-items: center; gap: 10px;
+  flex: none; width: 360px; max-width: 100%; height: 40px; padding: 0 16px;
+  border-radius: 20px; background: var(--ac-chip);
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.pill input { font-size: 14px; }
+.pill .searchIcon { color: var(--ac-muted); }
+.pill:focus-within { background: #fff; box-shadow: inset 0 0 0 2px var(--ac-navy); }
+
+/* «Lo más buscado» */
+.popular { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 12px; }
+.popular ul { display: flex; flex-wrap: wrap; gap: 8px; }
+.popularLabel { font: 400 13px/1 var(--ac-sans); color: var(--ac-muted); }
+.chip {
+  display: inline-flex; align-items: center; height: 38px; padding: 0 16px;
+  border-radius: 999px; background: var(--ac-chip);
+  font: 600 13px/1 var(--ac-sans); color: #111;
+  transition: background 0.2s, color 0.2s;
+}
+.chip:hover, .chip:focus-visible { background: var(--ac-navy); color: #fff; }
+
+/* ---------- Barra superior: migas de pan + buscador ---------- */
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 26px 0 0; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; font: 400 13px/1.5 var(--ac-sans); color: var(--ac-muted); }
+.crumbs li + li::before { content: '/'; margin: 0 9px; color: var(--ac-muted); }
+.crumbs a { transition: color 0.2s; }
+.crumbs a:hover { color: var(--ac-link); }
+.crumbs [aria-current] { font-weight: 600; color: var(--ac-navy); }
+
+/* ---------- «¿No lo encuentras?» ---------- */
+.contact { margin-top: 100px; padding: 46px 44px 44px; border-radius: 24px; background: var(--ac-sand); }
+.contactTitle { font: 700 64px/0.95 var(--ac-display); text-transform: uppercase; letter-spacing: -0.5px; color: #3a3a3a; }
+.contactTitle small { font-size: 36px; letter-spacing: 0; }
+.contactText { margin-top: 10px; font: 400 15px/1.5 var(--ac-sans); color: var(--ac-muted); }
+.contactGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+.contactCard {
+  display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 170px; padding: 26px 26px 28px;
+  border-radius: 18px; background: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.contactCard:hover, .contactCard:focus-visible { transform: translateY(-3px); box-shadow: 0 18px 34px -24px rgba(16, 32, 54, 0.45); }
+.contactCard .eyebrow { font-size: 10px; letter-spacing: 1.8px; }
+.contactCard strong { display: block; margin-top: 4px; font: 600 21px/1.45 var(--ac-sans); color: var(--ac-navy); }
+.nowrap { white-space: nowrap; }
+.contactCard strong svg { display: inline; vertical-align: -1px; transition: transform 0.25s; }
+.contactCard:hover strong svg { transform: translateX(3px); }
+.contactCard > span:last-child { font: 400 13.5px/1.5 var(--ac-sans); color: var(--ac-muted); }
+.contactDark { background: var(--ac-navy); }
+.contactDark .eyebrow, .contactDark > span:last-child { color: var(--ac-soft); }
+.contactDark strong { color: #fff; }
+
+@media (max-width: 1023px) {
+  .contactGrid { grid-template-columns: 1fr; }
+  .contactCard { min-height: 0; }
+}
+@media (max-width: 767px) {
+  .wrap { width: calc(100% - 30px); }
+  .topbar { flex-direction: column; align-items: stretch; gap: 16px; padding-top: 18px; }
+  .pill { width: 100%; }
+  .search { height: 56px; padding-left: 16px; gap: 10px; }
+  .searchBtn { height: 42px; padding: 0 16px; }
+  .search input { font-size: 15px; }
+  .contact { margin-top: 70px; padding: 32px 20px 22px; border-radius: 20px; }
+  .contactTitle { font-size: 46px; }
+  .contactTitle small { font-size: 27px; }
+  .endLine { margin-top: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contactCard, .contactCard strong svg, .searchBtn { transition: none; }
+}

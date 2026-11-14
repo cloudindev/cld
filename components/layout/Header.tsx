@@ -3,13 +3,15 @@
 // Academy e «Iniciar sesión»; header fijo al hacer scroll y header móvil (<1200px) con menú desplegable.
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { academyLink, hostingMenu, logo, mainNav, topbar, uneteButton } from '@/content/global';
 import { ArrowRight, ChevronRight } from './icons';
 import { SplitText } from './SplitText';
 import s from './Header.module.css';
 
-// Flecha diagonal: Academy es otro sitio y se abre en una pestaña nueva
+// Flecha diagonal junto a Academy. Academy ya está dentro de la web (/academy/) y se abre en la misma pestaña,
+// pero el cliente pidió conservar la flecha del menú.
 function ExternalIcon() {
   return (
     <svg className={s.extIcon} viewBox="0 0 12 12" width="10" height="10" aria-hidden="true">
@@ -56,6 +58,7 @@ export function Header() {
   const [placeholder, setPlaceholder] = useState<number | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const [hostingOpen, setHostingOpen] = useState(false);
+  const inAcademy = usePathname()?.startsWith('/academy/') ?? false;
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -122,10 +125,10 @@ export function Header() {
                 ))}
               </ul>
               <div className={s.actions}>
-                <a href={academyLink.href} className={s.academy} target="_blank" rel="noopener">
+                <Link href={academyLink.href} className={s.academy} aria-current={inAcademy ? 'page' : undefined}>
                   {academyLink.label}
                   <ExternalIcon />
-                </a>
+                </Link>
                 <Link href={uneteButton.href} className={s.unete}>
                   <span>{uneteButton.label}</span>
                   <span className={s.uneteIcon}><ArrowRight /></span>
@@ -171,7 +174,7 @@ export function Header() {
               </li>
             ))}
             <li>
-              <a href={academyLink.href} target="_blank" rel="noopener" onClick={() => setOpen(false)}>{academyLink.label} <ExternalIcon /></a>
+              <Link href={academyLink.href} aria-current={inAcademy ? 'page' : undefined} onClick={() => setOpen(false)}>{academyLink.label} <ExternalIcon /></Link>
             </li>
             <li>
               <Link href={uneteButton.href} onClick={() => setOpen(false)}>{uneteButton.label}</Link>

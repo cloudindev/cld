@@ -21,7 +21,7 @@ const state = () => p.evaluate(() => {
 });
 const pos = async text => { const bb = await p.locator('header a:visible', { hasText: new RegExp('^' + text) }).first().boundingBox(); return { x: bb.x + bb.width / 2, y: bb.y + bb.height / 2, bb }; };
 const H = await pos('Hosting'), D = await pos('Dominios'), C = await pos('Páginas Web'), K = await pos('Seguridad');
-// estructura: ítems del menú y, a la derecha, Academy (enlace externo) e «Iniciar sesión»
+// estructura: ítems del menú y, a la derecha, Academy (/academy/, misma pestaña) e «Iniciar sesión»
 const nav = await p.evaluate(() => ({
   items: [...document.querySelectorAll('#primary-nav > li > a')].map(a => a.textContent.trim()),
   right: [...document.querySelectorAll('[class*="Header_actions"] a')].map(a => [a.textContent.trim(), a.getAttribute('href'), a.target || '']),

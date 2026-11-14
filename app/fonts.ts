@@ -56,7 +56,7 @@ export const lqdIcons = localFont({
 });
 
 
-// Space Grotesk: solo la usa la página 404 (capas RevSlider del original).
+// Space Grotesk: la usan la página 404 (capas RevSlider del original) y Academy (texto del Centro de Ayuda).
 export const spaceGrotesk = localFont({
   variable: '--ff-space-grotesk',
   display: 'swap',

@@ -8,7 +8,12 @@ import s from './Mascot.module.css';
 type Mascot = { destroy(): void };
 const ENGINE = '/mascota/mascota.js';
 
-export function Mascot() {
+type Props = {
+  align?: 'center' | 'right';   // 'right': asomado a la derecha (cabecera de Academy)
+  className?: string;           // tamaño, posición y colores de la raya los pone quien lo usa (variables CSS)
+};
+
+export function Mascot({ align = 'center', className = '' }: Props) {
   const section = useRef<HTMLElement>(null);
   const char = useRef<HTMLDivElement>(null);
   const [up, setUp] = useState(false);
@@ -31,7 +36,7 @@ export function Mascot() {
   }, []);
 
   return (
-    <section ref={section} className={`${s.section} ${up ? s.up : ''}`} aria-hidden="true">
+    <section ref={section} className={`${s.section} ${align === 'right' ? s.right : ''} ${up ? s.up : ''} ${className}`} aria-hidden="true">
       <div className={s.stage}>
         <div ref={char} className={s.char}>
           {/* eslint-disable-next-line @next/next/no-img-element -- la <img> es la textura WebGL: debe ser el archivo original */}

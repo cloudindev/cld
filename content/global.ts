@@ -22,8 +22,9 @@ export const mainNav: NavItem[] = [
   { label: 'Seguridad', href: '/seguridad/' },
 ];
 
-// Enlace a Cloudin Academy (antes, megamenú; el destino es el del botón «entra en Cloudin Academy»)
-export const academyLink = { label: 'Academy', href: 'https://cloudin.academy/' };
+// Enlace a Academy, a la derecha junto a «Iniciar sesión». Academy (Centro de Ayuda) ya está dentro de la web
+// (/academy/, ver NOTAS.md, punto 38); antes era un sitio aparte, cloudin.academy. Conserva la flecha del menú.
+export const academyLink = { label: 'Academy', href: '/academy/' };
 
 // Submenú Hosting. TODO: los href '#' no tienen página todavía; los subtítulos son provisionales.
 export const hostingMenu = {
@@ -58,7 +59,7 @@ export const footer = {
   topMenu: [
     { label: 'Soporte', href: 'https://panel.cloudin.pro/submitticket.php', external: true, rel: 'nofollow' },
     { label: 'Contacto', href: '/contacto', external: false, rel: undefined },
-    { label: 'Academy', href: 'https://cloudin.academy', external: true, rel: 'nofollow' },
+    { label: 'Academy', href: '/academy/', external: false, rel: undefined },
     { label: '|\u00a0\u00a0\u00a0\u00a0\u00a0Área de cliente', href: 'https://panel.cloudin.pro/index.php?rp=/login', external: true, rel: 'nofollow' },
   ],
   vat: 'Los precios no incluyen IVA',

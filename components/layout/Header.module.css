@@ -94,7 +94,7 @@
 .unete:hover svg, .unete:focus-visible svg { fill: #fff; }
 
 .actions { display: flex; align-items: center; gap: 30px; }
-/* Academy: enlace de texto como los del menú, con flecha de enlace externo */
+/* Academy: enlace de texto como los del menú, con la flecha diagonal (va a /academy/, en la misma pestaña) */
 .academy {
   display: inline-flex; align-items: center; gap: 6px;
   font: 600 16px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: #111;
