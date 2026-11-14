@@ -14,3 +14,4 @@ _inventory/pages
 _inventory/measure
 _inventory/interactions
 _inventory/jelly
+__pycache__
