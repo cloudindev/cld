@@ -47,7 +47,7 @@ export const hostingMenu = {
   mainTitle: 'Hosting',
   main: [
     { title: 'Hosting Web', href: '/hosting/', icon: '/wp-content/uploads/2020/10/hosting-wordpress.png' },
-    { title: 'Hosting VPS', href: '#', icon: '/wp-content/uploads/2020/10/alojamiento-web.png' },
+    { title: 'Hosting VPS', href: '#', icon: '/icons/servidores.png' }, // icono «Hosting web» de Academy sin la nube (ver NOTAS.md, punto 31)
     { title: 'Hosting GPU', href: '#', icon: undefined },
   ],
   specializedTitle: 'Casos de uso',
