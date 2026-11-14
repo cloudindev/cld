@@ -11,18 +11,25 @@ const ENGINE = '/mascota/mascota.js';
 type Props = {
   align?: 'center' | 'right';   // 'right': asomado a la derecha (cabecera de Academy)
   className?: string;           // tamaño, posición y colores de la raya los pone quien lo usa (variables CSS)
+  down?: boolean;               // se zambulle detrás de la raya (misiones de la home); al volver a false, sube otra vez
+  onUp?: () => void;            // la primera vez que se asoma
+  children?: React.ReactNode;   // capas encima del personaje (la burbuja de diálogo de las misiones)
 };
 
-export function Mascot({ align = 'center', className = '' }: Props) {
+export function Mascot({ align = 'center', className = '', down = false, onUp, children }: Props) {
   const section = useRef<HTMLElement>(null);
   const char = useRef<HTMLDivElement>(null);
   const [up, setUp] = useState(false);
+  const onUpRef = useRef(onUp);
+  onUpRef.current = onUp;
 
   // Se asoma (sube desde detrás de la raya) la primera vez que la sección entra en pantalla
   useEffect(() => {
     const el = section.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => { if (e?.isIntersecting) { setUp(true); io.disconnect(); } }, { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => {
+      if (e?.isIntersecting) { setUp(true); onUpRef.current?.(); io.disconnect(); }
+    }, { threshold: 0.35 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
@@ -36,7 +43,10 @@ export function Mascot({ align = 'center', className = '' }: Props) {
   }, []);
 
   return (
-    <section ref={section} className={`${s.section} ${align === 'right' ? s.right : ''} ${up ? s.up : ''} ${className}`} aria-hidden="true">
+    <section
+      ref={section} aria-hidden="true" data-state={!up ? 'hidden' : down ? 'down' : 'up'}
+      className={`${s.section} ${align === 'right' ? s.right : ''} ${up ? s.up : ''} ${down ? s.down : ''} ${className}`}
+    >
       <div className={s.stage}>
         <div ref={char} className={s.char}>
           {/* eslint-disable-next-line @next/next/no-img-element -- la <img> es la textura WebGL: debe ser el archivo original */}
@@ -46,6 +56,7 @@ export function Mascot({ align = 'center', className = '' }: Props) {
       <div className={s.line}>
         <span /><span /><span /><span /><span /><span />
       </div>
+      {children}
     </section>
   );
 }

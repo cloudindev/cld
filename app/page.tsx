@@ -1,9 +1,8 @@
 import { buildMetadata, JsonLd } from '@/lib/seo';
 import { DomainSearch } from '@/components/home/DomainSearch';
 import { HostingPlans } from '@/components/home/HostingPlans';
-import { Mascot } from '@/components/home/Mascot';
+import { Missions } from '@/components/home/Missions';
 import { VideoHero } from '@/components/home/VideoHero';
-import { Hero } from '@/components/home/Hero';
 import { Think } from '@/components/home/Think';
 import { ProductCards } from '@/components/home/ProductCards';
 import { Needs } from '@/components/home/Needs';
@@ -22,8 +21,8 @@ export default function HomePage() {
       <DomainSearch />
       <VideoHero />
       <HostingPlans />
-      <Mascot />
-      <Hero />
+      {/* personaje asomado sobre la raya + misiones de Cloudy (sustituye a «Digitaliza tu negocio», ver NOTAS.md, punto 39) */}
+      <Missions />
       <Think />
       <ProductCards />
       <Needs />

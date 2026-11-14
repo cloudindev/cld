@@ -16,6 +16,20 @@
   transition: transform 1s cubic-bezier(0.22, 1.3, 0.36, 1);
 }
 .up .char { transform: none; }
+/* Se zambulle detrás de la raya (misiones de la home): un saltito hacia arriba y abajo de golpe.
+   Al quitar .down vuelve a subir con el rebote de siempre. La raya se ondula al pasar el personaje. */
+.section.down .char {
+  transform: translateY(calc(var(--clip) + 40px));
+  transition: transform 0.62s cubic-bezier(0.6, -0.45, 0.74, 0.05);
+}
+.down .line span { animation: splash 0.75s cubic-bezier(0.3, 0.7, 0.4, 1) 0.36s both; }
+.down .line span:nth-child(2), .down .line span:nth-child(5) { animation-delay: 0.42s; }
+.down .line span:nth-child(1), .down .line span:nth-child(6) { animation-delay: 0.48s; }
+@keyframes splash {
+  0%, 100% { transform: none; }
+  30% { transform: translateY(5px) scaleY(1.6); }
+  60% { transform: translateY(-2px); }
+}
 /* Variante alineada a la derecha (Academy): --char-right fija la distancia al borde derecho */
 .right .char { left: auto; right: var(--char-right, 8%); margin-left: 0; }
 .char img {
@@ -37,6 +51,9 @@
 .line span:nth-child(6) { background: var(--l6, #9ad8cc); }
 
 @media (max-width: 1199px) { .section { --w: 260px; } }
-/* en móvil la sección siguiente (Hero) sube 20 px con margen negativo: se compensa para que no tape la raya */
-@media (max-width: 767px) { .section { --w: 210px; padding-top: 20px; margin-bottom: 20px; } }
-@media (prefers-reduced-motion: reduce) { .char { transform: none; transition: none; } }
+@media (max-width: 767px) { .section { --w: 210px; padding-top: 20px; } }
+@media (prefers-reduced-motion: reduce) {
+  .char { transform: none; transition: none; }
+  .section.down .char { transform: none; opacity: 0; transition: opacity 0.2s; }
+  .down .line span { animation: none; }
+}

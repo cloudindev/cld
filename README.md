@@ -148,7 +148,13 @@ Para añadir una guía, escribe otro objeto en el fichero de su tema: la página
 
 ## Personaje asomado
 
-`public/mascota/` contiene el personaje de la sección de la raya (entre los planes y «Digitaliza tu negocio»): `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`. Detalles en NOTAS.md, punto 36.
+`public/mascota/` contiene el personaje de la sección de la raya (entre los planes y las misiones de Cloudy): `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`. Detalles en NOTAS.md, punto 36.
+
+## Misiones de Cloudy (home)
+
+Debajo del personaje, «¿Qué hacemos hoy?»: tres tarjetas (Páginas web, Correo electrónico, Marketing). Al elegir una, Cloudy se zambulle detrás de la raya y la tarjeta se abre hasta mostrar su vídeo y dos planes. Componente en `components/home/Missions.tsx`; textos, colores, vídeos y planes en `content/misiones.ts` (**los planes son simulados**: hay que poner los reales).
+
+Los vídeos originales están en `assets/mascota/cloudy-*.mp4`; para la web se recodifican (sin audio, unos 300 KB) con su portada: `sh tools/mascota/videos.sh`. Pruebas: `node tools/mascota/misiones.mjs`. Detalles en NOTAS.md, punto 39.
 
 ### Recalibrar las piezas 3D contra las fotos
 
