@@ -44,7 +44,7 @@ function HostingPanel({ mobile = false, onNavigate }: { mobile?: boolean; onNavi
   return (
     <div className={mobile ? s.hostingMobile : s.hostingMenu}>
       <div className={s.hmMain}>
-        <h2 className={s.hmTitle}>{hostingMenu.mainTitle}</h2>
+        <h2 className={s.hmTitle}><span className={s.hmMark}>{hostingMenu.mainTitle}</span></h2>
         <ul>
           {hostingMenu.main.map(it => (
             <li key={it.title}>
