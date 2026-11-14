@@ -44,7 +44,6 @@
 
 .nav { display: flex; }
 .nav > li { position: relative; display: flex; flex-direction: column; }
-.nav > li.hasMega { position: static; }
 .nav > li > a {
   position: relative; z-index: 1;
   display: flex; align-items: center; height: 100%;
@@ -94,70 +93,25 @@
 .unete:hover, .unete:focus-visible { background: #000; color: #fff; box-shadow: var(--sh-btn-hover); transform: translateY(-2px); }
 .unete:hover svg, .unete:focus-visible svg { fill: #fff; }
 
+.actions { display: flex; align-items: center; gap: 30px; }
+/* Academy: enlace de texto como los del menú, con flecha de enlace externo */
+.academy {
+  display: inline-flex; align-items: center; gap: 6px;
+  font: 600 16px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: #111;
+  transition: opacity 0.3s;
+}
+.academy:hover, .academy:focus-visible { color: #111; opacity: 0.6; }
+.extIcon { flex: none; }
+
 .divider { height: 2px; }
 .divider > div { max-width: var(--container-boxed); height: 2px; margin-inline: auto; border-bottom: 1px solid #e5e5e5; }
 .spacer { height: 1px; background: #fff; }
-
-/* ---------- Megamenú Academy ---------- */
-.megamenu {
-  position: absolute; top: 84px; left: 420.67px; /* coordenadas del original a 1440 */
-  width: 600px;
-  padding-top: 20px;
-  background: #fff;
-  box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.07);
-  visibility: hidden; opacity: 0; transform: translateY(15px);
-  /* cerrado (y mientras se desvanece) no recoge el ratón: si no, al pasar por su zona se volvía a abrir */
-  pointer-events: none;
-  transition: opacity var(--t-megamenu) var(--ease-out-expo), transform var(--t-megamenu) var(--ease-out-expo), visibility 0s linear var(--t-megamenu);
-}
-/* puente invisible sobre el hueco de 10 px entre la barra y el panel, para poder bajar a él */
-.megamenu::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
-@media (min-width: 1200px) {
-  .megamenu { left: calc(50% - 299.33px); }
-}
-/* se abre al pasar el ratón (con 0,1 s de margen para que no parpadee al pasar de largo) o con el teclado;
-   tras un clic no se queda abierto aunque el enlace conserve el foco */
-.hasMega:hover .megamenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0.1s; }
-.hasMega:has(:focus-visible) .megamenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
-
-.mmTitle {
-  padding: 3px 30px 14px;
-  font: 500 15px/15.75px var(--font-poppins);
-  letter-spacing: -0.2px;
-  color: #000;
-}
-.mmRow { display: flex; padding: 0 30px; }
-.mmRowFirst { margin-bottom: 10px; }
-.mmRowLast { margin-bottom: 25px; }
-.mmBox { position: relative; display: flex; gap: 18px; width: 270px; padding: 10px; }
-.mmIcon { flex: none; width: 49px; height: 49px; margin-top: 8.53px; }
-.mmHeading { margin-bottom: 10.5px; font: 700 15px/15px var(--font-poppins); letter-spacing: 0.1px; color: var(--c-navy); padding-top: 0.66px; }
-.mmText { font: 400 14px/23.25px var(--font-poppins); letter-spacing: 0.1px; color: #4a4a4a; }
-.mmTextChivo { font: 400 15px/23.25px var(--font-chivo); letter-spacing: 0.1px; color: #4a4a4a; }
-.mmOverlay { position: absolute; inset: 0; z-index: 2; }
-.mmDivider { padding: 15px 30px 25px; }
-.mmDivider span { display: block; border-top: 1px solid rgba(0, 0, 0, 0.1); }
-.mmButton {
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 62.25px;
-  padding: 19.5px 40.5px;
-  background: #f7f9fc;
-  font: 400 15px/23.25px var(--font-poppins);
-  letter-spacing: 0.1px;
-  color: #393939;
-}
-.mmButton:hover { color: #393939; }
-.mmButtonIcon { display: flex; opacity: 0; transition: opacity 0.3s, transform 0.3s var(--ease-arrow); }
-.mmButtonIcon svg { width: 8px; height: 8px; fill: #393939; }
-.mmButton:hover .mmButtonIcon { opacity: 1; transform: translateX(6px); }
 
 /* ---------- Header fijo ---------- */
 .isStuck .desktop { position: fixed; top: 0; left: 0; right: 0; }
 .isStuck .topbar, .isStuck .divider, .isStuck .spacer { display: none; }
 .isStuck .bar { border-radius: 0; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); }
 .isStuck .barInner { height: 65px; }
-.isStuck .megamenu { top: 75px; }
 
 /* ---------- Móvil y tablet (<1200px) ---------- */
 @media (max-width: 1199px) {
@@ -206,9 +160,6 @@
   border-radius: 3px; background: rgba(0, 0, 0, 0.05);
   font-size: 18px; color: #000;
 }
-.academyMobile { padding: 10px 0 20px; }
-.academyMobile .mmRow { flex-direction: column; padding: 0 0 0 5px; }
-.academyMobile .mmBox { width: 100%; }
 
 /* ---------- Submenú Hosting (añadido; no existe en el original) ---------- */
 .hostingMenu {
@@ -219,7 +170,8 @@
   border-radius: 10px;
   box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.07);
   visibility: hidden; opacity: 0; transform: translateY(15px);
-  pointer-events: none;   /* cerrado (y mientras se desvanece) no recoge el ratón (ver .megamenu) */
+  /* cerrado (y mientras se desvanece) no recoge el ratón: si no, al pasar por su zona se volvía a abrir */
+  pointer-events: none;
   transition: opacity var(--t-megamenu) var(--ease-out-expo), transform var(--t-megamenu) var(--ease-out-expo), visibility 0s linear var(--t-megamenu);
 }
 .hasSub:hover .hostingMenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0.1s; }

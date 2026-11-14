@@ -1,4 +1,5 @@
-// Reproduce y comprueba cuándo se abren los desplegables del menú (Hosting y Academy) en escritorio.
+// Reproduce y comprueba cuándo se abre el desplegable de Hosting en escritorio, y la estructura del menú
+// (Academy es un enlace a la derecha, junto a «Iniciar sesión»; ya no tiene submenú).
 // Uso: node tools/header/menus.mjs [firefox]
 import { chromium, firefox } from 'playwright';
 const useFx = process.argv[2] === 'firefox';
@@ -16,10 +17,17 @@ const state = () => p.evaluate(() => {
     if (+cs.opacity > 0.5 && live) return 'ABIERTO';
     return live ? 'fantasma' : 'cerrándose';
   };
-  return { hosting: vis('[class*="Header_hostingMenu"]'), academy: vis('[class*="Header_megamenu"]') };
+  return { hosting: vis('[class*="Header_hostingMenu"]') };
 });
 const pos = async text => { const bb = await p.locator('header a:visible', { hasText: new RegExp('^' + text) }).first().boundingBox(); return { x: bb.x + bb.width / 2, y: bb.y + bb.height / 2, bb }; };
-const H = await pos('Hosting'), D = await pos('Dominios'), C = await pos('Páginas Web'), A = await pos('Academy'), K = await pos('Contacto');
+const H = await pos('Hosting'), D = await pos('Dominios'), C = await pos('Páginas Web'), K = await pos('Seguridad');
+// estructura: ítems del menú y, a la derecha, Academy (enlace externo) e «Iniciar sesión»
+const nav = await p.evaluate(() => ({
+  items: [...document.querySelectorAll('#primary-nav > li > a')].map(a => a.textContent.trim()),
+  right: [...document.querySelectorAll('[class*="Header_actions"] a')].map(a => [a.textContent.trim(), a.getAttribute('href'), a.target || '']),
+  submenusAcademy: document.querySelectorAll('[class*="megamenu"]').length,
+}));
+console.log('menú:', JSON.stringify(nav));
 const panel = await p.evaluate(() => { const el = document.querySelector('[class*="Header_hostingMenu"]'); const r = el.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
 console.log('panel Hosting (cerrado):', JSON.stringify(panel));
 const results = [];
@@ -46,29 +54,18 @@ await check('Hosting → bajar en 0,3 s a la página bajo «Páginas Web» (fuer
 await check('Barrer de derecha a izquierda 60 px por debajo del menú', async () => {
   await p.mouse.move(K.x, K.y + 60); await p.waitForTimeout(100);
   await p.mouse.move(200, K.y + 60, { steps: 25 }); await p.waitForTimeout(300);
-}, { hosting: 'cerrado', academy: 'cerrado' });
+}, { hosting: 'cerrado' });
 // 3) pasar el ratón de largo por encima de «Hosting» (bajando desde arriba hacia la página)
 await check('Pasar de largo sobre «Hosting» camino de la página', async () => {
   await p.mouse.move(H.x, 5); await p.waitForTimeout(100);
   await p.mouse.move(H.x, H.y + 400, { steps: 6 }); await p.waitForTimeout(120);
 }, { hosting: 'cerrado' });
-// 4) Academy → salir hacia abajo a la izquierda (zona del panel de Hosting)
-await check('Academy → salir hacia abajo a la izquierda', async () => {
-  await p.mouse.move(A.x, A.y, { steps: 3 }); await p.waitForTimeout(400);
-  await p.mouse.move(H.x, H.y + 150, { steps: 8 }); await p.waitForTimeout(250);
-}, { hosting: 'cerrado', academy: 'cerrado' });
 // 5) uso normal: abrir Hosting y bajar al panel hasta «Hosting GPU»: debe seguir abierto
 await check('Uso normal: Hosting → bajar dentro del panel', async () => {
   await p.mouse.move(H.x, H.y, { steps: 3 }); await p.waitForTimeout(400);
   const gpu = await p.locator('header a:visible', { hasText: /^Hosting GPU$/ }).first().boundingBox();
   await p.mouse.move(gpu.x + 20, gpu.y + gpu.height / 2, { steps: 8 }); await p.waitForTimeout(400);
 }, { hosting: 'ABIERTO' });
-// 6) uso normal: Academy → bajar al megamenú (hay un hueco de 10 px entre la barra y el panel)
-await check('Uso normal: Academy → bajar al megamenú', async () => {
-  await p.mouse.move(A.x, A.y, { steps: 3 }); await p.waitForTimeout(400);
-  const btn = await p.locator('header a:visible', { hasText: /entra en Cloudin Academy/ }).first().boundingBox();
-  await p.mouse.move(btn.x + btn.width / 2, btn.y + 10, { steps: 12 }); await p.waitForTimeout(400);
-}, { academy: 'ABIERTO' });
 // 7) clic en un enlace del panel (navegación sin recargar): luego ratón lejos → el panel no debe quedarse abierto
 await check('Clic en «Hosting Web» del panel y ratón fuera', async () => {
   await p.mouse.move(H.x, H.y, { steps: 3 }); await p.waitForTimeout(400);

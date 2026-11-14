@@ -10,38 +10,20 @@ export const topbar = {
 
 export const logo = { src: '/wp-content/uploads/2021/06/cloudin.png', alt: 'Cloudin', width: 120, height: 26 };
 
-export type NavItem = { label: string; href: string; badge?: string; megamenu?: boolean; submenu?: 'hosting' };
+export type NavItem = { label: string; href: string; badge?: string; submenu?: 'hosting' };
 
 // Menú principal (cambiado a petición del cliente; ver NOTAS.md, puntos 31 y 37): Hosting con desplegable,
-// Páginas Web y Seguridad son nuevas; Cloud y Casos de éxito se quitaron del menú (las secciones siguen existiendo).
+// Páginas Web y Seguridad son nuevas; Cloud, Casos de éxito y Contacto se quitaron del menú (las páginas y
+// secciones siguen existiendo). Academy ya no tiene submenú: es un enlace a la derecha, junto a «Iniciar sesión».
 export const mainNav: NavItem[] = [
   { label: 'Hosting', href: '/hosting/', submenu: 'hosting' },
   { label: 'Dominios', href: '/dominios/', badge: 'HOT' },
   { label: 'Páginas Web', href: '/paginas-web/' },
   { label: 'Seguridad', href: '/seguridad/' },
-  { label: 'Academy', href: '#', megamenu: true },
-  { label: 'Contacto', href: '/contacto/' },
 ];
 
-export const academyMenu = {
-  groups: [
-    {
-      title: 'Para empresas',
-      items: [
-        { title: 'Correo electrónico', text: 'Configuración, creación de cuentas y más.', icon: '/wp-content/uploads/2020/10/email-profesional-empresas.png', href: 'https://cloudin.academy/category/correo-electronico/', font: 'poppins' },
-        { title: 'Dominios', text: 'Empieza tu proyecto online con un dominio.', icon: '/wp-content/uploads/2020/10/comprar-dominio.png', href: 'https://cloudin.academy/category/dominios/', font: 'chivo' },
-      ],
-    },
-    {
-      title: 'Para desarrolladores',
-      items: [
-        { title: 'Hosting web', text: 'Gestionar tu alojamiento web como un pro.', icon: '/wp-content/uploads/2020/10/alojamiento-web.png', href: 'https://cloudin.academy/category/hosting/', font: 'poppins' },
-        { title: 'Wordpress', text: 'Tutoriales, manejo, trucos y más ...', icon: '/wp-content/uploads/2020/10/hosting-wordpress.png', href: 'https://cloudin.academy/category/wordpress/', font: 'poppins' },
-      ],
-    },
-  ],
-  button: { label: 'entra en Cloudin Academy', href: 'https://cloudin.academy/' },
-} as const;
+// Enlace a Cloudin Academy (antes, megamenú; el destino es el del botón «entra en Cloudin Academy»)
+export const academyLink = { label: 'Academy', href: 'https://cloudin.academy/' };
 
 // Submenú Hosting. TODO: los href '#' no tienen página todavía; los subtítulos son provisionales.
 export const hostingMenu = {
