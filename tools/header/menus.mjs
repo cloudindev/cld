@@ -19,7 +19,7 @@ const state = () => p.evaluate(() => {
   return { hosting: vis('[class*="Header_hostingMenu"]'), academy: vis('[class*="Header_megamenu"]') };
 });
 const pos = async text => { const bb = await p.locator('header a:visible', { hasText: new RegExp('^' + text) }).first().boundingBox(); return { x: bb.x + bb.width / 2, y: bb.y + bb.height / 2, bb }; };
-const H = await pos('Hosting'), D = await pos('Dominios'), C = await pos('Cloud'), A = await pos('Academy'), K = await pos('Contacto');
+const H = await pos('Hosting'), D = await pos('Dominios'), C = await pos('Páginas Web'), A = await pos('Academy'), K = await pos('Contacto');
 const panel = await p.evaluate(() => { const el = document.querySelector('[class*="Header_hostingMenu"]'); const r = el.getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
 console.log('panel Hosting (cerrado):', JSON.stringify(panel));
 const results = [];
@@ -37,7 +37,7 @@ const check = async (name, fn, expect) => {
   results.push([ok ? 'OK ' : 'MAL', name, JSON.stringify(st) + after]);
 };
 // 1) pasar por Hosting y bajar enseguida a la zona donde estaba el panel (debajo de Dominios / Cloud)
-await check('Hosting → bajar en 0,3 s a la página bajo «Cloud» (fuera del menú)', async () => {
+await check('Hosting → bajar en 0,3 s a la página bajo «Páginas Web» (fuera del menú)', async () => {
   await p.mouse.move(H.x, H.y, { steps: 3 }); await p.waitForTimeout(400);
   await p.mouse.move(C.x + 40, H.y + 60, { steps: 2 }); await p.waitForTimeout(80);
   await p.mouse.move(C.x + 60, H.y + 260, { steps: 6 }); await p.waitForTimeout(250);

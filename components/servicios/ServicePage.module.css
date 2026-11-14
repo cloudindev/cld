@@ -1,0 +1,118 @@
+/* Páginas de servicio · mismo lenguaje que las secciones nuevas de la home: tarjetas pastel redondeadas,
+   Oswald en los titulares, Poppins en el texto y el resaltado turquesa de «AHORA» */
+.page { max-width: var(--container-boxed); margin: 0 auto; padding: 30px 0 90px; }
+.web { background: #e4f1f2; }
+.vps { background: #f1edea; }
+
+/* ---------- Encabezado ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+  min-height: 470px; padding: 60px 64px;
+  border-radius: 12px;
+}
+.heroText { position: relative; max-width: 54%; }
+.eyebrow { margin-bottom: 18px; font: 500 13px/1 var(--ff-space-grotesk), sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #4d4d4d; }
+.title { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 26px; font: 700 68px/62px var(--font-oswald); letter-spacing: -1px; color: #020202; }
+.mark { display: inline-block; margin: 6px 0 0 -4px; padding: 0 6px 6px 4px; background: var(--bg-highlight-ahora); }
+.lead { max-width: 520px; margin-bottom: 32px; font: 400 17px/1.65 var(--font-poppins); color: #3d3d3d; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+.btn { padding: 16px 28px; }
+.more { display: inline-flex; align-items: center; gap: 6px; font: 500 15px/1.3 var(--font-poppins); color: var(--c-navy); }
+.more a { color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
+.more a:hover { color: var(--c-link); }
+/* Pieza 3D (la misma de la home, se puede arrastrar). Sin transform: ver NOTAS.md, punto 34 */
+.jelly { --jw: 420px; position: absolute; top: 50%; right: 5%; width: var(--jw); margin-top: calc(var(--jw) * var(--jr, 0.61) / -2); }
+.jelly_cloud { --jw: 380px; }
+
+/* ---------- Bloques ---------- */
+.intro { max-width: 860px; margin: 90px auto 0; text-align: center; }
+.introText { font: 400 18px/1.7 var(--font-poppins); color: #4d4d4d; }
+.section { margin-top: 90px; }
+.h2 { margin-bottom: 34px; font: 700 40px/1.1 var(--font-oswald); letter-spacing: -0.5px; text-transform: uppercase; color: #020202; }
+.intro .h2 { margin-bottom: 18px; }
+.h3 { margin-bottom: 10px; font: 600 19px/1.3 var(--font-poppins); color: var(--c-navy); }
+.text { font: 400 15px/1.65 var(--font-poppins); color: #4d4d4d; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.card {
+  padding: 30px 28px;
+  border: 1px solid #ececec; border-radius: 12px; background: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.card:hover { border-color: #dcdcdc; box-shadow: 0 20px 40px -28px rgba(0, 0, 0, 0.25); }
+.card .more { margin-top: 16px; }
+.icon { display: inline-grid; place-items: center; width: 52px; height: 52px; margin-bottom: 22px; border-radius: 14px; color: var(--c-navy); }
+.icon_web { background: #e4f1f2; }
+.icon_vps { background: #f1edea; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.step { padding-top: 22px; border-top: 2px solid var(--c-navy); }
+.step .more { margin-top: 14px; }
+.num { display: inline-block; margin-bottom: 16px; padding: 0 6px 3px 4px; background: var(--bg-highlight-ahora); font: 700 34px/1 var(--font-oswald); color: #020202; }
+
+.band {
+  display: flex; align-items: center; justify-content: space-between; gap: 30px;
+  margin-top: 90px; padding: 44px 56px;
+  border-radius: 12px; background: var(--c-navy); color: #fff;
+}
+.bandTitle { margin-bottom: 8px; font: 700 34px/1.1 var(--font-oswald); text-transform: uppercase; color: #fff; }
+.bandText { max-width: 660px; font: 400 16px/1.6 var(--font-poppins); color: rgba(255, 255, 255, 0.82); }
+.bandBtn {
+  flex: none; padding: 16px 28px; border-radius: 3px;
+  background: var(--bg-highlight-ahora); color: #020202;
+  font: 400 15px/15px var(--font-chivo); letter-spacing: 0.1px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.bandBtn:hover, .bandBtn:focus-visible { color: #020202; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25); }
+
+.faq { border-top: 1px solid #e6e6e6; }
+.qa { border-bottom: 1px solid #e6e6e6; }
+.q {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  padding: 24px 0; list-style: none; cursor: pointer;
+  font: 600 18px/1.4 var(--font-poppins); color: var(--c-navy);
+}
+.q::-webkit-details-marker { display: none; }
+.q::after { content: '+'; flex: none; font: 300 30px/1 var(--font-poppins); transition: transform 0.3s; }
+.qa[open] .q::after { transform: rotate(45deg); }
+.q:focus-visible { outline: 2px solid var(--c-link); outline-offset: 4px; }
+.a { max-width: 860px; padding: 0 0 26px; font: 400 16px/1.7 var(--font-poppins); color: #4d4d4d; }
+
+.cta { margin-top: 90px; padding: 72px 40px; border-radius: 12px; text-align: center; }
+.ctaTitle { margin-bottom: 14px; font: 700 46px/1.05 var(--font-oswald); text-transform: uppercase; color: #020202; }
+.ctaText { margin-bottom: 30px; font: 400 17px/1.6 var(--font-poppins); color: #3d3d3d; }
+.cta .actions { justify-content: center; }
+
+@media (max-width: 1199px) {
+  .page { padding: 20px 20px 80px; }
+  .hero { min-height: 420px; padding: 50px 40px; }
+  .title { font-size: 56px; line-height: 52px; }
+  .jelly { --jw: 340px; right: 3%; }
+  .jelly_cloud { --jw: 300px; }
+}
+@media (max-width: 900px) {
+  .hero { flex-direction: column; align-items: flex-start; min-height: 0; padding: 40px 32px 10px; }
+  .heroText { max-width: none; }
+  .jelly { position: relative; top: auto; right: auto; align-self: center; margin: 24px 0 20px; --jw: 320px; }
+  .jelly_cloud { --jw: 290px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
+}
+@media (max-width: 767px) {
+  .page { padding: 15px 10px 60px; }
+  .hero { padding: 32px 22px 6px; }
+  .title { font-size: 44px; line-height: 42px; }
+  .lead { font-size: 16px; }
+  .jelly { --jw: 270px; }
+  .jelly_cloud { --jw: 240px; }
+  .intro { margin-top: 60px; padding: 0 8px; }
+  .introText { font-size: 16px; }
+  .section, .band, .cta { margin-top: 60px; }
+  .h2 { margin-bottom: 24px; font-size: 30px; }
+  .grid, .steps { grid-template-columns: 1fr; }
+  .band { flex-direction: column; align-items: flex-start; padding: 34px 26px; }
+  .bandTitle { font-size: 28px; }
+  .cta { padding: 50px 22px; }
+  .ctaTitle { font-size: 34px; }
+}

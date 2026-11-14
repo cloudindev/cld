@@ -12,12 +12,13 @@ export const logo = { src: '/wp-content/uploads/2021/06/cloudin.png', alt: 'Clou
 
 export type NavItem = { label: string; href: string; badge?: string; megamenu?: boolean; submenu?: 'hosting' };
 
-// Hosting (desplegable añadido por el cliente; no existe en el original).
+// Menú principal (cambiado a petición del cliente; ver NOTAS.md, puntos 31 y 37): Hosting con desplegable,
+// Páginas Web y Seguridad son nuevas; Cloud y Casos de éxito se quitaron del menú (las secciones siguen existiendo).
 export const mainNav: NavItem[] = [
   { label: 'Hosting', href: '/hosting/', submenu: 'hosting' },
   { label: 'Dominios', href: '/dominios/', badge: 'HOT' },
-  { label: 'Cloud', href: '/cloud/' },
-  { label: 'Casos de éxito', href: '/#portfolio' },
+  { label: 'Páginas Web', href: '/paginas-web/' },
+  { label: 'Seguridad', href: '/seguridad/' },
   { label: 'Academy', href: '#', megamenu: true },
   { label: 'Contacto', href: '/contacto/' },
 ];

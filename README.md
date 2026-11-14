@@ -129,6 +129,10 @@ Los precios se actualizan al volver a compilar. Para refrescarlos solos, program
 
 El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Detalles en NOTAS.md, punto 34.
 
+## Páginas de servicio
+
+`/paginas-web/` y `/seguridad/` comparten la plantilla `components/servicios/ServicePage.tsx` y su contenido está en `content/servicios.ts` (encabezado con la pieza 3D, ventajas, pasos, banda, preguntas frecuentes y llamada final). Para añadir otra página de servicio basta con otro objeto `ServicePage` y una ruta en `app/`. Detalles en NOTAS.md, punto 37.
+
 ## Personaje asomado
 
 `public/mascota/` contiene el personaje de la sección de la raya (entre los planes y «Digitaliza tu negocio»): `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`. Detalles en NOTAS.md, punto 36.
