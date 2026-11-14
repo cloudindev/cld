@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Jelly 3D · comparación con la foto</title>
+  <meta name="robots" content="noindex">
+  <style>
+    html, body { margin: 0; background: #fff; font: 13px system-ui, sans-serif; }
+    #box { position: relative; overflow: hidden; }
+    #slot { position: absolute; }
+    #slot img { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+  </style>
+</head>
+<body>
+  <!-- ?shape=web|cloud  &bg=ffffff  &w=900 (ancho del hueco)  &photo=1 (muestra la foto en vez del 3D) -->
+  <div id="box"><div id="slot"><img id="ref" alt=""></div></div>
+  <script type="module">
+    import { createJelly3D } from './jelly3d.js';
+    const q = new URLSearchParams(location.search);
+    const shape = q.get('shape') || 'web', w = +(q.get('w') || 900), pad = +(q.get('pad') || 100);
+    const ar = shape === 'web' ? 513 / 900 : 654 / 900, h = Math.round(w * ar);
+    const box = document.getElementById('box'), slot = document.getElementById('slot'), ref = document.getElementById('ref');
+    box.style.cssText += `width:${w + 2 * pad}px;height:${h + 2 * pad}px;background:#${q.get('bg') || 'ffffff'}`;
+    slot.style.cssText += `left:${pad}px;top:${pad}px;width:${w}px;height:${h}px`;
+    ref.src = shape === 'web' ? 'web.webp' : 'cloud.webp';
+    if (q.get('photo')) ref.style.opacity = 1;
+    else window.piece = createJelly3D(slot, { shape });
+    window.slotRect = { x: pad, y: pad, width: w, height: h };
+  </script>
+</body>
+</html>

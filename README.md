@@ -124,10 +124,27 @@ Los precios se actualizan al volver a compilar. Para refrescarlos solos, program
 
 `public/jelly/` contiene dos motores sin dependencias:
 
-- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Se pueden arrastrar dentro de su tarjeta. Parámetros en `CONFIG3D`; formas y materiales en `SHAPES`. Demo en `/jelly/3d.html`.
+- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Están medidas y calibradas sobre las fotos de `assets/jelly/`: en reposo el render cae exactamente sobre la foto. Se pueden arrastrar dentro de su tarjeta. Parámetros en `CONFIG3D`; formas, materiales y luz en `SHAPES`. Demo en `/jelly/3d.html`.
 - **`jelly.js`** (WebGL1 + fallback CSS): animación 2D sobre las fotos recortadas. Se usa solo si no hay WebGL2. Parámetros en `CONFIG`. Demo en `/jelly/`.
 
 El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Detalles en NOTAS.md, punto 34.
+
+### Recalibrar las piezas 3D contra las fotos
+
+Las herramientas están en `tools/jelly/` (Python 3 con numpy y Pillow, y Playwright con Chrome). Con `out/` servido en `http://localhost:3000`:
+
+```bash
+python3 tools/jelly/fit_web.py        # pose, perspectiva y proporciones de la ventana → web_fit.json
+python3 tools/jelly/web_deco.py       # vista cenital de la cara superior: barras, puntos y ranura
+python3 tools/jelly/cloud_shape.py    # contorno en planta de la nube → cloud_outline.txt
+python3 tools/jelly/regions.py        # zonas de muestreo y color objetivo de cada material
+node tools/jelly/fit-materials.mjs web && node tools/jelly/fit-materials.mjs cloud
+python3 tools/jelly/bake.py           # vuelca los materiales en SHAPES (public/jelly/jelly3d.js)
+node tools/jelly/shot.mjs && python3 tools/jelly/compare.py   # lado a lado con la foto + coincidencia de siluetas
+node tools/jelly/interactions.mjs     # arrastre, vuelta a su sitio, móvil y Firefox en la home
+```
+
+Todo se escribe en `_inventory/jelly/` (no se versiona). La página `/jelly/test.html?shape=web|cloud` muestra la pieza en el hueco exacto de la foto.
 
 ## Formularios
 

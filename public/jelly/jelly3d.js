@@ -1,26 +1,31 @@
 /**
  * jelly3d.js · Piezas de gominola en 3D con física de sólido blando real (sin dependencias).
  *
+ * GEOMETRÍA · Cada pieza está medida sobre su foto de referencia (assets/jelly): contorno en planta,
+ * grosor, altura de cada capa, pose y perspectiva de la cámara, y posición de cada adorno. En reposo
+ * el render ocupa exactamente el sitio de la foto recortada (public/jelly/*.webp).
+ *
  * FÍSICA · El cuerpo es una malla volumétrica de tetraedros (retícula de celdas partidas en 6 tetraedros)
  * resuelta con XPBD a 60 Hz fijos y 10 subpasos:
  *   - restricción de distancia en cada arista (elasticidad, con «compliance» finita → blanda)
- *   - restricción de volumen en cada tetraedro (casi incompresible: al estirarla adelgaza, como la gelatina)
- *   - amortiguación solo de la velocidad relativa a lo largo de las aristas (cae y vuelca libremente,
- *     pero el temblor se apaga)
+ *   - restricción de volumen en cada tetraedro (casi incompresible: al estirarla adelgaza)
+ *   - «shape matching» suave hacia la forma rígida mejor encajada (no se pliega por mucho que se tire)
+ *   - amortiguación solo de la velocidad relativa a lo largo de las aristas
  *   - contacto con el suelo con rozamiento y paredes invisibles en los bordes de la tarjeta
- *   - agarre: unión blanda a un parche de partículas alrededor del punto pulsado
- * La superficie lisa y los adornos son mallas aparte: cada vértice va «cosido» a un tetraedro con
- * coordenadas baricéntricas, así se estiran y giran con la gelatina que los rodea.
+ *   - agarre: unión blanda a un parche de partículas alrededor del punto pulsado, con alcance limitado
+ * La superficie lisa, la franja interior y los adornos son mallas aparte: cada vértice va «cosido» a un
+ * tetraedro con coordenadas baricéntricas, así se estiran y giran con la gelatina que los rodea.
  *
- * RENDER (WebGL2) · Primero el suelo (fondo de la tarjeta + sombra) en una textura; luego las caras
- * traseras para medir cuánta gelatina atraviesa cada rayo; las caras delanteras refractan el fondo según
- * ese grosor, lo absorben con Beer–Lambert por capas, añaden dispersión lechosa, brillo en bordes finos,
- * reflejos Fresnel de un estudio procedural y brillos GGX. Sombra suave teñida + oclusión de contacto
- * a partir de un mapa de alturas visto desde arriba.
+ * RENDER (WebGL2, luz en espacio lineal) · 1) suelo + franja crema interior en una textura (lo que se ve
+ * a través del cristal); 2) caras traseras y franja para medir cuánta gelatina atraviesa cada rayo;
+ * 3) caras delanteras: refracción según ese grosor, absorción Beer–Lambert y dispersión por capas,
+ * motas y vetas de luz, reflejos Fresnel de una carpa de luz con cajas y brillos especulares;
+ * 4) calcas (sombras de los relieves, ranura) y adornos esmaltados. Sombra suave en el suelo a partir de
+ * un mapa de alturas visto desde arriba.
  *
  * Uso: const j = createJelly3D(el, { shape: 'cloud' | 'web' }); → null si no hay WebGL2.
  *      j.reset() la devuelve a su sitio · j.destroy()
- * `el` marca el sitio y el tamaño de la pieza en reposo; el lienzo cubre su contenedor posicionado
+ * `el` es el hueco de la foto (mismo tamaño y proporción); el lienzo cubre su contenedor posicionado
  * (la tarjeta), que es el «suelo» por el que se puede mover.
  */
 
@@ -45,141 +50,150 @@ export const CONFIG3D = {
   hover: { kick: 0.9, radius: 0.5 }, // golpecito al pasar el ratón por encima (un temblor)
   grab: {
     radius: 0.55,           // tamaño del parche agarrado (grande: el tirón se reparte y no pellizca)
-    compliance: 2e-3,       // unión del parche al puntero (más alto = agarre más elástico; nunca rígido, para que no pellizque)
+    compliance: 2e-3,       // unión del parche al puntero (nunca rígido, para que no pellizque)
     maxHeight: 0.7,         // hasta dónde se puede levantar
     maxStretch: 0.2,        // cuánto puede alejarse el punto agarrado del cuerpo (tope de la flexión)
     clickKick: 2.4,         // golpecito al hacer clic sin arrastrar
   },
   reset: { duration: 0.8 }, // vuelta a su sitio (s)
-  camera: { fov: 15, elevation: 37, fill: 0.9 },
-  shadow: { strength: 0.32, contact: 0.35 },
+  shadow: { strength: 0.3, contact: 0.3 },
   sleep: { speed: 0.012, frames: 45 }, // se detiene (0 % CPU) cuando todo está quieto
   maxDpr: 2,
 };
 
 /* =========================================================================
- * PIEZAS · silueta (SDF en planta), grosor, capas de material y adornos
- * h = altura relativa (0 base … 1 cara superior). sigma = absorción (Beer–Lambert, por unidad);
- * milk = densidad de dispersión lechosa; milkColor = color de esa dispersión.
+ * PIEZAS · medidas sobre las fotos de referencia
+ *
+ * outline / rect   contorno en planta (x, z); z negativo = fondo. La nube trae el contorno ya orientado.
+ * thickness        grosor total; bevelTop / bevelBottom = radio del canto superior / inferior
+ * layers           alturas relativas (0-1) donde acaba la base y donde acaba la franja crema
+ * view             cámara de la foto: elevación (°), distancia, escala (anchos de foto por unidad) y
+ *                  punto de la foto (0-1) donde cae el centro de la pieza
+ * materials        [base, franja, tapa] · sigma = absorción RGB por unidad (lineal) · scatter = densidad
+ *                  de dispersión («leche») · color = color de esa dispersión (sRGB) · path = recorrido
+ *                  máximo efectivo (satura la absorción en los tramos largos) · shade = cuánto oscurece
+ *                  el lado que no mira a la luz (0 = nada: la luz se reparte por dentro)
  * ========================================================================= */
+const CLOUD_OUTLINE = [[0.177,-0.751],[0.201,-0.748],[0.225,-0.747],[0.249,-0.742],[0.273,-0.736],[0.296,-0.728],[0.319,-0.717],[0.342,-0.704],[0.364,-0.688],[0.386,-0.67],[0.407,-0.649],[0.427,-0.626],[0.448,-0.603],[0.469,-0.584],[0.492,-0.571],[0.516,-0.565],[0.54,-0.565],[0.564,-0.569],[0.588,-0.573],[0.611,-0.577],[0.635,-0.577],[0.659,-0.577],[0.683,-0.576],[0.707,-0.571],[0.731,-0.565],[0.755,-0.557],[0.778,-0.548],[0.801,-0.536],[0.824,-0.523],[0.846,-0.507],[0.868,-0.488],[0.889,-0.467],[0.909,-0.444],[0.928,-0.418],[0.945,-0.388],[0.96,-0.355],[0.974,-0.32],[0.985,-0.282],[0.994,-0.242],[1,-0.2],[0.992,-0.161],[0.978,-0.126],[0.963,-0.093],[0.946,-0.062],[0.927,-0.035],[0.908,-0.009],[0.887,0.012],[0.866,0.033],[0.845,0.052],[0.823,0.07],[0.801,0.086],[0.778,0.101],[0.756,0.115],[0.733,0.129],[0.71,0.141],[0.687,0.154],[0.664,0.166],[0.641,0.178],[0.618,0.191],[0.595,0.202],[0.572,0.215],[0.549,0.226],[0.526,0.239],[0.503,0.251],[0.48,0.263],[0.457,0.276],[0.434,0.288],[0.411,0.3],[0.388,0.312],[0.365,0.324],[0.342,0.337],[0.319,0.349],[0.296,0.361],[0.273,0.373],[0.25,0.385],[0.227,0.397],[0.204,0.41],[0.181,0.422],[0.158,0.435],[0.135,0.447],[0.112,0.46],[0.089,0.471],[0.066,0.484],[0.043,0.496],[0.02,0.509],[-0.003,0.521],[-0.026,0.533],[-0.049,0.546],[-0.072,0.558],[-0.095,0.57],[-0.118,0.582],[-0.141,0.595],[-0.164,0.607],[-0.187,0.619],[-0.21,0.632],[-0.233,0.644],[-0.256,0.656],[-0.279,0.668],[-0.302,0.68],[-0.325,0.692],[-0.348,0.702],[-0.371,0.712],[-0.395,0.721],[-0.418,0.728],[-0.442,0.735],[-0.466,0.741],[-0.49,0.744],[-0.514,0.748],[-0.538,0.749],[-0.562,0.751],[-0.586,0.748],[-0.609,0.745],[-0.633,0.741],[-0.657,0.734],[-0.681,0.727],[-0.704,0.719],[-0.727,0.708],[-0.75,0.697],[-0.773,0.683],[-0.796,0.668],[-0.818,0.651],[-0.84,0.633],[-0.861,0.614],[-0.882,0.592],[-0.901,0.568],[-0.92,0.541],[-0.938,0.511],[-0.954,0.479],[-0.969,0.446],[-0.983,0.411],[-0.994,0.373],[-1,0.332],[-0.995,0.29],[-0.987,0.25],[-0.976,0.212],[-0.963,0.176],[-0.948,0.142],[-0.932,0.11],[-0.914,0.082],[-0.895,0.056],[-0.875,0.031],[-0.854,0.009],[-0.833,-0.011],[-0.812,-0.029],[-0.789,-0.045],[-0.767,-0.06],[-0.748,-0.084],[-0.744,-0.126],[-0.74,-0.169],[-0.736,-0.211],[-0.73,-0.253],[-0.723,-0.293],[-0.713,-0.332],[-0.7,-0.369],[-0.685,-0.403],[-0.669,-0.433],[-0.65,-0.461],[-0.631,-0.486],[-0.61,-0.509],[-0.589,-0.528],[-0.567,-0.546],[-0.545,-0.562],[-0.522,-0.576],[-0.499,-0.589],[-0.476,-0.601],[-0.453,-0.61],[-0.429,-0.618],[-0.406,-0.624],[-0.382,-0.629],[-0.358,-0.634],[-0.334,-0.634],[-0.31,-0.634],[-0.286,-0.634],[-0.262,-0.631],[-0.238,-0.627],[-0.214,-0.62],[-0.191,-0.614],[-0.167,-0.606],[-0.143,-0.6],[-0.119,-0.598],[-0.096,-0.603],[-0.072,-0.614],[-0.051,-0.631],[-0.029,-0.652],[-0.008,-0.672],[0.013,-0.69],[0.036,-0.707],[0.058,-0.72],[0.082,-0.73],[0.105,-0.739],[0.129,-0.744],[0.153,-0.748]];
+const IVORY = [0.976, 0.949, 0.894];
+
 const SHAPES = {
   cloud: {
-    sdf(x, z) {
-      const base = sdRoundBox(x, z, 0, 0.16, 1.0, 0.42, 0.42);
-      let d = smin(base, sdCircle(x, z, -0.56, -0.08, 0.44), 0.2);
-      d = smin(d, sdCircle(x, z, 0.08, -0.3, 0.56), 0.2);
-      d = smin(d, sdCircle(x, z, 0.7, -0.02, 0.42), 0.2);
-      return d;
-    },
-    thickness: 0.54, bevel: 0.15, yaw: -14,
-    layers: [0.4, 0.52],
+    outline: CLOUD_OUTLINE, yaw: 0,
+    thickness: 0.548, bevelTop: 0.11, bevelBottom: 0.03, lip: { width: 0.1, depth: 0.016 },
+    layers: [0.529, 0.7],
+    view: { elevation: 34, distance: 200, scale: 0.4918, cx: 0.4995, cy: 0.4341 },
     materials: [
-      { sigma: [14.0, 3.0, 2.0], milk: 0.9, milkColor: [0.04, 0.42, 0.5] },  // base turquesa
-      { sigma: [0.3, 0.35, 0.5], milk: 14, milkColor: [0.98, 0.96, 0.9] },   // franja crema (geometría interior)
-      { sigma: [3.2, 0.9, 0.08], milk: 0.5, milkColor: [0.5, 0.82, 1.0] },  // nube azul hielo (cristal)
+      { sigma: [8, 2, 1.5], scatter: 5, color: [0.02, 0.407, 0.436], path: 0.35, shade: 0.15 }, // base turquesa (gominola traslúcida)
+      { sigma: [0, 0, 0], scatter: 80, color: [0.875, 0.848, 0.751], path: 1, shade: 0.3 }, // franja crema
+      { sigma: [0.25, 0.06, 0.03], scatter: 7, color: [0.553, 0.812, 0.929], path: 0.4, shade: 0.06 }, // tapa azul hielo (ópalo)
     ],
-    tint: [0.15, 0.5, 0.56],
+    look: { wave: 0.9, speck: 1, streak: 0.5, bandShade: 0.14 },
+    light: { env: [6.0, 3.5, 1.7, 0.16], back: [36, 0.42, 0.42], top: 3, floor: 0.12 }, // panel trasero alto: brillo «líquido» sobre la tapa
+    tint: [0.2, 0.62, 0.7],
   },
   web: {
-    sdf(x, z) { return sdRoundBox(x, z, 0, 0, 1.0, 0.68, 0.22); },
-    thickness: 0.42, bevel: 0.12, yaw: -18,
-    layers: [0.36, 0.5],
+    rect: { depth: 1.5416, radius: 0.2465 }, yaw: 39.98,
+    thickness: 0.3628, bevelTop: 0.035, bevelBottom: 0.022,
+    layers: [0.445, 0.62],
+    view: { elevation: 25.6, distance: 5.7127, scale: 0.40976, cx: 0.5079, cy: 0.4145 },
     materials: [
-      { sigma: [1.2, 10.0, 14.0], milk: 0.7, milkColor: [0.8, 0.25, 0.12] }, // base naranja rojizo
-      { sigma: [0.3, 0.4, 0.6], milk: 14, milkColor: [0.99, 0.94, 0.85] },   // franja crema (geometría interior)
-      { sigma: [0.06, 1.5, 2.2], milk: 0.45, milkColor: [1.0, 0.68, 0.5] },  // tapa melocotón (cristal)
+      { sigma: [1.5, 6, 8], scatter: 14, color: [0.755, 0.28, 0.152], path: 0.3, shade: 0.15 }, // base naranja rojizo (gominola traslúcida)
+      { sigma: [0, 0, 0], scatter: 80, color: [1, 0.98, 0.889], path: 1, shade: 0.3 }, // franja crema
+      { sigma: [0.281, 8.25, 10.214], scatter: 0.25, color: [1, 0.7, 0.55], path: 0.16, shade: 0.1 }, // tapa melocotón (cristal)
     ],
-    tint: [0.9, 0.42, 0.3],
-    // Adornos en relieve sobre la cara superior (z negativo = fondo de la pieza)
-    decorations: [
-      { pill: [-0.96, 0.96, -0.42, 0.022], color: [0.99, 0.72, 0.6] },  // línea de la barra de título
-      { dot: [-0.83, -0.55, 0.05], color: [0.86, 0.17, 0.13] },
-      { dot: [-0.69, -0.55, 0.05], color: [0.96, 0.72, 0.16] },
-      { dot: [-0.55, -0.55, 0.05], color: [0.33, 0.68, 0.24] },
-      { pill: [-0.62, 0.12, -0.2, 0.12], color: [0.98, 0.94, 0.85] },
-      { pill: [0.3, 0.86, -0.22, 0.12], color: [0.98, 0.94, 0.85] },
-      { pill: [-0.5, 0.18, -0.02, 0.055], color: [0.98, 0.94, 0.85] },
-      { pill: [0.36, 0.82, -0.03, 0.055], color: [0.98, 0.94, 0.85] },
-      { pill: [-0.3, 0.24, 0.16, 0.12], color: [0.98, 0.94, 0.85] },
-      { pill: [-0.22, 0.26, 0.34, 0.055], color: [0.98, 0.94, 0.85] },
-    ],
+    look: { wave: 0, speck: 0, streak: 0.22, bandShade: 0, border: 0.2 },
+    light: { env: [4.5, 3.0, 3.6, 0.16], back: [14, 0.2, 0.25], top: 1.2, floor: 0.5 },
+    tint: [1.0, 0.62, 0.48],
+    // Relieves de la cara superior, medidos sobre la vista cenital rectificada de la foto
+    deco: {
+      bars: [ // [x0, x1, z0, z1, radio de esquina]
+        [-0.643, 0.634, -0.202, -0.016, 0.04],
+        [-0.637, 0.154, 0.071, 0.109, 0.019],
+        [-0.649, -0.098, 0.216, 0.399, 0.04],
+        [0.064, 0.629, 0.212, 0.399, 0.04],
+        [-0.643, -0.25, 0.492, 0.53, 0.019],
+        [0.066, 0.476, 0.489, 0.527, 0.019],
+      ],
+      dots: [ // [x, z, color]
+        [-0.705, -0.493, [0.86, 0.1, 0.1]],
+        [-0.564, -0.492, [0.97, 0.76, 0.1]],
+        [-0.421, -0.492, [0.27, 0.66, 0.18]],
+      ],
+      dotRadius: 0.046, ringRadius: 0.066,
+      groove: { z: -0.379, x0: -0.91, x1: 0.87 },
+    },
   },
 };
 
 const TAU = Math.PI * 2, DEG = Math.PI / 180, HMAX = 4;
 
-/* ---------- SDF 2D ---------- */
-function sdCircle(x, z, cx, cz, r) { return Math.hypot(x - cx, z - cz) - r; }
-function sdRoundBox(x, z, cx, cz, hx, hz, r) {
-  const qx = Math.abs(x - cx) - hx + r, qz = Math.abs(z - cz) - hz + r;
-  return Math.hypot(Math.max(qx, 0), Math.max(qz, 0)) + Math.min(Math.max(qx, qz), 0) - r;
-}
-function smin(a, b, k) { const h = Math.max(k - Math.abs(a - b), 0) / k; return Math.min(a, b) - h * h * k * 0.25; }
-
 /* =========================================================================
- * GEOMETRÍA · silueta → superficie con bordes redondeados + retícula de tetraedros
+ * GEOMETRÍA · contorno → superficie con cantos redondeados + franja + adornos + retícula de tetraedros
  * ========================================================================= */
 function buildModel(shape, cfg) {
-  const N = 192; // puntos de la silueta (múltiplo de 8 para las tapas)
-  // Silueta por muestreo polar del SDF y reescalado a 2 de ancho, centrada
-  const raw = [];
-  for (let i = 0; i < 720; i++) {
-    const a = i / 720 * TAU, dx = Math.cos(a), dz = Math.sin(a);
-    let lo = 0, hi = 4;
-    for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; if (shape.sdf(dx * m, dz * m) < 0) lo = m; else hi = m; }
-    raw.push([dx * lo, dz * lo]);
+  const N = 192; // puntos del contorno (múltiplo de 8 para las tapas)
+  // Contorno denso: polígono dado (nube) o rectángulo redondeado (ventana)
+  let dense = shape.outline;
+  if (shape.rect) {
+    const hx = 1, hz = shape.rect.depth / 2, R = shape.rect.radius;
+    dense = [];
+    for (const [cx, cz, a0] of [[hx - R, hz - R, 0], [-hx + R, hz - R, 90], [-hx + R, -hz + R, 180], [hx - R, -hz + R, 270]]) {
+      for (let k = 0; k <= 40; k++) { const a = (a0 + 90 * k / 40) * DEG; dense.push([cx + R * Math.cos(a), cz + R * Math.sin(a)]); }
+    }
   }
-  let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
-  for (const [x, z] of raw) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); z0 = Math.min(z0, z); z1 = Math.max(z1, z); }
-  const sc = 2 / (x1 - x0), cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
-  const sdf = (x, z) => shape.sdf(x / sc + cx, z / sc + cz) * sc;
-  const pts = raw.map(([x, z]) => [(x - cx) * sc, (z - cz) * sc]);
-  // remuestreo por longitud de arco
-  const cum = [0];
-  for (let i = 1; i <= pts.length; i++) { const a = pts[i - 1], b = pts[i % pts.length]; cum.push(cum[i - 1] + Math.hypot(b[0] - a[0], b[1] - a[1])); }
-  const L = cum[pts.length], ol = [];
-  for (let j = 0, s = 0; j < N; j++) {
-    const t = j / N * L;
-    while (cum[s + 1] < t) s++;
-    const a = pts[s], b = pts[(s + 1) % pts.length], f = (t - cum[s]) / (cum[s + 1] - cum[s] || 1);
-    ol.push({ x: a[0] + (b[0] - a[0]) * f, z: a[1] + (b[1] - a[1]) * f, nx: 0, nz: 0 });
-  }
-  for (let i = 0; i < N; i++) {
-    const p = ol[(i + N - 1) % N], q = ol[(i + 1) % N];
-    let nx = q.z - p.z, nz = -(q.x - p.x); const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l;
-    if (sdf(ol[i].x + nx * 0.01, ol[i].z + nz * 0.01) < sdf(ol[i].x, ol[i].z)) { nx = -nx; nz = -nz; }
-    ol[i].nx = nx; ol[i].nz = nz;
-  }
-  const zMin = Math.min(...ol.map(p => p.z)), zMax = Math.max(...ol.map(p => p.z));
+  const ring0 = resample(dense, N);
+  const ccw = signedArea(ring0) > 0;
+  const ol = ring0.map((p, i) => {
+    const a = ring0[(i + N - 1) % N], b = ring0[(i + 1) % N];
+    let nx = b[1] - a[1], nz = -(b[0] - a[0]); const l = Math.hypot(nx, nz) || 1;
+    if (!ccw) { nx = -nx; nz = -nz; }
+    return { x: p[0], z: p[1], nx: nx / l, nz: nz / l };
+  });
+  const sdf = polySdf(ring0);
+  let xMin = Infinity, xMax = -Infinity, zMin = Infinity, zMax = -Infinity;
+  for (const p of ol) { xMin = Math.min(xMin, p.x); xMax = Math.max(xMax, p.x); zMin = Math.min(zMin, p.z); zMax = Math.max(zMax, p.z); }
 
-  const T = shape.thickness, r = shape.bevel;
-  const verts = [], tris = [];
-  const addV = (x, y, z, extra) => { verts.push({ x, y, z, e: extra }); return verts.length - 1; };
-  const addTri = (a, b, c, n) => {
-    const A = verts[a], B = verts[b], C = verts[c];
-    const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z, vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;
-    const cxp = uy * vz - uz * vy, cyp = uz * vx - ux * vz, czp = ux * vy - uy * vx;
-    if (cxp * n[0] + cyp * n[1] + czp * n[2] < 0) tris.push(a, c, b); else tris.push(a, b, c);
+  const T = shape.thickness, rt = shape.bevelTop, rb = shape.bevelBottom;
+  const mesh = () => {
+    const v = [], t = [], al = [];
+    return {
+      v, t, al,
+      add(x, y, z, extra, alpha = 1) { v.push({ x, y, z, e: extra }); al.push(alpha); return v.length - 1; },
+      // triángulo orientado según la normal esperada n
+      tri(a, b, c, n) {
+        const A = v[a], B = v[b], C = v[c];
+        const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z, vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;
+        if ((uy * vz - uz * vy) * n[0] + (uz * vx - ux * vz) * n[1] + (ux * vy - uy * vx) * n[2] < 0) t.push(a, c, b); else t.push(a, b, c);
+      },
+    };
   };
 
-  // Anillos del perfil redondeado: abajo de -90° a 0°, arriba de 0° a 90°
+  /* ----- Superficie exterior (cristal) ----- */
+  const S = mesh();
+  // Anillos del perfil: canto inferior, pared (con anillos en los cambios de capa) y canto superior
   const rings = [];
-  for (let k = 0; k <= 4; k++) { const f = (-90 + k * 22.5) * DEG; rings.push({ d: r * (1 - Math.cos(f)), y: r + r * Math.sin(f), f }); }
-  for (let k = 0; k <= 4; k++) { const f = (k * 22.5) * DEG; rings.push({ d: r * (1 - Math.cos(f)), y: T - r + r * Math.sin(f), f }); }
-  for (const rg of rings) for (const p of ol) addV(p.x - p.nx * rg.d, rg.y, p.z - p.nz * rg.d, [rg.y / T, 0, 0]);
+  for (let k = 0; k <= 4; k++) { const f = (-90 + k * 22.5) * DEG; rings.push({ d: rb * (1 - Math.cos(f)), y: rb + rb * Math.sin(f), f }); }
+  for (const l of shape.layers) { const y = l * T; if (y > rb + 0.01 && y < T - rt - 0.01) rings.push({ d: 0, y, f: 0 }); }
+  for (let k = 0; k <= 5; k++) { const f = (k * 18) * DEG; rings.push({ d: rt * (1 - Math.cos(f)), y: T - rt + rt * Math.sin(f), f }); }
+  // labio: tras el canto, la cara superior baja suavemente hacia un interior algo hundido
+  if (shape.lip) {
+    const { width: w, depth: dp } = shape.lip;
+    for (const [fd, fy] of [[0.3, 0.12], [0.6, 0.5], [0.85, 0.88], [1.15, 1]]) rings.push({ d: rt + w * fd, y: T - dp * fy, f: 90 * DEG });
+  }
+  for (const rg of rings) for (const p of ol) { const x = p.x - p.nx * rg.d, z = p.z - p.nz * rg.d; S.add(x, rg.y, z, [rg.y / T, x, z]); }
   for (let k = 0; k < rings.length - 1; k++) {
     const fm = (rings[k].f + rings[k + 1].f) / 2;
     for (let i = 0; i < N; i++) {
       const j = (i + 1) % N, n = [ol[i].nx * Math.cos(fm), Math.sin(fm), ol[i].nz * Math.cos(fm)];
       const a = k * N + i, b = k * N + j, c = (k + 1) * N + j, d = (k + 1) * N + i;
-      if (rings[k].y === rings[k + 1].y && rings[k].d === rings[k + 1].d) continue;
-      addTri(a, b, c, n); addTri(a, c, d, n);
+      S.tri(a, b, c, n); S.tri(a, c, d, n);
     }
   }
   // Tapas: polígono grueso (1 de cada 8) por recorte de orejas + 3 subdivisiones ajustadas al anillo
   const cap = (k, up) => {
-    const ringXZ = i => verts[k * N + i];
-    let vs = [];
+    const ringXZ = i => S.v[k * N + i];
+    const vs = [];
     for (let i = 0; i < N; i += 8) vs.push({ x: ringXZ(i).x, z: ringXZ(i).z, ring: i });
     let ts = earClip(vs), step = 8;
     for (let lvl = 0; lvl < 3; lvl++) {
@@ -204,76 +218,107 @@ function buildModel(shape, cfg) {
       ts = nt; step /= 2;
     }
     const y = rings[k].y;
-    const gi = vs.map(v => (v.ring >= 0 ? k * N + v.ring : addV(v.x, y, v.z, [y / T, 0, 0])));
-    for (let t = 0; t < ts.length; t += 3) addTri(gi[ts[t]], gi[ts[t + 1]], gi[ts[t + 2]], [0, up ? 1 : -1, 0]);
+    const gi = vs.map(v => (v.ring >= 0 ? k * N + v.ring : S.add(v.x, y, v.z, [y / T, v.x, v.z])));
+    for (let t = 0; t < ts.length; t += 3) S.tri(gi[ts[t]], gi[ts[t + 1]], gi[ts[t + 2]], [0, up ? 1 : -1, 0]);
   };
   cap(rings.length - 1, true);
   cap(0, false);
 
-  // Adornos en relieve (malla aparte con color por vértice)
-  const dv = [], dt = [];
-  const addDV = (x, y, z, col) => { dv.push({ x, y, z, e: col }); return dv.length - 1; };
-  const addDT = (a, b, c, n) => {
-    const A = dv[a], B = dv[b], C = dv[c];
-    const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z, vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;
-    const s = (uy * vz - uz * vy) * n[0] + (uz * vx - ux * vz) * n[1] + (ux * vy - uy * vx) * n[2];
-    if (s < 0) dt.push(a, c, b); else dt.push(a, b, c);
-  };
-  for (const d of shape.decorations ?? []) {
-    let o = [];
-    if (d.pill) {
-      const [xa, xb, z, w] = d.pill, rr = w / 2, M = 10;
-      for (let i = 0; i <= M; i++) { const a = -Math.PI / 2 + i / M * Math.PI; o.push([xb - rr + Math.cos(a) * rr, z + Math.sin(a) * rr]); }
-      for (let i = 0; i <= M; i++) { const a = Math.PI / 2 + i / M * Math.PI; o.push([xa + rr + Math.cos(a) * rr, z + Math.sin(a) * rr]); }
-    } else {
-      const [x, z, rr] = d.dot;
-      for (let i = 0; i < 20; i++) { const a = i / 20 * TAU; o.push([x + Math.cos(a) * rr, z + Math.sin(a) * rr]); }
-    }
-    const h = d.pill ? 0.026 : 0.034, inset = 0.008;
-    const cxo = o.reduce((s, p) => s + p[0], 0) / o.length, czo = o.reduce((s, p) => s + p[1], 0) / o.length;
-    const M = o.length, base = dv.length;
-    for (const [x, z] of o) addDV(x, T - 0.012, z, d.color);
-    for (const [x, z] of o) { const dx = cxo - x, dz = czo - z, l = Math.hypot(dx, dz) || 1; addDV(x + dx / l * inset, T + h, z + dz / l * inset, d.color); }
-    const c = addDV(cxo, T + h, czo, d.color);
-    for (let i = 0; i < M; i++) {
-      const j = (i + 1) % M, a = base + i, b = base + j, a2 = base + M + i, b2 = base + M + j;
-      const nx = o[j][1] - o[i][1], nz = -(o[j][0] - o[i][0]);
-      const out = (o[i][0] - cxo) * nx + (o[i][1] - czo) * nz > 0 ? 1 : -1;
-      addDT(a, b, b2, [nx * out, 0.3, nz * out]); addDT(a, b2, a2, [nx * out, 0.3, nz * out]);
-      addDT(a2, b2, c, [0, 1, 0]);
-    }
-  }
-
-  // Franja crema: malla opaca interior entre las dos alturas de capa, metida dentro del bisel
-  const bv = [], bt = [];
+  /* ----- Franja crema: malla opaca interior entre las dos alturas de capa (se ve a través del cristal) ----- */
+  const B = mesh();
   {
-    const y0 = shape.layers[0] * T, y1 = shape.layers[1] * T, inset = r * 0.5;
+    const y0 = shape.layers[0] * T, y1 = shape.layers[1] * T, inset = 0.012;
     const ring = ol.map(p => ({ x: p.x - p.nx * inset, z: p.z - p.nz * inset }));
-    // lados (vértices 0..2N-1)
-    for (const y of [y0, y1]) for (const q of ring) bv.push({ x: q.x, y, z: q.z, e: [0, 0, 0] });
-    for (let i = 0; i < N; i++) { const j = (i + 1) % N; bt.push(i, j, N + j, i, N + j, N + i); }
-    for (let t = 0; t < N * 6; t += 3) { // hacia fuera
-      const A = bv[bt[t]], B = bv[bt[t + 1]], C = bv[bt[t + 2]];
-      const ux = B.x - A.x, uy = B.y - A.y, uz = B.z - A.z, vx = C.x - A.x, vy = C.y - A.y, vz = C.z - A.z;
-      const nx = uy * vz - uz * vy, nz = ux * vy - uy * vx, i = bt[t] % N;
-      if (nx * ol[i].nx + nz * ol[i].nz < 0) { const tmp = bt[t + 1]; bt[t + 1] = bt[t + 2]; bt[t + 2] = tmp; }
-    }
-    // tapas con vértices propios (2N..4N-1), trianguladas sobre el anillo completo
-    for (const y of [y0, y1]) for (const q of ring) bv.push({ x: q.x, y, z: q.z, e: [0, 0, 0] });
-    const ct = earClip(ring.map(q => ({ x: q.x, z: q.z })));
-    for (let t = 0; t < ct.length; t += 3) bt.push(3 * N + ct[t], 3 * N + ct[t + 1], 3 * N + ct[t + 2], 2 * N + ct[t], 2 * N + ct[t + 2], 2 * N + ct[t + 1]);
-    for (let t = N * 6; t < bt.length; t += 3) { // tapa superior hacia arriba, inferior hacia abajo
-      const A = bv[bt[t]], B = bv[bt[t + 1]], C = bv[bt[t + 2]];
-      const ny = (B.z - A.z) * (C.x - A.x) - (B.x - A.x) * (C.z - A.z);
-      const up = bt[t] >= 3 * N;
-      if ((ny > 0) !== up) { const tmp = bt[t + 1]; bt[t + 1] = bt[t + 2]; bt[t + 2] = tmp; }
+    for (const y of [y0, y1]) for (const q of ring) B.add(q.x, y, q.z, [0, 0, 0]);       // lados
+    for (let i = 0; i < N; i++) { const j = (i + 1) % N, n = [ol[i].nx, 0, ol[i].nz]; B.tri(i, j, N + j, n); B.tri(i, N + j, N + i, n); }
+    for (const y of [y0, y1]) for (const q of ring) B.add(q.x, y, q.z, [0, 0, 0]);       // tapas (vértices propios)
+    const ct = earClip(ring);
+    for (let t = 0; t < ct.length; t += 3) {
+      B.tri(3 * N + ct[t], 3 * N + ct[t + 1], 3 * N + ct[t + 2], [0, 1, 0]);
+      B.tri(2 * N + ct[t], 2 * N + ct[t + 1], 2 * N + ct[t + 2], [0, -1, 0]);
     }
   }
 
-  // Retícula de tetraedros que cubre la silueta (dilatada para envolver toda la superficie)
+  /* ----- Adornos en relieve (opacos, color por vértice) y calcas (sombras, ranura; color + alfa) ----- */
+  const D = mesh(), K = mesh();
+  const dc = shape.deco;
+  if (dc) {
+    const rrect = (x0, x1, z0, z1, r, n = 6) => {
+      const o = [];
+      for (const [cx, cz, a0] of [[x1 - r, z1 - r, 0], [x0 + r, z1 - r, 90], [x0 + r, z0 + r, 180], [x1 - r, z0 + r, 270]]) {
+        for (let k = 0; k <= n; k++) { const a = (a0 + 90 * k / n) * DEG; o.push([cx + r * Math.cos(a), cz + r * Math.sin(a)]); }
+      }
+      return o;
+    };
+    const circle = (x, z, r, n = 28) => Array.from({ length: n }, (_, i) => [x + r * Math.cos(i / n * TAU), z + r * Math.sin(i / n * TAU)]);
+    // extrusión con perfil [retranqueo, altura sobre la tapa] y tapa en abanico
+    const loft = (o, profile, color, capY) => {
+      const M = o.length, cx = o.reduce((s, p) => s + p[0], 0) / M, cz = o.reduce((s, p) => s + p[1], 0) / M;
+      const nrm = o.map((p, i) => { const a = o[(i + M - 1) % M], b = o[(i + 1) % M]; let nx = b[1] - a[1], nz = -(b[0] - a[0]); const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l; return (p[0] - cx) * nx + (p[1] - cz) * nz < 0 ? [-nx, -nz] : [nx, nz]; });
+      const base = D.v.length;
+      profile.forEach(([d, y]) => o.forEach((p, i) => D.add(p[0] - nrm[i][0] * d, T + y, p[1] - nrm[i][1] * d, color)));
+      for (let k = 0; k < profile.length - 1; k++) for (let i = 0; i < M; i++) {
+        const j = (i + 1) % M, a = base + k * M + i, b = base + k * M + j, c = base + (k + 1) * M + j, d = base + (k + 1) * M + i;
+        const n = [nrm[i][0], 0.6, nrm[i][1]];
+        D.tri(a, b, c, n); D.tri(a, c, d, n);
+      }
+      if (capY != null) {
+        const c = D.add(cx, T + capY, cz, color), top = base + (profile.length - 1) * M;
+        for (let i = 0; i < M; i++) D.tri(top + i, top + (i + 1) % M, c, [0, 1, 0]);
+      }
+    };
+    // sombra de contacto alrededor de un relieve: anillo que se desvanece, desplazado en contra de la luz
+    const skirt = (o, w, a0, shift = [0.012, 0.03]) => {
+      const M = o.length, cx = o.reduce((s, p) => s + p[0], 0) / M, cz = o.reduce((s, p) => s + p[1], 0) / M, col = [0.6, 0.27, 0.19];
+      const base = K.v.length;
+      o.forEach(p => K.add(p[0], T + 0.0025, p[1], col, a0));
+      o.forEach((p, i) => {
+        const a = o[(i + M - 1) % M], b = o[(i + 1) % M]; let nx = b[1] - a[1], nz = -(b[0] - a[0]); const l = Math.hypot(nx, nz) || 1; nx /= l; nz /= l;
+        if ((p[0] - cx) * nx + (p[1] - cz) * nz < 0) { nx = -nx; nz = -nz; }
+        K.add(p[0] + nx * w + shift[0], T + 0.0025, p[1] + nz * w + shift[1], col, 0);
+      });
+      for (let i = 0; i < M; i++) { const j = (i + 1) % M; K.tri(base + i, base + j, base + M + j, [0, 1, 0]); K.tri(base + i, base + M + j, base + M + i, [0, 1, 0]); }
+      // interior (bajo el relieve) para que la sombra desplazada no deje hueco
+      const c = K.add(cx, T + 0.0025, cz, col, a0);
+      for (let i = 0; i < M; i++) K.tri(base + i, base + (i + 1) % M, c, [0, 1, 0]);
+    };
+    for (const [x0, x1, z0, z1, r] of dc.bars) {
+      const o = rrect(x0, x1, z0, z1, r);
+      skirt(o, 0.045, 0.34);
+      loft(o, [[0, -0.004], [0.0012, 0.009], [0.006, 0.0145], [0.014, 0.0165]], IVORY, 0.0168);
+    }
+    for (const [x, z, color] of dc.dots) {
+      skirt(circle(x, z, dc.ringRadius), 0.03, 0.3, [0.008, 0.02]);
+      loft(circle(x, z, dc.ringRadius), [[0, -0.004], [0.001, 0.006], [0.006, 0.011], [0.016, 0.011]], IVORY, null);
+      const dome = []; for (let k = 0; k <= 6; k++) { const a = k / 7 * 90 * DEG; dome.push([dc.dotRadius * (1 - Math.cos(a)), 0.004 + 0.036 * Math.sin(a)]); }
+      loft(circle(x, z, dc.dotRadius), dome, color, 0.0405);
+    }
+    // ranura de la barra de título: línea oscura fina + filo claro, y el reflejo de cada punto sobre ella
+    const g = dc.groove, seg = 24;
+    const strip = (zc, w, col, a) => {
+      const base = K.v.length;
+      for (let i = 0; i <= seg; i++) {
+        const x = g.x0 + (g.x1 - g.x0) * i / seg, e = Math.min(1, Math.min(i, seg - i) / 1.5);
+        K.add(x, T + 0.003, zc - w / 2, col, 0); K.add(x, T + 0.003, zc, col, a * e); K.add(x, T + 0.003, zc + w / 2, col, 0);
+      }
+      for (let i = 0; i < seg; i++) for (let r = 0; r < 2; r++) {
+        const a0 = base + i * 3 + r, b0 = base + (i + 1) * 3 + r;
+        K.tri(a0, b0, b0 + 1, [0, 1, 0]); K.tri(a0, b0 + 1, a0 + 1, [0, 1, 0]);
+      }
+    };
+    strip(g.z, 0.03, [0.66, 0.26, 0.17], 0.8);
+    strip(g.z - 0.016, 0.014, [1, 0.94, 0.9], 0.7);
+    for (const [x, , color] of dc.dots) {
+      const c = K.add(x - 0.02, T + 0.0035, g.z + 0.004, color, 0.6), base = K.v.length, M = 16;
+      for (let i = 0; i < M; i++) K.add(x - 0.02 + 0.05 * Math.cos(i / M * TAU), T + 0.0035, g.z + 0.004 + 0.012 * Math.sin(i / M * TAU), color, 0);
+      for (let i = 0; i < M; i++) K.tri(base + i, base + (i + 1) % M, c, [0, 1, 0]);
+    }
+  }
+
+  /* ----- Retícula de tetraedros que cubre el contorno (dilatada para envolver toda la superficie) ----- */
   const h = cfg.physics.cell, ny = Math.max(2, Math.round(T / h)), hy = T / ny;
-  const gx0 = -1 - h, gz0 = zMin - h;
-  const nx = Math.ceil((2 + 2 * h) / h), nz = Math.ceil((zMax - zMin + 2 * h) / h);
+  const gx0 = xMin - h, gz0 = zMin - h;
+  const nx = Math.ceil((xMax - xMin + 2 * h) / h), nz = Math.ceil((zMax - zMin + 2 * h) / h);
   const keep = new Uint8Array(nx * nz);
   for (let i = 0; i < nx; i++) for (let k = 0; k < nz; k++) {
     if (sdf(gx0 + (i + 0.5) * h, gz0 + (k + 0.5) * h) < 0.8 * h) keep[i * nz + k] = 1;
@@ -300,7 +345,7 @@ function buildModel(shape, cfg) {
   const pos = new Float32Array(P);
   const tetArr = new Uint32Array(tets);
 
-  // Coser cada vértice (superficie y adornos) a un tetraedro con coordenadas baricéntricas
+  // Coser cada vértice a un tetraedro con coordenadas baricéntricas
   const embed = list => {
     const ids = new Uint32Array(list.length * 4), w = new Float32Array(list.length * 4);
     list.forEach((v, n) => {
@@ -322,17 +367,42 @@ function buildModel(shape, cfg) {
     });
     return { ids, w };
   };
+  const pack = m => (m.v.length ? { n: m.v.length, extra: new Float32Array(m.v.flatMap(v => v.e)), alpha: new Float32Array(m.al), index: new Uint32Array(m.t), ...embed(m.v) } : null);
 
-  return {
-    T, outline: ol,
-    particles: pos, tets: tetArr,
-    surface: { n: verts.length, extra: new Float32Array(verts.flatMap(v => v.e)), index: new Uint32Array(tris), ...embed(verts) },
-    deco: dv.length ? { n: dv.length, extra: new Float32Array(dv.flatMap(v => v.e)), index: new Uint32Array(dt), ...embed(dv) } : null,
-    band: { n: bv.length, extra: new Float32Array(bv.flatMap(v => v.e)), index: new Uint32Array(bt), ...embed(bv) },
-  };
+  return { T, outline: ol, particles: pos, tets: tetArr, surface: pack(S), band: pack(B), deco: pack(D), decal: pack(K) };
 }
 
 function clampI(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+// Remuestreo de un polígono cerrado a n puntos equidistantes en longitud de arco
+function resample(pts, n) {
+  const m = pts.length, cum = [0];
+  for (let i = 1; i <= m; i++) { const a = pts[i - 1], b = pts[i % m]; cum.push(cum[i - 1] + Math.hypot(b[0] - a[0], b[1] - a[1])); }
+  const L = cum[m], out = [];
+  for (let j = 0, s = 0; j < n; j++) {
+    const t = j / n * L;
+    while (cum[s + 1] < t) s++;
+    const a = pts[s], b = pts[(s + 1) % m], f = (t - cum[s]) / (cum[s + 1] - cum[s] || 1);
+    out.push([a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]);
+  }
+  return out;
+}
+function signedArea(p) { let a = 0; for (let i = 0; i < p.length; i++) { const q = p[(i + 1) % p.length]; a += p[i][0] * q[1] - q[0] * p[i][1]; } return a / 2; }
+// Distancia con signo a un polígono (negativa dentro)
+function polySdf(p) {
+  const n = p.length;
+  return (x, z) => {
+    let d = Infinity, inside = false;
+    for (let i = 0, j = n - 1; i < n; j = i++) {
+      const ax = p[j][0], az = p[j][1], bx = p[i][0], bz = p[i][1];
+      const ex = bx - ax, ez = bz - az, wx = x - ax, wz = z - az;
+      const t = Math.max(0, Math.min(1, (wx * ex + wz * ez) / (ex * ex + ez * ez || 1)));
+      d = Math.min(d, Math.hypot(wx - ex * t, wz - ez * t));
+      if ((az > z) !== (bz > z) && x < ax + (z - az) / (bz - az) * ex) inside = !inside;
+    }
+    return inside ? -d : d;
+  };
+}
 
 function bary(pos, tets, t, x, y, z) {
   const i = tets[t * 4] * 3, a = [pos[i], pos[i + 1], pos[i + 2]];
@@ -345,8 +415,9 @@ function bary(pos, tets, t, x, y, z) {
 function dot3(a, b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
 function cross3(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
 
-// Recorte de orejas en planta (x, z) → índices de triángulos
-function earClip(vs) {
+// Recorte de orejas en planta (x, z) → índices de triángulos. Admite puntos {x, z} o [x, z].
+function earClip(pts) {
+  const vs = pts.map(p => (Array.isArray(p) ? { x: p[0], z: p[1] } : p));
   const idx = vs.map((_, i) => i), out = [];
   let area = 0;
   for (let i = 0; i < vs.length; i++) { const a = vs[i], b = vs[(i + 1) % vs.length]; area += a.x * b.z - b.x * a.z; }
@@ -377,10 +448,6 @@ function earClip(vs) {
 /* =========================================================================
  * MATRICES (column-major, como WebGL)
  * ========================================================================= */
-function perspective(fovy, aspect, near, far, sx, sy) {
-  const f = 1 / Math.tan(fovy / 2);
-  return new Float32Array([f / aspect, 0, 0, 0, 0, f, 0, 0, -sx, -sy, (far + near) / (near - far), -1, 0, 0, 2 * far * near / (near - far), 0]);
-}
 function lookAt(e, t, u) {
   let zx = e[0] - t[0], zy = e[1] - t[1], zz = e[2] - t[2]; let l = Math.hypot(zx, zy, zz); zx /= l; zy /= l; zz /= l;
   let xx = u[1] * zz - u[2] * zy, xy = u[2] * zx - u[0] * zz, xz = u[0] * zy - u[1] * zx; l = Math.hypot(xx, xy, xz); xx /= l; xy /= l; xz /= l;
@@ -396,7 +463,7 @@ function mul4(a, b) {
   return o;
 }
 function invert4(m) {
-  const inv = new Float32Array(16);
+  const inv = new Float64Array(16);
   inv[0] = m[5] * m[10] * m[15] - m[5] * m[11] * m[14] - m[9] * m[6] * m[15] + m[9] * m[7] * m[14] + m[13] * m[6] * m[11] - m[13] * m[7] * m[10];
   inv[4] = -m[4] * m[10] * m[15] + m[4] * m[11] * m[14] + m[8] * m[6] * m[15] - m[8] * m[7] * m[14] - m[12] * m[6] * m[11] + m[12] * m[7] * m[10];
   inv[8] = m[4] * m[9] * m[15] - m[4] * m[11] * m[13] - m[8] * m[5] * m[15] + m[8] * m[7] * m[13] + m[12] * m[5] * m[11] - m[12] * m[7] * m[9];
@@ -418,29 +485,59 @@ function invert4(m) {
   return inv;
 }
 function xform(m, x, y, z, w = 1) {
-  const o = [m[0] * x + m[4] * y + m[8] * z + m[12] * w, m[1] * x + m[5] * y + m[9] * z + m[13] * w,
+  return [m[0] * x + m[4] * y + m[8] * z + m[12] * w, m[1] * x + m[5] * y + m[9] * z + m[13] * w,
     m[2] * x + m[6] * y + m[10] * z + m[14] * w, m[3] * x + m[7] * y + m[11] * z + m[15] * w];
-  return o;
 }
 
 /* =========================================================================
  * SHADERS (GLSL ES 3.00)
  * ========================================================================= */
 const VS = `#version 300 es
-layout(location=0) in vec3 a_pos; layout(location=1) in vec3 a_nrm; layout(location=2) in vec3 a_x;
+layout(location=0) in vec3 a_pos; layout(location=1) in vec3 a_nrm; layout(location=2) in vec3 a_x; layout(location=3) in float a_a;
 uniform mat4 u_view, u_proj;
-out vec3 v_pos; out vec3 v_nrm; out vec3 v_x; out float v_vz;
+out vec3 v_pos; out vec3 v_nrm; out vec3 v_x; out float v_vz; out float v_a;
 void main() {
   vec4 vp = u_view * vec4(a_pos, 1.0);
-  v_pos = a_pos; v_nrm = a_nrm; v_x = a_x; v_vz = -vp.z;
+  v_pos = a_pos; v_nrm = a_nrm; v_x = a_x; v_vz = -vp.z; v_a = a_a;
   gl_Position = u_proj * vp;
 }`;
 
-// Profundidad lineal de las caras traseras, empaquetada en 16 bits (RG)
+// Trozos comunes: color lineal ↔ sRGB y la carpa de luz que se refleja en las piezas
+const GLSL_COMMON = `
+vec3 toLin(vec3 c) { return pow(max(c, 0.0), vec3(2.2)); }
+vec3 toSrgb(vec3 c) { return pow(max(c, 0.0), vec3(1.0 / 2.2)); }
+uniform vec3 u_envFloor;   // color del suelo (fondo de la tarjeta), lineal
+uniform vec4 u_envK;       // intensidades: caja principal, caja derecha, panel trasero, penumbra del estudio
+uniform vec4 u_envB;       // panel trasero: elevación del centro (rad), semialto hacia arriba y hacia abajo (tangentes); w = caja cenital
+// «ventana» rectangular blanda en la dirección c (semiancho w, semialto h, en tangentes)
+float box(vec3 r, vec3 c, float w, float h) {
+  vec3 up = abs(c.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
+  vec3 rt = normalize(cross(c, up)); up = cross(rt, c);
+  float d = dot(r, c); if (d <= 0.0) return 0.0;
+  vec2 q = vec2(dot(r, rt), dot(r, up)) / d;
+  return (1.0 - smoothstep(w * 0.8, w, abs(q.x))) * (1.0 - smoothstep(h * 0.8, h, abs(q.y)));
+}
+// Carpa de luz de estudio: suelo, paredes claras, techo más claro y tres cajas de luz
+vec3 env(vec3 r) {
+  vec3 c = mix(u_envFloor, vec3(u_envK.w), smoothstep(-0.2, 0.12, r.y));          // suelo (lo reflejan las paredes) → penumbra
+  c += vec3(u_envK.x) * box(r, normalize(vec3(-0.77, 0.58, -0.25)), 0.6, 0.32);        // caja principal: izquierda, algo detrás
+  c += vec3(u_envK.y) * box(r, normalize(vec3(0.72, 0.62, 0.1)), 0.42, 0.3);           // caja derecha
+  c += vec3(u_envB.w) * box(r, normalize(vec3(0.0, 0.85, 0.5)), 0.9, 0.6);             // caja cenital, algo adelantada (la reflejan los cantos)
+  // panel trasero: es lo que refleja la cara superior (degradado suave hacia arriba y hacia abajo)
+  vec3 bc = normalize(vec3(-0.1, tan(u_envB.x), -1.0)); float bd = dot(r, bc);
+  if (bd > 0.0) {
+    vec3 brt = normalize(cross(bc, vec3(0.0, 1.0, 0.0))); vec2 q = vec2(dot(r, brt), dot(r, cross(brt, bc))) / bd;
+    float fy = q.y > 0.0 ? 1.0 - smoothstep(0.02, u_envB.y, q.y) : 1.0 - smoothstep(0.02, u_envB.z, -q.y);
+    c += vec3(u_envK.z) * (1.0 - smoothstep(1.0, 1.7, abs(q.x))) * fy;
+  }
+  return c;
+}`;
+
+// Profundidad lineal empaquetada en 16 bits (RG) entre los planos cercano y lejano
 const FS_BACK = `#version 300 es
 precision highp float;
-in float v_vz; uniform float u_far; out vec4 o;
-void main() { float d = clamp(v_vz / u_far, 0.0, 1.0) * 255.0; o = vec4(floor(d) / 255.0, fract(d), 0.0, 1.0); }`;
+in float v_vz; in vec3 v_nrm; uniform vec2 u_range; out vec4 o;
+void main() { float d = clamp((v_vz - u_range.x) / (u_range.y - u_range.x), 0.0, 1.0) * 255.0; o = vec4(floor(d) / 255.0, fract(d), abs(normalize(v_nrm).y), 1.0); }`;
 
 // Mapa de alturas visto desde arriba: R = altura máxima, G = 1 - altura mínima (mezcla MAX)
 const VS_HEIGHT = `#version 300 es
@@ -450,9 +547,10 @@ void main() { v_y = a_pos.y; gl_Position = vec4((a_pos.x - u_c.x) / u_s, (a_pos.
 const FS_HEIGHT = `#version 300 es
 precision highp float;
 in float v_y; out vec4 o;
-void main() { float h = clamp(v_y / ${HMAX.toFixed(1)}, 0.0, 1.0); o = vec4(h, 1.0 - h, 0.0, 1.0); }`;
+void main() { float h = clamp(v_y / ${HMAX.toFixed(1)}, 0.0, 1.0); o = vec4(h, 1.0 - h, 1.0, 1.0); }`; // B = cobertura
 
-// Suelo: fondo de la tarjeta + sombra suave teñida + oclusión de contacto
+// Suelo. Modo 0 = lo que se ve a través de la pieza (suelo iluminado por la luz que la atraviesa);
+// modo 1 = en pantalla, solo la sombra (premultiplicada) sobre la tarjeta.
 const FS_FLOOR = `#version 300 es
 precision highp float;
 in vec3 v_pos;
@@ -461,125 +559,196 @@ uniform vec3 u_bg, u_tint; uniform vec2 u_shift; uniform float u_mode, u_strengt
 out vec4 o;
 void main() {
   vec2 uv = (v_pos.xz - u_c) / u_s * 0.5 + 0.5;
-  float occ = 0.0, ao = 0.0, bot = 0.0, n = 0.0;
+  float occ = 0.0, ao = 0.0, under = 0.0;
   // altura de la base bajo la pieza (para aclarar y ensanchar la sombra al levantarla)
-  vec4 c0 = textureLod(u_height, uv - u_shift, 0.0);
-  float lift = c0.r > 0.0 ? (1.0 - c0.g) * ${HMAX.toFixed(1)} : 0.0;
+  vec4 c0 = textureLod(u_height, uv - u_shift, 3.0);
+  float lift = c0.b > 0.02 ? clamp(1.0 - c0.g / c0.b, 0.0, 1.0) * ${HMAX.toFixed(1)} : 0.0;
   float rad = 0.035 + lift * 0.05;
   for (int i = 0; i < 12; i++) {
     float a = float(i) * 2.39996, r = sqrt((float(i) + 0.5) / 12.0);
     vec2 d = vec2(cos(a), sin(a)) * r;
     occ += smoothstep(0.0, 0.02, textureLod(u_height, uv - u_shift + d * rad, 2.5).r);
     vec4 c = textureLod(u_height, uv + d * 0.012, 0.0);
-    ao += smoothstep(0.0, 0.03, c.r) * smoothstep(0.12, 0.0, (1.0 - c.g) * ${HMAX.toFixed(1)});
+    ao += smoothstep(0.0, 0.03, c.r) * (1.0 - smoothstep(0.0, 0.12, (c.b > 0.02 ? clamp(1.0 - c.g / c.b, 0.0, 1.0) : 1.0) * ${HMAX.toFixed(1)}));
+    under += smoothstep(0.0, 0.02, textureLod(u_height, uv + d * 0.02, 1.5).r);
   }
-  occ /= 12.0; ao /= 12.0;
-  float a = clamp(occ * u_strength * exp(-lift * 1.5) + ao * u_contact, 0.0, 0.8);
-  vec3 sh = mix(vec3(0.16, 0.13, 0.12), u_tint * 0.55, 0.35);
-  if (u_mode < 0.5) o = vec4(mix(u_bg, sh, a), 1.0);   // fondo para la refracción
-  else o = vec4(sh * a, a);                               // en pantalla: solo la sombra (premultiplicada)
+  occ /= 12.0; ao /= 12.0; under /= 12.0;
+  if (u_mode < 0.5) {
+    // bajo la pieza el suelo recibe la luz teñida que la atraviesa
+    o = vec4(mix(u_bg, u_bg * u_tint, under * 0.85), 1.0);
+  } else {
+    float a = clamp(occ * u_strength * exp(-lift * 1.5) + ao * u_contact, 0.0, 0.8);
+    vec3 sh = mix(vec3(0.16, 0.13, 0.12), u_tint * 0.45, 0.4);
+    o = vec4(sh * a, a);
+  }
 }`;
 
-// Gelatina: refracción por grosor, absorción por capas, dispersión lechosa, Fresnel, GGX
+// Gelatina / cristal por capas
 const FS_JELLY = `#version 300 es
 precision highp float;
 in vec3 v_pos; in vec3 v_nrm; in vec3 v_x; in float v_vz;
-uniform sampler2D u_scene, u_back; uniform vec2 u_res; uniform vec3 u_cam; uniform mat4 u_view; uniform float u_far;
-uniform vec3 u_sig[3]; uniform vec3 u_milkC[3]; uniform float u_milk[3]; uniform vec2 u_layers; uniform vec3 u_L;
+uniform sampler2D u_scene, u_back; uniform vec2 u_res, u_range, u_refr; uniform vec3 u_cam; uniform mat4 u_view;
+uniform vec3 u_sig[3]; uniform vec3 u_scC[3]; uniform float u_sc[3]; uniform float u_path[3]; uniform float u_shade[3];
+uniform vec2 u_layers; uniform vec3 u_L; uniform vec4 u_look; uniform float u_T; uniform vec4 u_spec; uniform vec4 u_rect; uniform vec3 u_under;
 out vec4 o;
-// Estudio: cielo claro, una caja de luz grande arriba a la izquierda (el reflejo ancho) y relleno a la derecha
-float box(vec3 r, vec3 c, float w, float h) {
-  // «ventana» rectangular blanda en la dirección c (ancho w, alto h, en radianes aprox.)
-  vec3 up = abs(c.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0);
-  vec3 rt = normalize(cross(c, up)); up = cross(rt, c);
-  float d = dot(r, c); if (d <= 0.0) return 0.0;
-  vec2 q = vec2(dot(r, rt), dot(r, up)) / d;
-  return smoothstep(w, w * 0.6, abs(q.x)) * smoothstep(h, h * 0.6, abs(q.y));
+${GLSL_COMMON}
+// Hash entero (exacto): el mismo punto de la rejilla da siempre el mismo valor, venga de la celda que venga.
+// Con hashes en coma flotante las celdas vecinas pueden discrepar y se ven parches rectangulares.
+float hash3(vec3 p) {
+  ivec3 q = ivec3(floor(p + 0.5));
+  uint h = uint(q.x) * 374761393u + uint(q.y) * 668265263u + uint(q.z) * 2246822519u;
+  h = (h ^ (h >> 13)) * 1274126177u; h ^= h >> 16;
+  return float(h & 0xffffffu) / 16777216.0;
 }
-vec3 env(vec3 r) {
-  vec3 c = vec3(0.32, 0.32, 0.34) + vec3(0.5, 0.5, 0.52) * smoothstep(-0.4, 0.9, r.y);
-  c += vec3(3.2) * box(r, normalize(vec3(-0.4, 0.85, 0.35)), 0.9, 0.35);   // caja de luz principal (reflejo ancho)
-  c += vec3(1.6) * box(r, normalize(vec3(0.75, 0.55, 0.4)), 0.35, 0.3);    // relleno a la derecha
-  c += vec3(2.4) * box(r, normalize(vec3(-0.1, 0.55, -0.85)), 0.9, 0.22);  // ventana tras la pieza: es la que refleja la tapa plana
-  return c;
+float vnoise(vec2 p) {
+  vec2 i = floor(p), f = fract(p); f = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);   // interpolación quíntica (derivadas continuas)
+  float a = hash3(vec3(i, 1.0)), b = hash3(vec3(i + vec2(1.0, 0.0), 1.0)), c = hash3(vec3(i + vec2(0.0, 1.0), 1.0)), d = hash3(vec3(i + vec2(1.0, 1.0), 1.0));
+  return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
 }
+float ggx(float nh, float a2) { float d = nh * nh * (a2 - 1.0) + 1.0; return a2 / (3.14159 * d * d); }
 void main() {
   vec3 N = normalize(v_nrm), V = normalize(u_cam - v_pos);
+  float h = v_x.x; vec2 rest = v_x.yz;
+  float la = smoothstep(u_layers.x - 0.004, u_layers.x + 0.004, h);
+  float lb = smoothstep(u_layers.y - 0.004, u_layers.y + 0.004, h);
+  vec3 sig = mix(mix(u_sig[0], u_sig[1], la), u_sig[2], lb);
+  vec3 scC = toLin(mix(mix(u_scC[0], u_scC[1], la), u_scC[2], lb));
+  float sc = mix(mix(u_sc[0], u_sc[1], la), u_sc[2], lb);
+  float pmax = mix(mix(u_path[0], u_path[1], la), u_path[2], lb);
+  float shade = mix(mix(u_shade[0], u_shade[1], la), u_shade[2], lb);
+
+  // ondulación suave de la tapa (reflejos «líquidos»)
+  float wv = u_look.x * lb * smoothstep(0.3, 0.8, N.y);
+  if (wv > 0.0) {
+    vec2 p = rest * 2.3; float e = 0.07;
+    vec2 g = vec2(vnoise(p + vec2(e, 0.0)) - vnoise(p - vec2(e, 0.0)), vnoise(p + vec2(0.0, e)) - vnoise(p - vec2(0.0, e))) / (2.0 * e);
+    N = normalize(N + vec3(g.x, 0.0, g.y) * 0.16 * wv);
+  }
   float NdV = clamp(dot(N, V), 0.0, 1.0);
+
+  // grosor de gelatina que atraviesa el rayo (hasta la cara trasera o la franja crema)
   vec2 uv = gl_FragCoord.xy / u_res;
   vec4 bk = texture(u_back, uv);
-  float back = (bk.r + bk.g / 255.0) * u_far;
-  float t = clamp(back - v_vz, 0.0, 2.2);
-  float la = smoothstep(u_layers.x - 0.025, u_layers.x + 0.025, v_x.x);
-  float lb = smoothstep(u_layers.y - 0.025, u_layers.y + 0.025, v_x.x);
-  vec3 sig = mix(mix(u_sig[0], u_sig[1], la), u_sig[2], lb);
-  vec3 mc = mix(mix(u_milkC[0], u_milkC[1], la), u_milkC[2], lb);
-  float mk = mix(mix(u_milk[0], u_milk[1], la), u_milk[2], lb);
+  float back = u_range.x + (bk.r + bk.g / 255.0) * (u_range.y - u_range.x);
+  float t = clamp(back - v_vz, 0.0, 3.0);
+  // el rayo se refracta al entrar (n ≈ 1,45): por la tapa baja más vertical (recorrido más corto que en línea
+  // recta) y por las paredes más horizontal (más largo). Lo que hay al otro lado es casi siempre un plano
+  // horizontal (franja o suelo), así que el recorrido real escala con la componente vertical de ambos rayos.
+  vec3 Tr = refract(-V, N, 1.0 / 1.45);
+  float t0 = t;
+  t *= clamp(abs(V.y) / max(abs(Tr.y), 0.05), 0.4, 1.6);
+  float te = pmax * (1.0 - exp(-t / pmax));
+
+  // lo que hay detrás, refractado según la inclinación de la superficie y el grosor
   vec3 nV = mat3(u_view) * N;
-  // lo que hay detrás (suelo con sombra y la franja crema interior), refractado según el grosor; a lineal
-  vec3 bg = pow(texture(u_scene, clamp(uv - nV.xy * (0.035 + t * 0.05), 0.001, 0.999)).rgb, vec3(2.2));
-  mc = pow(mc, vec3(2.2));
-  float m = 1.0 - exp(-mk * t);
-  vec3 col = bg * exp(-sig * t) * (1.0 - m) + mc * m;
-  float dif = clamp(dot(N, u_L) * 0.5 + 0.5, 0.0, 1.0);
-  col *= 0.9 + 0.3 * dif;
-  // luz que entra por los bordes finos y biselados (brillo de borde, como en la foto)
-  float rim = pow(1.0 - NdV, 2.5) * smoothstep(u_layers.x * 0.5, u_layers.y, v_x.x);
-  col += (mc * 0.6 + 0.4) * rim * (0.18 + 0.35 * exp(-t * 4.0));
+  vec3 behind = toLin(texture(u_scene, clamp(uv - nV.xy * u_refr * (0.25 + te), 0.001, 0.999)).rgb);
+
+  // Tapa de cristal: si el rayo acabaría saliendo por una pared, en realidad rebota dentro (reflexión total)
+  // y lo que se ve es la franja crema con más recorrido, no el fondo
+  float isWall = lb * (1.0 - smoothstep(0.35, 0.75, bk.b)) * step(t0, 2.9);  // el rayo recto saldría por una pared
+  float dyTop = max(h - u_layers.y, 0.0) * u_T;                                // altura sobre la franja
+  float reach = dyTop * sqrt(max(1.0 - Tr.y * Tr.y, 0.0)) / max(abs(Tr.y), 0.05); // alcance horizontal del rayo refractado
+  float xw = t0 * sqrt(max(1.0 - V.y * V.y, 0.0));                             // distancia horizontal a esa pared
+  float tir = isWall * (1.0 - smoothstep(reach * 0.75, reach * 1.15, xw));     // rebota en la pared antes de llegar a la franja
+  behind = mix(behind, toLin(u_scC[1]) * 0.94, isWall);
+  float tBand = dyTop / max(abs(Tr.y), 0.05);
+  te = mix(te, pmax * (1.0 - exp(-(tBand * (1.0 + 0.9 * tir)) / pmax)), isWall);
+  behind *= exp(-sig * 0.05 * tir);
+
+  // Cara superior de cristal (pieza rectangular): junto a los cantos la franja recibe más luz (entra por la
+  // pared) y se ve un borde interior más claro, rematado por una línea fina
+  float line = 0.0;
+  if (u_rect.w > 0.0) {
+    vec2 qd = abs(rest) - u_rect.xy + u_rect.z;
+    float dEdge = -(length(max(qd, 0.0)) + min(max(qd.x, qd.y), 0.0) - u_rect.z);   // distancia al contorno (dentro > 0)
+    float topFace = lb * smoothstep(0.5, 0.9, N.y);
+    behind *= 1.0 + u_rect.w * (1.0 - smoothstep(0.07, 0.09, dEdge)) * topFace * (1.0 - isWall);
+    line = exp(-pow((dEdge - 0.092) / 0.008, 2.0)) * topFace;
+  }
+  float base = 1.0 - la;
+  // base: al fondo está el suelo bajo la pieza, iluminado por la luz teñida que la atraviesa
+  behind = mix(behind, u_under, base);
+
+  float m = 1.0 - exp(-sc * te);
+  float wrap = clamp(dot(N, u_L) * 0.5 + 0.5, 0.0, 1.0);
+  vec3 col = behind * exp(-sig * te) * (1.0 - m) + scC * m * (1.0 - shade * (1.0 - wrap));
+
+  col *= 1.0 - 0.09 * line;
+  // franja: algo más oscura hacia abajo; base: sombra bajo la franja, vetas de luz verticales y variación suave
+  float inBand = la * (1.0 - lb);
+  col *= 1.0 - u_look.w * inBand * (1.0 - smoothstep(u_layers.x, u_layers.y, h)) * 1.6;
+  col *= 1.0 - 0.3 * base * exp(-(u_layers.x - h) / 0.03);
+  float streak = smoothstep(0.52, 0.9, vnoise(vec2(rest.x * 3.1 + rest.y * 1.7, rest.y * 2.9 - rest.x * 1.3)));
+  col *= 1.0 + base * u_look.z * (0.75 * streak + 0.3 * (vnoise(rest * 1.9 + 7.0) - 0.5));
+  // tapa opalina: nubes suaves de densidad
+  col *= 1.0 + lb * u_look.x * 0.12 * (vnoise(rest * 2.6 + 3.0) - 0.5);
+
+  // motas (burbujas diminutas) dentro de la base
+  if (u_look.y > 0.0) {
+    vec3 q = vec3(rest.x, h * u_T, rest.y) * 70.0, id = floor(q), f = fract(q) - 0.5;
+    float rnd = hash3(id);
+    float speck = step(0.955, rnd) * (1.0 - smoothstep(0.05, 0.3, length(f + (vec3(hash3(id + 3.1), hash3(id + 7.3), hash3(id + 5.7)) - 0.5) * 0.5)));
+    col += vec3(0.55, 0.85, 0.9) * speck * 0.5 * u_look.y * base;
+  }
+
+  // reflejo del estudio (Fresnel) y brillos de la luz principal
   vec3 R = reflect(-V, N);
-  float F = 0.05 + 0.95 * pow(1.0 - NdV, 5.0);
+  float F = u_spec.x + (1.0 - u_spec.x) * pow(1.0 - NdV, 5.0);
   col = col * (1.0 - F) + env(R) * F;
-  col *= 1.0 - 0.25 * (1.0 - smoothstep(0.0, 0.3, v_x.x));   // la base queda en sombra junto al suelo
   vec3 H = normalize(u_L + V);
   float NdH = max(dot(N, H), 0.0), NdL = max(dot(N, u_L), 0.0);
-  float a2 = 0.0016, dd = NdH * NdH * (a2 - 1.0) + 1.0;
-  float D = a2 / (3.14159 * dd * dd);
-  col += vec3(1.0) * min(D * 0.06 * NdL, 4.0);
-  float a2b = 0.012, ddb = NdH * NdH * (a2b - 1.0) + 1.0;
-  col += vec3(0.95) * min(a2b / (3.14159 * ddb * ddb) * 0.05 * NdL, 1.5);
-  vec3 H2 = normalize(normalize(vec3(0.8, 0.45, 0.4)) + V);
-  float nh2 = max(dot(N, H2), 0.0), dd2 = nh2 * nh2 * (0.004 - 1.0) + 1.0;
-  col += vec3(0.5) * min(0.004 / (3.14159 * dd2 * dd2) * 0.04, 2.0);
-  o = vec4(pow(max(col, 0.0), vec3(1.0 / 2.2)), 1.0);
+  col += vec3(1.0) * min(ggx(NdH, 0.0009) * u_spec.y * NdL, 6.0);
+  col += vec3(1.0) * min(ggx(NdH, 0.02) * u_spec.z * NdL, 1.5);
+  o = vec4(toSrgb(col), 1.0);
 }`;
 
-// Franja crema interior: opaca, mate con un poco de brillo (va dentro de la escena que refracta el cristal)
+// Franja crema interior: opaca y mate (va dentro de la escena que refracta el cristal)
 const FS_BAND = `#version 300 es
 precision highp float;
 in vec3 v_pos; in vec3 v_nrm;
 uniform vec3 u_cam, u_L, u_color; out vec4 o;
+${GLSL_COMMON}
 void main() {
-  vec3 N = normalize(v_nrm), V = normalize(u_cam - v_pos);
-  vec3 base = pow(u_color, vec3(2.2));
-  float dif = clamp(dot(N, u_L), 0.0, 1.0);
-  vec3 col = base * (0.55 + 0.5 * dif);
-  vec3 H = normalize(u_L + V); float nh = max(dot(N, H), 0.0), dd = nh * nh * (0.05 - 1.0) + 1.0;
-  col += vec3(0.25) * min(0.05 / (3.14159 * dd * dd) * 0.1, 1.0);
-  o = vec4(pow(col, vec3(1.0 / 2.2)), 1.0);
+  vec3 N = normalize(v_nrm);
+  float wrap = clamp(dot(N, u_L) * 0.5 + 0.5, 0.0, 1.0);
+  o = vec4(toSrgb(toLin(u_color) * (1.0 - 0.3 * (1.0 - wrap))), 1.0);
 }`;
 
-// Adornos opacos (crema / puntos de color) con brillo
+// Adornos opacos esmaltados (marfil / puntos de color)
 const FS_DECO = `#version 300 es
 precision highp float;
 in vec3 v_pos; in vec3 v_nrm; in vec3 v_x;
-uniform vec3 u_cam, u_L; out vec4 o;
+uniform vec3 u_cam, u_L; uniform vec4 u_spec; out vec4 o;
+${GLSL_COMMON}
+float ggx(float nh, float a2) { float d = nh * nh * (a2 - 1.0) + 1.0; return a2 / (3.14159 * d * d); }
 void main() {
   vec3 N = normalize(v_nrm), V = normalize(u_cam - v_pos);
   float NdV = clamp(dot(N, V), 0.0, 1.0);
-  vec3 col = pow(v_x, vec3(2.2)) * (0.55 + 0.5 * clamp(dot(N, u_L), 0.0, 1.0));
-  float F = 0.05 + 0.95 * pow(1.0 - NdV, 5.0);
-  col = mix(col, vec3(1.0), F * 0.7);
-  vec3 H = normalize(u_L + V); float nh = max(dot(N, H), 0.0), dd = nh * nh * (0.006 - 1.0) + 1.0;
-  col += vec3(0.8) * min(0.006 / (3.14159 * dd * dd) * 0.08, 1.5);
-  o = vec4(pow(col, vec3(1.0 / 2.2)), 1.0);
+  float wrap = clamp(dot(N, u_L) * 0.5 + 0.5, 0.0, 1.0);
+  vec3 col = toLin(v_x) * (0.74 + 0.3 * wrap);
+  vec3 R = reflect(-V, N);
+  float F = 0.045 + 0.955 * pow(1.0 - NdV, 5.0);
+  col = col * (1.0 - F) + min(env(R), vec3(1.6)) * F * 0.6;
+  vec3 H = normalize(u_L + V); float NdH = max(dot(N, H), 0.0), NdL = max(dot(N, u_L), 0.0);
+  col += vec3(1.0) * min(ggx(NdH, 0.0012) * u_spec.y * 1.6 * NdL, 6.0);
+  col += vec3(1.0) * min(ggx(NdH, 0.03) * u_spec.z * 0.6 * NdL, 0.6);
+  o = vec4(toSrgb(col), 1.0);
 }`;
+
+// Calcas: color plano con alfa (sombras de contacto, ranura), premultiplicado
+const FS_DECAL = `#version 300 es
+precision highp float;
+in vec3 v_x; in float v_a; out vec4 o;
+void main() { o = vec4(v_x * v_a, v_a); }`;
 
 /* =========================================================================
  * PIEZA
  * ========================================================================= */
 export function createJelly3D(root, opts = {}) {
   const cfg = CONFIG3D;
-  const shape = SHAPES[opts.shape] ?? SHAPES.cloud;
+  const shape = structuredClone(SHAPES[opts.shape] ?? SHAPES.cloud);
+  // luz y brillos (ajustables con tune() en la página de pruebas)
+  const light = { dir: norm([-0.6, 0.72, -0.35]), env: [4.0, 2.6, 1.3, 0.16], back: [17, 0.3, 0.25], top: 2, floor: 0.5, spec: [0.045, 0.09, 0.035], refr: 0.16, ...(shape.light ?? {}), ...(opts.light ?? {}) };
   const box = root.offsetParent || root.parentElement;
   const canvas = document.createElement('canvas');
   canvas.className = 'jelly3d-canvas';
@@ -589,8 +758,8 @@ export function createJelly3D(root, opts = {}) {
   if (!gl) return null;
 
   const progs = {
-    back: program(gl, VS, FS_BACK), height: program(gl, VS_HEIGHT, FS_HEIGHT),
-    floor: program(gl, VS, FS_FLOOR), jelly: program(gl, VS, FS_JELLY), deco: program(gl, VS, FS_DECO), band: program(gl, VS, FS_BAND),
+    back: program(gl, VS, FS_BACK), height: program(gl, VS_HEIGHT, FS_HEIGHT), floor: program(gl, VS, FS_FLOOR),
+    jelly: program(gl, VS, FS_JELLY), deco: program(gl, VS, FS_DECO), band: program(gl, VS, FS_BAND), decal: program(gl, VS, FS_DECAL),
   };
   if (Object.values(progs).some(p => !p)) return null;
 
@@ -619,11 +788,6 @@ export function createJelly3D(root, opts = {}) {
   const edges = new Uint32Array([...edgeSet.values()].flat()), ne = edges.length / 2;
   const restLen = new Float32Array(ne);
   for (let e = 0; e < ne; e++) restLen[e] = dist(x, edges[e * 2], edges[e * 2 + 1]);
-
-  const surf = model.surface, deco = model.deco, band = model.band;
-  const bPos = new Float32Array(band.n * 3), bNrm = new Float32Array(band.n * 3);
-  const sPos = new Float32Array(surf.n * 3), sNrm = new Float32Array(surf.n * 3);
-  const dPos = deco ? new Float32Array(deco.n * 3) : null, dNrm = deco ? new Float32Array(deco.n * 3) : null;
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let grab = null, resetT = -1, sleeping = false, still = 0, acc = 0, last = 0, raf = 0, visible = true, destroyed = false;
@@ -754,11 +918,15 @@ export function createJelly3D(root, opts = {}) {
     v.fill(0); home.set(x);
   }
 
-  /* ----- Superficie cosida a los tetraedros ----- */
-  function skin(m, out, nrm) {
+  /* ----- Mallas cosidas a los tetraedros ----- */
+  // La retícula física deforma la superficie a trozos (lineal dentro de cada tetraedro): al asentarse por la
+  // gravedad quedarían facetas visibles en los reflejos. Por eso la normal final es la ideal de la malla sin
+  // deformar más el cambio respecto al reposo: en su sitio los reflejos son perfectamente lisos.
+  function skin(m, src = x, upload = true) {
+    const out = m.pos, nrm = m.nrm;
     for (let n = 0; n < m.n; n++) {
       let px = 0, py = 0, pz = 0;
-      for (let q = 0; q < 4; q++) { const i = m.ids[n * 4 + q] * 3, w = m.w[n * 4 + q]; px += x[i] * w; py += x[i + 1] * w; pz += x[i + 2] * w; }
+      for (let q = 0; q < 4; q++) { const i = m.ids[n * 4 + q] * 3, w = m.w[n * 4 + q]; px += src[i] * w; py += src[i + 1] * w; pz += src[i + 2] * w; }
       out[n * 3] = px; out[n * 3 + 1] = py; out[n * 3 + 2] = pz;
     }
     nrm.fill(0);
@@ -771,38 +939,75 @@ export function createJelly3D(root, opts = {}) {
       for (const k of [a, b, c]) { nrm[k] += nx; nrm[k + 1] += ny; nrm[k + 2] += nz; }
     }
     for (let k = 0; k < nrm.length; k += 3) { const l = Math.hypot(nrm[k], nrm[k + 1], nrm[k + 2]) || 1; nrm[k] /= l; nrm[k + 1] /= l; nrm[k + 2] /= l; }
+    if (!upload) return;
+    if (m.nIdeal) {
+      const a = m.nIdeal, b = m.nHome;
+      // cambio de la normal respecto al reposo, suavizado entre vértices vecinos (difumina las facetas de la retícula)
+      let d = m.dA, e = m.dB;
+      for (let k = 0; k < nrm.length; k++) d[k] = nrm[k] - b[k];
+      if (m.adj) for (let pass = 0; pass < 2; pass++) {
+        const st = m.adjStart, ad = m.adj;
+        for (let n = 0; n < m.n; n++) {
+          let sx = d[n * 3], sy = d[n * 3 + 1], sz = d[n * 3 + 2]; const i0 = st[n], i1 = st[n + 1];
+          for (let i = i0; i < i1; i++) { const q = ad[i] * 3; sx += d[q]; sy += d[q + 1]; sz += d[q + 2]; }
+          const c = 1 / (i1 - i0 + 1); e[n * 3] = sx * c; e[n * 3 + 1] = sy * c; e[n * 3 + 2] = sz * c;
+        }
+        const t = d; d = e; e = t;
+      }
+      for (let k = 0; k < nrm.length; k += 3) {
+        const nx = a[k] + d[k], ny = a[k + 1] + d[k + 1], nz = a[k + 2] + d[k + 2], l = Math.hypot(nx, ny, nz) || 1;
+        nrm[k] = nx / l; nrm[k + 1] = ny / l; nrm[k + 2] = nz / l;
+      }
+    }
+    gl.bindBuffer(gl.ARRAY_BUFFER, m.pb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, out);
+    gl.bindBuffer(gl.ARRAY_BUFFER, m.nb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrm);
   }
-
-  /* ----- GPU: buffers ----- */
-  const mkMesh = (m, posArr, nrmArr) => {
-    const vao = gl.createVertexArray(); gl.bindVertexArray(vao);
-    const pb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, posArr.byteLength, gl.DYNAMIC_DRAW);
-    gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
-    const nb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferData(gl.ARRAY_BUFFER, nrmArr.byteLength, gl.DYNAMIC_DRAW);
-    gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0);
-    const xb = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, xb); gl.bufferData(gl.ARRAY_BUFFER, m.extra, gl.STATIC_DRAW);
-    gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 0, 0);
-    const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, m.index, gl.STATIC_DRAW);
+  // normales de referencia: ideales (malla sin deformar) y las que da la retícula asentada en su sitio
+  function bakeNormals() {
+    for (const m of [surf, band, deco, decal]) {
+      if (!m) continue;
+      skin(m, x0, false); m.nIdeal = Float32Array.from(m.nrm);
+      skin(m, home, false); m.nHome = Float32Array.from(m.nrm);
+      m.dA = new Float32Array(m.n * 3); m.dB = new Float32Array(m.n * 3);
+    }
+    // vecinos de cada vértice de la superficie (para suavizar)
+    const nb = Array.from({ length: surf.n }, () => new Set()), I = surf.index;
+    for (let t = 0; t < I.length; t += 3) { const a = I[t], b = I[t + 1], c = I[t + 2]; nb[a].add(b).add(c); nb[b].add(a).add(c); nb[c].add(a).add(b); }
+    surf.adjStart = new Uint32Array(surf.n + 1);
+    for (let n = 0; n < surf.n; n++) surf.adjStart[n + 1] = surf.adjStart[n] + nb[n].size;
+    surf.adj = new Uint32Array(surf.adjStart[surf.n]);
+    for (let n = 0, k = 0; n < surf.n; n++) for (const q of nb[n]) surf.adj[k++] = q;
+  }
+  const mkMesh = m => {
+    if (!m) return null;
+    m.pos = new Float32Array(m.n * 3); m.nrm = new Float32Array(m.n * 3);
+    m.vao = gl.createVertexArray(); gl.bindVertexArray(m.vao);
+    const buf = (loc, size, data, usage) => {
+      const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferData(gl.ARRAY_BUFFER, data, usage);
+      gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0); return b;
+    };
+    m.pb = buf(0, 3, m.pos.byteLength, gl.DYNAMIC_DRAW); m.nb = buf(1, 3, m.nrm.byteLength, gl.DYNAMIC_DRAW);
+    buf(2, 3, m.extra, gl.STATIC_DRAW); buf(3, 1, m.alpha, gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer()); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, m.index, gl.STATIC_DRAW);
     gl.bindVertexArray(null);
-    return { vao, pb, nb, count: m.index.length, upload() {
-      gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, posArr);
-      gl.bindBuffer(gl.ARRAY_BUFFER, nb); gl.bufferSubData(gl.ARRAY_BUFFER, 0, nrmArr);
-    } };
+    m.draw = () => { gl.bindVertexArray(m.vao); gl.drawElements(gl.TRIANGLES, m.index.length, gl.UNSIGNED_INT, 0); };
+    return m;
   };
-  const gSurf = mkMesh(surf, sPos, sNrm), gDeco = deco ? mkMesh(deco, dPos, dNrm) : null, gBand = mkMesh(band, bPos, bNrm);
+  const surf = mkMesh(model.surface), band = mkMesh(model.band), deco = mkMesh(model.deco), decal = mkMesh(model.decal);
+  const sPos = surf.pos;
   const floorVao = gl.createVertexArray(); gl.bindVertexArray(floorVao);
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-30, 0, -30, 30, 0, -30, -30, 0, 30, 30, 0, 30]), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-40, 0, -40, 40, 0, -40, -40, 0, 40, 40, 0, 40]), gl.STATIC_DRAW);
   gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
-  gl.vertexAttrib3f(1, 0, 1, 0); gl.vertexAttrib3f(2, 0, 0, 0);
   gl.bindVertexArray(null);
+  gl.vertexAttrib3f(1, 0, 1, 0); gl.vertexAttrib3f(2, 0, 0, 0); gl.vertexAttrib1f(3, 1);
 
   const HS = 512;
   const heightT = tex(gl, HS, HS, true), heightFB = fbo(gl, heightT, null);
   let sceneT, sceneFB, sceneDepth, backT, backDepth, backFB, W = 1, H = 1;
 
-  /* ----- Cámara: la pieza en reposo ocupa el sitio y el tamaño del elemento `root` ----- */
-  let view, proj, viewProj, invVP, cam, far;
+  /* ----- Cámara: la de la foto. La pieza en reposo cae exactamente sobre el hueco `root` ----- */
+  let view, proj, viewProj, invVP, cam, near, far, refr = [0, 0];
   function layout() {
     const br = box.getBoundingClientRect(), rr = root.getBoundingClientRect();
     if (!br.width || !br.height || !rr.width) return false;
@@ -815,28 +1020,38 @@ export function createJelly3D(root, opts = {}) {
       sceneT = tex(gl, W, H); sceneDepth = rb(); sceneFB = fbo(gl, sceneT, sceneDepth);
       backT = tex(gl, W, H); backDepth = rb(); backFB = fbo(gl, backT, backDepth);
     }
-    const fov = cfg.camera.fov * DEG, el = cfg.camera.elevation * DEG;
-    // ancho en pantalla de la pieza en reposo
-    let mn = Infinity, mx = -Infinity;
-    for (const p of model.outline) { const wx = p.x * cy + p.z * sy; mn = Math.min(mn, wx); mx = Math.max(mx, wx); }
-    const fpx = (br.height / 2) / Math.tan(fov / 2);
-    const d = (mx - mn) * fpx / (rr.width * cfg.camera.fill);
-    const target = [0, model.T * 0.45, 0];
+    const vw = shape.view, el = vw.elevation * DEG, d = vw.distance;
+    const fpx = vw.scale * rr.width;                        // px por unidad a la distancia del centro de la pieza
+    const target = [0, model.T / 2, 0];
     cam = [0, target[1] + d * Math.sin(el), d * Math.cos(el)];
-    far = d * 4;
-    const hx = (rr.left + rr.width / 2 - br.left) / br.width * 2 - 1, hy = 1 - (rr.top + rr.height / 2 - br.top) / br.height * 2;
+    near = Math.max(0.1, d - 5); far = d + 5;
+    // el centro de la pieza se proyecta en el punto (cx, cy) del hueco
+    const tx = rr.left - br.left + vw.cx * rr.width, ty = rr.top - br.top + vw.cy * rr.height;
+    const sxn = tx / br.width * 2 - 1, syn = 1 - ty / br.height * 2;
     view = lookAt(cam, target, [0, 1, 0]);
-    proj = perspective(fov, br.width / br.height, d * 0.2, far, hx, hy);
+    proj = new Float32Array([2 * fpx * d / br.width, 0, 0, 0, 0, 2 * fpx * d / br.height, 0, 0, -sxn, -syn, (far + near) / (near - far), -1, 0, 0, 2 * far * near / (near - far), 0]);
     viewProj = mul4(proj, view); invVP = invert4(viewProj);
+    refr = [light.refr * fpx / br.width, light.refr * fpx / br.height];
     // paredes: los bordes de la tarjeta proyectados sobre el suelo, con margen
     const floorAt = (nx, ny) => { const [o, dir] = rayNdc(nx, ny); return dir[1] < -1e-4 ? [o[0] - dir[0] * o[1] / dir[1], o[2] - dir[2] * o[1] / dir[1]] : null; };
     const m = 0.45;
-    const lA = floorAt(-1, -1), lB = floorAt(-1, hy), rA = floorAt(1, -1), rB = floorAt(1, hy);
+    const lA = floorAt(-1, -1), lB = floorAt(-1, syn), rA = floorAt(1, -1), rB = floorAt(1, syn);
     if (lA && lB && rA && rB) {
       bounds.zNear = Math.max(lA[1], rA[1]) + 0.1;
       bounds.l = [lA[0] - m, lA[1], (lB[0] - lA[0]) / (lB[1] - lA[1] || 1)];
       bounds.r = [rA[0] + m, rA[1], (rB[0] - rA[0]) / (rB[1] - rA[1] || 1)];
       bounds.zFar = Math.min(-1.2, lB[1] - 1.2);
+      // las paredes nunca aprietan la pieza en su sitio (la foto sobresale de la tarjeta): se abren lo necesario
+      let needL = -Infinity, needR = -Infinity, zMax = -Infinity, zMin = Infinity;
+      for (let i = 0; i < np; i++) {
+        const px = x0[i * 3], pz = x0[i * 3 + 2];
+        needL = Math.max(needL, bounds.l[0] + (pz - bounds.l[1]) * bounds.l[2] - px);
+        needR = Math.max(needR, px - (bounds.r[0] + (pz - bounds.r[1]) * bounds.r[2]));
+        zMax = Math.max(zMax, pz); zMin = Math.min(zMin, pz);
+      }
+      if (needL > -0.08) bounds.l[0] -= needL + 0.08;
+      if (needR > -0.08) bounds.r[0] += needR + 0.08;
+      bounds.zNear = Math.max(bounds.zNear, zMax + 0.08); bounds.zFar = Math.min(bounds.zFar, zMin - 0.08);
     }
     return true;
   }
@@ -852,7 +1067,6 @@ export function createJelly3D(root, opts = {}) {
   }
 
   /* ----- Dibujo ----- */
-  const L = norm([-0.45, 0.85, 0.42]);
   const bgColor = () => {
     for (let el = box; el; el = el.parentElement) {
       const m = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
@@ -861,78 +1075,90 @@ export function createJelly3D(root, opts = {}) {
     return [1, 1, 1];
   };
   let bg = bgColor();
+  const uCache = new Map();
+  function U(p, n) { if (!uCache.has(p)) uCache.set(p, {}); const c = uCache.get(p); if (!(n in c)) c[n] = gl.getUniformLocation(p, n); return c[n]; }
+  function use(p) {
+    gl.useProgram(p);
+    gl.uniformMatrix4fv(U(p, 'u_view'), false, view); gl.uniformMatrix4fv(U(p, 'u_proj'), false, proj);
+    gl.uniform3fv(U(p, 'u_cam'), cam); gl.uniform3fv(U(p, 'u_L'), light.dir);
+    gl.uniform3fv(U(p, 'u_envFloor'), bg.map(c => Math.pow(c, 2.2) * light.floor)); gl.uniform4fv(U(p, 'u_envK'), light.env);
+    gl.uniform4f(U(p, 'u_spec'), light.spec[0], light.spec[1], light.spec[2], 0);
+    gl.uniform4f(U(p, 'u_envB'), light.back[0] * DEG, light.back[1], light.back[2], light.top);
+    return p;
+  }
   function draw() {
-    skin(surf, sPos, sNrm); gSurf.upload();
-    skin(band, bPos, bNrm); gBand.upload();
-    if (deco) { skin(deco, dPos, dNrm); gDeco.upload(); }
+    skin(surf); skin(band); if (deco) skin(deco); if (decal) skin(decal);
     let cxs = 0, czs = 0; for (let i = 0; i < np; i++) { cxs += x[i * 3]; czs += x[i * 3 + 2]; } cxs /= np; czs /= np;
-    const S = 2.6;
+    const SH = 2.6, L = light.dir;
 
-    // 1 · mapa de alturas
+    // 1 · mapa de alturas (para la sombra)
     gl.bindFramebuffer(gl.FRAMEBUFFER, heightFB); gl.viewport(0, 0, HS, HS);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     gl.disable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
     gl.enable(gl.BLEND); gl.blendEquation(gl.MAX); gl.blendFunc(gl.ONE, gl.ONE);
     gl.useProgram(progs.height);
-    gl.uniform2f(U(progs.height, 'u_c'), cxs, czs); gl.uniform1f(U(progs.height, 'u_s'), S);
-    gl.bindVertexArray(gSurf.vao); gl.drawElements(gl.TRIANGLES, gSurf.count, gl.UNSIGNED_INT, 0);
+    gl.uniform2f(U(progs.height, 'u_c'), cxs, czs); gl.uniform1f(U(progs.height, 'u_s'), SH);
+    surf.draw();
     gl.blendEquation(gl.FUNC_ADD); gl.disable(gl.BLEND);
     gl.bindTexture(gl.TEXTURE_2D, heightT); gl.generateMipmap(gl.TEXTURE_2D);
 
-    // 2 · suelo para la refracción
-    const floorU = (mode) => {
-      const p = progs.floor; gl.useProgram(p); setCam(p);
+    const floor = mode => {
+      const p = use(progs.floor);
       gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, heightT); gl.uniform1i(U(p, 'u_height'), 0);
-      gl.uniform2f(U(p, 'u_c'), cxs, czs); gl.uniform1f(U(p, 'u_s'), S);
+      gl.uniform2f(U(p, 'u_c'), cxs, czs); gl.uniform1f(U(p, 'u_s'), SH);
       gl.uniform3fv(U(p, 'u_bg'), bg); gl.uniform3fv(U(p, 'u_tint'), shape.tint);
       gl.uniform2f(U(p, 'u_shift'), -L[0] * 0.03, -L[2] * 0.03);
       gl.uniform1f(U(p, 'u_mode'), mode); gl.uniform1f(U(p, 'u_strength'), cfg.shadow.strength); gl.uniform1f(U(p, 'u_contact'), cfg.shadow.contact);
       gl.bindVertexArray(floorVao); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
+
+    // 2 · escena que se ve a través del cristal: suelo + franja crema
     gl.bindFramebuffer(gl.FRAMEBUFFER, sceneFB); gl.viewport(0, 0, W, H);
     gl.clearDepth(1); gl.clear(gl.DEPTH_BUFFER_BIT);
-    floorU(0);
+    gl.disable(gl.DEPTH_TEST);
+    floor(0);
     gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LESS); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
-    const pb = progs.band; gl.useProgram(pb); setCam(pb); gl.uniform3fv(U(pb, 'u_L'), L); gl.uniform3fv(U(pb, 'u_color'), shape.materials[1].milkColor);
-    gl.bindVertexArray(gBand.vao); gl.drawElements(gl.TRIANGLES, gBand.count, gl.UNSIGNED_INT, 0);
+    const pb = use(progs.band); gl.uniform3fv(U(pb, 'u_color'), shape.materials[1].color);
+    band.draw();
 
-    // 3 · caras traseras → grosor
+    // 3 · grosor: caras traseras del cristal o la franja, lo que esté antes
     gl.bindFramebuffer(gl.FRAMEBUFFER, backFB); gl.viewport(0, 0, W, H);
     gl.clearColor(1, 1, 0, 1); gl.clearDepth(1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LESS); gl.enable(gl.CULL_FACE); gl.cullFace(gl.FRONT);
-    gl.useProgram(progs.back); setCam(progs.back); gl.uniform1f(U(progs.back, 'u_far'), far);
-    gl.bindVertexArray(gSurf.vao); gl.drawElements(gl.TRIANGLES, gSurf.count, gl.UNSIGNED_INT, 0);
+    gl.cullFace(gl.FRONT);
+    const pk = use(progs.back); gl.uniform2f(U(pk, 'u_range'), near, far);
+    surf.draw();
     gl.cullFace(gl.BACK);
-    gl.bindVertexArray(gBand.vao); gl.drawElements(gl.TRIANGLES, gBand.count, gl.UNSIGNED_INT, 0);
+    band.draw();
 
-    // 4 · pantalla: sombra, gelatina y adornos
+    // 4 · pantalla: sombra, cristal, calcas y adornos
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, W, H);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.disable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE);
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    floorU(1);
+    floor(1);
     gl.disable(gl.BLEND);
     gl.enable(gl.DEPTH_TEST); gl.enable(gl.CULL_FACE); gl.cullFace(gl.BACK);
-    const pj = progs.jelly; gl.useProgram(pj); setCam(pj);
+    const pj = use(progs.jelly);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, sceneT); gl.uniform1i(U(pj, 'u_scene'), 0);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, backT); gl.uniform1i(U(pj, 'u_back'), 1);
-    gl.uniform2f(U(pj, 'u_res'), W, H); gl.uniform1f(U(pj, 'u_far'), far); gl.uniform3fv(U(pj, 'u_L'), L);
-    gl.uniform3fv(U(pj, 'u_sig'), shape.materials.flatMap(m => m.sigma));
-    gl.uniform3fv(U(pj, 'u_milkC'), shape.materials.flatMap(m => m.milkColor));
-    gl.uniform1fv(U(pj, 'u_milk'), shape.materials.map(m => m.milk));
+    gl.uniform2f(U(pj, 'u_res'), W, H); gl.uniform2f(U(pj, 'u_range'), near, far); gl.uniform2f(U(pj, 'u_refr'), refr[0], refr[1]);
+    const mt = shape.materials, lk = shape.look;
+    gl.uniform3fv(U(pj, 'u_sig'), mt.flatMap(m => m.sigma));
+    gl.uniform3fv(U(pj, 'u_scC'), mt.flatMap(m => m.color));
+    gl.uniform1fv(U(pj, 'u_sc'), mt.map(m => m.scatter));
+    gl.uniform1fv(U(pj, 'u_path'), mt.map(m => m.path)); gl.uniform1fv(U(pj, 'u_shade'), mt.map(m => m.shade ?? 0.3));
     gl.uniform2f(U(pj, 'u_layers'), shape.layers[0], shape.layers[1]);
-    gl.bindVertexArray(gSurf.vao); gl.drawElements(gl.TRIANGLES, gSurf.count, gl.UNSIGNED_INT, 0);
-    if (gDeco) {
-      const pd = progs.deco; gl.useProgram(pd); setCam(pd); gl.uniform3fv(U(pd, 'u_L'), L);
-      gl.bindVertexArray(gDeco.vao); gl.drawElements(gl.TRIANGLES, gDeco.count, gl.UNSIGNED_INT, 0);
+    gl.uniform4f(U(pj, 'u_look'), lk.wave, lk.speck, lk.streak, lk.bandShade); gl.uniform1f(U(pj, 'u_T'), model.T);
+    gl.uniform3fv(U(pj, 'u_under'), bg.map((c, i) => Math.pow(c * (1 - 0.85 * (1 - shape.tint[i])), 2.2)));
+    gl.uniform4f(U(pj, 'u_rect'), 1, (shape.rect?.depth ?? 0) / 2, shape.rect?.radius ?? 0, shape.rect ? (lk.border ?? 0) : 0);
+    surf.draw();
+    if (decal) {
+      gl.enable(gl.BLEND); gl.depthMask(false); gl.depthFunc(gl.LEQUAL);
+      use(progs.decal); decal.draw();
+      gl.disable(gl.BLEND); gl.depthMask(true); gl.depthFunc(gl.LESS);
     }
+    if (deco) { use(progs.deco); deco.draw(); }
     gl.bindVertexArray(null);
-  }
-  const uCache = new Map();
-  function U(p, n) { const k = p; if (!uCache.has(k)) uCache.set(k, {}); const c = uCache.get(k); if (!(n in c)) c[n] = gl.getUniformLocation(p, n); return c[n]; }
-  function setCam(p) {
-    gl.uniformMatrix4fv(U(p, 'u_view'), false, view); gl.uniformMatrix4fv(U(p, 'u_proj'), false, proj);
-    gl.uniform3fv(U(p, 'u_cam'), cam);
   }
 
   /* ----- Bucle ----- */
@@ -965,8 +1191,8 @@ export function createJelly3D(root, opts = {}) {
       const tv = [o[0] - sPos[a], o[1] - sPos[a + 1], o[2] - sPos[a + 2]];
       const u = dot3(tv, p) / det; if (u < 0 || u > 1) continue;
       const q = cross3(tv, e1), w = dot3(d, q) / det; if (w < 0 || u + w > 1) continue;
-      const dist = dot3(e2, q) / det;
-      if (dist > 0 && dist < best) { best = dist; hit = [o[0] + d[0] * dist, o[1] + d[1] * dist, o[2] + d[2] * dist]; }
+      const dd = dot3(e2, q) / det;
+      if (dd > 0 && dd < best) { best = dd; hit = [o[0] + d[0] * dd, o[1] + d[1] * dd, o[2] + d[2] * dd]; }
     }
     return hit;
   }
@@ -974,7 +1200,7 @@ export function createJelly3D(root, opts = {}) {
     const [o, d] = rayClient(cx, cyy), n = grab.normal;
     const den = dot3(d, n); if (Math.abs(den) < 1e-6) return grab.target;
     const t = dot3([grab.point[0] - o[0], grab.point[1] - o[1], grab.point[2] - o[2]], n) / den;
-    const p = [o[0] + d[0] * t, Math.min(cfg.grab.maxHeight, Math.max(0, o[1] + d[1] * t)), o[2] + d[2] * t];
+    const p = [o[0] + d[0] * t, o[1] + d[1] * t, o[2] + d[2] * t];
     // tope de la flexión: el punto agarrado no se aleja del centro del cuerpo más que en reposo + maxStretch
     const c = centroid(), dx = p[0] - c[0], dy = p[1] - c[1], dz = p[2] - c[2], l = Math.hypot(dx, dy, dz), mx = grab.restDist + cfg.grab.maxStretch;
     if (l > mx) { p[0] = c[0] + dx / l * mx; p[1] = c[1] + dy / l * mx; p[2] = c[2] + dz / l * mx; }
@@ -1038,8 +1264,7 @@ export function createJelly3D(root, opts = {}) {
       window.addEventListener('click', stop, { capture: true, once: true });
       setTimeout(() => window.removeEventListener('click', stop, { capture: true }), 0);
     } else {
-      // clic sin arrastrar: un golpecito
-      poke(g.point, cfg.grab.clickKick, cfg.grab.radius);
+      poke(g.point, cfg.grab.clickKick, cfg.grab.radius); // clic sin arrastrar: un golpecito
     }
     wake();
   }
@@ -1060,20 +1285,33 @@ export function createJelly3D(root, opts = {}) {
   ro.observe(box); ro.observe(root);
 
   box.appendChild(canvas);
-  layout(); settle(); draw();
+  layout(); settle(); bakeNormals(); draw();
   root.classList.add('jelly--3d');
 
-  return {
+  const api = {
     kind: '3d',
     reset() { if (grab || !moved) return; moved = false; resetT = 0; wake(); },
     get moved() { return moved; },
-    /** Caja envolvente de las partículas (para pruebas). */
+    /* --- utilidades para la página de pruebas --- */
+    /** Caja envolvente de las partículas. */
     bbox() {
       const b = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity];
       for (let i = 0; i < np; i++) for (let q = 0; q < 3; q++) { b[q] = Math.min(b[q], x[i * 3 + q]); b[q + 3] = Math.max(b[q + 3], x[i * 3 + q]); }
       return b.map(n => +n.toFixed(2));
     },
-    get stats() { return { particles: np, tets: nt, edges: ne, surface: surf.n }; },
+    get stats() { return { particles: np, tets: nt, edges: ne, surface: surf.n, band: band.n, deco: deco?.n ?? 0, decal: decal?.n ?? 0 }; },
+    /** Cambia materiales / luz en caliente y redibuja: tune({ materials, look, tint, light: { env, spec, dir, refr } }). */
+    tune(p = {}) {
+      if (p.materials) p.materials.forEach((m, i) => m && Object.assign(shape.materials[i], m));
+      if (p.look) Object.assign(shape.look, p.look);
+      if (p.tint) shape.tint = p.tint;
+      if (p.light) { Object.assign(light, p.light); if (p.light.dir) light.dir = norm(p.light.dir); }
+      layout(); draw();
+      return { materials: shape.materials, look: shape.look, tint: shape.tint, light };
+    },
+    /** Dibuja y devuelve los píxeles RGBA del lienzo (de abajo arriba) con su tamaño. */
+    pixels() { draw(); const px = new Uint8Array(W * H * 4); gl.readPixels(0, 0, W, H, gl.RGBA, gl.UNSIGNED_BYTE, px); return { width: W, height: H, data: px }; },
+    get shape() { return shape; },
     destroy() {
       destroyed = true; cancelAnimationFrame(raf); io.disconnect(); ro.disconnect();
       box.removeEventListener('pointerdown', onDown, true); box.removeEventListener('pointermove', onMove);
@@ -1081,8 +1319,11 @@ export function createJelly3D(root, opts = {}) {
       box.removeEventListener('pointerleave', onLeave); box.removeEventListener('touchstart', onTouch);
       box.style.cursor = ''; root.classList.remove('jelly--3d');
       canvas.remove(); gl.getExtension('WEBGL_lose_context')?.loseContext();
+      delete root.__jelly3d;
     },
   };
+  root.__jelly3d = api; // acceso desde las pruebas
+  return api;
 }
 
 /* ---------- utilidades ---------- */
