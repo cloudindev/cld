@@ -106,13 +106,19 @@
   background: #fff;
   box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.07);
   visibility: hidden; opacity: 0; transform: translateY(15px);
+  /* cerrado (y mientras se desvanece) no recoge el ratón: si no, al pasar por su zona se volvía a abrir */
+  pointer-events: none;
   transition: opacity var(--t-megamenu) var(--ease-out-expo), transform var(--t-megamenu) var(--ease-out-expo), visibility 0s linear var(--t-megamenu);
 }
+/* puente invisible sobre el hueco de 10 px entre la barra y el panel, para poder bajar a él */
+.megamenu::before { content: ''; position: absolute; left: 0; right: 0; top: -12px; height: 12px; }
 @media (min-width: 1200px) {
   .megamenu { left: calc(50% - 299.33px); }
 }
-.hasMega:hover .megamenu,
-.hasMega:focus-within .megamenu { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+/* se abre al pasar el ratón (con 0,1 s de margen para que no parpadee al pasar de largo) o con el teclado;
+   tras un clic no se queda abierto aunque el enlace conserve el foco */
+.hasMega:hover .megamenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0.1s; }
+.hasMega:has(:focus-visible) .megamenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 
 .mmTitle {
   padding: 3px 30px 14px;
@@ -213,10 +219,11 @@
   border-radius: 10px;
   box-shadow: 0 16px 50px 0 rgba(0, 0, 0, 0.07);
   visibility: hidden; opacity: 0; transform: translateY(15px);
+  pointer-events: none;   /* cerrado (y mientras se desvanece) no recoge el ratón (ver .megamenu) */
   transition: opacity var(--t-megamenu) var(--ease-out-expo), transform var(--t-megamenu) var(--ease-out-expo), visibility 0s linear var(--t-megamenu);
 }
-.hasSub:hover .hostingMenu,
-.hasSub:focus-within .hostingMenu { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; }
+.hasSub:hover .hostingMenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0.1s; }
+.hasSub:has(:focus-visible) .hostingMenu { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition-delay: 0s; }
 .hmMain { padding-right: 30px; border-right: 1px solid rgba(0, 0, 0, 0.1); }
 .hmTitle { padding: 3px 0 10px; font: 500 15px/15.75px var(--font-poppins); letter-spacing: -0.2px; color: #000; }
 .hmIcon { flex: none; display: flex; width: 49px; height: 49px; }
