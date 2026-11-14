@@ -9,8 +9,17 @@
   background: #fff;
   font: 700 19px/23.25px var(--font-poppins); letter-spacing: normal; color: #111;
   vertical-align: baseline;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .input::placeholder { color: #757575; opacity: 1; }
+/* Al escribir, el mismo efecto que el buscador de Academy: borde marino de 2 px y halo lila suave.
+   El segundo píxel del borde es una sombra, para que el texto no se mueva al enfocar. */
+.input:focus {
+  outline: 0;
+  border-color: #102036;
+  box-shadow: 0 0 0 1px #102036, 0 0 0 5px rgba(103, 121, 235, 0.22);
+}
+@media (prefers-reduced-motion: reduce) { .input { transition: none; } }
 .submit {
   width: 150px; height: 60px; margin-left: 5px;
   padding: 1px 6px;
