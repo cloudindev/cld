@@ -1,0 +1,85 @@
+/* Home · Cloudy asomado por encima del buscador de dominios (ver CloudySearch.tsx).
+   El borde superior del buscador es la raya de colores de la marca: Cloudy se esconde detrás de él. */
+section.section { padding-top: 18px; }
+
+/* Franja encima del buscador: titular a la izquierda y Cloudy a la derecha, encima del botón */
+.band { position: relative; }
+.title {
+  position: absolute; left: 0; bottom: 18px; z-index: 1;
+  font: 700 54px/1 var(--font-oswald); letter-spacing: -1px; text-transform: uppercase; color: #020202;
+  cursor: text;
+}
+.mark { display: inline-block; padding: 0 7px 4px 5px; background: var(--bg-highlight-ahora); }
+
+/* Personaje: alineado a la derecha, encima del botón «Buscar dominio» */
+.section .mascot {
+  --w: 220px;
+  --char-right: 4px;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+/* Buscador: la raya de colores es su borde superior (los extremos los redondea la propia caja) */
+.box { position: relative; overflow: hidden; padding-top: 14px; }
+.line { position: absolute; top: 0; left: 0; right: 0; display: flex; height: 4px; }
+.line span { flex: 1.7 1 0; }
+.line span:nth-child(1) { flex-grow: 1.5; background: #5b7bfb; }
+.line span:nth-child(2) { background: #23a9a3; }
+.line span:nth-child(3) { background: #01213a; }
+.line span:nth-child(4) { background: #f2a38b; }
+.line span:nth-child(5) { background: #e1603e; }
+.line span:nth-child(6) { background: #9ad8cc; }
+/* al zambullirse Cloudy, la raya se ondula desde donde está él (a la derecha) hacia la izquierda */
+.box[data-splash] .line span { animation: splash 0.75s cubic-bezier(0.3, 0.7, 0.4, 1) both; }
+.box[data-splash] .line span:nth-child(6) { animation-delay: 0.3s; }
+.box[data-splash] .line span:nth-child(5) { animation-delay: 0.36s; }
+.box[data-splash] .line span:nth-child(4) { animation-delay: 0.42s; }
+.box[data-splash] .line span:nth-child(3) { animation-delay: 0.48s; }
+.box[data-splash] .line span:nth-child(2) { animation-delay: 0.54s; }
+.box[data-splash] .line span:nth-child(1) { animation-delay: 0.6s; }
+@keyframes splash {
+  0%, 100% { transform: none; }
+  30% { transform: scaleY(2.2); }
+  60% { transform: scaleY(0.6); }
+}
+
+/* Burbuja de Cloudy (a su izquierda, con el rabito hacia él) */
+.bubble {
+  position: absolute; z-index: 3;
+  right: calc(var(--char-right) + var(--w) * 0.86);
+  bottom: calc(var(--clip) * 0.5);
+  width: max-content; max-width: 320px; padding: 12px 18px;
+  border-radius: 20px 20px 6px 20px;
+  background: #01213a; color: #fff;
+  font: 600 15px/1.35 var(--font-poppins);
+  box-shadow: 0 16px 30px -18px rgba(1, 33, 58, 0.6);
+  transform-origin: 100% 100%;
+  opacity: 0; transform: scale(0.6) translateY(10px);
+  transition: opacity 0.25s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.bubble::after {
+  content: ''; position: absolute; right: 6px; bottom: -7px;
+  width: 16px; height: 12px; background: #01213a;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+[data-state='up'] > .bubble[data-show='true'] { opacity: 1; transform: none; }
+.bubbleText { display: block; animation: say 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes say { from { opacity: 0; transform: translateY(6px); } }
+
+@media (max-width: 1199px) {
+  section.section { padding-top: 30px; }   /* DomainSearch deja 100 px arriba: aquí ese hueco lo ocupa Cloudy */
+  .section .mascot { --w: 200px; }
+  .title { left: 20px; font-size: 46px; }
+}
+/* en tablet y móvil el titular no cabe junto a la burbuja: solo Cloudy */
+@media (max-width: 1023px) { .title { display: none; } }
+@media (max-width: 767px) {
+  section.section { padding-top: 14px; }
+  .section .mascot { --w: 160px; --char-right: 2px; }
+  .bubble { max-width: calc(100vw - 40px - var(--w) * 0.86); padding: 10px 14px; font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bubble { transition: opacity 0.2s; transform: none; }
+  .bubbleText, .box[data-splash] .line span { animation: none; }
+}

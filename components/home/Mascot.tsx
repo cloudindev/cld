@@ -1,27 +1,33 @@
 'use client';
-// Raya de colores con el personaje de Cloudin asomado detrás: sigue el ratón con la cabeza y la mirada.
+// Personaje de Cloudin (Cloudy) asomado detrás de una raya de colores: sigue el ratón con la cabeza y la mirada.
+// En la home se asoma por encima del buscador de dominios (CloudySearch); en Academy, sobre la raya.
 // El motor (public/mascota/mascota.js) se carga en el navegador sin pasar por el bundler; hasta entonces
 // (o sin JS) se ve la imagen quieta. La sección es decorativa.
 import { useEffect, useRef, useState } from 'react';
 import s from './Mascot.module.css';
 
-type Mascot = { destroy(): void };
+/** Motor (public/mascota/mascota.js): look(x, y) le hace mirar un punto de la pantalla; look(null), al frente */
+export type MascotEngine = { destroy(): void; look(x: number | null, y?: number): void };
 const ENGINE = '/mascota/mascota.js';
 
 type Props = {
   align?: 'center' | 'right';   // 'right': asomado a la derecha (cabecera de Academy)
   className?: string;           // tamaño, posición y colores de la raya los pone quien lo usa (variables CSS)
-  down?: boolean;               // se zambulle detrás de la raya (misiones de la home); al volver a false, sube otra vez
+  down?: boolean;               // se zambulle detrás de la raya; al volver a false, sube otra vez
+  line?: boolean;               // false: sin raya propia (el horizonte lo pone otro elemento, p. ej. el buscador)
   onUp?: () => void;            // la primera vez que se asoma
-  children?: React.ReactNode;   // capas encima del personaje (la burbuja de diálogo de las misiones)
+  onEngine?: (m: MascotEngine | null) => void;   // el motor, cuando está listo (null al desmontar)
+  children?: React.ReactNode;   // capas encima del personaje (la burbuja de diálogo)
 };
 
-export function Mascot({ align = 'center', className = '', down = false, onUp, children }: Props) {
+export function Mascot({ align = 'center', className = '', down = false, line = true, onUp, onEngine, children }: Props) {
   const section = useRef<HTMLElement>(null);
   const char = useRef<HTMLDivElement>(null);
   const [up, setUp] = useState(false);
   const onUpRef = useRef(onUp);
   onUpRef.current = onUp;
+  const onEngineRef = useRef(onEngine);
+  onEngineRef.current = onEngine;
 
   // Se asoma (sube desde detrás de la raya) la primera vez que la sección entra en pantalla
   useEffect(() => {
@@ -35,11 +41,11 @@ export function Mascot({ align = 'center', className = '', down = false, onUp, c
   }, []);
 
   useEffect(() => {
-    let m: Mascot | undefined, cancelled = false;
-    import(/* webpackIgnore: true */ ENGINE).then((mod: { createMascot(el: HTMLElement): Mascot }) => {
-      if (!cancelled && char.current) m = mod.createMascot(char.current);
+    let m: MascotEngine | undefined, cancelled = false;
+    import(/* webpackIgnore: true */ ENGINE).then((mod: { createMascot(el: HTMLElement): MascotEngine }) => {
+      if (!cancelled && char.current) { m = mod.createMascot(char.current); onEngineRef.current?.(m); }
     }).catch(() => { /* sin motor: queda la imagen quieta */ });
-    return () => { cancelled = true; m?.destroy(); };
+    return () => { cancelled = true; m?.destroy(); onEngineRef.current?.(null); };
   }, []);
 
   return (
@@ -53,9 +59,11 @@ export function Mascot({ align = 'center', className = '', down = false, onUp, c
           <img src="/mascota/mascota.webp" alt="" width={542} height={402} draggable={false} />
         </div>
       </div>
-      <div className={s.line}>
-        <span /><span /><span /><span /><span /><span />
-      </div>
+      {line && (
+        <div className={s.line}>
+          <span /><span /><span /><span /><span /><span />
+        </div>
+      )}
       {children}
     </section>
   );

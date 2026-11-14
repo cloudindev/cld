@@ -28,6 +28,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1 };
 
 const GA_ID = 'G-LC74SXTVHY';
+// Asistente de Olabrain (widget de chat), en todas las páginas a petición del cliente (ver NOTAS.md, punto 41)
+const OLABRAIN_AGENT = '3c1d7f49-2af6-4648-b673-9a4aa6cfd09f';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -50,6 +52,8 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}');`}
         </Script>
+        {/* se carga cuando el navegador está libre: no retrasa la carga de la página */}
+        <Script src="https://app.olabrain.com/widget.js" data-agent={OLABRAIN_AGENT} strategy="lazyOnload" />
       </body>
     </html>
   );
