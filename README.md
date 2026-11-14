@@ -142,6 +142,7 @@ node tools/jelly/fit-materials.mjs web && node tools/jelly/fit-materials.mjs clo
 python3 tools/jelly/bake.py           # vuelca los materiales en SHAPES (public/jelly/jelly3d.js)
 node tools/jelly/shot.mjs && python3 tools/jelly/compare.py   # lado a lado con la foto + coincidencia de siluetas
 node tools/jelly/interactions.mjs     # arrastre, vuelta a su sitio, móvil y Firefox en la home
+node tools/jelly/shadow-check.mjs     # comprueba que la sombra no tenga líneas claras (añade «firefox» para Firefox)
 ```
 
 Todo se escribe en `_inventory/jelly/` (no se versiona). La página `/jelly/test.html?shape=web|cloud` muestra la pieza en el hueco exacto de la foto.

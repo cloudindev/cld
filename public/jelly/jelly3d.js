@@ -549,38 +549,61 @@ precision highp float;
 in float v_y; out vec4 o;
 void main() { float h = clamp(v_y / ${HMAX.toFixed(1)}, 0.0, 1.0); o = vec4(h, 1.0 - h, 1.0, 1.0); }`; // B = cobertura
 
+// Sombra del suelo: el mapa de alturas (512²) se resume en máscaras a 128² y la ancha se desenfoca con un
+// gaussiano separable. Así la penumbra es continua (un muestreo en disco deja lóbulos y escalones que en
+// pantalla se ven como líneas claras).
+const VS_QUAD = `#version 300 es
+layout(location=0) in vec3 a_pos; out vec2 v_uv;
+void main() { v_uv = a_pos.xy * 0.5 + 0.5; gl_Position = vec4(a_pos.xy, 0.0, 1.0); }`;
+// R = sombra ancha (más tenue cuanto más levantada está la pieza), G = sombra de contacto, B = cobertura
+const FS_RESOLVE = `#version 300 es
+precision highp float;
+uniform sampler2D u_height; out vec4 o;
+void main() {
+  ivec2 base = ivec2(gl_FragCoord.xy) * 4;
+  float soft = 0.0, contact = 0.0, cov = 0.0;
+  for (int j = 0; j < 4; j++) for (int i = 0; i < 4; i++) {
+    vec4 c = texelFetch(u_height, base + ivec2(i, j), 0);
+    float minH = (1.0 - c.g) * ${HMAX.toFixed(1)};      // altura de la base de la pieza sobre ese punto del suelo
+    soft += c.b * exp(-minH * 1.5);
+    contact += c.b * (1.0 - smoothstep(0.0, 0.12, minH));
+    cov += c.b;
+  }
+  o = vec4(soft, contact, cov, 16.0) / 16.0;
+}`;
+const FS_BLUR = `#version 300 es
+precision highp float;
+uniform sampler2D u_src; uniform vec2 u_dir; in vec2 v_uv; out vec4 o;
+void main() {
+  vec4 acc = vec4(0.0); float wsum = 0.0;
+  for (int i = -9; i <= 9; i++) { float w = exp(-float(i * i) / 22.0); acc += texture(u_src, v_uv + u_dir * float(i)) * w; wsum += w; }
+  o = acc / wsum;
+}`;
+
 // Suelo. Modo 0 = lo que se ve a través de la pieza (suelo iluminado por la luz que la atraviesa);
 // modo 1 = en pantalla, solo la sombra (premultiplicada) sobre la tarjeta.
 const FS_FLOOR = `#version 300 es
 precision highp float;
 in vec3 v_pos;
-uniform sampler2D u_height; uniform vec2 u_c; uniform float u_s;
+uniform sampler2D u_blur, u_res; uniform vec2 u_c; uniform float u_s;
 uniform vec3 u_bg, u_tint; uniform vec2 u_shift; uniform float u_mode, u_strength, u_contact;
 out vec4 o;
 void main() {
   vec2 uv = (v_pos.xz - u_c) / u_s * 0.5 + 0.5;
-  float occ = 0.0, ao = 0.0, under = 0.0;
-  // altura de la base bajo la pieza (para aclarar y ensanchar la sombra al levantarla)
-  vec4 c0 = textureLod(u_height, uv - u_shift, 3.0);
-  float lift = c0.b > 0.02 ? clamp(1.0 - c0.g / c0.b, 0.0, 1.0) * ${HMAX.toFixed(1)} : 0.0;
-  float rad = 0.035 + lift * 0.05;
-  for (int i = 0; i < 12; i++) {
-    float a = float(i) * 2.39996, r = sqrt((float(i) + 0.5) / 12.0);
-    vec2 d = vec2(cos(a), sin(a)) * r;
-    occ += smoothstep(0.0, 0.02, textureLod(u_height, uv - u_shift + d * rad, 2.5).r);
-    vec4 c = textureLod(u_height, uv + d * 0.012, 0.0);
-    ao += smoothstep(0.0, 0.03, c.r) * (1.0 - smoothstep(0.0, 0.12, (c.b > 0.02 ? clamp(1.0 - c.g / c.b, 0.0, 1.0) : 1.0) * ${HMAX.toFixed(1)}));
-    under += smoothstep(0.0, 0.02, textureLod(u_height, uv + d * 0.02, 1.5).r);
-  }
-  occ /= 12.0; ao /= 12.0; under /= 12.0;
   if (u_mode < 0.5) {
     // bajo la pieza el suelo recibe la luz teñida que la atraviesa
-    o = vec4(mix(u_bg, u_bg * u_tint, under * 0.85), 1.0);
-  } else {
-    float a = clamp(occ * u_strength * exp(-lift * 1.5) + ao * u_contact, 0.0, 0.8);
-    vec3 sh = mix(vec3(0.16, 0.13, 0.12), u_tint * 0.45, 0.4);
-    o = vec4(sh * a, a);
+    o = vec4(mix(u_bg, u_bg * u_tint, smoothstep(0.0, 0.7, texture(u_blur, uv).b) * 0.85), 1.0);
+    return;
   }
+  // sombra ancha: desplazada en contra de la luz; sombra de contacto: pegada a la pieza (filtro tienda 3×3)
+  float soft = smoothstep(0.0, 0.9, texture(u_blur, uv - u_shift).r);
+  float ao = 0.0;
+  for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++)
+    ao += texture(u_res, uv + vec2(float(i), float(j)) / 128.0).g * (2.0 - abs(float(i))) * (2.0 - abs(float(j)));
+  ao /= 16.0;
+  float a = clamp(soft * u_strength + ao * u_contact, 0.0, 0.8);
+  vec3 sh = mix(vec3(0.16, 0.13, 0.12), u_tint * 0.45, 0.4);
+  o = vec4(sh * a, a);
 }`;
 
 // Gelatina / cristal por capas
@@ -759,6 +782,7 @@ export function createJelly3D(root, opts = {}) {
 
   const progs = {
     back: program(gl, VS, FS_BACK), height: program(gl, VS_HEIGHT, FS_HEIGHT), floor: program(gl, VS, FS_FLOOR),
+    resolve: program(gl, VS_QUAD, FS_RESOLVE), blur: program(gl, VS_QUAD, FS_BLUR),
     jelly: program(gl, VS, FS_JELLY), deco: program(gl, VS, FS_DECO), band: program(gl, VS, FS_BAND), decal: program(gl, VS, FS_DECAL),
   };
   if (Object.values(progs).some(p => !p)) return null;
@@ -1002,8 +1026,17 @@ export function createJelly3D(root, opts = {}) {
   gl.bindVertexArray(null);
   gl.vertexAttrib3f(1, 0, 1, 0); gl.vertexAttrib3f(2, 0, 0, 0); gl.vertexAttrib1f(3, 1);
 
-  const HS = 512;
-  const heightT = tex(gl, HS, HS, true), heightFB = fbo(gl, heightT, null);
+  const quadVao = gl.createVertexArray(); gl.bindVertexArray(quadVao);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 0, 1, -1, 0, -1, 1, 0, 1, 1, 0]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+  gl.bindVertexArray(null);
+
+  const HS = 512, RS = 128; // mapa de alturas y máscaras de sombra (RS = HS / 4)
+  const heightT = tex(gl, HS, HS), heightFB = fbo(gl, heightT, null);
+  const resT = tex(gl, RS, RS), resFB = fbo(gl, resT, null);
+  const blurAT = tex(gl, RS, RS), blurAFB = fbo(gl, blurAT, null);
+  const blurBT = tex(gl, RS, RS), blurBFB = fbo(gl, blurBT, null);
   let sceneT, sceneFB, sceneDepth, backT, backDepth, backFB, W = 1, H = 1;
 
   /* ----- Cámara: la de la foto. La pieza en reposo cae exactamente sobre el hueco `root` ----- */
@@ -1100,11 +1133,18 @@ export function createJelly3D(root, opts = {}) {
     gl.uniform2f(U(progs.height, 'u_c'), cxs, czs); gl.uniform1f(U(progs.height, 'u_s'), SH);
     surf.draw();
     gl.blendEquation(gl.FUNC_ADD); gl.disable(gl.BLEND);
-    gl.bindTexture(gl.TEXTURE_2D, heightT); gl.generateMipmap(gl.TEXTURE_2D);
+    // máscaras de sombra a 128² y desenfoque gaussiano (horizontal + vertical) de la ancha
+    gl.viewport(0, 0, RS, RS); gl.bindVertexArray(quadVao); gl.activeTexture(gl.TEXTURE0);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, resFB); gl.useProgram(progs.resolve);
+    gl.bindTexture(gl.TEXTURE_2D, heightT); gl.uniform1i(U(progs.resolve, 'u_height'), 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.useProgram(progs.blur); gl.uniform1i(U(progs.blur, 'u_src'), 0);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, blurAFB); gl.bindTexture(gl.TEXTURE_2D, resT); gl.uniform2f(U(progs.blur, 'u_dir'), 1 / RS, 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, blurBFB); gl.bindTexture(gl.TEXTURE_2D, blurAT); gl.uniform2f(U(progs.blur, 'u_dir'), 0, 1 / RS); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     const floor = mode => {
       const p = use(progs.floor);
-      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, heightT); gl.uniform1i(U(p, 'u_height'), 0);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, blurBT); gl.uniform1i(U(p, 'u_blur'), 0);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, resT); gl.uniform1i(U(p, 'u_res'), 1);
       gl.uniform2f(U(p, 'u_c'), cxs, czs); gl.uniform1f(U(p, 'u_s'), SH);
       gl.uniform3fv(U(p, 'u_bg'), bg); gl.uniform3fv(U(p, 'u_tint'), shape.tint);
       gl.uniform2f(U(p, 'u_shift'), -L[0] * 0.03, -L[2] * 0.03);
