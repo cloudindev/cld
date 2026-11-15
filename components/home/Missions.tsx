@@ -1,5 +1,5 @@
 'use client';
-// Home · «¿Qué hacemos hoy?»: las misiones de Cloudy, debajo del personaje asomado sobre la raya.
+// Home · «¿Qué necesita tu empresa?»: las misiones de Cloudy, debajo del personaje asomado sobre la raya.
 // Contenido en content/misiones.ts (los planes son simulados). Ver NOTAS.md, punto 39.
 //
 // Al elegir una tarjeta:
@@ -187,11 +187,8 @@ export function Missions() {
       <Mascot down={down} />
 
       <div className={s.head}>
-        <div>
-          <p className={s.eyebrow}>{misiones.eyebrow}</p>
-          <h2 className={s.title}>{misiones.title} <span className={s.mark}>{misiones.highlight}</span></h2>
-        </div>
-        <p className={s.lead}>{misiones.text}</p>
+        <p className={s.eyebrow}>{misiones.eyebrow}</p>
+        <h2 className={s.title}>{misiones.title} <span className={s.mark}>{misiones.highlight}</span></h2>
       </div>
 
       <div ref={stage} className={s.stage}>

@@ -1,4 +1,4 @@
-/* Home · «¿Qué hacemos hoy?»: las misiones de Cloudy (ver Missions.tsx y NOTAS.md, punto 39).
+/* Home · «¿Qué necesita tu empresa?»: las misiones de Cloudy (ver Missions.tsx y NOTAS.md, punto 39).
    Tipografía y color de la home: Oswald en los titulares con el resaltado turquesa de «AHORA», Poppins en
    el texto, marino #01213a. Cada misión tiene su color (--accent / --soft).
    --studio es el gris claro del fondo de los vídeos de Cloudy: con él, el vídeo se funde con el panel. */
@@ -13,14 +13,10 @@
 }
 
 /* ---------- Titular ---------- */
-.head {
-  display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
-  width: var(--wrap); margin: 64px auto 0;
-}
+.head { width: var(--wrap); margin: 64px auto 0; }
 .eyebrow { margin-bottom: 16px; font: 600 12px/1 var(--font-poppins); letter-spacing: 2.4px; text-transform: uppercase; color: var(--muted); }
 .title { font: 700 68px/0.95 var(--font-oswald); letter-spacing: -1px; text-transform: uppercase; color: #020202; }
 .mark { display: inline-block; padding: 0 8px 5px 6px; background: var(--bg-highlight-ahora); }
-.lead { max-width: 380px; padding-bottom: 6px; font: 400 17px/1.6 var(--font-poppins); color: #4d4d4d; }
 
 /* ---------- Escenario: tarjetas o panel ---------- */
 .stage { position: relative; width: var(--wrap); margin: 40px auto 0; }
@@ -223,9 +219,9 @@
 }
 @media (max-width: 767px) {
   .missions { padding-bottom: 70px; }
-  .head { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 44px; }
+  .head { margin-top: 44px; }
   .title { font-size: 44px; }
-  .lead { font-size: 16px; }
+  .title .mark { margin-top: 6px; }   /* «EMPRESA?» baja a la segunda línea: aire bajo el «¿» de la primera */
   .stage { margin-top: 26px; }
   .cardTitle { font-size: 21px; }
   .cardText { font-size: 14px; }

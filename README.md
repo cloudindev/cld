@@ -152,7 +152,7 @@ Para añadir una guía, escribe otro objeto en el fichero de su tema: la página
 
 ## Misiones de Cloudy (home)
 
-Debajo del personaje, «¿Qué hacemos hoy?»: tres tarjetas (Páginas web, Correo electrónico, Marketing). Al elegir una, Cloudy se zambulle detrás de la raya y la tarjeta se abre hasta mostrar su vídeo y dos planes. Componente en `components/home/Missions.tsx`; textos, colores, vídeos y planes en `content/misiones.ts` (**los planes son simulados**: hay que poner los reales).
+Debajo del personaje, «¿Qué necesita tu empresa?»: tres tarjetas (Páginas web, Correo electrónico, Marketing). Al elegir una, Cloudy se zambulle detrás de la raya y la tarjeta se abre hasta mostrar su vídeo y dos planes. Componente en `components/home/Missions.tsx`; textos, colores, vídeos y planes en `content/misiones.ts` (**los planes son simulados**: hay que poner los reales).
 
 Los vídeos originales están en `assets/mascota/cloudy-*.mp4`; para la web se recodifican (sin audio, unos 300 KB) con su portada: `sh tools/mascota/videos.sh`. Pruebas: `node tools/mascota/misiones.mjs`. Detalles en NOTAS.md, punto 39.
 

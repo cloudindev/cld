@@ -1,4 +1,4 @@
-// Home · «¿Qué hacemos hoy?»: las misiones de Cloudy (debajo del personaje asomado sobre la raya).
+// Home · «¿Qué necesita tu empresa?»: las misiones de Cloudy (debajo del personaje asomado sobre la raya).
 // Tres tarjetas; al elegir una, Cloudy se zambulle detrás de la raya y aparece su vídeo con dos planes.
 // LOS PLANES SON SIMULADOS (nombres, precios y características de ejemplo): ver NOTAS.md, punto 39.
 
@@ -31,9 +31,8 @@ export type Mision = {
 
 export const misiones = {
   eyebrow: 'Cloudy está listo',
-  title: '¿Qué hacemos',
-  highlight: 'hoy?',
-  text: 'Elige una misión y mira a Cloudy ponerse manos a la obra.',
+  title: '¿Qué necesita tu',
+  highlight: 'empresa?',
   more: 'Ver planes',
   close: 'Volver a las misiones',
   note: 'Precios sin IVA.',
