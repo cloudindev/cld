@@ -297,13 +297,12 @@ function Card({ m, i, k, picked, disabled, hidden, onChoose, windowRef, buttonRe
         <img src={m.video.poster} alt="" width={1284} height={716} loading="lazy" decoding="async" />
         <video ref={vid} muted loop playsInline preload="none" aria-hidden="true" className={playing ? s.on : ''}
           onPlaying={() => setPlaying(true)} onPause={() => setPlaying(false)} />
-        <span className={s.num}>Misión {m.num}</span>
       </span>
       <span className={s.body}>
         <span className={s.cardTitle}>{m.card.title}</span>
         <span className={s.go} aria-hidden="true"><Arrow /></span>
         <span id={`mision-${m.id}-texto`} className={s.cardText}>{m.card.text}</span>
-        <span className={s.teaser}>2 planes · desde {euros(desde(m))} €</span>
+        <span className={s.teaser}>desde {euros(desde(m))} €</span>
       </span>
     </button>
   );

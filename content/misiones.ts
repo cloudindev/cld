@@ -19,8 +19,7 @@ export type Plan = {
 
 export type Mision = {
   id: MisionId;
-  num: string;
-  accent: string;          // color de la misión (sale de la raya de colores de la marca)
+  accent: string;          // color de la misión (punto de la tarjeta, flecha, plan destacado)
   soft: string;            // el mismo color, muy claro (fondos de etiquetas y botones)
   card: { title: string; text: string };
   short: string;           // nombre corto (pastillas del panel en móvil)
@@ -39,7 +38,6 @@ export const misiones = {
   items: [
     {
       id: 'web',
-      num: '01',
       accent: '#23a9a3',
       soft: '#dff3f1',
       card: { title: 'Páginas web', text: 'A medida en WordPress o lista en minutos con inteligencia artificial.' },
@@ -74,7 +72,6 @@ export const misiones = {
     },
     {
       id: 'correo',
-      num: '02',
       accent: '#5b7bfb',
       soft: '#e6ebff',
       card: { title: 'Correo electrónico', text: 'Correo profesional con tu dominio, sin spam y en todos tus dispositivos.' },
@@ -108,7 +105,6 @@ export const misiones = {
     },
     {
       id: 'marketing',
-      num: '03',
       accent: '#e1603e',
       soft: '#fdebe4',
       card: { title: 'Marketing', text: 'Que te encuentren en Google y confíen en ti a la primera.' },

@@ -63,6 +63,13 @@ const shot = (p, name, clip) => p.screenshot({ path: `${OUT}${ENG}-${name}.png`,
   let c = await cloudy(p);
   ok('Cloudy se asoma sin burbuja', c.state === 'up' && c.quiet, JSON.stringify({ state: c.state, quiet: c.quiet }));
   ok('Raya con los colores de la paleta', JSON.stringify(c.line) === JSON.stringify(PALETA), c.line.join(' · '));
+  // tarjetas sin el distintivo «Misión 0N»; abajo, solo el punto de color y el precio
+  const pie = await p.evaluate(() => ({
+    badges: document.querySelectorAll('[class*="Missions_num"]').length,
+    teasers: [...document.querySelectorAll('[class*="Missions_teaser"]')].map(e => e.textContent),
+    dot: getComputedStyle(document.querySelector('[class*="Missions_teaser"]'), '::before').backgroundColor,
+  }));
+  ok('Tarjetas: sin «Misión 0N» y abajo solo el punto y «desde…»', !pie.badges && JSON.stringify(pie.teasers) === JSON.stringify(['desde 14,90 €', 'desde 1,49 €', 'desde 149 €']) && pie.dot !== 'rgba(0, 0, 0, 0)', JSON.stringify(pie));
   await shot(p, '1-tarjetas', await area());
 
   // pasar el ratón por la tarjeta de correo: se anima la ventana (Cloudy no dice nada)
