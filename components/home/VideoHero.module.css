@@ -1,6 +1,5 @@
-/* Tarjeta de vídeo de 4 capítulos (justo antes de «Y los mejores clientes del mundo») · mismo ancho y radio
-   que las tarjetas de planes */
-.section { max-width: var(--container-boxed); margin-inline: auto; padding: 90px 0 30px; }
+/* Tarjeta hero de vídeo bajo el buscador · mismo ancho y radio que las tarjetas de planes */
+.section { max-width: var(--container-boxed); margin-inline: auto; padding: 20px 0 0; }
 .card {
   position: relative; overflow: hidden;
   aspect-ratio: 2 / 1;
@@ -44,7 +43,7 @@
 .toggle svg { width: 20px; height: 20px; fill: currentColor; }
 
 @media (max-width: 1199px) {
-  .section { max-width: none; padding: 70px 20px 20px; }
+  .section { max-width: none; padding: 20px 20px 0; }
   .overlay { padding: 60px 36px 28px; }
 }
 @media (max-width: 1023px) {
@@ -59,7 +58,7 @@
   .bar { order: 2; }
 }
 @media (max-width: 767px) {
-  .section { padding: 50px 10px 10px; }
+  .section { padding: 15px 10px 0; }
   .card { aspect-ratio: 4 / 5; }
   .overlay { padding: 60px 18px 20px; }
 }

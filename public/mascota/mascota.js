@@ -180,9 +180,6 @@ export function createMascot(root, opts = {}) {
     get kind() { return renderer?.kind; },
     /** Para pruebas: fija la mirada (−1…1) sin muelle y dibuja. */
     pose(x, y, b = 0) { look.x = look.tx = x; look.y = look.ty = y; look.vx = look.vy = 0; blink = b; draw(); },
-    /** Mira a un punto de la pantalla (coordenadas de cliente), p. ej. donde se está escribiendo; null = al frente.
-     *  Con muelle, como con el ratón; el siguiente movimiento del ratón vuelve a mandar. */
-    look(x, y) { pointer = x == null ? null : { x, y }; wake(); },
     destroy() {
       destroyed = true; cancelAnimationFrame(raf); clearTimeout(blinkTimer); clearTimeout(touchTimer); io.disconnect();
       window.removeEventListener('pointermove', onMove); window.removeEventListener('pointerdown', onTouch);

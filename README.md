@@ -148,11 +148,11 @@ Para añadir una guía, escribe otro objeto en el fichero de su tema: la página
 
 ## Personaje asomado
 
-`public/mascota/` contiene el personaje (Cloudy), que en la home se asoma por encima del buscador de dominios (`components/home/CloudySearch.tsx`) y en Academy sobre la raya: `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`; `look(x, y)` le hace mirar un punto (en el buscador, donde se escribe). Detalles en NOTAS.md, puntos 36 y 40. Pruebas del buscador: `node tools/mascota/buscador.mjs`.
+`public/mascota/` contiene el personaje (Cloudy) de la sección de la raya: en la home, entre los planes y las misiones de Cloudy; en Academy, asomado a la derecha de la cabecera. Son `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`. Detalles en NOTAS.md, punto 36.
 
 ## Misiones de Cloudy (home)
 
-«¿Qué hacemos hoy?», debajo de los planes: tres tarjetas (Páginas web, Correo electrónico, Marketing). Al elegir una, la tarjeta se abre hasta mostrar el vídeo de Cloudy en esa misión y dos planes. Componente en `components/home/Missions.tsx`; textos, colores, vídeos y planes en `content/misiones.ts` (**los planes son simulados**: hay que poner los reales).
+Debajo del personaje, «¿Qué hacemos hoy?»: tres tarjetas (Páginas web, Correo electrónico, Marketing). Al elegir una, Cloudy se zambulle detrás de la raya y la tarjeta se abre hasta mostrar su vídeo y dos planes. Componente en `components/home/Missions.tsx`; textos, colores, vídeos y planes en `content/misiones.ts` (**los planes son simulados**: hay que poner los reales).
 
 Los vídeos originales están en `assets/mascota/cloudy-*.mp4`; para la web se recodifican (sin audio, unos 300 KB) con su portada: `sh tools/mascota/videos.sh`. Pruebas: `node tools/mascota/misiones.mjs`. Detalles en NOTAS.md, punto 39.
 
@@ -180,7 +180,7 @@ Los formularios mantienen sus campos, nombres, obligatorios y validación. El en
 
 ## Asistente (Olabrain)
 
-El widget de Olabrain se carga en todas las páginas desde `app/layout.tsx` (`next/script`, `lazyOnload`). Para cambiar de agente, cambia `OLABRAIN_AGENT`. Detalles en NOTAS.md, punto 41.
+El widget de Olabrain se carga en todas las páginas desde `app/layout.tsx` (`next/script`, `lazyOnload`). Para cambiar de agente, cambia `OLABRAIN_AGENT`. Prueba: `node tools/olabrain.mjs`. Detalles en NOTAS.md, punto 41.
 
 ## Analítica
 

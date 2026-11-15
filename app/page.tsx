@@ -1,5 +1,5 @@
 import { buildMetadata, JsonLd } from '@/lib/seo';
-import { CloudySearch } from '@/components/home/CloudySearch';
+import { DomainSearch } from '@/components/home/DomainSearch';
 import { HostingPlans } from '@/components/home/HostingPlans';
 import { Missions } from '@/components/home/Missions';
 import { VideoHero } from '@/components/home/VideoHero';
@@ -13,19 +13,19 @@ import { Family } from '@/components/home/Family';
 
 export const metadata = buildMetadata('/');
 
-// Orden de la home (cambios del cliente, ver NOTAS.md, puntos 35, 39 y 40): el buscador de dominios lleva a
-// Cloudy asomado por encima; las misiones sustituyen a «Digitaliza tu negocio»; el vídeo de 4 capítulos va
-// justo antes de «Y los mejores clientes del mundo»; «¿Qué necesitas para tu empresa?» ya no está en la home.
+// «¿Qué necesitas para tu empresa?» (Needs) ya no está en la home: sigue en /hosting-y-dominios-cloud-empresas/
+// (ver NOTAS.md, punto 40).
 export default function HomePage() {
   return (
     <>
       <JsonLd path="/" />
-      <CloudySearch />
+      <DomainSearch />
+      <VideoHero />
       <HostingPlans />
+      {/* personaje asomado sobre la raya + misiones de Cloudy (sustituye a «Digitaliza tu negocio», ver NOTAS.md, punto 39) */}
       <Missions />
       <Think />
       <ProductCards />
-      <VideoHero />
       <PortfolioSection />
       <Help />
       <Partners />
