@@ -24,10 +24,15 @@ async function open(ctxOpts, tag) {
   await p.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
   return { ctx, p };
 }
-const bubble = p => p.evaluate(() => {
-  const b = document.querySelector('span[data-show]');
-  const st = b?.closest('[data-state]')?.getAttribute('data-state');
-  return { text: b?.textContent ?? '', shown: b?.getAttribute('data-show') === 'true' && st === 'up', state: st };
+// Cloudy no habla (sin burbuja, a petición del cliente) y la raya lleva los colores de la paleta de la web
+const PALETA = ['rgb(0, 68, 235)', 'rgb(34, 215, 223)', 'rgb(1, 33, 58)', 'rgb(0, 252, 239)', 'rgb(91, 123, 251)', 'rgb(9, 193, 184)'];
+const cloudy = p => p.evaluate(() => {
+  const sec = document.querySelector('[class*="Mascot_section"]');
+  return {
+    state: sec.getAttribute('data-state'),
+    quiet: !document.querySelector('[class*="Missions_bubble"], span[data-show]') && !sec.textContent.trim(),
+    line: [...sec.querySelectorAll('[class*="Mascot_line"] > span')].map(e => getComputedStyle(e).backgroundColor),
+  };
 });
 // Elementos de la sección que se salen de la pantalla sin estar dentro de algo que los recorte (el carrusel).
 // (La home ya desbordaba antes por el portfolio y el bloque «Cta»; el body lo oculta. Aquí solo se mira esta sección.)
@@ -46,7 +51,7 @@ const shot = (p, name, clip) => p.screenshot({ path: `${OUT}${ENG}-${name}.png`,
 // ---------------- Escritorio ----------------
 {
   const { ctx, p } = await open({ viewport: { width: 1440, height: 900 } }, 'escritorio');
-  // llevar la sección a la vista: el personaje sube y saluda
+  // llevar la sección a la vista: el personaje sube
   await p.evaluate(() => { const m = document.querySelector('[class*="Mascot_section"]'); window.scrollTo(0, m.getBoundingClientRect().top + scrollY - 130); });
   await p.waitForTimeout(2600);
   const area = async () => {
@@ -55,15 +60,15 @@ const shot = (p, name, clip) => p.screenshot({ path: `${OUT}${ENG}-${name}.png`,
     });
     return r;
   };
-  let b = await bubble(p);
-  ok('Cloudy saluda al asomarse', b.shown && /Hola/.test(b.text), JSON.stringify(b));
+  let c = await cloudy(p);
+  ok('Cloudy se asoma sin burbuja', c.state === 'up' && c.quiet, JSON.stringify({ state: c.state, quiet: c.quiet }));
+  ok('Raya con los colores de la paleta', JSON.stringify(c.line) === JSON.stringify(PALETA), c.line.join(' · '));
   await shot(p, '1-tarjetas', await area());
 
-  // pasar el ratón por la tarjeta de correo: cambia la burbuja y se anima la ventana
+  // pasar el ratón por la tarjeta de correo: se anima la ventana (Cloudy no dice nada)
   await p.locator('button[class*="Missions_card"]').nth(1).hover();
   await p.waitForTimeout(1200);
-  b = await bubble(p);
-  ok('Hover: Cloudy cambia lo que dice', /volando/.test(b.text), b.text);
+  ok('Hover: Cloudy sigue sin hablar', (await cloudy(p)).quiet);
   const prev = await p.evaluate(() => { const v = document.querySelectorAll('[class*="Missions_window"] video')[1]; return { src: v.getAttribute('src'), paused: v.paused, t: v.currentTime }; });
   ok('Hover: la ventana reproduce el vídeo de la misión', prev.src?.includes('cloudy-email') && !prev.paused && prev.t > 0, JSON.stringify(prev));
   await shot(p, '2-hover', await area());
@@ -115,7 +120,7 @@ const shot = (p, name, clip) => p.screenshot({ path: `${OUT}${ENG}-${name}.png`,
     await p.waitForTimeout(Math.max(0, ms - (Date.now() - t1)));
     await shot(p, `6-cerrar-${String(ms).padStart(4, '0')}`, clip2);
   }
-  await p.mouse.move(700, 40);   // el ratón fuera de las tarjetas: si no, Cloudy habla de la que tiene debajo
+  await p.mouse.move(700, 40);   // el ratón fuera de las tarjetas (captura sin hover)
   await p.waitForTimeout(1500);
   const back = await p.evaluate(() => ({
     panel: !!document.getElementById('mision-panel'),
@@ -123,11 +128,11 @@ const shot = (p, name, clip) => p.screenshot({ path: `${OUT}${ENG}-${name}.png`,
     focus: document.activeElement?.getAttribute('aria-describedby'),
     cards: [...document.querySelectorAll('button[class*="Missions_card"]')].map(c => getComputedStyle(c).opacity),
   }));
-  b = await bubble(p);
+  c = await cloudy(p);
   ok('Cerrar con Esc: vuelven las tarjetas', !back.panel && back.cards.every(o => o === '1'), JSON.stringify(back.cards));
   ok('Cerrar: Cloudy vuelve a asomarse', back.mascot === 'up', back.mascot);
   ok('Cerrar: el foco vuelve a la tarjeta de la misión abierta', back.focus === 'mision-correo-texto', back.focus);
-  ok('Cerrar: Cloudy propone otra misión', b.shown && /otra misión/.test(b.text), b.text);
+  ok('Cerrar: Cloudy sigue sin hablar', c.quiet);
   await shot(p, '7-vuelta', await area());
 
   // teclado: Tab hasta una tarjeta y Enter

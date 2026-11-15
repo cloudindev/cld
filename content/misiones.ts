@@ -24,7 +24,6 @@ export type Mision = {
   soft: string;            // el mismo color, muy claro (fondos de etiquetas y botones)
   card: { title: string; text: string };
   short: string;           // nombre corto (pastillas del panel en móvil)
-  bubble: string;          // lo que dice Cloudy al pasar por la tarjeta
   video: { src: string; poster: string; label: string };
   detail: { eyebrow: string; title: string[]; highlight: string; text: string; more: Link };
   plans: [Plan, Plan];
@@ -38,7 +37,6 @@ export const misiones = {
   more: 'Ver planes',
   close: 'Volver a las misiones',
   note: 'Precios sin IVA.',
-  bubbles: { hola: '¡Hola! ¿En qué te echo una mano?', voy: '¡Voy para allá!', otra: '¿Nos vamos de otra misión?' },
   items: [
     {
       id: 'web',
@@ -47,7 +45,6 @@ export const misiones = {
       soft: '#dff3f1',
       card: { title: 'Páginas web', text: 'A medida en WordPress o lista en minutos con inteligencia artificial.' },
       short: 'Web',
-      bubble: '¡Me pongo los cascos y a diseñar!',
       video: { src: '/mascota/cloudy-working.mp4', poster: '/mascota/cloudy-working.webp', label: 'Cloudy, con cascos, trabaja en su portátil' },
       detail: {
         eyebrow: 'Misión 01 · Páginas web',
@@ -83,7 +80,6 @@ export const misiones = {
       soft: '#e6ebff',
       card: { title: 'Correo electrónico', text: 'Correo profesional con tu dominio, sin spam y en todos tus dispositivos.' },
       short: 'Correo',
-      bubble: '¡Tus correos, volando!',
       video: { src: '/mascota/cloudy-email.mp4', poster: '/mascota/cloudy-email.webp', label: 'Cloudy lanza un avión de papel entre un montón de sobres' },
       detail: {
         eyebrow: 'Misión 02 · Correo electrónico',
@@ -118,7 +114,6 @@ export const misiones = {
       soft: '#fdebe4',
       card: { title: 'Marketing', text: 'Que te encuentren en Google y confíen en ti a la primera.' },
       short: 'Marketing',
-      bubble: '¡Que todo el mundo te encuentre!',
       video: { src: '/mascota/cloudy-shield.mp4', poster: '/mascota/cloudy-shield.webp', label: 'Cloudy sostiene un escudo con un check de verificado' },
       detail: {
         eyebrow: 'Misión 03 · Marketing',

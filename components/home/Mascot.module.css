@@ -39,16 +39,18 @@
 .char :global(.mascota-canvas) { position: absolute; pointer-events: none; }
 .char:global(.mascota--webgl) img { opacity: 0; }
 
-/* Raya: tramos con los colores de la marca (azul de enlace, turquesa, marino, melocotón, naranja y menta).
+/* Raya: seis tramos con colores de la paleta de la web (styles/tokens.css): azul primario (#0044eb, el del
+   badge HOT), turquesa claro de la barra promocional, marino de los titulares, cian de los resaltados
+   («AHORA», «HOY?»), azul de enlace y turquesa oscuro de la barra promocional.
    Colores, grosor y proporción se pueden cambiar desde fuera con variables (Academy usa los de su diseño). */
 .line { display: flex; height: var(--line-h, 4px); }
 .line span { flex: var(--line-grow, 1.7) 1 0; }
-.line span:nth-child(1) { flex-grow: var(--line-grow1, 1.5); background: var(--l1, #5b7bfb); }
-.line span:nth-child(2) { background: var(--l2, #23a9a3); }
+.line span:nth-child(1) { flex-grow: var(--line-grow1, 1.5); background: var(--l1, #0044eb); }
+.line span:nth-child(2) { background: var(--l2, #22d7df); }
 .line span:nth-child(3) { background: var(--l3, #01213a); }
-.line span:nth-child(4) { background: var(--l4, #f2a38b); }
-.line span:nth-child(5) { background: var(--l5, #e1603e); }
-.line span:nth-child(6) { background: var(--l6, #9ad8cc); }
+.line span:nth-child(4) { background: var(--l4, #00fcef); }
+.line span:nth-child(5) { background: var(--l5, #5b7bfb); }
+.line span:nth-child(6) { background: var(--l6, #09c1b8); }
 
 @media (max-width: 1199px) { .section { --w: 260px; } }
 @media (max-width: 767px) { .section { --w: 210px; padding-top: 20px; } }

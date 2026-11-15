@@ -3,12 +3,13 @@
 // Contenido en content/misiones.ts (los planes son simulados). Ver NOTAS.md, punto 39.
 //
 // Al elegir una tarjeta:
-//   1. Cloudy dice «¡Voy para allá!» y se zambulle detrás de la raya (que se ondula al pasar);
+//   1. Cloudy se zambulle detrás de la raya (que se ondula al pasar);
 //   2. las otras dos tarjetas caen y la elegida se queda solo con su ventana;
 //   3. la ventana se abre hasta ser el panel de la misión (clip-path) mientras Cloudy, en vídeo, viaja de
 //      la ventana a su sitio (FLIP); después entran el título, el texto y los dos planes, y los precios cuentan.
-// Al cerrar (×, Esc) se deshace el camino y Cloudy vuelve a asomarse. Con «movimiento reducido» no hay
-// coreografía: se cambia de vista sin animaciones y los vídeos no arrancan solos.
+// Al cerrar (×, Esc) se deshace el camino y Cloudy vuelve a asomarse. Cloudy no habla: sin burbuja, a
+// petición del cliente. Con «movimiento reducido» no hay coreografía: se cambia de vista sin animaciones
+// y los vídeos no arrancan solos.
 import Link from 'next/link';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { desde, euros, misiones, type Mision, type MisionId, type Plan } from '@/content/misiones';
@@ -41,8 +42,6 @@ export function Missions() {
   const [phase, setPhase] = useState<Phase>('grid');
   const [active, setActive] = useState<MisionId | null>(null);   // misión abierta
   const [picked, setPicked] = useState<MisionId | null>(null);   // tarjeta que se abrió (para ir y volver)
-  const [hover, setHover] = useState<MisionId | null>(null);
-  const [greet, setGreet] = useState<string | null>(null);
   const [down, setDown] = useState(false);
   const [paused, setPaused] = useState(false);
   const [first, setFirst] = useState(true);                      // primera entrada del panel (con espera)
@@ -59,7 +58,6 @@ export function Missions() {
   const stageAnim = useRef<Animation | null>(null);
   const flip = useRef<'open' | null>(null);
   const refocus = useRef<MisionId | null>(null);       // tarjeta que recibe el foco al volver
-  const quiet = useRef(false);                         // ese foco no cambia lo que dice Cloudy
   const timers = useRef<number[]>([]);
   const reduced = useRef(false);
 
@@ -77,13 +75,12 @@ export function Missions() {
     if (phase !== 'grid') return;
     window.gtag?.('event', 'mision_cloudy', { mision: id });
     setPicked(id);
-    setHover(null);
     if (reduced.current) {
       setActive(id); setPhase('open'); setDown(true);
       return;
     }
     gridH.current = stage.current?.offsetHeight ?? 0;
-    setPhase('out');                                  // «¡Voy para allá!» y las otras tarjetas caen
+    setPhase('out');                                  // las otras tarjetas caen
     later(() => setDown(true), 380);                  // Cloudy se zambulle
     later(() => { flip.current = 'open'; setFirst(true); setActive(id); setPhase('open'); }, OUT_MS);
   };
@@ -135,9 +132,7 @@ export function Missions() {
   useEffect(() => {
     if (phase === 'open') titleRef.current?.focus({ preventScroll: true });
     if (phase === 'grid' && refocus.current) {
-      quiet.current = true;
       cards.current.get(refocus.current)?.focus({ preventScroll: true });
-      quiet.current = false;
       refocus.current = null;
     }
   }, [phase]);
@@ -150,7 +145,6 @@ export function Missions() {
       setActive(null); setDown(false); setPhase('back');
       refocus.current = id;
       later(() => { setPhase('grid'); setPicked(null); }, BACK_MS);
-      later(() => setGreet(misiones.bubbles.otra), BACK_MS + 500);
     };
     const st = stage.current, pn = panel.current, sl = slot.current, g = grid.current;
     const to = !reduced.current && active ? toWindow(active, true) : null;
@@ -185,22 +179,12 @@ export function Missions() {
     if (v.paused) { v.play().catch(() => {}); setPaused(false); } else { v.pause(); setPaused(true); }
   };
 
-  // ---------- Burbuja de Cloudy ----------
-  const bubble =
-    phase === 'out' ? misiones.bubbles.voy
-    : phase === 'grid' || phase === 'back' ? (hover ? byId(hover).bubble : greet)
-    : null;
-
   const m = active ? byId(active) : null;
   const open = phase === 'open' || phase === 'closing';
 
   return (
     <div className={s.missions}>
-      <Mascot down={down} onUp={() => later(() => setGreet(misiones.bubbles.hola), 1100)} className={s.mascot}>
-        <span className={s.bubble} data-show={bubble ? 'true' : 'false'}>
-          <span key={bubble ?? ''} className={s.bubbleText}>{bubble}</span>
-        </span>
-      </Mascot>
+      <Mascot down={down} />
 
       <div className={s.head}>
         <div>
@@ -219,7 +203,7 @@ export function Missions() {
                 <Card
                   key={it.id} m={it} i={i} k={k} picked={picked === it.id}
                   disabled={phase !== 'grid'} hidden={open}
-                  onChoose={() => choose(it.id)} onHover={id => { if (!quiet.current) setHover(id); }}
+                  onChoose={() => choose(it.id)}
                   windowRef={el => { if (el) windows.current.set(it.id, el); else windows.current.delete(it.id); }}
                   buttonRef={el => { if (el) cards.current.set(it.id, el); else cards.current.delete(it.id); }}
                   canPreview={() => !reduced.current && window.matchMedia('(hover: hover) and (pointer: fine)').matches}
@@ -287,29 +271,28 @@ export function Missions() {
 // ---------- Tarjeta de misión ----------
 type CardProps = {
   m: Mision; i: number; k: number; picked: boolean; disabled: boolean; hidden: boolean;
-  onChoose: () => void; onHover: (id: MisionId | null) => void;
+  onChoose: () => void;
   windowRef: (el: HTMLElement | null) => void; buttonRef: (el: HTMLButtonElement | null) => void;
   canPreview: () => boolean;
 };
 
-function Card({ m, i, k, picked, disabled, hidden, onChoose, onHover, windowRef, buttonRef, canPreview }: CardProps) {
+function Card({ m, i, k, picked, disabled, hidden, onChoose, windowRef, buttonRef, canPreview }: CardProps) {
   const vid = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   useEffect(() => { if (hidden) vid.current?.pause(); }, [hidden]);
   // al pasar el ratón, la ventana se anima con el vídeo de la misión (se descarga la primera vez)
   const enter = () => {
-    onHover(m.id);
     const v = vid.current;
     if (!v || !canPreview()) return;
     if (!v.getAttribute('src')) v.src = m.video.src;
     v.play().catch(() => {});
   };
-  const leave = () => { onHover(null); vid.current?.pause(); };
+  const leave = () => { vid.current?.pause(); };
   return (
     <button
       ref={buttonRef} type="button" className={`${s.card} ${picked ? s.picked : ''}`}
       style={{ ...vars(m), ['--k' as string]: Math.max(k, 0), ['--rot' as string]: i === 0 ? '-6deg' : i === 2 ? '6deg' : '0deg' }}
-      onClick={onChoose} onPointerEnter={enter} onPointerLeave={leave} onFocus={() => onHover(m.id)} onBlur={() => onHover(null)}
+      onClick={onChoose} onPointerEnter={enter} onPointerLeave={leave}
       aria-controls="mision-panel" aria-describedby={`mision-${m.id}-texto`} aria-disabled={disabled || undefined} tabIndex={hidden ? -1 : undefined}
     >
       <span ref={windowRef} className={s.window}>

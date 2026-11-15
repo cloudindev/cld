@@ -1,6 +1,6 @@
 /* Home · «¿Qué hacemos hoy?»: las misiones de Cloudy (ver Missions.tsx y NOTAS.md, punto 39).
    Tipografía y color de la home: Oswald en los titulares con el resaltado turquesa de «AHORA», Poppins en
-   el texto, marino #01213a. Cada misión toma su color de la raya de la marca (--accent / --soft).
+   el texto, marino #01213a. Cada misión tiene su color (--accent / --soft).
    --studio es el gris claro del fondo de los vídeos de Cloudy: con él, el vídeo se funde con el panel. */
 .missions {
   --navy: #01213a;
@@ -11,31 +11,6 @@
   position: relative;
   padding-bottom: 110px;
 }
-
-/* ---------- Burbuja de Cloudy (dentro de la sección del personaje: usa su --w y su --clip) ---------- */
-.mascot { position: relative; z-index: 2; }
-.bubble {
-  position: absolute; z-index: 3;
-  left: calc(50% + var(--w) * 0.3);
-  bottom: calc(var(--clip) * 0.66);
-  max-width: 260px; padding: 12px 18px;
-  border-radius: 20px 20px 20px 6px;
-  background: var(--navy); color: #fff;
-  font: 600 15px/1.35 var(--font-poppins);
-  box-shadow: 0 16px 30px -18px rgba(1, 33, 58, 0.6);
-  transform-origin: 0 100%;
-  opacity: 0; transform: scale(0.6) translateY(10px);
-  transition: opacity 0.25s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  pointer-events: none;
-}
-.bubble::after {   /* rabito hacia la cara de Cloudy */
-  content: ''; position: absolute; left: 6px; bottom: -7px;
-  width: 16px; height: 12px; background: var(--navy);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-[data-state='up'] > .bubble[data-show='true'] { opacity: 1; transform: none; }
-.bubbleText { display: block; animation: say 0.35s var(--ease-out); }
-@keyframes say { from { opacity: 0; transform: translateY(6px); } }
 
 /* ---------- Titular ---------- */
 .head {
@@ -248,8 +223,6 @@
 }
 @media (max-width: 767px) {
   .missions { padding-bottom: 70px; }
-  .bubble { left: 50%; bottom: calc(var(--clip) + 14px); max-width: min(260px, 80vw); border-radius: 18px; transform-origin: 50% 100%; translate: -50% 0; font-size: 14px; padding: 10px 15px; }
-  .bubble::after { left: calc(50% - 8px); clip-path: polygon(0 0, 100% 0, 50% 100%); }
   .head { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 44px; }
   .title { font-size: 44px; }
   .lead { font-size: 16px; }
@@ -268,8 +241,8 @@
   .planText { min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .card, .window img, .window video, .go, .plan, .close, .bubble { transition: none; }
+  .card, .window img, .window video, .go, .plan, .close { transition: none; }
   .card:hover { transform: none; }
   .grid[data-phase] .card, .grid[data-phase] .picked .body, .content[data-enter] .reveal,
-  .content[data-enter] .ln > span, .content[data-enter] .plan, .video, .bubbleText { animation: none; }
+  .content[data-enter] .ln > span, .content[data-enter] .plan, .video { animation: none; }
 }
