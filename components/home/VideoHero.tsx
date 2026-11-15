@@ -1,26 +1,22 @@
 'use client';
-// Tarjeta hero con los 4 clips encadenados. Dos <video> alternan: mientras uno se ve, el otro ya
-// tiene cargado el siguiente clip, así el salto entre clips no tiene cortes.
+// Tarjeta hero con el vídeo de Cloudin (un solo vídeo en bucle; ver NOTAS.md, punto 35). Cuenta la historia
+// en 4 capítulos: abajo, cada uno con su barra, que avanza con el vídeo; al pulsar uno, salta a su inicio.
 // - Solo empieza a descargar al acercarse a la pantalla y se pausa fuera de ella.
 // - Con prefers-reduced-motion no arranca solo: se ve el póster y el botón de reproducir.
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { videoHero as c } from '@/content/home';
 import s from './VideoHero.module.css';
 
-const N = c.chapters.length;
+const STARTS: number[] = c.chapters.map(ch => ch.start);
 
 export function VideoHero() {
   const root = useRef<HTMLElement>(null);
-  const vids = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
-  const [idx, setIdx] = useState(0);        // capítulo visible
-  const [slot, setSlot] = useState(0);      // <video> que lo muestra (0/1)
+  const video = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);  // ya se puede cargar
   const [visible, setVisible] = useState(false);
   const [playing, setPlaying] = useState(true);
-  const [progress, setProgress] = useState(0);
-
-  // El vídeo activo muestra idx; el otro precarga el siguiente
-  const srcOf = (sl: number) => (sl === slot ? c.chapters[idx]! : c.chapters[(idx + 1) % N]!);
+  const [time, setTime] = useState(0);
+  const [duration, setDuration] = useState<number>(c.duration);
 
   useEffect(() => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
@@ -33,59 +29,48 @@ export function VideoHero() {
     return () => io.disconnect();
   }, []);
 
-  // Reproduce / pausa el activo; el otro queda parado al principio
   useEffect(() => {
-    if (!near) return;
-    const a = vids[slot]!.current, b = vids[1 - slot]!.current;
-    if (b) { b.pause(); b.currentTime = 0; }
-    if (!a) return;
-    if (playing && visible) a.play().catch(() => setPlaying(false));
-    else a.pause();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [near, visible, playing, idx, slot]);
+    const v = video.current;
+    if (!near || !v) return;
+    if (playing && visible) v.play().catch(() => setPlaying(false));
+    else v.pause();
+  }, [near, visible, playing]);
 
-  const onEnded = useCallback((sl: number) => {
-    if (sl !== slot) return;
-    setIdx(i => (i + 1) % N); setSlot(x => 1 - x); setProgress(0);
-  }, [slot]);
-
-  const onTime = (sl: number) => {
-    const v = vids[sl]!.current;
-    if (sl === slot && v && v.duration) setProgress(v.currentTime / v.duration);
+  // Capítulo actual (el último que ya ha empezado) y cuánto se ha visto de cada uno
+  let idx = 0;
+  STARTS.forEach((start, j) => { if (time >= start) idx = j; });
+  const seen = (j: number) => {
+    if (j !== idx) return j < idx ? 1 : 0;
+    const start = STARTS[j]!, end = STARTS[j + 1] ?? duration;
+    return Math.min(1, Math.max(0, (time - start) / (end - start)));
   };
 
   const jump = (j: number) => {
-    if (j === idx) { const v = vids[slot]!.current; if (v) v.currentTime = 0; }
-    setIdx(j); setProgress(0); setPlaying(true);
+    const v = video.current;
+    if (v) v.currentTime = STARTS[j]!;
+    setTime(STARTS[j]!); setPlaying(true);
   };
 
   return (
     <section ref={root} className={s.section} aria-label={c.label}>
       <div className={s.card}>
-        {[0, 1].map(sl => {
-          const ch = srcOf(sl);
-          return (
-            <video
-              key={sl}
-              ref={vids[sl]}
-              className={`${s.video} ${sl === slot ? s.on : ''}`}
-              src={near ? ch.src : undefined}
-              poster={sl === slot ? ch.poster : undefined}
-              muted playsInline preload={near ? 'auto' : 'none'}
-              aria-hidden={sl !== slot}
-              onEnded={() => onEnded(sl)}
-              onTimeUpdate={() => onTime(sl)}
-            />
-          );
-        })}
+        <video
+          ref={video}
+          className={s.video}
+          src={near ? c.src : undefined}
+          poster={c.poster}
+          muted loop playsInline preload={near ? 'auto' : 'none'}
+          onTimeUpdate={e => setTime(e.currentTarget.currentTime)}
+          onLoadedMetadata={e => { if (e.currentTarget.duration) setDuration(e.currentTarget.duration); }}
+        />
 
         <div className={s.overlay}>
           <ol className={s.chapters}>
             {c.chapters.map((ch, j) => (
-              <li key={ch.src}>
+              <li key={ch.title}>
                 <button type="button" className={`${s.chapter} ${j === idx ? s.current : ''}`} aria-current={j === idx ? 'step' : undefined} onClick={() => jump(j)}>
                   <span className={s.bar}>
-                    <span className={s.fill} style={{ transform: `scaleX(${j < idx ? 1 : j === idx ? progress : 0})` }} />
+                    <span className={s.fill} style={{ transform: `scaleX(${seen(j)})` }} />
                   </span>
                   <span className={s.num}>0{j + 1}</span>
                   <span className={s.title}>{ch.title}</span>

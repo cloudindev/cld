@@ -17,6 +17,8 @@ const watch = (page, tag) => {
 };
 
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+// el vídeo hero (44 s) mantiene la red ocupada mientras se reproduce y aquí no hace falta: sin él, «networkidle» llega
+await ctx.route('**/video/hero-cloudin.mp4', r => r.abort());
 if (!useFx) await ctx.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: BASE });
 const p = await ctx.newPage();
 watch(p, 'escritorio');

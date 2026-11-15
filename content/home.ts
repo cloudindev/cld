@@ -236,15 +236,18 @@ export const planPicker = {
   errorLink: { label: 'Ver planes en el área de cliente', href: 'https://panel.cloudin.pro/cart.php' },
 } as const;
 
-/* ---------- Vídeo hero bajo el buscador (4 clips encadenados, sin audio) ---------- */
-// Títulos de capítulo provisionales (ver NOTAS.md, punto 35).
+/* ---------- Vídeo hero bajo el buscador (un vídeo en bucle, sin audio, contado en 4 capítulos) ---------- */
+// Cada capítulo empieza en el segundo `start` del vídeo; los títulos son provisionales (ver NOTAS.md, punto 35).
 export const videoHero = {
   label: 'Vídeo: de una idea a un proyecto online con Cloudin',
+  src: '/video/hero-cloudin.mp4',
+  poster: '/video/hero-cloudin.webp',
+  duration: 44.2,                                               // s (hasta que el vídeo diga la suya)
   chapters: [
-    { src: '/video/section1.mp4', poster: '/video/section1.webp', title: 'Tienes una idea' },
-    { src: '/video/section2.mp4', poster: '/video/section2.webp', title: 'La llevamos a la nube' },
-    { src: '/video/section3.mp4', poster: '/video/section3.webp', title: 'Tus clientes te encuentran' },
-    { src: '/video/section4.mp4', poster: '/video/section4.webp', title: 'Tu negocio crece' },
+    { start: 0, title: 'Tienes una idea' },                     // ella imagina su tienda de plantas
+    { start: 6, title: 'La llevamos a la nube' },               // por la ventana, el avión entra en las nubes
+    { start: 24, title: 'Tus clientes te encuentran' },         // al salir de la nube, un cliente encuentra plantas.com
+    { start: 34.1, title: 'Tu negocio crece' },                 // la oficina llena de pedidos
   ],
   play: 'Reproducir vídeo',
   pause: 'Pausar vídeo',

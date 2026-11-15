@@ -11,6 +11,8 @@ const ok = (name, pass, info = '') => results.push([pass ? 'OK ' : 'MAL', name, 
 
 for (const path of ['/', '/academy/', '/contacto/', '/blog/', '/hosting-y-dominios-cloud-empresas/']) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  // el vídeo hero (44 s) mantiene la red ocupada mientras se reproduce y aquí no hace falta: sin él, «networkidle» llega
+  await ctx.route('**/video/hero-cloudin.mp4', r => r.abort());
   const p = await ctx.newPage();
   await p.goto(BASE + path, { waitUntil: 'networkidle' });
   await p.waitForTimeout(1500);

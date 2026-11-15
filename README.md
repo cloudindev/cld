@@ -146,6 +146,10 @@ El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si 
 
 Para añadir una guía, escribe otro objeto en el fichero de su tema: la página, el buscador y el sitemap (`/academy-sitemap.xml`) se actualizan al compilar. El build falla si una guía enlaza a otra que no existe. Pruebas: `node tools/academy/interactions.mjs`. Detalles y datos pendientes en NOTAS.md, punto 38.
 
+## Vídeo hero (home)
+
+Debajo del buscador va el vídeo de Cloudin (`components/home/VideoHero.tsx`). Es un solo vídeo en bucle y sin audio, dividido en 4 capítulos que son tramos de tiempo; los títulos y el segundo en que empieza cada uno están en `videoHero` (`content/home.ts`). El original está en `assets/hero-cloudin.mp4`. Para la web se recodifica (720p, unos 7 MB) y se le saca el póster con `sh tools/hero-video.sh`. Pruebas: `node tools/hero-video.mjs`. Detalles en NOTAS.md, punto 35.
+
 ## Personaje asomado
 
 `public/mascota/` contiene el personaje (Cloudy) de la sección de la raya: en la home, entre los planes y las misiones de Cloudy; en Academy, asomado a la derecha de la cabecera. Son `mascota.webp` (recorte de `assets/mascota/mascota-original.jpg` con `python3 tools/mascota/recorte.py`) y `mascota.js`, que lo anima con WebGL para que siga el ratón con la cabeza y la mirada. Parámetros en `CONFIG` y medidas de la cara y los ojos en `RIG`. Detalles en NOTAS.md, punto 36.

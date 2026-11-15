@@ -16,6 +16,8 @@ const errors = [];
 
 async function open(ctxOpts, tag) {
   const ctx = await browser.newContext(ctxOpts);
+  // el vídeo hero (44 s) mantiene la red ocupada mientras se reproduce y aquí no hace falta: sin él, «networkidle» llega
+  await ctx.route('**/video/hero-cloudin.mp4', r => r.abort());
   const p = await ctx.newPage();
   p.on('pageerror', e => errors.push(`${tag}: ${e.message}`));
   p.on('console', m => { if (m.type() === 'error' && !/google|Failed to load resource|RSC payload/.test(m.text())) errors.push(`${tag}: ${m.text()}`); });
