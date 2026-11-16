@@ -17,6 +17,8 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
   const [cycle, setCycle] = useState<Cycle>('annually');
   // Al elegir una tarjeta, las piezas jelly de las demás vuelven a su sitio
   const [resets, setResets] = useState<Record<Key, number>>({ web: 0, vps: 0 });
+  // Al pasar el ratón por una tarjeta, su pieza da un rebote (ver NOTAS.md, punto 34)
+  const [hops, setHops] = useState<Record<Key, number>>({ web: 0, vps: 0 });
   const tabs = useRef<(HTMLDivElement | null)[]>([]);
   const panel = useRef<HTMLDivElement>(null);
   const res = plans[sel];
@@ -53,14 +55,15 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
             className={`${s.card} ${s[o.key]} ${sel === o.key ? s.active : ''}`}
             onClick={() => choose(o.key)}
             onKeyDown={e => onKey(e, i)}
+            onPointerEnter={e => { if (e.pointerType !== 'touch') setHops(h => ({ ...h, [o.key]: h[o.key] + 1 })); }}
           >
             <div className={s.cardBody}>
               <h2 className={s.title}><span className={s.eyebrow}>{o.eyebrow}</span> {o.title}</h2>
               <p className={s.text}>{o.text}</p>
               <span className={`btn-sm ${s.btn}`} onClick={e => { e.stopPropagation(); choose(o.key, true); }}>{o.button}</span>
             </div>
-            {o.key === 'web' && <JellyCloud image="web" alt={c.web.alt} className={s.jelly} reset={resets.web} />}
-            {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} reset={resets.vps} />}
+            {o.key === 'web' && <JellyCloud image="web" alt={c.web.alt} className={s.jelly} reset={resets.web} hop={hops.web} />}
+            {o.key === 'vps' && <JellyCloud alt={c.cloud.alt} className={s.jelly} reset={resets.vps} hop={hops.vps} />}
           </div>
         ))}
       </div>

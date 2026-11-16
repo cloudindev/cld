@@ -5,7 +5,7 @@
 import { useEffect, useRef, type CSSProperties } from 'react';
 import '@/public/jelly/jelly.css';
 
-type Jelly = { destroy(): void; reset(): void };
+type Jelly = { destroy(): void; reset(): void; hop?(): void };
 const ENGINE_3D = '/jelly/jelly3d.js';
 const ENGINE_2D = '/jelly/jelly.js';
 
@@ -15,8 +15,9 @@ export const JELLY: Record<'cloud' | 'web', { src: string; shadow: string | null
   web: { src: '/jelly/web.webp', shadow: '/jelly/web-shadow.webp', width: 900, height: 513, shape: 'web' },
 };
 
-/** `reset`: cada vez que cambia, la pieza vuelve a su sitio (si se había arrastrado). */
-export function JellyCloud({ alt, className, image = 'cloud', reset = 0 }: { alt: string; className?: string; image?: keyof typeof JELLY; reset?: number }) {
+/** `reset`: cada vez que cambia, la pieza vuelve a su sitio (si se había arrastrado).
+ *  `hop`: cada vez que cambia, la pieza da un rebote (al pasar el ratón por su tarjeta). */
+export function JellyCloud({ alt, className, image = 'cloud', reset = 0, hop = 0 }: { alt: string; className?: string; image?: keyof typeof JELLY; reset?: number; hop?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const jelly = useRef<Jelly | undefined>(undefined);
   const im = JELLY[image];
@@ -47,6 +48,7 @@ export function JellyCloud({ alt, className, image = 'cloud', reset = 0 }: { alt
     };
   }, [image, im.shape]);
   useEffect(() => { if (reset) jelly.current?.reset(); }, [reset]);
+  useEffect(() => { if (hop) jelly.current?.hop?.(); }, [hop]);
   // --jr = alto/ancho: lo usa el CSS de la página para centrar sin transform (ver NOTAS.md, punto 34)
   const style = { aspectRatio: `${im.width} / ${im.height}`, '--jr': im.height / im.width } as CSSProperties;
   return (

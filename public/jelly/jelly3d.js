@@ -24,7 +24,7 @@
  * un mapa de alturas visto desde arriba.
  *
  * Uso: const j = createJelly3D(el, { shape: 'cloud' | 'web' }); → null si no hay WebGL2.
- *      j.reset() la devuelve a su sitio · j.destroy()
+ *      j.reset() la devuelve a su sitio · j.hop() da un saltito (al pasar el ratón por la tarjeta) · j.destroy()
  * `el` es el hueco de la foto (mismo tamaño y proporción); el lienzo cubre su contenedor posicionado
  * (la tarjeta), que es el «suelo» por el que se puede mover.
  */
@@ -48,6 +48,12 @@ export const CONFIG3D = {
     settleSteps: 40,        // pasos para dejarla asentada en reposo antes de mostrarla
   },
   hover: { kick: 0.9, radius: 0.5 }, // golpecito al pasar el ratón por encima (un temblor)
+  // Rebote al entrar el ratón en la tarjeta. Es solo visual (no toca la física: con la gravedad y la firmeza
+  // de la gelatina un salto real dura 0,1 s y no se ve): se agacha, salta, al caer se aplasta, da un rebotito
+  // y tiembla. height = altura del salto (la pieza mide 2 de ancho) · air = tiempo en el aire (s) ·
+  // crouch = lo que tarda en agacharse (s) · squash = cuánto se aplasta / estira (0-1) · bounce = lo que
+  // conserva del salto al rebotar · freq / damping = muelle del aplastamiento (Hz, 0-1)
+  hop: { height: 0.1, air: 0.3, crouch: 0.07, squash: 0.07, bounce: 0.3, freq: 4.5, damping: 0.28, cooldown: 0.6 },
   grab: {
     radius: 0.55,           // tamaño del parche agarrado (grande: el tirón se reparte y no pellizca)
     compliance: 2e-3,       // unión del parche al puntero (nunca rígido, para que no pellizque)
@@ -815,7 +821,7 @@ export function createJelly3D(root, opts = {}) {
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let grab = null, resetT = -1, sleeping = false, still = 0, acc = 0, last = 0, raf = 0, visible = true, destroyed = false;
-  let moved = false, cursorOn = false;
+  let moved = false, cursorOn = false, lastHop = -1e9, hopS = null;
   const bounds = { zNear: 1e9, zFar: -1e9, l: [-1e9, 0, 0], r: [1e9, 0, 0] };
 
   /* ----- Simulación XPBD ----- */
@@ -1119,8 +1125,43 @@ export function createJelly3D(root, opts = {}) {
     gl.uniform4f(U(p, 'u_envB'), light.back[0] * DEG, light.back[1], light.back[2], light.top);
     return p;
   }
+  /* ----- Rebote (solo visual) ----- */
+  // Altura: parábola (sale de height y air). Aplastamiento: muelle amortiguado; al despegar se estira, al
+  // aterrizar se aplasta según la velocidad de llegada.
+  function hopStep(dt) {
+    const H = cfg.hop, g = 8 * H.height / (H.air * H.air), v0 = g * H.air / 2;
+    const w = 2 * Math.PI * H.freq, k = w * w, c = 2 * H.damping * w;
+    const b = hopS;
+    b.t += dt;
+    if (b.t < H.crouch) { b.s = -H.squash * Math.sin(b.t / H.crouch * Math.PI / 2); b.sv = 0; return; }   // se agacha
+    if (!b.up) { b.up = true; b.hv = v0; b.sv = H.squash * w * 0.9; }                                    // despega estirándose
+    if (b.h > 0 || b.hv > 0) {
+      b.hv -= g * dt; b.h += b.hv * dt;
+      if (b.h <= 0) {                                                                                     // aterriza
+        const vin = -b.hv; b.h = 0;
+        b.sv -= H.squash * w * 1.2 * (vin / v0);
+        b.hv = vin * H.bounce > v0 * 0.15 ? vin * H.bounce : 0;
+      }
+    }
+    b.sv += (-k * b.s - c * b.sv) * dt; b.s += b.sv * dt;
+    if (b.h === 0 && b.hv === 0 && Math.abs(b.s) < 1e-3 && Math.abs(b.sv) < 0.03) hopS = null;
+  }
+  // Posiciones para dibujar: las de la física con el rebote encima (escala en vertical desde el suelo, que
+  // conserva el volumen, y elevación)
+  const xr = new Float32Array(np * 3);
+  function posed() {
+    if (!hopS) return x;
+    const sy = 1 + hopS.s, sxz = 1 / Math.sqrt(sy), h = hopS.h;
+    let cx = 0, cz = 0; for (let i = 0; i < np; i++) { cx += x[i * 3]; cz += x[i * 3 + 2]; } cx /= np; cz /= np;
+    for (let i = 0; i < np; i++) {
+      const k = i * 3;
+      xr[k] = cx + (x[k] - cx) * sxz; xr[k + 1] = x[k + 1] * sy + h; xr[k + 2] = cz + (x[k + 2] - cz) * sxz;
+    }
+    return xr;
+  }
   function draw() {
-    skin(surf); skin(band); if (deco) skin(deco); if (decal) skin(decal);
+    const src = posed();
+    skin(surf, src); skin(band, src); if (deco) skin(deco, src); if (decal) skin(decal, src);
     let cxs = 0, czs = 0; for (let i = 0; i < np; i++) { cxs += x[i * 3]; czs += x[i * 3 + 2]; } cxs /= np; czs /= np;
     const SH = 2.6, L = light.dir;
 
@@ -1210,10 +1251,10 @@ export function createJelly3D(root, opts = {}) {
     acc += dt;
     const fixed = 1 / cfg.physics.hz;
     let n = 0, vmax = 0;
-    while (acc >= fixed && n < 3) { vmax = Math.max(vmax, step(fixed)); acc -= fixed; n++; }
+    while (acc >= fixed && n < 3) { vmax = Math.max(vmax, step(fixed)); if (hopS) hopStep(fixed); acc -= fixed; n++; }
     if (n === 3) acc = 0;
     draw();
-    still = vmax < cfg.sleep.speed && !grab && resetT < 0 ? still + 1 : 0;
+    still = vmax < cfg.sleep.speed && !grab && resetT < 0 && !hopS ? still + 1 : 0;
     sleeping = still > cfg.sleep.frames;
     if (!sleeping && visible) raf = requestAnimationFrame(frame);
   }
@@ -1273,7 +1314,7 @@ export function createJelly3D(root, opts = {}) {
     const c = centroid();
     grab = { id: e.pointerId, ids, wt, off, point: hit, normal: fwd, target: hit.slice(), sx: e.clientX, sy: e.clientY, moved: false,
       restDist: Math.hypot(hit[0] - c[0], hit[1] - c[1], hit[2] - c[2]) };
-    resetT = -1;
+    resetT = -1; hopS = null;
     try { box.setPointerCapture(e.pointerId); } catch { /* sin captura */ }
     box.style.cursor = 'grabbing';
     wake();
@@ -1332,6 +1373,15 @@ export function createJelly3D(root, opts = {}) {
     kind: '3d',
     reset() { if (grab || !moved) return; moved = false; resetT = 0; wake(); },
     get moved() { return moved; },
+    /** Rebote (al pasar el ratón por la tarjeta; ver CONFIG3D.hop). No hace nada con «movimiento reducido»,
+     *  con la pieza agarrada, mientras dura otro ni antes de `cooldown` desde el anterior. */
+    hop() {
+      const now = performance.now();
+      if (destroyed || grab || hopS || reduce.matches || now - lastHop < cfg.hop.cooldown * 1000) return;
+      lastHop = now; hopS = { t: 0, up: false, h: 0, hv: 0, s: 0, sv: 0 }; wake();
+    },
+    /** Para pruebas: altura y aplastamiento del rebote en curso (null si no hay). */
+    get hopping() { return hopS && { t: +hopS.t.toFixed(3), h: +hopS.h.toFixed(4), s: +hopS.s.toFixed(4) }; },
     /* --- utilidades para la página de pruebas --- */
     /** Caja envolvente de las partículas. */
     bbox() {
