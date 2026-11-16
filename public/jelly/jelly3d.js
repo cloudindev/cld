@@ -52,8 +52,9 @@ export const CONFIG3D = {
   // de la gelatina un salto real dura 0,1 s y no se ve): se agacha, salta, al caer se aplasta, da un rebotito
   // y tiembla. height = altura del salto (la pieza mide 2 de ancho) · air = tiempo en el aire (s) ·
   // crouch = lo que tarda en agacharse (s) · squash = cuánto se aplasta / estira (0-1) · bounce = lo que
-  // conserva del salto al rebotar · freq / damping = muelle del aplastamiento (Hz, 0-1)
-  hop: { height: 0.1, air: 0.3, crouch: 0.07, squash: 0.07, bounce: 0.3, freq: 4.5, damping: 0.28, cooldown: 0.6 },
+  // conserva del salto al rebotar · freq / damping = muelle del aplastamiento (Hz, 0-1) · cooldown = tiempo
+  // mínimo entre rebotes (s) · afterPlay = sin rebotes mientras se juega con la pieza y hasta estos s después
+  hop: { height: 0.1, air: 0.3, crouch: 0.07, squash: 0.07, bounce: 0.3, freq: 4.5, damping: 0.28, cooldown: 1.5, afterPlay: 5 },
   grab: {
     radius: 0.55,           // tamaño del parche agarrado (grande: el tirón se reparte y no pellizca)
     compliance: 2e-3,       // unión del parche al puntero (nunca rígido, para que no pellizque)
@@ -821,7 +822,7 @@ export function createJelly3D(root, opts = {}) {
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let grab = null, resetT = -1, sleeping = false, still = 0, acc = 0, last = 0, raf = 0, visible = true, destroyed = false;
-  let moved = false, cursorOn = false, lastHop = -1e9, hopS = null;
+  let moved = false, cursorOn = false, lastHop = -1e9, lastPlay = -1e9, hopS = null;
   const bounds = { zNear: 1e9, zFar: -1e9, l: [-1e9, 0, 0], r: [1e9, 0, 0] };
 
   /* ----- Simulación XPBD ----- */
@@ -1133,6 +1134,11 @@ export function createJelly3D(root, opts = {}) {
     const w = 2 * Math.PI * H.freq, k = w * w, c = 2 * H.damping * w;
     const b = hopS;
     b.t += dt;
+    if (b.cut) {                                                                                          // se ha agarrado la pieza: se desvanece
+      b.h *= 0.7; b.s *= 0.7; b.hv = b.sv = 0;
+      if (b.h < 1e-3 && Math.abs(b.s) < 1e-3) hopS = null;
+      return;
+    }
     if (b.t < H.crouch) { b.s = -H.squash * Math.sin(b.t / H.crouch * Math.PI / 2); b.sv = 0; return; }   // se agacha
     if (!b.up) { b.up = true; b.hv = v0; b.sv = H.squash * w * 0.9; }                                    // despega estirándose
     if (b.h > 0 || b.hv > 0) {
@@ -1314,7 +1320,7 @@ export function createJelly3D(root, opts = {}) {
     const c = centroid();
     grab = { id: e.pointerId, ids, wt, off, point: hit, normal: fwd, target: hit.slice(), sx: e.clientX, sy: e.clientY, moved: false,
       restDist: Math.hypot(hit[0] - c[0], hit[1] - c[1], hit[2] - c[2]) };
-    resetT = -1; hopS = null;
+    resetT = -1; lastPlay = performance.now(); if (hopS) hopS.cut = true;
     try { box.setPointerCapture(e.pointerId); } catch { /* sin captura */ }
     box.style.cursor = 'grabbing';
     wake();
@@ -1335,7 +1341,7 @@ export function createJelly3D(root, opts = {}) {
   }
   function onUp(e) {
     if (!grab || e.pointerId !== grab.id) return;
-    const g = grab; grab = null;
+    const g = grab; grab = null; lastPlay = performance.now();
     try { box.releasePointerCapture(e.pointerId); } catch { /* ya liberado */ }
     box.style.cursor = cursorOn ? 'grab' : '';
     if (g.moved) {
@@ -1373,11 +1379,12 @@ export function createJelly3D(root, opts = {}) {
     kind: '3d',
     reset() { if (grab || !moved) return; moved = false; resetT = 0; wake(); },
     get moved() { return moved; },
-    /** Rebote (al pasar el ratón por la tarjeta; ver CONFIG3D.hop). No hace nada con «movimiento reducido»,
-     *  con la pieza agarrada, mientras dura otro ni antes de `cooldown` desde el anterior. */
+    /** Rebote (al llegar el ratón a la tarjeta; ver CONFIG3D.hop). No hace nada con «movimiento reducido»,
+     *  mientras dura otro, antes de `cooldown` desde el anterior ni mientras se juega con la pieza (agarrarla
+     *  o hacerle clic) y hasta `afterPlay` después. */
     hop() {
       const now = performance.now();
-      if (destroyed || grab || hopS || reduce.matches || now - lastHop < cfg.hop.cooldown * 1000) return;
+      if (destroyed || grab || hopS || reduce.matches || now - lastHop < cfg.hop.cooldown * 1000 || now - lastPlay < cfg.hop.afterPlay * 1000) return;
       lastHop = now; hopS = { t: 0, up: false, h: 0, hv: 0, s: 0, sv: 0 }; wake();
     },
     /** Para pruebas: altura y aplastamiento del rebote en curso (null si no hay). */

@@ -127,7 +127,7 @@ Los precios se actualizan al volver a compilar. Para refrescarlos solos, program
 
 `public/jelly/` contiene dos motores sin dependencias:
 
-- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Están medidas y calibradas sobre las fotos de `assets/jelly/`: en reposo el render cae exactamente sobre la foto. Se pueden arrastrar dentro de su tarjeta y, al pasar el ratón por la tarjeta, dan un rebote (`hop()`, parámetros en `CONFIG3D.hop`; prueba: `node tools/jelly/rebote.mjs`). Parámetros en `CONFIG3D`; formas, materiales y luz en `SHAPES`. Demo en `/jelly/3d.html`.
+- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Están medidas y calibradas sobre las fotos de `assets/jelly/`: en reposo el render cae exactamente sobre la foto. Se pueden arrastrar dentro de su tarjeta y, al llegar el ratón a su tarjeta, saludan con un rebote, que no se repite mientras se juega con ellas (`hop()`, parámetros en `CONFIG3D.hop`; prueba: `node tools/jelly/rebote.mjs`). Parámetros en `CONFIG3D`; formas, materiales y luz en `SHAPES`. Demo en `/jelly/3d.html`.
 - **`jelly.js`** (WebGL1 + fallback CSS): animación 2D sobre las fotos recortadas. Se usa solo si no hay WebGL2. Parámetros en `CONFIG`. Demo en `/jelly/`.
 
 El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Detalles en NOTAS.md, punto 34.

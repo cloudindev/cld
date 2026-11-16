@@ -1,7 +1,7 @@
 'use client';
 // Selector Hosting Web / Hosting VPS (tarjetas pastel) + planes de WHMCS debajo.
 // Por defecto está seleccionada la primera opción. Los planes llegan ya resueltos desde el build.
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { planPicker as c } from '@/content/home';
 import type { Plan, PlansResult } from '@/lib/whmcs';
 import { JellyCloud } from './JellyCloud';
@@ -10,6 +10,8 @@ import s from './PlanPicker.module.css';
 type Key = (typeof c.options)[number]['key'];
 type Cycle = 'monthly' | 'annually';
 
+const HOP_REST = 3000;   // ms fuera del bloque de tarjetas para que la pieza vuelva a saludar al llegar
+
 const fmt = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
@@ -17,8 +19,18 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
   const [cycle, setCycle] = useState<Cycle>('annually');
   // Al elegir una tarjeta, las piezas jelly de las demás vuelven a su sitio
   const [resets, setResets] = useState<Record<Key, number>>({ web: 0, vps: 0 });
-  // Al pasar el ratón por una tarjeta, su pieza da un rebote (ver NOTAS.md, punto 34)
+  // Rebote de la pieza al llegar el ratón a su tarjeta, como saludo (ver NOTAS.md, punto 34): solo al entrar en el
+  // bloque de tarjetas desde fuera y si llevaba HOP_REST ms fuera. Pasar de una tarjeta a otra, o salir y volver
+  // mientras se juega con las piezas, no lo repite (y el motor no rebota mientras se juega con la pieza).
   const [hops, setHops] = useState<Record<Key, number>>({ web: 0, vps: 0 });
+  const cards = useRef<HTMLDivElement>(null);
+  const away = useRef(-Infinity);   // cuándo salió el ratón del bloque de tarjetas
+  const arrive = (k: Key, e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch') return;
+    if (e.relatedTarget instanceof Node && cards.current?.contains(e.relatedTarget)) return;   // viene de la otra tarjeta
+    if (performance.now() - away.current < HOP_REST) return;                                     // acaba de salir
+    setHops(h => ({ ...h, [k]: h[k] + 1 }));
+  };
   const tabs = useRef<(HTMLDivElement | null)[]>([]);
   const panel = useRef<HTMLDivElement>(null);
   const res = plans[sel];
@@ -42,7 +54,7 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
 
   return (
     <section className={s.section} aria-label="Planes de hosting">
-      <div className={s.cards} role="tablist" aria-label="Tipo de hosting">
+      <div ref={cards} className={s.cards} role="tablist" aria-label="Tipo de hosting" onPointerLeave={e => { if (e.pointerType !== 'touch') away.current = performance.now(); }}>
         {c.options.map((o, i) => (
           <div
             key={o.key}
@@ -55,7 +67,7 @@ export function PlanPicker({ plans }: { plans: Record<Key, PlansResult> }) {
             className={`${s.card} ${s[o.key]} ${sel === o.key ? s.active : ''}`}
             onClick={() => choose(o.key)}
             onKeyDown={e => onKey(e, i)}
-            onPointerEnter={e => { if (e.pointerType !== 'touch') setHops(h => ({ ...h, [o.key]: h[o.key] + 1 })); }}
+            onPointerEnter={e => arrive(o.key, e)}
           >
             <div className={s.cardBody}>
               <h2 className={s.title}><span className={s.eyebrow}>{o.eyebrow}</span> {o.title}</h2>

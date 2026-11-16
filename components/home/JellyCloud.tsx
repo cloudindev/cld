@@ -16,7 +16,8 @@ export const JELLY: Record<'cloud' | 'web', { src: string; shadow: string | null
 };
 
 /** `reset`: cada vez que cambia, la pieza vuelve a su sitio (si se había arrastrado).
- *  `hop`: cada vez que cambia, la pieza da un rebote (al pasar el ratón por su tarjeta). */
+ *  `hop`: cada vez que cambia, la pieza da un rebote (saludo al llegar el ratón a su tarjeta; el motor lo ignora
+ *  mientras se juega con ella). */
 export function JellyCloud({ alt, className, image = 'cloud', reset = 0, hop = 0 }: { alt: string; className?: string; image?: keyof typeof JELLY; reset?: number; hop?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const jelly = useRef<Jelly | undefined>(undefined);

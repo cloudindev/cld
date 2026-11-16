@@ -46,7 +46,7 @@ export const CONFIG = {
     enterKick: 0.9,        // impulso de squash al entrar el puntero / tocar
     follow: 14,            // rapidez con que la abolladura sigue al puntero (1/s)
   },
-  hop: { kick: 1.6, cooldown: 0.6 }, // rebote al pasar el ratón por la tarjeta (impulso de squash)
+  hop: { kick: 1.6, cooldown: 1.5, afterPlay: 5 }, // rebote al llegar el ratón a la tarjeta (impulso de squash); sin rebotes mientras se juega con la pieza y hasta afterPlay s después
   click: {
     kick: 2.6,             // impulso de squash al hacer clic (rebote fuerte)
     poke: 3.5,             // impulso extra de la abolladura al hacer clic
@@ -174,7 +174,7 @@ export function createJelly(root, overrides = {}) {
   const grab = spring();
   const grabPt = { x: 0, y: 0.5 };
   let drag = null, H = 1, shownX = NaN, shownY = NaN;
-  let raf = 0, last = 0, visible = true, destroyed = false, paused = false, touchTimer = 0, lastHop = -1e9;
+  let raf = 0, last = 0, visible = true, destroyed = false, paused = false, touchTimer = 0, lastHop = -1e9, lastPlay = -1e9;
   let renderer = null;
 
   /* ----- Estado en cada instante: idle (periódico) + muelles ----- */
@@ -327,6 +327,7 @@ export function createJelly(root, overrides = {}) {
   }
   function onDown(e) {
     if (reduce.matches) return;
+    lastPlay = performance.now();
     onMove(e);
     squash.v += cfg.click.kick * 10; poke.v += cfg.click.poke; start();
     if (cfg.drag.enabled && e.pointerType !== 'touch' && e.button === 0 && !drag) {
@@ -374,7 +375,7 @@ export function createJelly(root, overrides = {}) {
     /** Rebote (al pasar el ratón por la tarjeta). */
     hop() {
       const now = performance.now();
-      if (destroyed || drag || reduce.matches || now - lastHop < cfg.hop.cooldown * 1000) return;
+      if (destroyed || drag || reduce.matches || now - lastHop < cfg.hop.cooldown * 1000 || now - lastPlay < cfg.hop.afterPlay * 1000) return;
       lastHop = now; squash.v += cfg.hop.kick * 10; start();
     },
     /** Devuelve la pieza a su sitio (con el mismo muelle, así que llega rebotando). */
