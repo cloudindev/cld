@@ -2,6 +2,7 @@ import { buildMetadata, JsonLd } from '@/lib/seo';
 import { DomainSearch } from '@/components/home/DomainSearch';
 import { HostingPlans } from '@/components/home/HostingPlans';
 import { Missions } from '@/components/home/Missions';
+import { AiHosting } from '@/components/home/AiHosting';
 import { VideoHero } from '@/components/home/VideoHero';
 import { Think } from '@/components/home/Think';
 import { ProductCards } from '@/components/home/ProductCards';
@@ -24,6 +25,8 @@ export default function HomePage() {
       <HostingPlans />
       {/* personaje asomado sobre la raya + misiones de Cloudy (sustituye a «Digitaliza tu negocio», ver NOTAS.md, punto 39) */}
       <Missions />
+      {/* «Hosting para IA»: el chip de gominola sobre su placa (a petición del cliente, ver NOTAS.md, punto 42) */}
+      <AiHosting />
       <Think />
       <ProductCards />
       <PortfolioSection />

@@ -123,14 +123,14 @@ Copia `.env.example` a `.env.local` y rellena las credenciales de la API de WHMC
 
 Los precios se actualizan al volver a compilar. Para refrescarlos solos, programa un build periódico, por ejemplo diario, en el CI o en el hosting.
 
-## Nube «jelly»
+## Piezas de gominola («jelly»)
 
 `public/jelly/` contiene dos motores sin dependencias:
 
-- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube y la ventana como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Están medidas y calibradas sobre las fotos de `assets/jelly/`: en reposo el render cae exactamente sobre la foto. Se pueden arrastrar dentro de su tarjeta y, al llegar el ratón a su tarjeta, saludan con un rebote, que no se repite mientras se juega con ellas (`hop()`, parámetros en `CONFIG3D.hop`; prueba: `node tools/jelly/rebote.mjs`). Parámetros en `CONFIG3D`; formas, materiales y luz en `SHAPES`. Demo en `/jelly/3d.html`.
+- **`jelly3d.js`** (WebGL2, el que se usa normalmente): la nube, la ventana y el chip de «Hosting para IA» como sólidos blandos 3D con física real (XPBD sobre una malla de tetraedros) y render con refracción, absorción por capas y sombra. Están medidas y calibradas sobre las fotos de `assets/jelly/`: en reposo el render cae exactamente sobre la foto. Se pueden arrastrar dentro de su tarjeta y, al llegar el ratón a su tarjeta, saludan con un rebote, que no se repite mientras se juega con ellas (`hop()`, parámetros en `CONFIG3D.hop`; prueba: `node tools/jelly/rebote.mjs`). Parámetros en `CONFIG3D`; formas, materiales y luz en `SHAPES`. Demo en `/jelly/3d.html`.
 - **`jelly.js`** (WebGL1 + fallback CSS): animación 2D sobre las fotos recortadas. Se usa solo si no hay WebGL2. Parámetros en `CONFIG`. Demo en `/jelly/`.
 
-El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Detalles en NOTAS.md, punto 34.
+El componente `components/home/JellyCloud.tsx` prueba primero el motor 3D y, si no está disponible, el 2D. Al tocar una pieza sin arrastrarla, los dos motores emiten el evento `jellypoke` (prop `onPoke`). Detalles en NOTAS.md, punto 34.
 
 ## Páginas de servicio
 
@@ -160,6 +160,10 @@ Debajo del personaje, «¿Qué necesita tu empresa?»: tres tarjetas (Páginas w
 
 Los vídeos originales están en `assets/mascota/cloudy-*.mp4`; para la web se recodifican (sin audio, unos 300 KB) con su portada: `sh tools/mascota/videos.sh`. Pruebas: `node tools/mascota/misiones.mjs`. Detalles en NOTAS.md, punto 39.
 
+## Hosting para IA (home)
+
+Debajo de las misiones, la sección «Hosting para IA» (`components/home/AiHosting.tsx`, textos en `hostingIA` de `content/home.ts`): titular, ventajas y botón a la izquierda, y el chip de gominola en 3D sobre una placa de circuito con pulsos de luz a la derecha. La placa se genera en `components/home/aiBoard.ts` con la misma cámara que el chip (`SHAPES.chip`). **Los textos son provisionales.** Pruebas: `node tools/ia/hosting-ia.mjs`. Detalles en NOTAS.md, punto 42.
+
 ### Recalibrar las piezas 3D contra las fotos
 
 Las herramientas están en `tools/jelly/` (Python 3 con numpy y Pillow, y Playwright con Chrome). Con `out/` servido en `http://localhost:3000`:
@@ -168,15 +172,18 @@ Las herramientas están en `tools/jelly/` (Python 3 con numpy y Pillow, y Playwr
 python3 tools/jelly/fit_web.py        # pose, perspectiva y proporciones de la ventana → web_fit.json
 python3 tools/jelly/web_deco.py       # vista cenital de la cara superior: barras, puntos y ranura
 python3 tools/jelly/cloud_shape.py    # contorno en planta de la nube → cloud_outline.txt
+python3 tools/jelly/chip_cutout.py    # recorte del chip y su sombra → public/jelly/chip.webp + chip-shadow.webp
+python3 tools/jelly/fit_chip.py       # chip: cámara (con el marco crema), cuerpo y patitas → chip_fit.json
+python3 tools/jelly/chip_deco.py      # chip: vista cenital, marco, contorno de la estrella y capas
 python3 tools/jelly/regions.py        # zonas de muestreo y color objetivo de cada material
-node tools/jelly/fit-materials.mjs web && node tools/jelly/fit-materials.mjs cloud
+node tools/jelly/fit-materials.mjs web && node tools/jelly/fit-materials.mjs cloud && node tools/jelly/fit-materials.mjs chip
 python3 tools/jelly/bake.py           # vuelca los materiales en SHAPES (public/jelly/jelly3d.js)
 node tools/jelly/shot.mjs && python3 tools/jelly/compare.py   # lado a lado con la foto + coincidencia de siluetas
 node tools/jelly/interactions.mjs     # arrastre, vuelta a su sitio, móvil y Firefox en la home
 node tools/jelly/shadow-check.mjs     # comprueba que la sombra no tenga líneas claras (añade «firefox» para Firefox)
 ```
 
-Todo se escribe en `_inventory/jelly/` (no se versiona). La página `/jelly/test.html?shape=web|cloud` muestra la pieza en el hueco exacto de la foto.
+Todo se escribe en `_inventory/jelly/` (no se versiona). La página `/jelly/test.html?shape=web|cloud|chip` muestra la pieza en el hueco exacto de la foto.
 
 ## Formularios
 

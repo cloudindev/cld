@@ -253,3 +253,24 @@ export const videoHero = {
   pause: 'Pausar vídeo',
   chapter: 'Capítulo',
 } as const;
+
+/* ---------- «Hosting para IA» bajo las misiones (añadido a petición del cliente; ver NOTAS.md, punto 42) ---------- */
+// TEXTOS PROVISIONALES, para que el cliente los revise: todavía no hay página ni planes de Hosting para IA (el menú
+// tiene «Hosting GPU» sin página). No dan cifras, modelos de GPU ni precios. El botón lleva a /contacto/.
+export const hostingIA = {
+  id: 'hosting-ia',
+  badge: 'Nuevo',
+  kicker: 'Hosting para',
+  title: 'IA',
+  text: 'Servidores con GPU para entrenar, ajustar y poner a trabajar tus modelos de inteligencia artificial. Tú eliges el modelo y tus datos se quedan en tu servidor.',
+  features: [
+    { icon: 'gpu', title: 'Potencia GPU', text: 'Aceleración para entrenar y responder rápido.' },
+    { icon: 'lock', title: 'Tu IA, en privado', text: 'Modelos abiertos en tu servidor: tus datos no salen.' },
+    { icon: 'api', title: 'Lista para producción', text: 'Tu chatbot, agente o API con dominio y SSL.' },
+    { icon: 'help', title: 'Te acompañamos', text: 'Elegimos contigo la máquina y la ponemos en marcha.' },
+  ],
+  cta: { label: 'Quiero mi hosting IA', href: '/contacto/' },
+  chip: { alt: 'Chip de gominola morado con una estrella en relieve' },
+  // serigrafía de la placa sobre la que está el chip (decorativa)
+  silk: { ref: 'U1', name: 'CLOUDIN · IA', gpu: 'GPU' },
+} as const;

@@ -22,6 +22,8 @@
 /* Con WebGL la <img> queda invisible (sigue dando tamaño y coordenadas del puntero) */
 .jelly--webgl .jelly-img { opacity: 0; }
 @media (hover: none) { .jelly-body { cursor: pointer; } }
-/* Motor 3D activo: la pieza se dibuja en un lienzo que cubre toda la tarjeta; la foto queda oculta */
-.jelly--3d .jelly-body { visibility: hidden; }
-.jelly3d-canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+/* Motor 3D activo: la pieza se dibuja en un lienzo que cubre toda la tarjeta; la foto queda oculta. El lienzo entra
+   con un fundido y la foto se oculta al acabar: si el 3D no coincide al píxel con la foto (el chip), el cambio no salta */
+.jelly--3d .jelly-body { visibility: hidden; transition: visibility 0s 0.4s; }
+.jelly3d-canvas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; animation: jelly3d-in 0.4s ease-out both; }
+@keyframes jelly3d-in { from { opacity: 0; } }

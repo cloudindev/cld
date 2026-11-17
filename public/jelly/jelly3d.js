@@ -23,8 +23,9 @@
  * 4) calcas (sombras de los relieves, ranura) y adornos esmaltados. Sombra suave en el suelo a partir de
  * un mapa de alturas visto desde arriba.
  *
- * Uso: const j = createJelly3D(el, { shape: 'cloud' | 'web' }); → null si no hay WebGL2.
+ * Uso: const j = createJelly3D(el, { shape: 'cloud' | 'web' | 'chip' }); → null si no hay WebGL2 (o la forma no existe).
  *      j.reset() la devuelve a su sitio · j.hop() da un saltito (al pasar el ratón por la tarjeta) · j.destroy()
+ *      Al hacerle clic (sin arrastrar), `el` emite el evento «jellypoke» (burbujea).
  * `el` es el hueco de la foto (mismo tamaño y proporción); el lienzo cubre su contenedor posicionado
  * (la tarjeta), que es el «suelo» por el que se puede mover.
  */
@@ -72,6 +73,8 @@ export const CONFIG3D = {
  * PIEZAS · medidas sobre las fotos de referencia
  *
  * outline / rect   contorno en planta (x, z); z negativo = fondo. La nube trae el contorno ya orientado.
+ * cell             tamaño de celda de la malla física, si no es el general (CONFIG3D.physics.cell)
+ * pins             patitas en la base (chip); deco = relieves de la cara superior (barras, puntos, marco, estrella)
  * thickness        grosor total; bevelTop / bevelBottom = radio del canto superior / inferior
  * layers           alturas relativas (0-1) donde acaba la base y donde acaba la franja crema
  * view             cámara de la foto: elevación (°), distancia, escala (anchos de foto por unidad) y
@@ -129,6 +132,32 @@ const SHAPES = {
       ],
       dotRadius: 0.046, ringRadius: 0.066,
       groove: { z: -0.379, x0: -0.91, x1: 0.87 },
+    },
+  },
+  // Chip (Hosting para IA). Cámara a partir del marco crema (tools/jelly/fit_chip.py); grosor, capas y patitas
+  // leídos en la foto con esa cámara (arista de la esquina delantera y pie de cada patita); marco y estrella
+  // medidos en la vista cenital rectificada (chip_deco.py). Ver NOTAS.md, punto 42.
+  chip: {
+    rect: { depth: 2, radius: 0.327 }, yaw: 58.41,
+    thickness: 0.803, bevelTop: 0.12, bevelBottom: 0.03,
+    cell: 0.19,   // es el doble de gruesa que la ventana: con la celda general tendría 2,4 veces más partículas
+    layers: [0.39, 0.5],
+    view: { elevation: 40.13, distance: 17.03, scale: 0.3068, cx: 0.5031, cy: 0.4449 },
+    materials: [
+      { sigma: [2.5, 6, 1], scatter: 4, color: [0.397, 0.258, 0.317], path: 0.35, shade: 0.15 }, // base morada (gominola traslúcida)
+      { sigma: [0, 0, 0], scatter: 80, color: [0.861, 0.822, 0.762], path: 1, shade: 0.3 }, // franja crema
+      { sigma: [0.7, 1.6, 0.2], scatter: 1.4, color: [1, 0.97, 1], path: 1, shade: 0.08 }, // tapa lila (cristal)
+    ],
+    look: { wave: 0, speck: 0, streak: 0.25, bandShade: 0.05, border: 0.25 },
+    light: { env: [4.5, 3.0, 3.6, 0.16], back: [14, 0.2, 0.25], top: 1.2, floor: 0.5 },
+    tint: [0.66, 0.5, 0.88],
+    // 4 patitas por lado, centradas: separación, ancho, saliente, alto, y radios de la tapa y de las esquinas
+    pins: { count: 4, pitch: 0.413, shift: 0, width: 0.32, out: 0.18, inset: 0.06, height: 0.33, round: 0.12, corner: 0.1 },
+    deco: {
+      color: [0.95, 0.93, 0.88], shadow: [0.36, 0.24, 0.55],
+      frame: { center: [-0.016, 0.006], half: [0.775, 0.775], radius: 0.295, width: 0.116, height: 0.055, shadowWidth: 0.05, shadowAlpha: 0.28 },
+      star: { x: 0, z: 0, angle: 1, height: 0.15, tip: 1, shadowWidth: 0.05, shadowAlpha: 0.3,
+        profile: [0.502, 0.49, 0.466, 0.435, 0.402, 0.369, 0.341, 0.319, 0.301, 0.286, 0.274, 0.265, 0.258, 0.253, 0.249, 0.246, 0.244, 0.243, 0.243, 0.244, 0.246, 0.249, 0.253, 0.258, 0.265, 0.274, 0.286, 0.301, 0.319, 0.341, 0.369, 0.402, 0.435, 0.466, 0.49, 0.502] },   // radio cada 2,5° (chip_deco.py)
     },
   },
 };
@@ -231,6 +260,54 @@ function buildModel(shape, cfg) {
   cap(rings.length - 1, true);
   cap(0, false);
 
+  /* ----- Patitas (chip): cajas redondeadas que salen de la pared en la capa de la base ----- */
+  // Cada lado lleva `count` patitas separadas `pitch`; `shift` las corre a lo largo del lado, en el mismo sentido de
+  // giro en los cuatro lados (en el chip es 0: están centradas). Van en la misma malla que el cuerpo: se dibujan,
+  // proyectan sombra y se pueden agarrar como el resto de la gelatina.
+  const pinPolys = [];
+  if (shape.pins) {
+    const pn = shape.pins, hz = shape.rect.depth / 2, ph = pn.height, rt = Math.min(pn.round, ph / 2), rb2 = 0.012;
+    for (const [nx, nz, half] of [[1, 0, 1], [0, 1, hz], [-1, 0, 1], [0, -1, hz]]) {
+      const tx = -nz, tz = nx;
+      for (let k = 0; k < pn.count; k++) {
+        const u = (k - (pn.count - 1) / 2) * pn.pitch + pn.shift, px = nx * half + tx * u, pz = nz * half + tz * u;
+        // huella en planta: de `inset` dentro de la pared a `out` fuera, ancho `width`, esquinas redondeadas
+        const a0 = -pn.inset, a1 = pn.out, b0 = -pn.width / 2, b1 = pn.width / 2, rc = Math.min(pn.corner, pn.width / 2 - 1e-3);
+        const foot = [];
+        for (const [ca, cb, g0] of [[a1 - rc, b1 - rc, 0], [a0 + rc, b1 - rc, 90], [a0 + rc, b0 + rc, 180], [a1 - rc, b0 + rc, 270]]) {
+          for (let q = 0; q <= 6; q++) { const g = (g0 + 15 * q) * DEG; foot.push([ca + rc * Math.cos(g), cb + rc * Math.sin(g)]); }
+        }
+        const fp = foot.map(([a, b]) => [px + nx * a + tx * b, pz + nz * a + tz * b]);
+        pinPolys.push(fp);
+        const M = fp.length, fc = fp.reduce((q, v) => [q[0] + v[0] / M, q[1] + v[1] / M], [0, 0]);
+        const fn = fp.map((v, i) => {
+          const a = fp[(i + M - 1) % M], b = fp[(i + 1) % M]; let ex = b[1] - a[1], ez = -(b[0] - a[0]); const l = Math.hypot(ex, ez) || 1; ex /= l; ez /= l;
+          return (v[0] - fc[0]) * ex + (v[1] - fc[1]) * ez < 0 ? [-ex, -ez] : [ex, ez];
+        });
+        // perfil: canto inferior pequeño, pared y canto superior redondeado (radio rt)
+        const pr = [];
+        for (let q = 0; q <= 2; q++) { const f = (-90 + q * 45) * DEG; pr.push({ d: rb2 * (1 - Math.cos(f)), y: rb2 + rb2 * Math.sin(f), f }); }
+        for (let q = 0; q <= 5; q++) { const f = (q * 18) * DEG; pr.push({ d: rt * (1 - Math.cos(f)), y: ph - rt + rt * Math.sin(f), f }); }
+        // toda la patita es de la gelatina de la base, aunque asome por encima de la franja
+        const hb = Math.max(0, shape.layers[0] - 0.02), hOf = y => Math.min(y / T, hb);
+        const base = S.v.length;
+        for (const rg of pr) for (let i = 0; i < M; i++) { const x = fp[i][0] - fn[i][0] * rg.d, z = fp[i][1] - fn[i][1] * rg.d; S.add(x, rg.y, z, [hOf(rg.y), x, z]); }
+        for (let q = 0; q < pr.length - 1; q++) {
+          const fm = (pr[q].f + pr[q + 1].f) / 2;
+          for (let i = 0; i < M; i++) {
+            const j = (i + 1) % M, n = [fn[i][0] * Math.cos(fm), Math.sin(fm), fn[i][1] * Math.cos(fm)];
+            const a = base + q * M + i, b = base + q * M + j, c = base + (q + 1) * M + j, d = base + (q + 1) * M + i;
+            S.tri(a, b, c, n); S.tri(a, c, d, n);
+          }
+        }
+        const top = base + (pr.length - 1) * M, tc = S.add(fc[0], ph, fc[1], [hOf(ph), fc[0], fc[1]]);
+        for (let i = 0; i < M; i++) S.tri(top + i, top + (i + 1) % M, tc, [0, 1, 0]);
+        const bc = S.add(fc[0], 0, fc[1], [0, fc[0], fc[1]]);
+        for (let i = 0; i < M; i++) S.tri(base + i, base + (i + 1) % M, bc, [0, -1, 0]);
+      }
+    }
+  }
+
   /* ----- Franja crema: malla opaca interior entre las dos alturas de capa (se ve a través del cristal) ----- */
   const B = mesh();
   {
@@ -276,7 +353,7 @@ function buildModel(shape, cfg) {
     };
     // sombra de contacto alrededor de un relieve: anillo que se desvanece, desplazado en contra de la luz
     const skirt = (o, w, a0, shift = [0.012, 0.03]) => {
-      const M = o.length, cx = o.reduce((s, p) => s + p[0], 0) / M, cz = o.reduce((s, p) => s + p[1], 0) / M, col = [0.6, 0.27, 0.19];
+      const M = o.length, cx = o.reduce((s, p) => s + p[0], 0) / M, cz = o.reduce((s, p) => s + p[1], 0) / M, col = dc.shadow ?? [0.6, 0.27, 0.19];
       const base = K.v.length;
       o.forEach(p => K.add(p[0], T + 0.0025, p[1], col, a0));
       o.forEach((p, i) => {
@@ -289,46 +366,120 @@ function buildModel(shape, cfg) {
       const c = K.add(cx, T + 0.0025, cz, col, a0);
       for (let i = 0; i < M; i++) K.tri(base + i, base + (i + 1) % M, c, [0, 1, 0]);
     };
-    for (const [x0, x1, z0, z1, r] of dc.bars) {
+    for (const [x0, x1, z0, z1, r] of dc.bars ?? []) {
       const o = rrect(x0, x1, z0, z1, r);
       skirt(o, 0.045, 0.34);
       loft(o, [[0, -0.004], [0.0012, 0.009], [0.006, 0.0145], [0.014, 0.0165]], IVORY, 0.0168);
     }
-    for (const [x, z, color] of dc.dots) {
+    for (const [x, z, color] of dc.dots ?? []) {
       skirt(circle(x, z, dc.ringRadius), 0.03, 0.3, [0.008, 0.02]);
       loft(circle(x, z, dc.ringRadius), [[0, -0.004], [0.001, 0.006], [0.006, 0.011], [0.016, 0.011]], IVORY, null);
       const dome = []; for (let k = 0; k <= 6; k++) { const a = k / 7 * 90 * DEG; dome.push([dc.dotRadius * (1 - Math.cos(a)), 0.004 + 0.036 * Math.sin(a)]); }
       loft(circle(x, z, dc.dotRadius), dome, color, 0.0405);
     }
     // ranura de la barra de título: línea oscura fina + filo claro, y el reflejo de cada punto sobre ella
-    const g = dc.groove, seg = 24;
-    const strip = (zc, w, col, a) => {
-      const base = K.v.length;
-      for (let i = 0; i <= seg; i++) {
-        const x = g.x0 + (g.x1 - g.x0) * i / seg, e = Math.min(1, Math.min(i, seg - i) / 1.5);
-        K.add(x, T + 0.003, zc - w / 2, col, 0); K.add(x, T + 0.003, zc, col, a * e); K.add(x, T + 0.003, zc + w / 2, col, 0);
+    if (dc.groove) {
+      const g = dc.groove, seg = 24;
+      const strip = (zc, w, col, a) => {
+        const base = K.v.length;
+        for (let i = 0; i <= seg; i++) {
+          const x = g.x0 + (g.x1 - g.x0) * i / seg, e = Math.min(1, Math.min(i, seg - i) / 1.5);
+          K.add(x, T + 0.003, zc - w / 2, col, 0); K.add(x, T + 0.003, zc, col, a * e); K.add(x, T + 0.003, zc + w / 2, col, 0);
+        }
+        for (let i = 0; i < seg; i++) for (let r = 0; r < 2; r++) {
+          const a0 = base + i * 3 + r, b0 = base + (i + 1) * 3 + r;
+          K.tri(a0, b0, b0 + 1, [0, 1, 0]); K.tri(a0, b0 + 1, a0 + 1, [0, 1, 0]);
+        }
+      };
+      strip(g.z, 0.03, [0.66, 0.26, 0.17], 0.8);
+      strip(g.z - 0.016, 0.014, [1, 0.94, 0.9], 0.7);
+      for (const [x, , color] of dc.dots) {
+        const c = K.add(x - 0.02, T + 0.0035, g.z + 0.004, color, 0.6), base = K.v.length, M = 16;
+        for (let i = 0; i < M; i++) K.add(x - 0.02 + 0.05 * Math.cos(i / M * TAU), T + 0.0035, g.z + 0.004 + 0.012 * Math.sin(i / M * TAU), color, 0);
+        for (let i = 0; i < M; i++) K.tri(base + i, base + (i + 1) % M, c, [0, 1, 0]);
       }
-      for (let i = 0; i < seg; i++) for (let r = 0; r < 2; r++) {
-        const a0 = base + i * 3 + r, b0 = base + (i + 1) * 3 + r;
-        K.tri(a0, b0, b0 + 1, [0, 1, 0]); K.tri(a0, b0 + 1, a0 + 1, [0, 1, 0]);
+    }
+    // Marco en relieve (chip): tubo de sección casi rectangular con cantos redondos a lo largo de un rectángulo
+    // redondeado, con su sombra de contacto a los dos lados
+    if (dc.frame) {
+      const f = dc.frame, col = dc.color ?? IVORY, w = f.width, hR = f.height;
+      const [ox, oz] = f.center ?? [0, 0];
+      const path = resample(rrect(ox - f.half[0], ox + f.half[0], oz - f.half[1], oz + f.half[1], f.radius, 12), 176), M = path.length;
+      const pn = path.map((p, i) => {
+        const a = path[(i + M - 1) % M], b = path[(i + 1) % M]; let ex = b[1] - a[1], ez = -(b[0] - a[0]); const l = Math.hypot(ex, ez) || 1; ex /= l; ez /= l;
+        return (p[0] - ox) * ex + (p[1] - oz) * ez < 0 ? [-ex, -ez] : [ex, ez];
+      });
+      const prof = [];   // [desplazamiento hacia fuera del eje, altura sobre la tapa]: superelipse (n = 3) apoyada en la tapa
+      for (let k = 0; k <= 14; k++) {
+        const a = Math.PI * k / 14, c = Math.cos(a), sn = Math.sin(a);
+        prof.push([-Math.sign(c) * Math.pow(Math.abs(c), 2 / 3) * w / 2, k === 0 || k === 14 ? -0.004 : Math.pow(sn, 2 / 3) * hR]);
       }
-    };
-    strip(g.z, 0.03, [0.66, 0.26, 0.17], 0.8);
-    strip(g.z - 0.016, 0.014, [1, 0.94, 0.9], 0.7);
-    for (const [x, , color] of dc.dots) {
-      const c = K.add(x - 0.02, T + 0.0035, g.z + 0.004, color, 0.6), base = K.v.length, M = 16;
-      for (let i = 0; i < M; i++) K.add(x - 0.02 + 0.05 * Math.cos(i / M * TAU), T + 0.0035, g.z + 0.004 + 0.012 * Math.sin(i / M * TAU), color, 0);
-      for (let i = 0; i < M; i++) K.tri(base + i, base + (i + 1) % M, c, [0, 1, 0]);
+      const base = D.v.length;
+      for (const [so, y] of prof) for (let i = 0; i < M; i++) D.add(path[i][0] + pn[i][0] * so, T + y, path[i][1] + pn[i][1] * so, col);
+      for (let k = 0; k < prof.length - 1; k++) {
+        let ns = prof[k + 1][1] - prof[k][1], ny = -(prof[k + 1][0] - prof[k][0]); if (ny < 0) { ns = -ns; ny = -ny; }
+        for (let i = 0; i < M; i++) {
+          const j = (i + 1) % M, n = [pn[i][0] * ns, ny, pn[i][1] * ns];
+          const a = base + k * M + i, b = base + k * M + j, c = base + (k + 1) * M + j, d = base + (k + 1) * M + i;
+          D.tri(a, b, c, n); D.tri(a, c, d, n);
+        }
+      }
+      const sc = dc.shadow ?? [0.6, 0.27, 0.19], [shx, shz] = f.shift ?? [0.012, 0.03];
+      for (const side of [1, -1]) {
+        const kb = K.v.length;
+        for (let i = 0; i < M; i++) {
+          const x = path[i][0], z = path[i][1], nx = pn[i][0] * side, nz = pn[i][1] * side;
+          K.add(x + nx * w * 0.45, T + 0.0025, z + nz * w * 0.45, sc, f.shadowAlpha);
+          K.add(x + nx * (w / 2 + f.shadowWidth) + shx, T + 0.0025, z + nz * (w / 2 + f.shadowWidth) + shz, sc, 0);
+        }
+        for (let i = 0; i < M; i++) { const j = (i + 1) % M; K.tri(kb + 2 * i, kb + 2 * j, kb + 2 * j + 1, [0, 1, 0]); K.tri(kb + 2 * i, kb + 2 * j + 1, kb + 2 * i + 1, [0, 1, 0]); }
+      }
+    }
+    // Estrella de 4 puntas abombada (chip): contorno de superelipse con exponente < 1 (lados cóncavos) y cuerpo
+    // «inflado»: cada anillo es el contorno escalado hacia el centro, más alto cuanto más dentro
+    if (dc.star) {
+      const st = dc.star, col = dc.color ?? IVORY, n = 160, o = [];
+      const ca = Math.cos(st.angle * DEG), sa = Math.sin(st.angle * DEG);
+      // radio en cada ángulo: el contorno medido (`profile`: de una punta a la siguiente, repetido en los 4 cuadrantes) o una
+      // superelipse; un promedio móvil de ±`tip` muestras redondea las puntas
+      const prof = st.profile, pl = prof?.length ?? 0;
+      const rr = Array.from({ length: n }, (_, i) => {
+        const t = i / n * TAU;
+        if (pl) { const f = ((t / (TAU / 4)) % 1) * pl, j = Math.floor(f), w = f - j; return prof[j % pl] * (1 - w) + prof[(j + 1) % pl] * w; }
+        return st.radius * Math.pow(Math.pow(Math.abs(Math.cos(t)), st.power) + Math.pow(Math.abs(Math.sin(t)), st.power), -1 / st.power);
+      });
+      const k = st.tip ?? 0;
+      for (let i = 0; i < n; i++) {
+        let r = 0; for (let j = -k; j <= k; j++) r += rr[(i + j + n) % n]; r /= 2 * k + 1;
+        const t = i / n * TAU, lx = r * Math.cos(t), lz = r * Math.sin(t) * (st.squash ?? 1);
+        o.push([st.x + lx * ca - lz * sa, st.z + lx * sa + lz * ca]);
+      }
+      skirt(o, st.shadowWidth, st.shadowAlpha, st.shift ?? [0.012, 0.03]);
+      const rings = [];
+      for (let k = 0; k <= 10; k++) { const a = k / 10 * Math.PI / 2; rings.push([Math.pow(Math.cos(a), 2 / 2.6), k === 0 ? -0.004 : Math.pow(Math.sin(a), 2 / 2.6) * st.height]); }
+      const base = D.v.length;
+      for (const [fs, y] of rings) for (const p of o) D.add(st.x + (p[0] - st.x) * fs, T + y, st.z + (p[1] - st.z) * fs, col);
+      for (let k = 0; k < rings.length - 1; k++) {
+        const up = (k + 0.5) / (rings.length - 1);
+        for (let i = 0; i < n; i++) {
+          const j = (i + 1) % n, nv = [(o[i][0] - st.x) * (1 - up), up, (o[i][1] - st.z) * (1 - up)];
+          const a = base + k * n + i, b = base + k * n + j, c = base + (k + 1) * n + j, d = base + (k + 1) * n + i;
+          D.tri(a, b, c, nv); D.tri(a, c, d, nv);
+        }
+      }
+      const tip = D.add(st.x, T + st.height, st.z, col), top = base + (rings.length - 1) * n;
+      for (let i = 0; i < n; i++) D.tri(top + i, top + (i + 1) % n, tip, [0, 1, 0]);
     }
   }
 
   /* ----- Retícula de tetraedros que cubre el contorno (dilatada para envolver toda la superficie) ----- */
-  const h = cfg.physics.cell, ny = Math.max(2, Math.round(T / h)), hy = T / ny;
+  const h = shape.cell ?? cfg.physics.cell, ny = Math.max(2, Math.round(T / h)), hy = T / ny;   // celda propia en piezas gruesas (chip)
   const gx0 = xMin - h, gz0 = zMin - h;
   const nx = Math.ceil((xMax - xMin + 2 * h) / h), nz = Math.ceil((zMax - zMin + 2 * h) / h);
-  const keep = new Uint8Array(nx * nz);
+  const keep = new Uint8Array(nx * nz), pinSdf = pinPolys.map(polySdf);
   for (let i = 0; i < nx; i++) for (let k = 0; k < nz; k++) {
-    if (sdf(gx0 + (i + 0.5) * h, gz0 + (k + 0.5) * h) < 0.8 * h) keep[i * nz + k] = 1;
+    const qx = gx0 + (i + 0.5) * h, qz = gz0 + (k + 0.5) * h;
+    if (sdf(qx, qz) < 0.8 * h || pinSdf.some(f => f(qx, qz) < 0.5 * h)) keep[i * nz + k] = 1;
   }
   const nodeId = new Int32Array((nx + 1) * (ny + 1) * (nz + 1)).fill(-1);
   const P = [];
@@ -776,7 +927,8 @@ void main() { o = vec4(v_x * v_a, v_a); }`;
  * ========================================================================= */
 export function createJelly3D(root, opts = {}) {
   const cfg = CONFIG3D;
-  const shape = structuredClone(SHAPES[opts.shape] ?? SHAPES.cloud);
+  if (!SHAPES[opts.shape ?? 'cloud']) return null;   // pieza sin forma 3D: el llamador usa el motor 2D
+  const shape = structuredClone(SHAPES[opts.shape ?? 'cloud']);
   // luz y brillos (ajustables con tune() en la página de pruebas)
   const light = { dir: norm([-0.6, 0.72, -0.35]), env: [4.0, 2.6, 1.3, 0.16], back: [17, 0.3, 0.25], top: 2, floor: 0.5, spec: [0.045, 0.09, 0.035], refr: 0.16, ...(shape.light ?? {}), ...(opts.light ?? {}) };
   const box = root.offsetParent || root.parentElement;
@@ -1352,6 +1504,7 @@ export function createJelly3D(root, opts = {}) {
       setTimeout(() => window.removeEventListener('click', stop, { capture: true }), 0);
     } else {
       poke(g.point, cfg.grab.clickKick, cfg.grab.radius); // clic sin arrastrar: un golpecito
+      root.dispatchEvent(new CustomEvent('jellypoke', { bubbles: true }));   // aviso para la página (p. ej. la sección de IA)
     }
     wake();
   }

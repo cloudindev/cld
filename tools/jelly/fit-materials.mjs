@@ -2,12 +2,14 @@
 // de cada capa hasta que el color medio del render en cada zona coincide con el de la foto.
 import { chromium } from 'playwright';
 import fs from 'node:fs';
-// Uso: node tools/jelly/fit-materials.mjs web|cloud   → _inventory/jelly/tune.json (luego: python3 tools/jelly/bake.py)
+// Uso: node tools/jelly/fit-materials.mjs web|cloud|chip   → _inventory/jelly/tune.json (luego: python3 tools/jelly/bake.py)
 const shape = process.argv[2], regFile = '_inventory/jelly/regions.json', outFile = '_inventory/jelly/tune.json';
 const regions = JSON.parse(fs.readFileSync(regFile, 'utf8'))[shape];
 const PLAN = {
   web: [{ region: 'top', layer: 2, mode: 'sigma' }, { region: 'base', layer: 0, mode: 'color' }, { region: 'band', layer: 1, mode: 'color' }],
   cloud: [{ region: 'base', layer: 0, mode: 'color' }, { region: 'band', layer: 1, mode: 'color' }, { region: 'top', layer: 2, mode: 'color' }],
+  // chip: la cara superior manda (es lo que más se ve); con este modelo las paredes no pueden salir a la vez más moradas
+  chip: [{ region: 'top', layer: 2, mode: 'color' }, { region: 'base', layer: 0, mode: 'color' }, { region: 'band', layer: 1, mode: 'color' }],
 }[shape];
 const b = await chromium.launch({ channel: 'chrome' });
 const p = await b.newPage({ viewport: { width: 1200, height: 900 }, deviceScaleFactor: 1 });

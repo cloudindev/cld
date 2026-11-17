@@ -6,7 +6,7 @@ OUT = os.path.join(ROOT, '_inventory', 'jelly'); os.makedirs(OUT, exist_ok=True)
 import json, re, sys
 p=ROOT+'public/jelly/jelly3d.js'; s=open(p).read()
 tune=json.load(open('tune.json'))
-names={'cloud':['base turquesa (gominola traslúcida)','franja crema','tapa azul hielo (ópalo)'],'web':['base naranja rojizo (gominola traslúcida)','franja crema','tapa melocotón (cristal)']}
+names={'cloud':['base turquesa (gominola traslúcida)','franja crema','tapa azul hielo (ópalo)'],'web':['base naranja rojizo (gominola traslúcida)','franja crema','tapa melocotón (cristal)'],'chip':['base morada (gominola traslúcida)','franja crema','tapa lila (cristal)']}
 def fmt(m,c):
     g=lambda v: ('%g'%round(v,3))
     return "      { sigma: [%s], scatter: %s, color: [%s], path: %s, shade: %s }, // %s" % (', '.join(g(v) for v in m['sigma']), g(m['scatter']), ', '.join(g(v) for v in m['color']), g(m['path']), g(m.get('shade',0.3)), c)

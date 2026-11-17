@@ -8,11 +8,12 @@
   <style>
     html, body { margin: 0; height: 100%; }
     body { display: grid; place-items: center; gap: 24px; background: #fff; font: 14px/1.4 system-ui, sans-serif; color: #6b6a64; }
-    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: min(92vw, 1240px); }
+    .cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; width: min(94vw, 1500px); }
     .card { position: relative; height: 300px; border-radius: 12px; overflow: hidden; }
-    .web { background: #e4f1f2; } .vps { background: #f1edea; }
+    .web { background: #e4f1f2; } .vps { background: #f1edea; } .ia { background: #f1eefa; }
     .slot { position: absolute; top: 50%; right: 20px; width: 330px; aspect-ratio: 900 / 513; margin-top: -94px; }
     .vps .slot { width: 290px; aspect-ratio: 900 / 654; margin-top: -105px; }
+    .ia .slot { width: 300px; aspect-ratio: 860 / 690; margin-top: -120px; right: auto; left: calc(50% - 150px); }
     .hint { text-align: center; }
     .hint a { color: inherit; }
   </style>
@@ -21,13 +22,15 @@
   <div class="cards">
     <div class="card web"><div class="slot" id="web"></div></div>
     <div class="card vps"><div class="slot" id="vps"></div></div>
+    <div class="card ia"><div class="slot" id="chip"></div></div>
   </div>
   <p class="hint">Arrastra las piezas · <a href="#" id="reset">devolverlas a su sitio</a></p>
   <script type="module">
     import { createJelly3D } from './jelly3d.js';
     window.web = createJelly3D(document.getElementById('web'), { shape: 'web' });
     window.vps = createJelly3D(document.getElementById('vps'), { shape: 'cloud' });
-    document.getElementById('reset').onclick = e => { e.preventDefault(); window.web?.reset(); window.vps?.reset(); };
+    window.chip = createJelly3D(document.getElementById('chip'), { shape: 'chip' });
+    document.getElementById('reset').onclick = e => { e.preventDefault(); window.web?.reset(); window.vps?.reset(); window.chip?.reset(); };
   </script>
 </body>
 </html>

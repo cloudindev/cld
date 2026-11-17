@@ -14,6 +14,7 @@
  * Con ratón la pieza se puede arrastrar dentro de su contenedor posicionado (la tarjeta);
  * `reset()` la devuelve a su sitio.
  * Uso: import { createJelly } from './jelly.js'; const j = createJelly(el); … j.destroy();
+ * Al hacerle clic o tocarla, `el` emite el evento «jellypoke» (burbujea).
  */
 
 /* =========================================================================
@@ -310,6 +311,7 @@ export function createJelly(root, overrides = {}) {
       window.addEventListener('click', stop, { capture: true, once: true });
       setTimeout(() => window.removeEventListener('click', stop, { capture: true }), 0);
     }
+    else root.dispatchEvent(new CustomEvent('jellypoke', { bubbles: true }));   // clic sin arrastrar (aviso para la página)
     squash.v += cfg.drag.dropKick * 10;
     const r = body.getBoundingClientRect();
     if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) onLeave(e);
@@ -330,6 +332,7 @@ export function createJelly(root, overrides = {}) {
     lastPlay = performance.now();
     onMove(e);
     squash.v += cfg.click.kick * 10; poke.v += cfg.click.poke; start();
+    if (e.pointerType === 'touch') root.dispatchEvent(new CustomEvent('jellypoke', { bubbles: true }));
     if (cfg.drag.enabled && e.pointerType !== 'touch' && e.button === 0 && !drag) {
       const r = body.getBoundingClientRect();
       H = r.height || 1;

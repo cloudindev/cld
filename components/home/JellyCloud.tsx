@@ -2,7 +2,7 @@
 // Pieza de gominola. Motor 3D con física de sólido blando (public/jelly/jelly3d.js, WebGL2); si no hay
 // WebGL2 se usa el motor 2D sobre la foto recortada (public/jelly/jelly.js). Ambos se cargan en el
 // navegador sin pasar por el bundler. Hasta entonces (o sin JS) se ve la imagen estática.
-import { useEffect, useRef, type CSSProperties } from 'react';
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import '@/public/jelly/jelly.css';
 
 type Jelly = { destroy(): void; reset(): void; hop?(): void };
@@ -10,15 +10,18 @@ const ENGINE_3D = '/jelly/jelly3d.js';
 const ENGINE_2D = '/jelly/jelly.js';
 
 /** Imágenes de public/jelly (recorte con alfa + sombra «multiply» opcional) y su forma 3D equivalente. */
-export const JELLY: Record<'cloud' | 'web', { src: string; shadow: string | null; width: number; height: number; shape: 'cloud' | 'web' }> = {
+export const JELLY: Record<'cloud' | 'web' | 'chip', { src: string; shadow: string | null; width: number; height: number; shape: 'cloud' | 'web' | 'chip' }> = {
   cloud: { src: '/jelly/cloud.webp', shadow: null, width: 900, height: 654, shape: 'cloud' },
   web: { src: '/jelly/web.webp', shadow: '/jelly/web-shadow.webp', width: 900, height: 513, shape: 'web' },
+  chip: { src: '/jelly/chip.webp', shadow: '/jelly/chip-shadow.webp', width: 860, height: 690, shape: 'chip' },
 };
 
 /** `reset`: cada vez que cambia, la pieza vuelve a su sitio (si se había arrastrado).
  *  `hop`: cada vez que cambia, la pieza da un rebote (saludo al llegar el ratón a su tarjeta; el motor lo ignora
- *  mientras se juega con ella). */
-export function JellyCloud({ alt, className, image = 'cloud', reset = 0, hop = 0 }: { alt: string; className?: string; image?: keyof typeof JELLY; reset?: number; hop?: number }) {
+ *  mientras se juega con ella).
+ *  `onPoke`: se llama al hacerle clic o tocarla sin arrastrar (evento «jellypoke» de los motores).
+ *  `under`: capa que va debajo de la pieza, en el mismo hueco (p. ej. la placa de circuito del chip). */
+export function JellyCloud({ alt, className, image = 'cloud', reset = 0, hop = 0, onPoke, under }: { alt: string; className?: string; image?: keyof typeof JELLY; reset?: number; hop?: number; onPoke?: () => void; under?: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const jelly = useRef<Jelly | undefined>(undefined);
   const im = JELLY[image];
@@ -50,10 +53,19 @@ export function JellyCloud({ alt, className, image = 'cloud', reset = 0, hop = 0
   }, [image, im.shape]);
   useEffect(() => { if (reset) jelly.current?.reset(); }, [reset]);
   useEffect(() => { if (hop) jelly.current?.hop?.(); }, [hop]);
+  const poke = useRef(onPoke);
+  useEffect(() => { poke.current = onPoke; }, [onPoke]);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const on = () => poke.current?.();
+    el.addEventListener('jellypoke', on);
+    return () => el.removeEventListener('jellypoke', on);
+  }, []);
   // --jr = alto/ancho: lo usa el CSS de la página para centrar sin transform (ver NOTAS.md, punto 34)
   const style = { aspectRatio: `${im.width} / ${im.height}`, '--jr': im.height / im.width } as CSSProperties;
   return (
     <div ref={ref} className={`jelly ${className ?? ''}`} style={style}>
+      {under}
       <div className="jelly-body">
         {/* eslint-disable-next-line @next/next/no-img-element -- la <img> es la textura WebGL: debe ser el archivo original, sin optimizar */}
         {im.shadow && <img className="jelly-shadow" src={im.shadow} alt="" width={im.width} height={im.height} />}
